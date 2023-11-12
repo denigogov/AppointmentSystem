@@ -1,0 +1,14 @@
+{
+  "name": "appointment-system-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start-frontend": "cd \"Client\" && pnpm run dev",
+    "start-backend": "cd \"Server\" && pnpm run dev",
+    "dev": "start /B cmd /c \"cd \"Client\" && pnpm install && pnpm run dev\" & start /B cmd /c \"cd \"Server\" && pnpm install && pnpm run dev\""
+  },
+  "keywords": [],
+  "author": "Dejan Gogov",
+  "license": "ISC"
+}
