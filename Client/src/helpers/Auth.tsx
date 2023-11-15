@@ -7,13 +7,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [token, setToken] = useState<TokenType>(
-    localStorage.getItem("token") ?? null
+    localStorage.getItem("accessKey") ?? null
   );
   const [userInfo, setUserInfo] = useState<UserInfoType | null>(null);
 
   const login = (token: TokenType) => {
     if (token && token.length) {
-      localStorage.setItem("token", token);
+      localStorage.setItem("accessKey", token);
       setToken(token);
     }
   };
@@ -24,7 +24,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   const logout = () => {
     setToken(null);
-    localStorage.removeItem("token");
+    localStorage.removeItem("accessKey");
   };
 
   return (

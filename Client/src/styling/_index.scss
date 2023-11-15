@@ -1,5 +1,41 @@
+@use "./general";
+@use "./colors";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  line-height: 1.5;
+  font-family: general.$primary-font;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+.errorMessage {
+  font-size: 12px;
+  color: colors.$error;
+}
+
+.navLinkInfo {
+  font-size: 12px;
+  color: colors.$font-Secound;
 }

@@ -6,12 +6,15 @@ import {
 } from "react-router-dom";
 import Root from "./pages/Root";
 import Login from "./pages/Login";
-import Home from "./pages/Home";
+// import Home from "./pages/Home/Home";
 import { useAuth } from "./helpers/Auth";
 import { useEffect, useState } from "react";
 import { fetchTokenValidation } from "./api/loginApi";
 import { RequireAuth } from "./helpers/RequireAuth";
 import { TokenType, UserInfoType } from "./types/AuthTypes";
+import Dashboard from "./pages/App/Dashboard";
+import WebPage from "./pages/Home/WebPage";
+import SignUp from "./pages/SignUp/SignUp";
 
 const App = () => {
   const auth = useAuth();
@@ -41,18 +44,30 @@ const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Root />}>
-        <Route
+        <Route index element={<WebPage />} />
+        {/* <Route
           path="home"
           element={
             <RequireAuth>
               <Home />
             </RequireAuth>
           }
-        />
+        /> */}
 
         {auth.token ? null : (
           <Route key="login" path="login" element={<Login />} />
         )}
+
+        <Route
+          path="app"
+          element={
+            <RequireAuth>
+              <Dashboard />
+            </RequireAuth>
+          }
+        />
+
+        <Route path="signUp" element={<SignUp />} />
 
         <Route
           key="notFound"
@@ -63,11 +78,7 @@ const App = () => {
     )
   );
 
-  return (
-    <div>
-      {loading ? <p>Loading...</p> : <RouterProvider router={router} />}
-    </div>
-  );
+  return <div>{loading ? <p></p> : <RouterProvider router={router} />}</div>;
 };
 
 export default App;

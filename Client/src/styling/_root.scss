@@ -1,0 +1,122 @@
+@use "./colors";
+@use "./general";
+@use "./mixin";
+
+.main-nav {
+  background: colors.$background;
+  height: 100vh;
+
+  .nav {
+    position: fixed;
+    z-index: 3;
+    position: absolute;
+    height: 100vh;
+    width: 280px;
+    // ADD FLEX PROPERTY TO SPLIT THE ICON AND OTHER STUFF INSIDE OF MOBILE NAV
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: space-around;
+    gap: 20px;
+    // flex end !!
+
+    background: colors.$background-alternative;
+    transition: general.$transition;
+
+    ul {
+      //  width: 100vw; fiting the property of parrent to be 280px
+      width: 100vw;
+      // border: 1px solid red;
+
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+}
+
+// Hamburger Menu
+.navIcon {
+  z-index: 2;
+  position: absolute;
+  top: 0px;
+  left: 25px;
+  transform: translate(-50%, 50%) rotate(90deg);
+
+  cursor: pointer;
+
+  &:hover::after {
+    transition: general.$transition;
+    font-size: 11px;
+  }
+
+  span {
+    cursor: pointer;
+    font-size: 15px;
+    border-left: 3px solid #ff8080;
+    padding: 3px;
+    font-size: 6px;
+
+    &:first-child {
+      border-color: #ff8080;
+      font-size: 18px;
+    }
+
+    &:nth-child(2) {
+      border-color: #ff8080;
+      font-size: 11px;
+    }
+  }
+}
+
+.overlay {
+  @include mixin.overlay();
+}
+
+// Classes only avaible to phone
+.close-nav {
+  position: absolute;
+  transition: all 0.6s linear;
+  transform: translateX(-300px);
+  z-index: 3;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  img {
+    width: 100px;
+  }
+}
+
+@media (min-width: 640px) {
+  .navIcon {
+    display: none;
+  }
+  .close-nav {
+    transform: translateX(0);
+  }
+
+  // Must be nested!
+  .main-nav {
+    .nav {
+      background-color: transparent;
+      display: flex;
+      justify-content: start;
+      align-items: flex-start;
+
+      ul {
+        padding: 15px 30px;
+        // border: 1px solid red;
+        justify-content: end;
+        align-items: start;
+        flex-direction: row;
+        background-color: transparent;
+      }
+    }
+  }
+}

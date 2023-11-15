@@ -1,0 +1,53 @@
+@use "./colors";
+@use "./mixin";
+
+.login-page {
+  background: colors.$background;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 30px;
+  text-align: center;
+  height: 100vh;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+
+    // button do not  be the same length as input filed
+    // align-items: center;
+
+    input[type="text"] {
+      background: url(../assets/loginInputIcon.svg) no-repeat;
+      background-color: white;
+      @include mixin.inputLogin();
+    }
+
+    input[type="password"] {
+      background: url(../assets/scissors.svg) no-repeat;
+      background-color: white;
+      @include mixin.inputLogin();
+    }
+
+    button {
+      @include mixin.button();
+      color: white;
+    }
+  }
+}
+
+.login-appInfo {
+  font-size: 32px;
+  font-weight: 200;
+}
+
+.login-logo {
+  padding: 10px;
+  img {
+    width: 4.3rem;
+  }
+}

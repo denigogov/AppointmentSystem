@@ -1,5 +1,7 @@
+@use "../styling/colors";
+
 .hambButton {
-  margin: 1rem;
+  padding: 1rem;
 
   label {
     display: flex;
@@ -8,7 +10,7 @@
     cursor: pointer;
 
     span {
-      background: red;
+      background: colors.$background;
       border-radius: 10px;
       height: 5px;
       margin: 4px 0;
