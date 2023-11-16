@@ -15,6 +15,7 @@ import { TokenType, UserInfoType } from "./types/AuthTypes";
 import Dashboard from "./pages/App/Dashboard";
 import WebPage from "./pages/Home/WebPage";
 import SignUp from "./pages/SignUp/SignUp";
+import ErrorPage from "./pages/ErrorPage";
 
 const App = () => {
   const auth = useAuth();
@@ -69,11 +70,7 @@ const App = () => {
 
         <Route path="signUp" element={<SignUp />} />
 
-        <Route
-          key="notFound"
-          path="*"
-          element={<h1>Page not Found</h1>}
-        ></Route>
+        <Route key="notFound" path="*" element={<ErrorPage />}></Route>
       </Route>
     )
   );

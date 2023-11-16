@@ -37,7 +37,7 @@ const Login = () => {
       }
       return data.token as TokenType;
     } catch (err) {
-      setError(`Wrong password or email`);
+      setError(`Wrong email or password `);
     } finally {
       setLoading(false);
     }

@@ -5,87 +5,138 @@
 // Desktop View
 .main-nav {
   .openNav {
-    border: 1px solid red;
     padding: 15px 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    font-weight: 500;
+    letter-spacing: 0.5px;
 
     ul {
       display: flex;
+      align-items: center;
       gap: 30px;
+
+      img {
+        display: none;
+      }
+
+      img.logoutIcon {
+        display: block;
+      }
     }
   }
 }
 
 .logo {
-  width: 40px;
+  cursor: pointer;
+  display: flex;
+  // flex-direction: column;
+  align-items: center;
+
+  img {
+    width: 60px;
+  }
 }
 
-.usernameNavBar {
-  font-size: 13px;
-  color: colors.$font-style;
+.logoutIcon {
+  width: 30px;
+  cursor: pointer;
+  transition: general.$transition;
+
+  &:hover {
+    filter: drop-shadow(8px 2px 3px rgb(0 0 0 / 0.5));
+  }
 }
 
-.usernameNavBar,
-.appInfoNav {
+.nav-footer,
+.mobile {
   display: none;
 }
 @media (max-width: 640px) {
   .main-nav {
     .openNav {
       position: fixed;
-      min-height: 100vh;
-      width: 280px;
+      height: 100vh;
+      width: 240px;
       display: flex;
       flex-direction: column;
-      justify-content: space-around;
+      justify-content: space-between;
+
       z-index: 3;
       background: colors.$background-alternative;
       transition: general.$transition;
-      ul {
+
+      nav {
         width: 100%;
 
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        align-content: center;
+        ul {
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+
+          li {
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+            padding: 5px 20px;
+            gap: 25px;
+
+            img {
+              display: block;
+              width: 30px;
+            }
+          }
+        }
       }
     }
 
     .closeNav {
       transition: general.$transition;
-      transform: translateX(-300px);
+      transform: translateX(-240px);
     }
   }
 
   .logo {
-    width: 80px;
+    flex-direction: column;
+
+    p {
+      color: colors.$font-style;
+    }
   }
-  .usernameNavBar,
-  .appInfoNav {
+
+  .mobile {
     display: block;
+  }
+
+  .nav-footer {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .nav-footer__icon {
+    display: flex;
+    gap: 10px;
+    img {
+      width: 35px;
+    }
   }
 
   .overlay {
     @include mixin.overlay();
   }
 
-  // // Hamburger Menu
+  // // Hamburger Menu Icon
   .navIcon {
     z-index: 2;
     position: fixed;
     top: 0px;
     left: 25px;
     transform: translate(-50%, 50%) rotate(90deg);
-
     cursor: pointer;
-
-    &:hover::after {
-      transition: general.$transition;
-      font-size: 11px;
-    }
 
     span {
       cursor: pointer;
@@ -104,5 +155,16 @@
         font-size: 11px;
       }
     }
+  }
+}
+
+a.active {
+  // border-bottom: 1px solid colors.$font-style;
+  border-bottom: 1px solid black;
+  padding: 4px;
+
+  img {
+    filter: brightness(0) saturate(100%) invert(87%) sepia(38%) saturate(3081%)
+      hue-rotate(299deg) brightness(99%) contrast(103%);
   }
 }
