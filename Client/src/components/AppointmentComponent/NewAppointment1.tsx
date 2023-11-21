@@ -1,13 +1,14 @@
-import { useState } from "react";
 import { AllServicesTypes } from "../../types/tableApiTypes";
 
 interface SignUpFormProps {
   allServices: AllServicesTypes[] | undefined;
+  setSelectedService: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const SignUpForm: React.FC<SignUpFormProps> = ({ allServices }) => {
-  const [selectedService, setSelectedService] = useState<string>("");
-
+const NewAppointment1 = ({
+  allServices,
+  setSelectedService,
+}: SignUpFormProps) => {
   const handleSelectedService = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedService(e.target.value);
   };
@@ -28,4 +29,4 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ allServices }) => {
   );
 };
 
-export default SignUpForm;
+export default NewAppointment1;

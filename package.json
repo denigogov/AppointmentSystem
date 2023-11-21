@@ -10,5 +10,8 @@
   },
   "keywords": [],
   "author": "Dejan Gogov",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "sweetalert2": "^11.10.1"
+  }
 }

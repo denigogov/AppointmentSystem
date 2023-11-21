@@ -1,4 +1,4 @@
-import { AllServicesTypes } from "../types/tableApiTypes";
+import { AllServicesTypes, ServiceEmloyeesTypes } from "../types/tableApiTypes";
 
 const DEFAULT_URL: string = "http://localhost:4000/";
 
@@ -14,9 +14,13 @@ export const apiFetcher = async <T>(url: string) => {
     return data as T;
   } catch (err) {
     console.error((err as Error).message);
+    throw new Error("An error occurred while fetching the data");
   }
 };
 
 export const fetchAllServices = async () => {
   return apiFetcher<AllServicesTypes>(`tableRoute/services`);
+};
+export const fetchAllServiceEmployees = async () => {
+  return apiFetcher<ServiceEmloyeesTypes>(`tableRoute/serviceemloyees`);
 };

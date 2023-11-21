@@ -1,0 +1,25 @@
+@use "./colors";
+@use "./general";
+@use "./mixin";
+
+.signUpContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    text-align: center;
+    padding: 10px;
+    color: colors.$font-Primary;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+
+    button {
+      color: white;
+      margin: 15px 0;
+      @include mixin.button();
+    }
+  }
+}

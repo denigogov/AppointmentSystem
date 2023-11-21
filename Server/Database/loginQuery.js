@@ -44,7 +44,7 @@ const getUserIdNext = async (req, res, next) => {
         [sub]
       );
 
-      const user = findCustomer[0];
+      const user = findCustomer[0] ?? false;
 
       req.userInfo = {
         id: user.id,
@@ -59,7 +59,7 @@ const getUserIdNext = async (req, res, next) => {
         [sub]
       );
 
-      const user = findEmployee[0];
+      const user = findEmployee[0] ?? false;
 
       req.userInfo = {
         id: user.id,
