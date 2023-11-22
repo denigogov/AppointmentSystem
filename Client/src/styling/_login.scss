@@ -28,7 +28,7 @@
     }
 
     input[type="password"] {
-      background: url(../assets/scissors.svg) no-repeat;
+      background: url(../assets/passwordInputIcon.svg) no-repeat;
       background-color: white;
       @include mixin.inputLogin();
     }

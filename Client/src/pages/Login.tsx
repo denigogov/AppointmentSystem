@@ -98,14 +98,14 @@ const Login = () => {
       <div>
         <p className="navLinkInfo">
           No account ?{" "}
-          <Link className="navLinkInfo" to="/signup">
+          <Link className="navLinkInfo__link" to="/signup">
             Create one
           </Link>
         </p>
 
         <p className="navLinkInfo">
           back to{" "}
-          <NavLink className="navLinkInfo" to="/">
+          <NavLink className="navLinkInfo__link" to="/">
             Home
           </NavLink>
         </p>

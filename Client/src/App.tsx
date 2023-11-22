@@ -28,6 +28,8 @@ const App = () => {
           const userData = await fetchTokenValidation(auth.token as TokenType);
           if (userData) {
             auth.info(userData.payload as UserInfoType);
+
+            console.log(auth.userInfo);
           }
         } else {
           auth.logout();

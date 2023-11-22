@@ -5,8 +5,7 @@ import {
   CustomerInputsTypes,
   CustomerinputsRegistrationTypes,
 } from "../../types/CustomerRegistrationTypes";
-
-// import { handlePostPutDeleteRequest } from "../../api/handleRequest";
+// import { postDeletePutRequest } from "../../api/handleRequest";
 import { useAuth } from "../../helpers/Auth";
 
 import { generateInputs } from "./SignUpInputs";
@@ -26,13 +25,28 @@ const SignUp = () => {
     password: "",
     confirmPassword: "",
   });
-
   const inputs = generateInputs(values.password);
   const navigate = useNavigate();
   const auth = useAuth();
 
   const handlePostRequest = async () => {
     const { confirmPassword, ...restValues } = values;
+
+    // postDeletePutRequest(
+    //   "POST",
+    //   `${auth.token}`,
+    //   "tableRoute/customers",
+    //   restValues,
+    //   setErrorMessage,
+    //   errorMessage,
+    //   "Customer Already exists",
+    //   "A user with the same email, phone, or username already exists. Please choose unique values.",
+    //   setSucces,
+    //   succes,
+    //   "cool",
+    //   "vmroooooo",
+    //   navigate("/")
+    // );
 
     try {
       const res = await fetch(`http://localhost:4000/tableRoute/customers`, {
@@ -45,8 +59,8 @@ const SignUp = () => {
       });
 
       if (res.ok) {
-        setErrorMessage("");
         setSucces(`Account creation successful!`);
+        setErrorMessage("");
 
         Swal.fire({
           icon: "success",

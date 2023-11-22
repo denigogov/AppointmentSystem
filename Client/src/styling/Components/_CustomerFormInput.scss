@@ -11,7 +11,7 @@
   input {
     display: flex;
     margin: 10px 0px;
-    @include mixin.inputLogin();
+    @include mixin.input();
   }
 
   label {

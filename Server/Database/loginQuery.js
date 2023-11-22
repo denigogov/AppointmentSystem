@@ -18,8 +18,8 @@ const findUserLogin = async (req, res, next) => {
 
     // ABLE NOW CUSTOMER AND EMPLOYEE TO LOGIN FROM THE SAME FORM !!
     if (
-      findUsername?.length > 0 ||
-      (findCustomer?.length > 0 && findCustomer[0]?.confirmation !== 0)
+      findUsername?.length ||
+      (findCustomer?.length && findCustomer[0]?.confirmation !== 0)
     ) {
       req.user = findUsername[0] || findCustomer[0];
 
@@ -37,34 +37,34 @@ const findUserLogin = async (req, res, next) => {
 
 const getUserIdNext = async (req, res, next) => {
   const { sub = 0, type = 0 } = req.decodedToken || {};
+
   try {
     if (type === 1) {
       const [findCustomer] = await database.query(
-        `select * from customers where id = ? `,
+        `select * from customers where id = ?`,
         [sub]
       );
 
-      const user = findCustomer[0] ?? false;
-
+      const customer = findCustomer[0] ?? false;
       req.userInfo = {
-        id: user.id,
-        username: user.username,
-        type: user.userType_id,
+        id: customer.id,
+        username: customer.firstName,
+        type: customer.userType_id,
       };
     } else {
       const [findEmployee] = await database.query(
-        `SELECT employees.id, username, email, password,employeesType_id, userType_id FROM haircut.employees 
+        `SELECT employees.id, employees.firstName, email, password,employeesType_id, userType_id FROM haircut.employees 
         join employeestype on employees.employeesType_id = employeestype.id
         join usertypes on employeestype.userType_id = usertypes.id where  employees.id = ?`,
         [sub]
       );
 
-      const user = findEmployee[0] ?? false;
+      const employee = findEmployee[0] ?? false;
 
       req.userInfo = {
-        id: user.id,
-        username: user.username,
-        type: user.userType_id,
+        id: employee.id,
+        username: employee.firstName,
+        type: employee.userType_id,
       };
     }
 

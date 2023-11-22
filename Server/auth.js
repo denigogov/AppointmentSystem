@@ -32,6 +32,7 @@ const verifyPassword = async (req, res) => {
     if (verifyPass) {
       const payload = {
         sub: req.user.id,
+        type: req.user.userType_id,
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET, {
         expiresIn: "12h",
@@ -61,7 +62,9 @@ const veryfyToken = async (req, res, next) => {
         if (err) {
           throw new Error("Invalid token");
         }
+
         req.decodedToken = decodedToken;
+
         next();
       });
     }

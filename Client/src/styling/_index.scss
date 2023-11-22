@@ -36,7 +36,14 @@ a {
   color: colors.$error;
 }
 
-.navLinkInfo {
+.navLinkInfo,
+.navLinkInfo__link {
   font-size: 12px;
   color: colors.$font-Secound;
+  transition: general.$transition;
+
+  // Only for the link to be highLigth !!
+  .navLinkInfo__link:hover {
+    color: colors.$font-style;
+  }
 }

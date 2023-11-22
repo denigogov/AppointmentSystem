@@ -29,6 +29,16 @@
   }
 }
 
+@mixin input {
+  border: 1px solid colors.$border-Primary;
+  border-radius: 10px;
+  padding: 10px 30px;
+
+  &:focus {
+    outline: 1px solid colors.$border-Primary-Dark;
+  }
+}
+
 @mixin overlay {
   position: fixed;
   top: 0;

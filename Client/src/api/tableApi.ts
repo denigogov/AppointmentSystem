@@ -13,7 +13,6 @@ export const apiFetcher = async <T>(url: string) => {
 
     return data as T;
   } catch (err) {
-    console.error((err as Error).message);
     throw new Error("An error occurred while fetching the data");
   }
 };
