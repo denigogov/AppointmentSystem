@@ -1,4 +1,6 @@
 const database = require("./database");
+const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.APIEMAILKEY);
 
 const createCustomer = async (req, res) => {
   try {
@@ -18,9 +20,28 @@ const createCustomer = async (req, res) => {
       [firstName, lastName, email, password, phoneNumber]
     );
 
-    createCustomer.affectedRows
-      ? res.sendStatus(201)
-      : res.status(500).send("Failed to create customer");
+    if (createCustomer.affectedRows) {
+      const message = {
+        to: email,
+        from: process.env.EMAIL,
+        subject: `Hello ${firstName}`,
+        html: `
+        <h5>${firstName} Click the following link to confirm your email address:</h5>
+        <a href="Confirmation Link to be added !"</a>
+      `,
+      };
+      sgMail
+        .send(message)
+        .then(() => {
+          res.status(200).send("Email confirmation sent successfully.");
+        })
+        .catch((error) => {
+          console.error(error);
+          res.status(500).send("Error sending confirmation email.");
+        });
+    } else {
+      res.status(500).send("Failed to create customer");
+    }
   } catch (err) {
     console.error(err);
     res.status(500).send("Internal Server Error");

@@ -79,4 +79,22 @@ const sendUserInfo = (req, res) => {
     payload: req.userInfo,
   });
 };
-module.exports = { hashedPassword, verifyPassword, veryfyToken, sendUserInfo };
+
+const emailTokenVerification = (req, res) => {
+  const payload = {
+    email: email,
+    firstName: firstName,
+  };
+
+  const token = jwt.sign(payload, secretKey, {
+    expiresIn: "60000", //60 secound!
+  });
+};
+
+module.exports = {
+  hashedPassword,
+  verifyPassword,
+  veryfyToken,
+  sendUserInfo,
+  emailTokenVerification,
+};

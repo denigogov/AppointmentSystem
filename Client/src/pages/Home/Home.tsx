@@ -3,6 +3,7 @@ import { useAuth } from "../../helpers/Auth";
 
 const Home = () => {
   const navigate = useNavigate();
+
   const auth = useAuth();
   const handleLogout = () => {
     auth.logout();

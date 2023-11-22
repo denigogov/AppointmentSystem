@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import Root from "./pages/Root";
 import Login from "./pages/Login";
-// import Home from "./pages/Home/Home";
+import Home from "./pages/Home/Home";
 import { useAuth } from "./helpers/Auth";
 import { useEffect, useState } from "react";
 import { fetchTokenValidation } from "./api/loginApi";
@@ -49,17 +49,14 @@ const App = () => {
       <Route path="/" element={<Root />}>
         <Route index element={<WebPage />} />
         {/* <Route
-          path="home"
+          path="home/:token"
           element={
-            <RequireAuth>
-              <Home />
-            </RequireAuth>
-          }
-        /> */}
+            // <RequireAuth>
+            <Home />
+            /* </RequireAuth> */}
+        {/* /> */}
 
-        {auth.token ? null : (
-          <Route key="login" path="login" element={<Login />} />
-        )}
+        {auth.token ? null : <Route path="login" element={<Login />} />}
 
         <Route
           path="app"
