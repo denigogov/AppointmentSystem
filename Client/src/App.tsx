@@ -26,11 +26,16 @@ const App = () => {
       try {
         if (typeof auth.token === "string" && auth.token.length) {
           const userData = await fetchTokenValidation(auth.token as TokenType);
+
           if (userData) {
             auth.info(userData.payload as UserInfoType);
 
-            console.log(auth.userInfo);
+            // I'm adding this to prevent nonAuth Users to login when try to add token from localstorage !
+          } else {
+            auth.logout();
           }
+
+          // Here reject if there is no token almost the same as up I'll have ti check which one and test it !!
         } else {
           auth.logout();
         }
@@ -48,13 +53,14 @@ const App = () => {
     createRoutesFromElements(
       <Route path="/" element={<Root />}>
         <Route index element={<WebPage />} />
-        {/* <Route
+        <Route
           path="home/:token"
           element={
             // <RequireAuth>
             <Home />
-            /* </RequireAuth> */}
-        {/* /> */}
+            // </RequireAuth>
+          }
+        />
 
         {auth.token ? null : <Route path="login" element={<Login />} />}
 

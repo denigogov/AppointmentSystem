@@ -1,10 +1,22 @@
 const database = require("./database");
+const jwt = require("jsonwebtoken");
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.APIEMAILKEY);
 
 const createCustomer = async (req, res) => {
   try {
     const { firstName, lastName, email, password, phoneNumber } = req.body;
+
+    const payload = {
+      email: email,
+      username: firstName,
+      type: 1,
+    };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: "90000", //60 secound!
+    });
+    const confirmationLink = `http://localhost:4000/tableRoute/confirm?token=${token}`;
 
     const [employeesEmail] = await database.query(
       "SELECT email FROM employees WHERE email = ? UNION SELECT email FROM customers WHERE email = ?",
@@ -21,13 +33,14 @@ const createCustomer = async (req, res) => {
     );
 
     if (createCustomer.affectedRows) {
+      // Sending the message when user create account
       const message = {
         to: email,
         from: process.env.EMAIL,
         subject: `Hello ${firstName}`,
         html: `
         <h5>${firstName} Click the following link to confirm your email address:</h5>
-        <a href="Confirmation Link to be added !"</a>
+        <a href="${confirmationLink}">confirmation link</a>
       `,
       };
       sgMail
