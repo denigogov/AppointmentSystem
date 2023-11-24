@@ -14,6 +14,7 @@ router
     validateCustomer,
     hashedPassword,
     customerDatabase.createCustomer
-  );
+  )
+  .get("/confirm", customerDatabase.customerConfirm);
 
 module.exports = router;

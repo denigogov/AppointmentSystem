@@ -9,10 +9,13 @@ const Home = () => {
   const auth = useAuth();
 
   useEffect(() => {
-    const tokens = location.search;
+    // Taking the first letter out becaouse is questionMark(?) and chaining to the localtion FN
+    const tokens = location.search.substring(1);
+    console.log("active", tokens);
 
     if (tokens) {
       auth.login(tokens);
+      navigate("/app");
     } else null;
   }, [location]);
 
