@@ -1,0 +1,15 @@
+.appRoot-container {
+  display: flex;
+  // height: 100%;  //TEST NEED TO FIT TO THE VIEW PORT ON DESKTOP !!
+}
+
+.appRoot-navigation {
+  flex: 0 0 15%; // 15% of the screen -- shorthand (grow, shrink, flex-basis)
+  display: flex;
+  flex-direction: column;
+  border: 1px solid blue;
+}
+
+.appRoot-outlet {
+  flex: 0 0 85%; // 85% of the screen -- shorthand (grow, shrink, flex-basis)
+}

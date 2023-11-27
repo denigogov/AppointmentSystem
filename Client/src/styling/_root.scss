@@ -53,6 +53,8 @@
 .mobile {
   display: none;
 }
+
+// Mobile View Start
 @media (max-width: 640px) {
   .main-nav {
     .openNav {
@@ -157,10 +159,10 @@
     }
   }
 }
+// Mobile View End
 
 a.active {
-  // border-bottom: 1px solid colors.$font-style;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid colors.$font-style;
   padding: 4px;
 
   img {

@@ -92,7 +92,7 @@ const Login = () => {
           placeholder="password"
           ref={passRef}
         />
-        <button>login</button> <p className="errorMessage">{error}</p>
+        <button>Sign in</button> <p className="errorMessage">{error}</p>
       </form>
       {loading && <LoadingRing />}
       <div>

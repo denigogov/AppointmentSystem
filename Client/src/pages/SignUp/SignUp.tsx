@@ -17,6 +17,7 @@ const SignUp = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
   //@ts-ignore
   const [succes, setSucces] = useState<string>("");
+  const [gender, setGender] = useState<string>("");
   const [values, setValues] = useState<CustomerInputsTypes>({
     firstName: "",
     lastName: "",
@@ -30,7 +31,8 @@ const SignUp = () => {
   const auth = useAuth();
 
   const handlePostRequest = async () => {
-    const { confirmPassword, ...restValues } = values;
+    const { confirmPassword, ...allValues } = values;
+    const restValues = { gender, ...allValues };
 
     // postDeletePutRequest(
     //   "POST",
@@ -66,7 +68,6 @@ const SignUp = () => {
           icon: "success",
           title: `Account creation successful!`,
           html: `<p>to get started, please verify your <strong>email</strong> using the link we sent</>`,
-
           confirmButtonColor: "#fe9393",
         }).then((res) => {
           if (res.isConfirmed || res.isDismissed) navigate("/");
@@ -106,6 +107,15 @@ const SignUp = () => {
     <div className="signUpContainer">
       <form onSubmit={handleSubmit} autoComplete="on">
         <h1>Register Form</h1>
+
+        <br />
+        <label>Choose your Gender</label>
+        <select required onChange={(e) => setGender(e.target.value)}>
+          <option>Select Your Gender</option>
+          <option>Female</option>
+          <option>Male</option>
+          <option>Other</option>
+        </select>
         {inputs.map((input: CustomerinputsRegistrationTypes, i: number) => {
           return (
             <CustomerFormInput

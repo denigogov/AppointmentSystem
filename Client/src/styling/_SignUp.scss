@@ -7,11 +7,23 @@
   justify-content: center;
   align-items: center;
 
+  // FOR ALL LABELS !
+  label {
+    font-size: 12px;
+    color: colors.$font-Secound;
+  }
+  select {
+    @include mixin.inputLogin();
+    background-color: white;
+    padding: 10px;
+  }
+
   h1 {
     text-align: center;
     padding: 10px;
     color: colors.$font-Primary;
   }
+
   form {
     display: flex;
     flex-direction: column;

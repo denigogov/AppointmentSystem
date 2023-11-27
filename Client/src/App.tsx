@@ -16,6 +16,7 @@ import Dashboard from "./pages/App/Dashboard";
 import WebPage from "./pages/Home/WebPage";
 import SignUp from "./pages/SignUp/SignUp";
 import ErrorPage from "./pages/ErrorPage";
+import AppRoot from "./pages/AppRoot";
 
 const App = () => {
   const auth = useAuth();
@@ -63,17 +64,14 @@ const App = () => {
         />
 
         {auth.token ? null : <Route path="login" element={<Login />} />}
+        {/* <RequireAuth> */}
+        <Route path="app" element={<AppRoot />}>
+          {/* </RequireAuth> */}
+          <Route index element={<Dashboard />} />
+        </Route>
 
-        <Route
-          path="app"
-          element={
-            <RequireAuth>
-              <Dashboard />
-            </RequireAuth>
-          }
-        />
-
-        <Route path="signUp" element={<SignUp />} />
+        {/* IF USER IS ALREADY SIGN IN , Don't show the router (show as error) */}
+        {auth.token ? null : <Route path="signUp" element={<SignUp />} />}
 
         <Route key="notFound" path="*" element={<ErrorPage />}></Route>
       </Route>

@@ -7,7 +7,8 @@ sgMail.setApiKey(process.env.APIEMAILKEY);
 
 const createCustomer = async (req, res) => {
   try {
-    const { firstName, lastName, email, password, phoneNumber } = req.body;
+    const { gender, firstName, lastName, email, password, phoneNumber } =
+      req.body;
 
     const payload = {
       email: email,
@@ -28,8 +29,8 @@ const createCustomer = async (req, res) => {
     }
 
     const [createCustomer] = await database.query(
-      "INSERT INTO customers (firstName, lastName, email, password, phoneNumber) VALUES (?, ?, ?, ?, ?)",
-      [firstName, lastName, email, password, phoneNumber]
+      "INSERT INTO customers (gender,firstName, lastName, email, password, phoneNumber) VALUES (?, ?,?, ?, ?, ?)",
+      [gender, firstName, lastName, email, password, phoneNumber]
     );
 
     if (createCustomer.affectedRows) {

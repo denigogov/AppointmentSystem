@@ -12,13 +12,7 @@ const validateCustomer = (req, res, next) => {
   const { firstName, lastName, email, password, phoneNumber } = req.body;
 
   const { error } = usersSchema.validate(
-    {
-      firstName,
-      lastName,
-      email,
-      password,
-      phoneNumber,
-    },
+    { firstName, lastName, email, password, phoneNumber },
     { abortEarly: false }
   );
 

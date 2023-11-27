@@ -25,6 +25,8 @@
     padding: 3px;
     display: none;
   }
+
+  // Classes for showing the input errors !
   input:invalid[focused="true"] {
     border: 1px solid colors.$error;
   }
