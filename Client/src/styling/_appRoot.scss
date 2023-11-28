@@ -1,15 +1,112 @@
+@use "./colors";
+@use "./general";
+
 .appRoot-container {
   display: flex;
-  // height: 100%;  //TEST NEED TO FIT TO THE VIEW PORT ON DESKTOP !!
+
+  height: calc(
+    100vh - 90px
+  ); // -90px from viewport because of the navbar which is 90px height (to fit the page in screen no scroll)
 }
 
 .appRoot-navigation {
-  flex: 0 0 15%; // 15% of the screen -- shorthand (grow, shrink, flex-basis)
+  border-right: 1px solid blue;
   display: flex;
+  flex: 0 0 15%; // 15% of the screen -- shorthand (grow, shrink, flex-basis)
   flex-direction: column;
-  border: 1px solid blue;
+  justify-content: space-between;
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 25px;
+
+    li {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      padding: 5px 20px;
+      gap: 25px;
+    }
+
+    img {
+      display: block;
+      width: 30px;
+      // filter: brightness(0) saturate(100%) invert(87%) sepia(38%)
+      //   saturate(3081%) hue-rotate(299deg) brightness(99%) contrast(103%);
+    }
+  }
+
+  .appRoot-nav_footer {
+    padding: 0 0 0 5px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 1s ease;
+
+    &:hover {
+      filter: drop-shadow(10px 4px 7px rgb(0 /1 0 0));
+    }
+    img {
+      rotate: 180deg;
+      width: 45px;
+      transition: general.$transition;
+    }
+  }
 }
 
+.appNavMenu--icon {
+  display: none;
+}
+
+// THE APP OUTLET
 .appRoot-outlet {
-  flex: 0 0 85%; // 85% of the screen -- shorthand (grow, shrink, flex-basis)
+  // flex: 0 0 75%; // 85% of the screen -- shorthand (grow, shrink, flex-basis)
+  flex: 1;
+}
+
+// Mobile Responsive
+
+@media (max-width: 640px) {
+  .appRoot-container {
+    flex-direction: column;
+  }
+
+  .appRoot-navigation {
+    padding: 10px;
+    align-items: center;
+    transition: all 1s ease;
+
+    // Hidding the logout for desktop !
+    .appRoot-nav_footer {
+      display: none;
+    }
+  }
+
+  // To hide App Nav Menu on mobile !
+  .activeMobNavigation {
+    margin-top: -260px;
+    transition: general.$transition;
+    // transform: translateY(-240px);
+  }
+
+  .appNavMenu--icon {
+    display: block;
+    position: fixed;
+    top: 8px;
+    right: 20px;
+    text-align: center;
+    cursor: pointer;
+
+    &:active {
+      transform: scale(0.98);
+    }
+
+    img {
+      width: 35px;
+    }
+  }
 }

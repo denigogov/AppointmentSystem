@@ -1,17 +1,70 @@
+// Icons
+import SigninIcon from "../assets/signinIcon.svg";
+import DashboardAppRootIcon from "../assets/DashboardAppRootIcon.svg";
+import CalendarNavigation from "../assets/calendarNavigation.svg";
+import SettingsNavIcon from "../assets/settingsNavIcon.svg";
+import HelpNavIcon from "../assets/helpNavIcon.svg";
+import UserNavMenu from "../assets/UserNavMenu.svg";
+
 import { NavLink } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import "../styling/_appRoot.scss";
 
+import { useState } from "react";
+import { useAuth } from "../helpers/Auth";
+
 const AppRoot = () => {
+  const [openNavUser, setOpenNavUser] = useState<boolean>(false);
+  const auth = useAuth();
+
+  const handleMobileMenu = () => {
+    setOpenNavUser(!openNavUser);
+  };
   return (
     <div className="appRoot-container">
-      <nav className="appRoot-navigation">
-        <NavLink to="dashboard">Dashboard</NavLink>
-        <NavLink to="dashboard">Appointments</NavLink>
-        <NavLink to="dashboard">Settings</NavLink>
-        <NavLink to="dashboard">Help</NavLink>
+      <nav
+        className={
+          openNavUser
+            ? "appRoot-navigation"
+            : "appRoot-navigation activeMobNavigation"
+        }
+      >
+        <ul>
+          <NavLink to="dashboard">
+            <li>
+              Dashboard
+              <img src={DashboardAppRootIcon} alt="Dashboard Icon" />
+            </li>
+          </NavLink>
+          <NavLink to="appointments">
+            <li>
+              Appointments
+              <img src={CalendarNavigation} alt="Calendar Icon" />
+            </li>
+          </NavLink>
+          <NavLink to="settings">
+            <li>
+              Settings
+              <img src={SettingsNavIcon} alt="Settings Icon" />
+            </li>
+          </NavLink>
+          <NavLink to="help">
+            <li>
+              Help
+              <img src={HelpNavIcon} alt="Help icon" />
+            </li>
+          </NavLink>
+        </ul>
+        <div className="appRoot-nav_footer" onClick={() => auth.logout()}>
+          <img src={SigninIcon} alt="signOut icon" />
+          <p className="navLinkInfo">Sign out</p>
+        </div>
       </nav>
-      <main className="appRoot-outlet">
+      <div className="appNavMenu--icon" onClick={handleMobileMenu}>
+        <img src={UserNavMenu} alt="app nav menu" />
+        <p className="navLinkInfo">{auth.userInfo?.username ?? "Dejan"}</p>
+      </div>
+      <main className="appRoot-outlet test">
         <Outlet />
       </main>
     </div>

@@ -10,13 +10,13 @@ import Home from "./pages/Home/Home";
 import { useAuth } from "./helpers/Auth";
 import { useEffect, useState } from "react";
 import { fetchTokenValidation } from "./api/loginApi";
-import { RequireAuth } from "./helpers/RequireAuth";
 import { TokenType, UserInfoType } from "./types/AuthTypes";
 import Dashboard from "./pages/App/Dashboard";
 import WebPage from "./pages/Home/WebPage";
 import SignUp from "./pages/SignUp/SignUp";
 import ErrorPage from "./pages/ErrorPage";
 import AppRoot from "./pages/AppRoot";
+import { RequireAuth } from "./helpers/RequireAuth";
 
 const App = () => {
   const auth = useAuth();
@@ -64,10 +64,17 @@ const App = () => {
         />
 
         {auth.token ? null : <Route path="login" element={<Login />} />}
-        {/* <RequireAuth> */}
-        <Route path="app" element={<AppRoot />}>
-          {/* </RequireAuth> */}
+
+        <Route
+          path="app"
+          element={
+            <RequireAuth>
+              <AppRoot />
+            </RequireAuth>
+          }
+        >
           <Route index element={<Dashboard />} />
+          <Route path="dashboard" element={<Dashboard />} />
         </Route>
 
         {/* IF USER IS ALREADY SIGN IN , Don't show the router (show as error) */}

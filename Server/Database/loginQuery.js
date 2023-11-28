@@ -41,7 +41,7 @@ const getUserIdNext = async (req, res, next) => {
   try {
     if (type === 1) {
       const [findCustomer] = await database.query(
-        `select * from customers where id = ?`,
+        `select id,firstName,userType_id from customers where id = ?`,
         [sub]
       );
 
@@ -53,9 +53,7 @@ const getUserIdNext = async (req, res, next) => {
       };
     } else {
       const [findEmployee] = await database.query(
-        `SELECT employees.id, employees.firstName, email, password,employeesType_id, userType_id FROM haircut.employees 
-        join employeestype on employees.employeesType_id = employeestype.id
-        join usertypes on employeestype.userType_id = usertypes.id where  employees.id = ?`,
+        `SELECT employees.id, employees.firstName, employees.employeesType_id  FROM haircut.employees where  employees.id = ?`,
         [sub]
       );
 
@@ -64,7 +62,7 @@ const getUserIdNext = async (req, res, next) => {
       req.userInfo = {
         id: employee.id,
         username: employee.firstName,
-        type: employee.userType_id,
+        type: employee.employeesType_id,
       };
     }
 
