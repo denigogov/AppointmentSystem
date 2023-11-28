@@ -55,7 +55,7 @@
 }
 
 // Mobile View Start
-@media (max-width: 640px) {
+@media (max-width: general.$sm) {
   .main-nav {
     .openNav {
       position: fixed;

@@ -32,13 +32,13 @@ a {
 }
 
 .errorMessage {
-  font-size: 12px;
+  font-size: 0.75em;
   color: colors.$error;
 }
 
 .navLinkInfo,
 .navLinkInfo__link {
-  font-size: 12px;
+  font-size: 0.75em; //12px
   color: colors.$font-Secound;
   transition: general.$transition;
 

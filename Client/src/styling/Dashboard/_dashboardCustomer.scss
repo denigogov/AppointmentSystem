@@ -1,0 +1,49 @@
+@use "../colors";
+@use "../general";
+
+.dashboardCustomer--container {
+  //   border: 1px solid yellowgreen;
+  height: calc(100vh - 5.6875em);
+  // -90px from viewport because of the navbar which is 90px height (to fit the page in screen no scroll)
+  // + 1px because of the border that I have on the top from AppRoot !
+  display: flex;
+}
+
+// Wrap !
+.customerInfo__dashboard--container {
+  border-right: 1px solid rgb(0, 255, 157);
+  width: 30%; // 30% of the viewPort !
+
+  // Left Bottom
+  // .dashboardCustomer__event--wrap {
+  //   height: 50%;
+  // }
+
+  // Left top
+  .dashboardCustomer__info--wrap,
+  .dashboardCustomer__event--wrap {
+    height: 50%;
+
+    // add this component and propery to fit the content into the center of the div !
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+// Right Side of the screen !
+.customerRightInfo--dashboard {
+  flex: 1;
+}
+
+@media (max-width: general.$lg) {
+  .dashboardCustomer--container {
+    height: 100vh;
+    flex-direction: column;
+
+    .customerInfo__dashboard--container {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

@@ -10,7 +10,7 @@
 }
 
 .appRoot-navigation {
-  border-right: 1px solid blue;
+  border-right: 1px solid colors.$border-Primary-Dark;
   display: flex;
   flex: 0 0 15%; // 15% of the screen -- shorthand (grow, shrink, flex-basis)
   flex-direction: column;
@@ -66,11 +66,11 @@
 .appRoot-outlet {
   // flex: 0 0 75%; // 85% of the screen -- shorthand (grow, shrink, flex-basis)
   flex: 1;
+  // background: colors.$background; // if I want to change the color of the outlet !
 }
-
 // Mobile Responsive
 
-@media (max-width: 640px) {
+@media (max-width: general.$sm) {
   .appRoot-container {
     flex-direction: column;
   }

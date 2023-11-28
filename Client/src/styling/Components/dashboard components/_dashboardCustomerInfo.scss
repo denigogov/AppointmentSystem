@@ -1,0 +1,33 @@
+@use "../../general";
+
+.dashboardCustomer__wrap-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: white;
+  border-radius: 15%;
+
+  // Add this property because of the background not fit into the box!
+  height: 95%;
+  width: 65%;
+
+  .customerIconName {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    letter-spacing: 1px;
+    font-weight: 500;
+
+    img {
+      width: 40px;
+    }
+  }
+
+  .customerData {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+  }
+}

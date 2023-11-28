@@ -11,7 +11,7 @@ import { useAuth } from "./helpers/Auth";
 import { useEffect, useState } from "react";
 import { fetchTokenValidation } from "./api/loginApi";
 import { TokenType, UserInfoType } from "./types/AuthTypes";
-import Dashboard from "./pages/App/Dashboard";
+import Dashboard from "./pages/App/Dashboard/Dashboard";
 import WebPage from "./pages/Home/WebPage";
 import SignUp from "./pages/SignUp/SignUp";
 import ErrorPage from "./pages/ErrorPage";
@@ -68,9 +68,9 @@ const App = () => {
         <Route
           path="app"
           element={
-            <RequireAuth>
-              <AppRoot />
-            </RequireAuth>
+            // <RequireAuth>
+            <AppRoot />
+            // </RequireAuth>
           }
         >
           <Route index element={<Dashboard />} />

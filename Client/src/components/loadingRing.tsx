@@ -1,3 +1,5 @@
+// Loading animation for login page !
+
 const LoadingRing = () => {
   return (
     <div>

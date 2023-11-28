@@ -19,6 +19,7 @@ const AppRoot = () => {
 
   const handleMobileMenu = () => {
     setOpenNavUser(!openNavUser);
+    window.scrollTo(0, 0);
   };
   return (
     <div className="appRoot-container">
