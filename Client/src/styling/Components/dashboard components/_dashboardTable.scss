@@ -1,0 +1,6 @@
+@use "../../mixin";
+
+// Need to make it responsive !
+.table-customersAppointments {
+  @include mixin.table();
+}

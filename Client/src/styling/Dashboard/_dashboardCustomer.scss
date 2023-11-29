@@ -1,3 +1,4 @@
+@use "../mixin";
 @use "../colors";
 @use "../general";
 
@@ -40,6 +41,7 @@
   .dashboardCustomer--container {
     height: 100vh;
     flex-direction: column;
+    // gap: 50px;
 
     .customerInfo__dashboard--container {
       width: 100%;

@@ -55,3 +55,33 @@
     color: colors.$NavLinkActive;
   }
 }
+
+@mixin table() {
+  table {
+    background-color: #fff;
+    width: 100%;
+    // height: 400px; /* heigh of the table */
+    border-collapse: collapse;
+    text-align: center;
+
+    th,
+    td {
+      position: relative;
+      padding: 8px;
+      text-align: center;
+      border-bottom: 1px solid colors.$border-Primary;
+
+      img {
+        display: block;
+        margin: 0 auto;
+        width: 24px;
+        cursor: pointer;
+      }
+    }
+
+    tr:hover {
+      transition: general.$transition;
+      background-color: colors.$background-secondary;
+    }
+  }
+}

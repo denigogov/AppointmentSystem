@@ -1,11 +1,12 @@
 @use "../../general";
+@use "../../colors";
 
 .dashboardCustomer__wrap-info {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  background-color: white;
+  background-color: colors.$dashboardBoxes;
   border-radius: 15%;
 
   // Add this property because of the background not fit into the box!

@@ -1,0 +1,42 @@
+@use "../../general";
+@use "../../colors";
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap");
+
+.dashboardCustomerRight--container {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  gap: 30px;
+
+  .dashboardCustomer__totalRandom,
+  .dashboardCustomer__totalAmount,
+  .dashboardCustomer__totalAppointments {
+    height: 25vh; // 25% of the viewport height
+    flex: 1;
+    div {
+      background-color: colors.$dashboardBoxes;
+      height: 100%;
+      border-radius: 15%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+
+      p:first-child {
+        font-size: 1.1em;
+        letter-spacing: 0.9px;
+      }
+
+      p:last-child {
+        font-size: 1.3em;
+        font-weight: 400;
+        font-style: italic;
+        font-family: "Merriweather", serif;
+      }
+    }
+  }
+}
+
+// NEED TO FIX MOBILE RESPONSIVE !

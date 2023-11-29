@@ -7,6 +7,7 @@ import "../../../styling/Dashboard/_dashboardCustomer.scss";
 const DashboardCustomer = () => {
   return (
     <div className="dashboardCustomer--container">
+      {/* Left Side */}
       <div className="customerInfo__dashboard--container">
         <div className="dashboardCustomer__info--wrap">
           <DashboardCustomerInfo />
@@ -15,6 +16,8 @@ const DashboardCustomer = () => {
           <DashboardUpcomingEvent />
         </div>
       </div>
+
+      {/* Right Side */}
       <div className="customerRightInfo--dashboard">
         <DashboardCustomerDataBox />
         <DashboardCustomerTableView />

@@ -6,12 +6,16 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  background-color: white;
+  background-color: colors.$dashboardBoxes;
   border-radius: 15%;
 
   // Add this property because of the background not fit into the box!
   height: 95%;
   width: 65%;
+
+  h4 {
+    text-align: center;
+  }
 
   .dashboardUpcomingEvent--wrap {
     display: flex;

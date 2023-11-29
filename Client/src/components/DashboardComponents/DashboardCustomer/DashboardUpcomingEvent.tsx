@@ -1,6 +1,6 @@
 import saloonChairIcon from "../../../assets/hairdressChair.svg";
 import "../../../styling/Components/dashboard components/_dashboardUpcomingEvents.scss";
-import DashboardUpcomingEmpty from "./DashboardUpcomingEmpty";
+// import DashboardUpcomingEmpty from "./DashboardUpcomingEmpty";
 
 const DashboardUpcomingEvent = () => {
   return (
