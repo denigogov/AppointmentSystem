@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const database = require("../Database/appointmenQuery");
-const customerDatabase = require("../Database/customerQuery");
+const customerEmailConfirm = require("../Database/emailConfirm");
+const customerQuery = require("../Database/customerQuery");
 const { hashedPassword, veryfyToken } = require("../auth");
 const { validateCustomer } = require("../Validations/tableQueryValidation");
 
@@ -13,8 +14,9 @@ router
     "/customers",
     validateCustomer,
     hashedPassword,
-    customerDatabase.createCustomer
+    customerEmailConfirm.createCustomer
   )
-  .get("/confirm", customerDatabase.customerConfirm);
+  .get("/confirm", customerEmailConfirm.customerConfirm)
+  .get("/customers/:id/:type", veryfyToken, customerQuery.customerAllData);
 
 module.exports = router;

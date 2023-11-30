@@ -84,4 +84,29 @@
       background-color: colors.$background-secondary;
     }
   }
+  @media (max-width: general.$md) {
+    td {
+      display: grid;
+      gap: 0.5rem;
+      grid-template-columns: 15ch auto;
+
+      &:first-child {
+        margin-top: 2rem;
+      }
+
+      &:last-child {
+        margin-bottom: 2rem;
+      }
+
+      &::before {
+        content: attr(data-cell) ": ";
+        font-weight: 600;
+        float: left;
+      }
+    }
+
+    th {
+      display: none;
+    }
+  }
 }

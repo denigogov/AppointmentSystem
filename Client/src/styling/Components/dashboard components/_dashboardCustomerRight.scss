@@ -3,7 +3,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap");
 
 .dashboardCustomerRight--container {
-  padding: 20px;
   display: flex;
   justify-content: space-between;
   text-align: center;
@@ -13,9 +12,10 @@
   .dashboardCustomer__totalAmount,
   .dashboardCustomer__totalAppointments {
     height: 25vh; // 25% of the viewport height
-    flex: 1;
+    flex: 1 1 0;
+    width: 0;
     div {
-      background-color: colors.$dashboardBoxes;
+      background: colors.$dashboardBoxes;
       height: 100%;
       border-radius: 15%;
       display: flex;
@@ -40,3 +40,5 @@
 }
 
 // NEED TO FIX MOBILE RESPONSIVE !
+@media (max-width: general.$lg) {
+}

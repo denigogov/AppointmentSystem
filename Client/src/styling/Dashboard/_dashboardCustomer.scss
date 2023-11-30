@@ -8,12 +8,18 @@
   // -90px from viewport because of the navbar which is 90px height (to fit the page in screen no scroll)
   // + 1px because of the border that I have on the top from AppRoot !
   display: flex;
+  gap: 20px;
+  padding: 20px;
 }
 
 // Wrap !
 .customerInfo__dashboard--container {
   border-right: 1px solid rgb(0, 255, 157);
   width: 30%; // 30% of the viewPort !
+
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 
   // Left Bottom
   // .dashboardCustomer__event--wrap {
@@ -34,14 +40,18 @@
 
 // Right Side of the screen !
 .customerRightInfo--dashboard {
+  // padding: 20px;
   flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
 @media (max-width: general.$lg) {
   .dashboardCustomer--container {
     height: 100vh;
     flex-direction: column;
-    // gap: 50px;
 
     .customerInfo__dashboard--container {
       width: 100%;

@@ -27,7 +27,11 @@ const Dashboard = () => {
       dashboardView = <DashboardCustomer />;
   }
 
-  return <div style={{ borderTop: "1px solid #b7b7b7" }}>{dashboardView}</div>;
+  return (
+    <div style={{ borderTop: "1px solid #b7b7b7" }}>
+      <main>{dashboardView}</main>
+    </div>
+  );
 };
 
 export default Dashboard;

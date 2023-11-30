@@ -1,6 +1,41 @@
 @use "../../mixin";
+@use "../../colors";
+@use "../../general";
 
-// Need to make it responsive !
+.customerApp--wrap {
+  background: colors.$dashboardBoxes;
+  border-radius: 25px;
+  h4 {
+    padding: 20px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: colors.$font-Secound;
+  }
+}
+
 .table-customersAppointments {
-  @include mixin.table();
+  width: 100%;
+  height: calc(100vh - 408px);
+  padding: 20px;
+  overflow-y: auto;
+
+  th {
+    background-color: colors.$background-secondary;
+  }
+
+  &::-webkit-scrollbar {
+    width: 3px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: colors.$font-style;
+  }
+
+  @include mixin.table;
+}
+@media (max-width: general.$md) {
+  .table-customersAppointments {
+    padding: 0; //do not show scrolling if there is only one data !;
+  }
 }

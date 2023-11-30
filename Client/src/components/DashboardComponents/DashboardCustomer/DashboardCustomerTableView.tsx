@@ -2,7 +2,8 @@ import "../../../styling/Components/dashboard components/_dashboardTable.scss";
 
 const DashboardCustomerTableView = () => {
   return (
-    <div>
+    <div className="customerApp--wrap">
+      <h4>All Appointments</h4>
       <div className="table-customersAppointments">
         <table>
           <thead>
@@ -15,11 +16,13 @@ const DashboardCustomerTableView = () => {
             </tr>
           </thead>
           <tbody>
-            <td>Haircut</td>
-            <td>Mark Tween</td>
-            <td>01.11.2023</td>
-            <td>05.11.2023</td>
-            <td>$ 20</td>
+            <tr>
+              <td data-cell="Service">Haircut</td>
+              <td data-cell="Employee">Mark Tween</td>
+              <td data-cell="Created At">01.11.2023</td>
+              <td data-cell="Scheduled At">05.11.2023</td>
+              <td data-cell="Price">20 €</td>
+            </tr>
           </tbody>
         </table>
       </div>
