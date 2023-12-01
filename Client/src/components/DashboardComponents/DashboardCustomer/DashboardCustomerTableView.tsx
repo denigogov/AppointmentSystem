@@ -1,6 +1,13 @@
+import { dataMonthShow } from "../../../helpers/Dates";
 import "../../../styling/Components/dashboard components/_dashboardTable.scss";
+import { CustomersDataTypes } from "../../../types/tableApiTypes";
 
-const DashboardCustomerTableView = () => {
+interface props {
+  cusomerTableDashboardData: CustomersDataTypes[];
+}
+
+const DashboardCustomerTableView = ({ cusomerTableDashboardData }: props) => {
+  console.log(cusomerTableDashboardData);
   return (
     <div className="customerApp--wrap">
       <h4>All Appointments</h4>
@@ -15,15 +22,35 @@ const DashboardCustomerTableView = () => {
               <th>Price</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td data-cell="Service">Haircut</td>
-              <td data-cell="Employee">Mark Tween</td>
-              <td data-cell="Created At">01.11.2023</td>
-              <td data-cell="Scheduled At">05.11.2023</td>
-              <td data-cell="Price">20 €</td>
-            </tr>
-          </tbody>
+          {cusomerTableDashboardData[0] !== null ? (
+            <tbody>
+              {cusomerTableDashboardData.map((cust, i) => (
+                <tr key={i}>
+                  <td data-cell="Service">
+                    {cust?.servicesName ?? "not found"}
+                  </td>
+                  <td data-cell="Employee">
+                    {cust?.EmployeeFirstName}
+                    {cust?.EmployeeLastName ?? "not found"}
+                  </td>
+                  <td data-cell="Created At">
+                    {" "}
+                    {dataMonthShow(cust?.created_at ?? "not found")}
+                  </td>
+                  <td data-cell="Scheduled At">
+                    {dataMonthShow(cust?.scheduled_at ?? "not found")}
+                  </td>
+                  <td data-cell="Price">{cust?.servicePrice ?? "Not Found"}</td>
+                </tr>
+              ))}
+            </tbody>
+          ) : (
+            <tbody>
+              <tr>
+                <td colSpan={parseInt("11")}>No Appointments found</td>
+              </tr>
+            </tbody>
+          )}
         </table>
       </div>
     </div>

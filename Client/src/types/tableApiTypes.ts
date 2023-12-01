@@ -28,6 +28,7 @@ export interface CustomerUpcomingEventType {
   servicesName?: string;
   EmployeeFirstName?: string;
   EmployeeLastName?: string;
+  daysLeft?: number | null | undefined;
 }
 
 export interface CustomersDataTypes

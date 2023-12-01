@@ -1,4 +1,9 @@
-import customerInfoIcon from "../../../assets/customerInfo.svg";
+// import customerInfoIcon from "../../../assets/customerInfo.svg";
+import customerInfoIcon from "../../../assets/customerInfo1.svg";
+
+// I need to add logic if the user if female or male to change !
+// import femaleIcon from "../../../assets/customerInfo1.svg";
+
 import "../../../styling/Components/dashboard components/_dashboardCustomerInfo.scss";
 import { CustomerPersonalInfo } from "../../../types/tableApiTypes";
 
@@ -37,30 +42,3 @@ const DashboardCustomerInfo = ({
 };
 
 export default DashboardCustomerInfo;
-
-// import customerInfoIcon from "../../../assets/customerInfo.svg";
-// import "../../../styling/Components/dashboard components/_dashboardCustomerInfo.scss";
-
-// const DashboardCustomerInfo = () => {
-
-//   return (
-//     <div className="dashboardCustomer__wrap-info">
-//       <div className="customerIconName">
-//         <img src={customerInfoIcon} alt="customer icon" />
-//         <p>dejan gogov</p>
-//       </div>
-//       <div className="customerData">
-//         <p className="navLinkInfo">Email</p>
-//         <h5>deni.gogov@hotmail.com</h5>
-
-//         <p className="navLinkInfo">Number</p>
-//         <h5>31231231231312</h5>
-
-//         <p className="navLinkInfo">Register Since</p>
-//         <h5>22 nov 2025</h5>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default DashboardCustomerInfo;

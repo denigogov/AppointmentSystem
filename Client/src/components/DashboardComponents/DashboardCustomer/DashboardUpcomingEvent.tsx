@@ -1,7 +1,12 @@
-import saloonChairIcon from "../../../assets/hairdressChair.svg";
-import { calcDaysBetween } from "../../../helpers/Dates";
+import HaircutIcon from "../../../assets/haircutIcon.svg";
+import ColoringIcon from "../../../assets/ColoringIcon.svg";
+import ShaveIcon from "../../../assets/shave.svg";
+import defaultIcon from "../../../assets/defaultUpcomingEventIcon.svg";
+
 import "../../../styling/Components/dashboard components/_dashboardUpcomingEvents.scss";
 import { CustomerUpcomingEventType } from "../../../types/tableApiTypes";
+import DashboardUpcomingEmpty from "./DashboardUpcomingEmpty";
+import { dataMonthShow } from "../../../helpers/Dates";
 
 // import DashboardUpcomingEmpty from "./DashboardUpcomingEmpty";
 
@@ -12,39 +17,40 @@ interface upcomingEventsDataProp {
 const DashboardUpcomingEvent = ({
   upcomingEventsData,
 }: upcomingEventsDataProp) => {
-  // NEED TO FINISH THIS FN TO TELL HOW MANY DAYS LEFT TILL THE NEXT APPOINTMENT
-  const RelativeTimeFormat = new Intl.RelativeTimeFormat("en", {
-    numeric: "auto",
-  });
+  interface ServiceIconsTypes {
+    Haircut?: string;
+    Coloring?: string;
+    Shave?: string;
+  }
 
-  const calcDays = upcomingEventsData.map((c) => {
-    const dates: string | null = c?.scheduled_at ?? "";
-    const appointmentDate = new Date(dates);
-
-    const startDate = new Date();
-    const endDate = appointmentDate;
-    const daysBetween = calcDaysBetween(startDate, endDate);
-    return daysBetween;
-  });
-
-  // const formattedRelativeTime = calcDays.map((days) => {
-  //   const unit = days < 0 ? "day" : "day";
-  //   return RelativeTimeFormat.format(days, unit);
-  // });
-
-  // console.log(formattedRelativeTime);
+  const serviceIcons: ServiceIconsTypes = {
+    Haircut: HaircutIcon,
+    Coloring: ColoringIcon,
+    Shave: ShaveIcon,
+  };
 
   return (
-    <div className="dashboardUpcomingEvent--container">
+    <div
+      className="dashboardUpcomingEvent--container"
+      style={
+        upcomingEventsData.length > 0
+          ? { justifyContent: "" }
+          : { justifyContent: "space-around" }
+      }
+    >
       <h4>Upcoming Appointments</h4>
 
       {upcomingEventsData.map((c, i) => {
         const dates: string | null = c?.scheduled_at ?? "";
-        const appointmentDate = new Date(dates).toUTCString().slice(0, 17);
+        const appointmentDate = dataMonthShow(dates);
+
+        // For Icons! ...every service has his own icon!
+        const serviceIconKey = c?.servicesName as keyof ServiceIconsTypes;
+        const serviceIcon =
+          (serviceIconKey && serviceIcons[serviceIconKey]) || defaultIcon;
 
         return (
           <div className="dashboardUpcomingEvent--wrap" key={i}>
-            {/* <DashboardUpcomingEmpty />  if there is not upcoming appointments ! */}
             <div className="dashboardCustomer__event">
               <p className="navLinkInfo">Service</p>
               <h5>{c?.servicesName ?? "not found!"}</h5>
@@ -55,15 +61,23 @@ const DashboardUpcomingEvent = ({
               <p className="navLinkInfo">Scheduled for</p>
               <h5>{appointmentDate}</h5>
 
-              <p className="navLinkInfo">{calcDays}</p>
+              <p className="navLinkInfo">
+                {c?.daysLeft === 0
+                  ? `Today`
+                  : c.daysLeft === 1
+                  ? `Tommorow`
+                  : `In ${c.daysLeft} Days`}
+              </p>
             </div>
 
             <div className="dashboardCustomer__icon">
-              <img src={saloonChairIcon} alt="barber chair" />
+              <img src={serviceIcon} alt="service icon" />
             </div>
           </div>
         );
       })}
+
+      {upcomingEventsData.length > 0 || <DashboardUpcomingEmpty />}
     </div>
   );
 };

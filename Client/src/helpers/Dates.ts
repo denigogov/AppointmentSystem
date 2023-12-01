@@ -14,6 +14,11 @@ export const calcDaysBetween = (StartDate: Date, EndDate: Date) => {
     StartDate.getDate()
   );
 
-  // so it's safe to divide by 24 hours
   return (start - end) / oneDay;
+};
+
+export const dataMonthShow = (selectedData: Date | string) => {
+  const format = new Date(selectedData).toUTCString().slice(0, 17);
+
+  return format;
 };

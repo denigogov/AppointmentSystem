@@ -3,7 +3,7 @@ import "../../../styling/Components/dashboard components/_dashboardUpcomingEvent
 const DashboardUpcomingEmpty = () => {
   return (
     <div className="dashboardUpcoming--Empty">
-      <p>No Avaiable Appointments</p>
+      <p>No Upcoming Appointments</p>
       <p>create one</p>
     </div>
   );

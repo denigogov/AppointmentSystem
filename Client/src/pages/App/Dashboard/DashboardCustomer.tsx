@@ -12,6 +12,7 @@ import {
   CustomerUpcomingEventType,
 } from "../../../types/tableApiTypes";
 import { fetchCustomerData } from "../../../api/tableApi";
+import { calcDaysBetween } from "../../../helpers/Dates";
 
 const DashboardCustomer = () => {
   const auth = useAuth();
@@ -55,25 +56,47 @@ const DashboardCustomer = () => {
     totalAmount: totalPrice ?? 0,
   };
 
-  // const upcomingEventsData: CustomerUpcomingEventType[] = [
-  //   {
-  //     EmployeeFirstName: customerData[0]?.EmployeeFirstName,
-  //     EmployeeLastName: customerData[0]?.EmployeeLastName,
-  //     scheduled_at: customerData[0]?.scheduled_at,
-  //     servicesName: customerData[0]?.servicesName,
-  //   },
-  // ];
+  const upcomingEventsData = customerData
+    .map((c: CustomersDataTypes) => {
+      // Logic for upcoming Appoitmnet !
+      const dates: string | null = c?.scheduled_at ?? "";
+      const convertingToDate = new Date(dates);
+      const startDate = new Date();
+      const endDate = convertingToDate;
+      const daysBetween = calcDaysBetween(startDate, endDate);
+      const nonNegativeDays = daysBetween >= 0 ? daysBetween : null;
 
-  const upcomingEventsData = customerData.map((c: CustomersDataTypes) => {
-    const eventData: CustomerUpcomingEventType = {
-      EmployeeFirstName: c?.EmployeeFirstName,
-      EmployeeLastName: c?.EmployeeLastName,
-      scheduled_at: c?.scheduled_at,
-      servicesName: c?.servicesName,
-    };
+      const eventData: CustomerUpcomingEventType = {
+        EmployeeFirstName: c?.EmployeeFirstName,
+        EmployeeLastName: c?.EmployeeLastName,
+        scheduled_at: c?.scheduled_at,
+        servicesName: c?.servicesName,
+        daysLeft: nonNegativeDays,
+      };
 
-    return eventData;
-  });
+      return eventData;
+    })
+    .filter(
+      (event: CustomerUpcomingEventType) =>
+        event?.daysLeft !== null &&
+        event?.daysLeft !== undefined &&
+        event?.daysLeft >= 0
+    );
+
+  const cusomerTableDashboardData = customerData.map(
+    (c: CustomersDataTypes) => {
+      const tableData = {
+        EmployeeFirstName: c?.EmployeeFirstName,
+        EmployeeLastName: c?.EmployeeLastName,
+        servicesName: c?.servicesName,
+        created_at: c?.created_at,
+        scheduled_at: c?.scheduled_at,
+        servicePrice: c.servicePrice,
+      };
+
+      return tableData.created_at ? tableData : null;
+    }
+  );
 
   return (
     <div className="dashboardCustomer--container">
@@ -91,7 +114,9 @@ const DashboardCustomer = () => {
       {/* Right Side */}
       <div className="customerRightInfo--dashboard">
         <DashboardCustomerDataBox customerDataBox={customerDataBox} />
-        <DashboardCustomerTableView />
+        <DashboardCustomerTableView
+          cusomerTableDashboardData={cusomerTableDashboardData}
+        />
       </div>
     </div>
   );

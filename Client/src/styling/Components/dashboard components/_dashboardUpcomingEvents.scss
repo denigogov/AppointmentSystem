@@ -30,14 +30,19 @@
   }
 
   .dashboardUpcomingEvent--wrap {
+    border-radius: 25px;
     display: flex;
     align-items: center;
     gap: 10px;
+    padding: 10px;
+
+    &:hover {
+      background: colors.$background;
+    }
 
     .dashboardCustomer__event {
       display: flex;
       flex-direction: column;
-
       gap: 4px;
 
       p:last-child {
@@ -47,7 +52,7 @@
 
     .dashboardCustomer__icon {
       img {
-        width: 70px;
+        width: 50px;
         transition: general.$transition;
 
         &:hover {
@@ -64,9 +69,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   gap: 20px;
 
-  &:first-child {
+  p:first-child {
     color: colors.$font-tertiary;
     font-size: 0.85em;
   }
