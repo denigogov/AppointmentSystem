@@ -10,7 +10,7 @@
 }
 
 .appRoot-navigation {
-  border-right: 1px solid colors.$border-Primary-Dark;
+  border-right: 1px solid colors.$border-Primary;
   display: flex;
   flex: 0 0 15%; // 15% of the screen -- shorthand (grow, shrink, flex-basis)
   flex-direction: column;

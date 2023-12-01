@@ -1,6 +1,11 @@
 import "../../../styling/Components/dashboard components/_dashboardCustomerRight.scss";
+import { CustomerDataBoxType } from "../../../types/tableApiTypes";
 
-const DashboardCustomerRight = () => {
+const DashboardCustomerRight = ({
+  customerDataBox,
+}: {
+  customerDataBox: CustomerDataBoxType;
+}) => {
   return (
     <div className="dashboardCustomerRight--container">
       <div className="dashboardCustomer__totalRandom">
@@ -12,13 +17,13 @@ const DashboardCustomerRight = () => {
       <div className="dashboardCustomer__totalAmount">
         <div>
           <p>Total Amount</p>
-          <p>€ 81</p>
+          <p>€ {customerDataBox?.totalAmount ?? 0}</p>
         </div>
       </div>
       <div className="dashboardCustomer__totalAppointments">
         <div>
           <p>Total Appointments</p>
-          <p>4</p>
+          <p>{customerDataBox?.totalAppointments ?? 0}</p>
         </div>
       </div>
     </div>

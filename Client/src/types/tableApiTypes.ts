@@ -18,13 +18,23 @@ export interface CustomerPersonalInfo {
   customerRegistration: string;
 }
 
-export interface CustomersDataTypes extends CustomerPersonalInfo {
+export interface CustomerDataBoxType {
+  totalAppointments: number;
+  totalAmount: number;
+}
+
+export interface CustomerUpcomingEventType {
+  scheduled_at?: string;
+  servicesName?: string;
   EmployeeFirstName?: string;
   EmployeeLastName?: string;
+}
+
+export interface CustomersDataTypes
+  extends CustomerPersonalInfo,
+    CustomerUpcomingEventType {
+  servicePrice?: number;
   created_at?: string;
-  scheduled_at?: string;
-  servicePrice?: string;
-  servicesName?: string;
 }
 
 // Best Way  to set USESTATE as prop
