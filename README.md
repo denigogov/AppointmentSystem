@@ -78,21 +78,3 @@ This command **installs the necessary dependencies** for both projects and start
 The frontend will be available at `http://localhost:3000/`, while the backend will be accessible at `http://localhost:4000/`.
 
 **Please note** that this setup does not rely on dedicated monorepo tools like Lerna or Yarn Workspaces. It offers a basic monorepo structure and can be expanded upon as the project evolves.
-
-
-
-## Usage
-
-After successfully setting up SalonPro Scheduler Suite System, you can access the application by navigating to the provided URLs for the front-end and back-end. Here are some common tasks and commands you may find useful:
-
-- **Customer Appointment Creation**: Visit the customer dashboard and use the user-friendly interface to create, track, and manage appointments.
-
-- **Employee Schedule Management**: Employees can log in to their respective dashboards to manage their individual appointments and track performance metrics.
-
-- **Owner Business Insights**: Owners can access the comprehensive dashboard to view business statistics, track employee performance, and gain valuable insights into customer engagement.
-
-## License
-
-SalonPro Scheduler Suite System is released under the [Your License Name] License. See the [LICENSE](./LICENSE) file for more details.
-
-
