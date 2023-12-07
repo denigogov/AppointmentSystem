@@ -1,8 +1,6 @@
 // import customerInfoIcon from "../../../assets/customerInfo.svg";
-import customerInfoIcon from "../../../assets/customerInfo1.svg";
-
-// I need to add logic if the user if female or male to change !
-// import femaleIcon from "../../../assets/customerInfo1.svg";
+import malePersonalIcon from "../../../assets/customerInfo1.svg";
+import femaleIcon from "../../../assets/femaleIcon.svg";
 
 import "../../../styling/Components/dashboard components/_dashboardCustomerInfo.scss";
 import { CustomerPersonalInfo } from "../../../types/tableApiTypes";
@@ -21,7 +19,14 @@ const DashboardCustomerInfo = ({
   return (
     <div className="dashboardCustomer__wrap-info">
       <div className="customerIconName">
-        <img src={customerInfoIcon} alt="customer icon" />
+        <img
+          src={
+            customerInfoData[0]?.gender === "Male"
+              ? malePersonalIcon
+              : femaleIcon
+          }
+          alt="customer icon"
+        />
         <p>
           {customerInfoData[0]?.CustomerFirstName ?? "unknow"}{" "}
           {customerInfoData[0]?.CustomerLastName ?? "unknow"}

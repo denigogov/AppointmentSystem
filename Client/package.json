@@ -13,11 +13,13 @@
     "date-fns": "^2.30.0",
     "framer-motion": "^10.16.4",
     "joi": "^17.11.0",
+    "moment-timezone": "^0.5.43",
     "react": "^18.2.0",
     "react-datepicker": "^4.21.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.18.0",
     "sass": "^1.69.5",
+    "sweetalert2": "^11.10.1",
     "swr": "^2.2.4"
   },
   "devDependencies": {

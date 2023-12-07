@@ -2,13 +2,16 @@ import { ServiceEmloyeesTypes } from "../../types/tableApiTypes";
 
 interface NewAppointment2rops {
   servicesEmpolyees: ServiceEmloyeesTypes[];
-  setSelectedUser: React.Dispatch<React.SetStateAction<string>>;
+  // setSelectedUser: React.Dispatch<React.SetStateAction<string>> ;
+  setSelectedUser: (value: React.SetStateAction<string>) => void;
 }
 
 const NewAppointment2 = ({
   servicesEmpolyees,
   setSelectedUser,
 }: NewAppointment2rops) => {
+  //
+
   const handleFindUser = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedUser(e.target.value);
   };

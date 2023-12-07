@@ -18,6 +18,7 @@ const DashboardCustomer = () => {
   const auth = useAuth();
 
   const token = auth?.token;
+
   const { id, type } = auth.userInfo ?? {};
 
   const {
@@ -29,7 +30,7 @@ const DashboardCustomer = () => {
   );
 
   if (customerDataError) return <h6>{customerDataError.message}</h6>;
-  if (customerDataLoading) return <></>;
+  if (customerDataLoading) return <p>loading...</p>;
 
   const customerInfoData: CustomerPersonalInfo[] = [
     {
@@ -38,6 +39,7 @@ const DashboardCustomer = () => {
       customerEmail: customerData[0]?.customerEmail,
       customerPhone: customerData[0]?.customerPhone,
       customerRegistration: customerData[0]?.customerRegistration,
+      gender: customerData[0]?.gender,
     },
   ];
 

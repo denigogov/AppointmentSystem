@@ -87,7 +87,8 @@ const SignUp = () => {
             errorMessage?.includes("Duplicate")
               ? "Customer Already exists"
               : errorMessage,
-            "A user with the same email, phone, or username already exists. Please choose unique values."
+            "A user with the same email, phone, or username already exists. Please choose unique values.",
+            "please try one more time !"
           );
       }
     }

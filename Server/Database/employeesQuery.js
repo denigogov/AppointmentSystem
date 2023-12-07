@@ -44,4 +44,20 @@ const createEmployee = async (req, res) => {
   }
 };
 
-module.exports = { getAllUsers, createEmployee };
+const employeesTimeManagment = async (req, res) => {
+  try {
+    const [timeManagment] = await database.query(
+      `SELECT * FROM haircut.timemanagment`
+    );
+
+    console.log(timeManagment);
+
+    timeManagment.length
+      ? res.status(200).send(timeManagment)
+      : res.status(404).send("no data found !");
+  } catch (err) {
+    res.sendStatus(500);
+  }
+};
+
+module.exports = { getAllUsers, createEmployee, employeesTimeManagment };

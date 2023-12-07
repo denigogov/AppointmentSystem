@@ -1,12 +1,15 @@
+import { TokenType } from "../types/AuthTypes";
 import {
+  AllAppointmentsTypes,
   AllServicesTypes,
   CustomersDataTypes,
   ServiceEmloyeesTypes,
+  TimeManagmentTypes,
 } from "../types/tableApiTypes";
 
 const DEFAULT_URL: string = "http://localhost:4000/";
 
-export const apiFetcher = async <T>(url: string, token?: string) => {
+export const apiFetcher = async <T>(url: string, token: string) => {
   try {
     const res = await fetch(`${DEFAULT_URL}${url}`, {
       headers: {
@@ -25,11 +28,16 @@ export const apiFetcher = async <T>(url: string, token?: string) => {
   }
 };
 
-export const fetchAllServices = async () => {
-  return apiFetcher<AllServicesTypes>(`tableRoute/services`);
+export const fetchAllServices = async (token: TokenType | undefined) => {
+  return apiFetcher<AllServicesTypes>(`tableRoute/services`, token || "");
 };
-export const fetchAllServiceEmployees = async () => {
-  return apiFetcher<ServiceEmloyeesTypes>(`tableRoute/serviceemloyees`);
+export const fetchAllServiceEmployees = async (
+  token: TokenType | undefined
+) => {
+  return apiFetcher<ServiceEmloyeesTypes>(
+    `tableRoute/serviceemloyees`,
+    token || ""
+  );
 };
 
 export const fetchCustomerData = async ({
@@ -44,5 +52,18 @@ export const fetchCustomerData = async ({
   return apiFetcher<CustomersDataTypes[] | null>(
     `tableRoute/customers/${id}/${type}`,
     token
+  );
+};
+
+// TIME MANAGMENT TABLE -- ALL values
+export const fetchTimeManagment = async (token: TokenType | undefined) => {
+  return apiFetcher<TimeManagmentTypes>(`employees/timeManagment`, token || "");
+};
+
+// ALL Appointmnets
+export const fetchAllAppointments = async (token: TokenType | undefined) => {
+  return apiFetcher<AllAppointmentsTypes>(
+    `tableRoute/appointment`,
+    token || ""
   );
 };

@@ -24,7 +24,39 @@ const getServiceEmployeesJoin = async (_, res) => {
   }
 };
 
+const getAllAppointments = async (_, res) => {
+  try {
+    const [appointmnets] = await database.query(`SELECT * from appointments`);
+
+    appointmnets
+      ? res.status(200).send(appointmnets)
+      : new Error("no appointments");
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const postAppointment = async (req, res) => {
+  try {
+    const { customer_id, employee_id, service_id, scheduled_at } = req.body;
+
+    const [createAppointment] = await database.query(
+      `Insert into appointments (customer_id, employee_id, service_id,scheduled_at) values(?,?,?,?)`,
+      [customer_id, employee_id, service_id, scheduled_at]
+    );
+
+    if (createAppointment.affectedRows) {
+      res.sendStatus(201);
+    } else throw new Error();
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err.message);
+  }
+};
+
 module.exports = {
   getAllServices,
   getServiceEmployeesJoin,
+  getAllAppointments,
+  postAppointment,
 };

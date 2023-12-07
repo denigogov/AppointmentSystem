@@ -7,7 +7,6 @@ interface props {
 }
 
 const DashboardCustomerTableView = ({ cusomerTableDashboardData }: props) => {
-  console.log(cusomerTableDashboardData);
   return (
     <div className="customerApp--wrap">
       <h4>All Appointments</h4>
@@ -18,7 +17,7 @@ const DashboardCustomerTableView = ({ cusomerTableDashboardData }: props) => {
               <th>Service</th>
               <th>Employee</th>
               <th>Created At</th>
-              <th>Scheduled At</th>
+              <th>Scheduled Date</th>
               <th>Price</th>
             </tr>
           </thead>
@@ -30,14 +29,14 @@ const DashboardCustomerTableView = ({ cusomerTableDashboardData }: props) => {
                     {cust?.servicesName ?? "not found"}
                   </td>
                   <td data-cell="Employee">
-                    {cust?.EmployeeFirstName}
+                    {cust?.EmployeeFirstName}{" "}
                     {cust?.EmployeeLastName ?? "not found"}
                   </td>
                   <td data-cell="Created At">
                     {" "}
                     {dataMonthShow(cust?.created_at ?? "not found")}
                   </td>
-                  <td data-cell="Scheduled At">
+                  <td data-cell="Scheduled Date">
                     {dataMonthShow(cust?.scheduled_at ?? "not found")}
                   </td>
                   <td data-cell="Price">{cust?.servicePrice ?? "Not Found"}</td>

@@ -2,20 +2,67 @@
 @use "./colors";
 
 .errorContainer {
-  height: 100vh;
-  background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  background-color: colors.$background;
+  width: 100%;
+  height: calc(100vh - 80px);
+}
 
+.wrapper {
+  left: 50%;
+  perspective: 50em;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.message {
+  background-color: #fff;
+  color: #b01720;
+  padding: 10%;
+  border-radius: 13px;
+
+  text-align: center;
+  transform-origin: center top;
+  transform-style: preserve-3d;
+  animation: sign 2s linear;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  gap: 20px;
+}
+@keyframes sign {
+  0% {
+    transform: rotateX(-70deg);
+  }
 
-  h1 {
-    color: rgba(#13242c, 0.1);
-    font-size: 9em; //   font-weight: 200;
-    letter-spacing: 1rem;
+  30% {
+    transform: rotateX(70deg);
+  }
+
+  50% {
+    transform: rotateX(-60deg);
+  }
+
+  70% {
+    transform: rotateX(50deg);
+  }
+
+  80% {
+    transform: rotateX(-40deg);
+  }
+
+  90% {
+    transform: rotateX(30deg);
+  }
+
+  95% {
+    transform: rotateX(-10deg);
+  }
+
+  98% {
+    transform: rotateX(10deg);
+  }
+
+  100% {
+    transform: rotateX(0deg);
   }
 }

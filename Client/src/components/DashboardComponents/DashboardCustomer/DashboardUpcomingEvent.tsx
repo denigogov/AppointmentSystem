@@ -6,7 +6,7 @@ import defaultIcon from "../../../assets/defaultUpcomingEventIcon.svg";
 import "../../../styling/Components/dashboard components/_dashboardUpcomingEvents.scss";
 import { CustomerUpcomingEventType } from "../../../types/tableApiTypes";
 import DashboardUpcomingEmpty from "./DashboardUpcomingEmpty";
-import { dataMonthShow } from "../../../helpers/Dates";
+import { convertISOtoLocalZoneFORMATED } from "../../../helpers/Dates";
 
 // import DashboardUpcomingEmpty from "./DashboardUpcomingEmpty";
 
@@ -33,7 +33,7 @@ const DashboardUpcomingEvent = ({
     <div
       className="dashboardUpcomingEvent--container"
       style={
-        upcomingEventsData.length > 0
+        upcomingEventsData.length
           ? { justifyContent: "" }
           : { justifyContent: "space-around" }
       }
@@ -42,7 +42,11 @@ const DashboardUpcomingEvent = ({
 
       {upcomingEventsData.map((c, i) => {
         const dates: string | null = c?.scheduled_at ?? "";
-        const appointmentDate = dataMonthShow(dates);
+        // const appointmentDate = new Date(dates).toUTCString().slice(0, 22);
+        const appointmentDate = convertISOtoLocalZoneFORMATED(dates).slice(
+          0,
+          26
+        );
 
         // For Icons! ...every service has his own icon!
         const serviceIconKey = c?.servicesName as keyof ServiceIconsTypes;

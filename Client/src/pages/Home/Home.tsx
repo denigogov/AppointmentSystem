@@ -16,8 +16,8 @@ const Home = () => {
     if (tokens) {
       auth.login(tokens);
 
-      // Fetching the token and redirect the user to the app route
-      navigate("/app");
+      // Fetching the token and redirect the user to the home page but already logged in !
+      navigate("/");
     } else null;
   }, [location]);
 

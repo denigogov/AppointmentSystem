@@ -16,6 +16,7 @@ export interface CustomerPersonalInfo {
   customerEmail: string;
   customerPhone?: string;
   customerRegistration: string;
+  gender: string;
 }
 
 export interface CustomerDataBoxType {
@@ -38,6 +39,28 @@ export interface CustomersDataTypes
   created_at?: string;
 }
 
+// Time Managment TYPES
+
+export interface TimeManagmentTypes {
+  id: number;
+  startDate: Date | null;
+  endDate: Date | null;
+  startHour: number | null;
+  endHour: number | null;
+  startMinute: number | null;
+  endMinute: number | null;
+  timeInterval: number | null;
+  employee_id: number | null;
+}
+
+export interface AllAppointmentsTypes {
+  id: number;
+  customer_id: number | null;
+  employee_id: number | null;
+  service_id: number;
+  created_at: Date;
+  scheduled_at: Date | string;
+}
 // Best Way  to set USESTATE as prop
 
 // setAnyState: React.Dispatch<React.SetStateAction<TYPE>>

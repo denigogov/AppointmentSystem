@@ -14,7 +14,7 @@ const NewAppointment1 = ({
   };
 
   return (
-    <div>
+    <div style={{ padding: "30px" }}>
       <h6>to create new account you need first to create an appoinment</h6>
 
       <select onChange={handleSelectedService}>

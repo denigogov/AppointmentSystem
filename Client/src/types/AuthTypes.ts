@@ -1,13 +1,10 @@
 export type TokenType = string | null;
 
-export type UserInfoType =
-  | {
-      id?: number;
-      username?: string;
-      type?: number;
-    }
-  | null
-  | undefined;
+export interface UserInfoType {
+  id?: number;
+  username?: string;
+  type?: number;
+}
 
 export type AuthContextType = {
   token?: TokenType;

@@ -6,6 +6,7 @@ const database = require("../Database/employeesQuery");
 
 router
   .get("/", veryfyToken, database.getAllUsers)
-  .post("/", veryfyToken, hashedPassword, database.createEmployee);
+  .post("/", veryfyToken, hashedPassword, database.createEmployee)
+  .get("/timeManagment", veryfyToken, database.employeesTimeManagment);
 
 module.exports = router;

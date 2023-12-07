@@ -14,21 +14,25 @@ export const succesMessageBtn = (
   });
 };
 
-export const errorMessageBtn = (state: string, message: string) => {
+export const errorMessageBtn = (
+  state: string,
+  message: string,
+  footer: string
+) => {
   return Swal.fire({
     icon: "error",
     title: state,
     html: message,
-    footer: "please try one more time !",
+    footer: footer,
     confirmButtonColor: "#da0404",
   });
 };
 
-export const succesMessageNoBtn = () => {
+export const succesMessageNoBtn = (title: string) => {
   return Swal.fire({
     position: "center",
     icon: "success",
-    title: "Your work has been saved",
+    title: title,
     showConfirmButton: false,
     timer: 1500,
   });

@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { TokenType } from "../types/AuthTypes";
 import { CredentialsTypes } from "../types/LoginApiTypes";
 import { useAuth } from "../helpers/Auth";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../styling/_login.scss";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -17,7 +17,7 @@ const Login = () => {
 
   const auth = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
 
   const loginResponse = async (credentials: CredentialsTypes) => {
     setLoading(true);
@@ -46,7 +46,7 @@ const Login = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const redirectPath = location.state?.path || "/";
+    // const redirectPath = location.state?.path || "/";
 
     // leaving as reference
 
@@ -62,10 +62,12 @@ const Login = () => {
     );
 
     const token = await loginResponse(credentials);
+    // const redirectPath = location.state?.path || "/";
 
     if (token) {
       auth.login(token);
-      navigate(redirectPath, { replace: true });
+      // navigate(redirectPath, { replace: true }); -- return you to be last place where you been ! nice future
+      navigate("/"); // I add because of the login bug the user data is not reading because of I don't know maybe useEffect I will have to discove little bit more ! vazno
     }
   };
 
@@ -82,6 +84,7 @@ const Login = () => {
           required
           type="text"
           name="email"
+          defaultValue="deni.gogov@hotmail.com"
           placeholder="email"
           ref={emailRef}
         />
@@ -89,6 +92,7 @@ const Login = () => {
           required
           type="password"
           name="password"
+          defaultValue="deni123!"
           placeholder="password"
           ref={passRef}
         />

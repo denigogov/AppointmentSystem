@@ -16,7 +16,8 @@ const customerAllData = async (req, res) => {
       customers.lastName as CustomerLastName, 
       customers.email as customerEmail, 
       customers.phoneNumber as customerPhone, 
-      customers.created_at as customerRegistration 
+      customers.created_at as customerRegistration,
+      customers.gender 
   FROM customers
   LEFT JOIN appointments ON customers.id = appointments.customer_id
   LEFT JOIN employees ON appointments.employee_id = employees.id
