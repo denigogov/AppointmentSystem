@@ -28,7 +28,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div style={{ borderTop: "1px solid #b7b7b7" }}>
+    <div style={{ borderTop: "1px solid #e0e0e0" }}>
       <main>{dashboardView}</main>
     </div>
   );

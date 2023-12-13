@@ -103,6 +103,8 @@ const NewAppointment3 = ({
         excludeDates={[addDays(new Date(), -1)]} // EXCLUDET DATE YESTERDAY !!
         dateFormat="MMMM d, yyyy hh:mm"
         timeFormat="HH:mm"
+        withPortal
+        portalId="root-portal"
         //  holidays={filteredHolliday} not recomendet to use because its not sync. with users, I will add this fundtion but i will mention also!
       />
     </div>

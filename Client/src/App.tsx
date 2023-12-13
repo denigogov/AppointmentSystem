@@ -19,6 +19,8 @@ import WebPage from "./pages/Home/WebPage";
 import SignUp from "./pages/SignUp/SignUp";
 import { RequireAuth } from "./helpers/RequireAuth";
 import Appointment from "./pages/App/Appointment/Appointment";
+import SettingsRoot from "./pages/App/Settings/SettingsRoot";
+import EditProfile from "./pages/App/Settings/EditProfile/EditProfile";
 
 const App = () => {
   const auth = useAuth();
@@ -71,7 +73,16 @@ const App = () => {
         >
           <Route index element={<Dashboard />} />
           <Route path="dashboard" element={<Dashboard />} />
-          <Route path="appointments" element={<Appointment />} />
+
+          {auth.userInfo?.type === 1 && (
+            <Route path="appointments" element={<Appointment />} />
+          )}
+
+          {/* Nested Routes for settings !  */}
+          <Route path="settings" element={<SettingsRoot />}>
+            <Route index element={<EditProfile />} />
+            <Route path="edit-profile" element={<EditProfile />} />
+          </Route>
         </Route>
 
         {/* IF USER IS ALREADY SIGN IN , Don't show the router (show as error) */}

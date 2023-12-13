@@ -1,3 +1,5 @@
+import { string } from "joi";
+
 export interface AllServicesTypes {
   id: number;
   servicesName: string;
@@ -7,7 +9,8 @@ export interface AllServicesTypes {
 export interface ServiceEmloyeesTypes {
   services_id: number;
   employees_id: number;
-  username: string;
+  firstName: string;
+  lastName: string;
 }
 
 export interface CustomerPersonalInfo {
@@ -37,6 +40,8 @@ export interface CustomersDataTypes
     CustomerUpcomingEventType {
   servicePrice?: number;
   created_at?: string;
+  appointmentId: number;
+  employeeId: number;
 }
 
 // Time Managment TYPES
@@ -61,9 +66,20 @@ export interface AllAppointmentsTypes {
   created_at: Date;
   scheduled_at: Date | string;
 }
+
+export interface AllUserTypes {
+  id: number;
+  userType_id: number;
+  firstName: string;
+  lastName: string;
+  city: string;
+  email: string;
+  phoneNumber?: string;
+  password: string;
+  gender?: string;
+}
+
 // Best Way  to set USESTATE as prop
-
 // setAnyState: React.Dispatch<React.SetStateAction<TYPE>>
-
 //  Add useState TYPE !
 // const [selectedMenuItems, setSelectedMenuItems] = useState([] as MenuItem[]);

@@ -22,7 +22,7 @@ const NewAppointment2 = ({
         <option value="">Select a user</option>
         {servicesEmpolyees?.map((e, i) => (
           <option key={i} value={e?.employees_id}>
-            {e.username}
+            {`${e.firstName} ${e.lastName}`}
           </option>
         ))}
       </select>

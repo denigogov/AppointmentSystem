@@ -43,7 +43,7 @@ a {
   transition: general.$transition;
 
   // Only for the link to be highLigth !!
-  .navLinkInfo__link:hover {
+  &:hover {
     color: colors.$font-style;
   }
 }

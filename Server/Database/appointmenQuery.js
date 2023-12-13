@@ -15,7 +15,7 @@ const getAllServices = async (_, res) => {
 const getServiceEmployeesJoin = async (_, res) => {
   try {
     const [servicesEmployees] =
-      await database.query(`SELECT services_id, employees_id, username FROM haircut.serviceemployee join employees on serviceemployee.employees_id = employees.id
+      await database.query(`SELECT services_id, employees_id, firstName, lastName FROM haircut.serviceemployee join employees on serviceemployee.employees_id = employees.id
     `);
 
     return res.status(200).send(servicesEmployees || []);
@@ -54,9 +54,26 @@ const postAppointment = async (req, res) => {
   }
 };
 
+const deleteAppointment = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const [deleteQuery] = await database.query(
+      "DELETE FROM appointments WHERE id = ?",
+      [id]
+    );
+
+    deleteQuery.affectedRows ? res.sendStatus(200) : res.sendStatus(404);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
+};
+
 module.exports = {
   getAllServices,
   getServiceEmployeesJoin,
   getAllAppointments,
   postAppointment,
+  deleteAppointment,
 };

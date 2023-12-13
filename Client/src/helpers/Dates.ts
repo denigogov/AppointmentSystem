@@ -36,3 +36,14 @@ export const convertISOtoLocalZoneFORMATED = (date: Date | string) => {
   const localDate = moment(date).tz(userTimeZone); // Adjust the time zone as needed
   return localDate.format("ddd, DD MMM YYYY HH:mm");
 };
+
+export const calculateDaysLeft = (date: Date | string | undefined) => {
+  const dates = date ?? "";
+  const convertingToDate = new Date(dates);
+  const startDate = new Date();
+  const endDate = convertingToDate;
+  const daysBetween = calcDaysBetween(startDate, endDate);
+  const nonNegativeDays = daysBetween >= 0 ? daysBetween : null;
+
+  return nonNegativeDays;
+};

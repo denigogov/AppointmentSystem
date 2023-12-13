@@ -10,6 +10,8 @@ const customerAllData = async (req, res) => {
       appointments.created_at, 
       employees.lastName as EmployeeLastName, 
       employees.firstName as EmployeeFirstName, 
+      employees.id as employeeId,
+      appointments.id as appointmentId,
       services.servicesName, 
       services.servicePrice, 
       customers.firstName as CustomerFirstName, 

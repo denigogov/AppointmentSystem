@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
-const { hashedPassword, veryfyToken } = require("../auth");
+const { hashedPassword, verifyToken } = require("../auth");
 const database = require("../Database/employeesQuery");
 
 router
-  .get("/", veryfyToken, database.getAllUsers)
-  .post("/", veryfyToken, hashedPassword, database.createEmployee)
-  .get("/timeManagment", veryfyToken, database.employeesTimeManagment);
+  .get("/", verifyToken, database.getAllUsers)
+  .post("/", verifyToken, hashedPassword, database.createEmployee)
+  .get("/timeManagment", verifyToken, database.employeesTimeManagment);
 
 module.exports = router;

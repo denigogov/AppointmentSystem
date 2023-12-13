@@ -12,7 +12,6 @@ interface CustomerFormInputProps {
 
 const CustomerFormInput = (props: CustomerFormInputProps) => {
   const [focused, setFocused] = useState<boolean>(false);
-
   const { label, errorMessage, onChange, ...inputProps } = props;
 
   const handleFocused = () => {

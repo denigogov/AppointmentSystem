@@ -19,12 +19,12 @@ const createEmployee = async (req, res) => {
       lastName,
       city,
       email,
-      phone,
+      phoneNumber,
       password,
     } = req.body;
 
     const [allAppointments] = await database.query(
-      "insert into employees (employeesType_id, username, firstName,lastName, city, email, phone, password) values(?,?,?,?,?,?,?,?)",
+      "insert into employees (employeesType_id, username, firstName,lastName, city, email, phoneNumber, password) values(?,?,?,?,?,?,?,?)",
       [
         employeesType_id,
         username,
@@ -32,7 +32,7 @@ const createEmployee = async (req, res) => {
         lastName,
         city,
         email,
-        phone,
+        phoneNumber,
         password,
       ]
     );
@@ -49,8 +49,6 @@ const employeesTimeManagment = async (req, res) => {
     const [timeManagment] = await database.query(
       `SELECT * FROM haircut.timemanagment`
     );
-
-    console.log(timeManagment);
 
     timeManagment.length
       ? res.status(200).send(timeManagment)

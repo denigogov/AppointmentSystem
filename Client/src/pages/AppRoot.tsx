@@ -3,6 +3,7 @@ import SigninIcon from "../assets/signinIcon.svg";
 import DashboardAppRootIcon from "../assets/DashboardAppRootIcon.svg";
 import CalendarNavigation from "../assets/calendarNavigation.svg";
 import SettingsNavIcon from "../assets/settingsNavIcon.svg";
+import testIcon from "../assets/testIcon.svg";
 import HelpNavIcon from "../assets/helpNavIcon.svg";
 import UserNavMenu from "../assets/UserNavMenu.svg";
 
@@ -37,12 +38,16 @@ const AppRoot = () => {
               <img src={DashboardAppRootIcon} alt="Dashboard Icon" />
             </li>
           </NavLink>
-          <NavLink to="appointments">
-            <li>
-              Appointments
-              <img src={CalendarNavigation} alt="Calendar Icon" />
-            </li>
-          </NavLink>
+
+          {/* THIS ROUTE ONLY RESERVE FOR NOW ONLY FOR CUSTOMER !! */}
+          {auth.userInfo?.type === 1 && (
+            <NavLink to="appointments">
+              <li>
+                Appointments
+                <img src={CalendarNavigation} alt="Calendar Icon" />
+              </li>
+            </NavLink>
+          )}
           <NavLink to="settings">
             <li>
               Settings

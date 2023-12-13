@@ -47,7 +47,7 @@ const verifyPassword = async (req, res) => {
   }
 };
 
-const veryfyToken = async (req, res, next) => {
+const verifyToken = async (req, res, next) => {
   try {
     const authorizationHeader = req.get("Authorization");
 
@@ -94,7 +94,7 @@ const emailTokenVerification = (req, res) => {
 module.exports = {
   hashedPassword,
   verifyPassword,
-  veryfyToken,
+  verifyToken,
   sendUserInfo,
   emailTokenVerification,
 };

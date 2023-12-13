@@ -5,6 +5,7 @@ import {
   CustomersDataTypes,
   ServiceEmloyeesTypes,
   TimeManagmentTypes,
+  AllUserTypes,
 } from "../types/tableApiTypes";
 
 const DEFAULT_URL: string = "http://localhost:4000/";
@@ -65,5 +66,20 @@ export const fetchAllAppointments = async (token: TokenType | undefined) => {
   return apiFetcher<AllAppointmentsTypes>(
     `tableRoute/appointment`,
     token || ""
+  );
+};
+
+export const fetchUserData = async ({
+  id,
+  type,
+  token,
+}: {
+  id?: number;
+  type?: number;
+  token?: any;
+}) => {
+  return apiFetcher<AllUserTypes[] | null>(
+    `tableRoute//accounts/${id}/${type}`,
+    token
   );
 };

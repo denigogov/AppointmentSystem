@@ -12,13 +12,11 @@ import {
   CustomerUpcomingEventType,
 } from "../../../types/tableApiTypes";
 import { fetchCustomerData } from "../../../api/tableApi";
-import { calcDaysBetween } from "../../../helpers/Dates";
+import { calculateDaysLeft } from "../../../helpers/Dates";
 
 const DashboardCustomer = () => {
   const auth = useAuth();
-
   const token = auth?.token;
-
   const { id, type } = auth.userInfo ?? {};
 
   const {
@@ -60,20 +58,12 @@ const DashboardCustomer = () => {
 
   const upcomingEventsData = customerData
     .map((c: CustomersDataTypes) => {
-      // Logic for upcoming Appoitmnet !
-      const dates: string | null = c?.scheduled_at ?? "";
-      const convertingToDate = new Date(dates);
-      const startDate = new Date();
-      const endDate = convertingToDate;
-      const daysBetween = calcDaysBetween(startDate, endDate);
-      const nonNegativeDays = daysBetween >= 0 ? daysBetween : null;
-
       const eventData: CustomerUpcomingEventType = {
         EmployeeFirstName: c?.EmployeeFirstName,
         EmployeeLastName: c?.EmployeeLastName,
         scheduled_at: c?.scheduled_at,
         servicesName: c?.servicesName,
-        daysLeft: nonNegativeDays,
+        daysLeft: calculateDaysLeft(c?.scheduled_at),
       };
 
       return eventData;
@@ -94,9 +84,11 @@ const DashboardCustomer = () => {
         created_at: c?.created_at,
         scheduled_at: c?.scheduled_at,
         servicePrice: c.servicePrice,
+        daysLeft: calculateDaysLeft(c?.scheduled_at),
+        appointmentId: c.appointmentId,
       };
 
-      return tableData.created_at ? tableData : null;
+      return tableData.created_at ? tableData : [];
     }
   );
 

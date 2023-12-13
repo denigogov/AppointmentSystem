@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 
-const { verifyPassword, veryfyToken, sendUserInfo } = require("../auth");
+const { verifyPassword, verifyToken, sendUserInfo } = require("../auth");
 const database = require("../Database/loginQuery");
 
 router
-  .get("/", veryfyToken, database.getUserIdNext, sendUserInfo)
+  .get("/", verifyToken, database.getUserIdNext, sendUserInfo)
   .post("/", database.findUserLogin, verifyPassword);
 
 module.exports = router;

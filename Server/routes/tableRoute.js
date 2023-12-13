@@ -5,12 +5,17 @@ const database = require("../Database/appointmenQuery");
 const customerEmailConfirm = require("../Database/emailConfirm");
 const customerQuery = require("../Database/customerQuery");
 const appointmenQuery = require("../Database/appointmenQuery");
-const { hashedPassword, veryfyToken } = require("../auth");
-const { validateCustomer } = require("../Validations/tableQueryValidation");
+const accountsQuery = require("../Database/accountsQuery");
+
+const { hashedPassword, verifyToken } = require("../auth");
+const {
+  validateCustomer,
+  validateUpdateUser,
+} = require("../Validations/tableQueryValidation");
 
 router
-  .get("/services", veryfyToken, database.getAllServices)
-  .get("/serviceemloyees", veryfyToken, database.getServiceEmployeesJoin)
+  .get("/services", verifyToken, database.getAllServices)
+  .get("/serviceemloyees", verifyToken, database.getServiceEmployeesJoin)
   .post(
     "/customers",
     validateCustomer,
@@ -18,8 +23,16 @@ router
     customerEmailConfirm.createCustomer
   )
   .get("/confirm", customerEmailConfirm.customerConfirm) // not need to add verify token !
-  .get("/customers/:id/:type", veryfyToken, customerQuery.customerAllData)
-  .get("/appointment", veryfyToken, appointmenQuery.getAllAppointments)
-  .post("/appointment", veryfyToken, appointmenQuery.postAppointment);
+  .get("/customers/:id/:type", verifyToken, customerQuery.customerAllData)
+  .get("/appointment", verifyToken, appointmenQuery.getAllAppointments)
+  .post("/appointment", verifyToken, appointmenQuery.postAppointment)
+  .delete("/appointment/:id", verifyToken, appointmenQuery.deleteAppointment)
+  .get("/accounts/:id/:type", verifyToken, accountsQuery.editUserAllData)
+  .put(
+    "/accounts/:id/:type",
+    validateUpdateUser,
+    verifyToken,
+    accountsQuery.updateUserData
+  );
 
 module.exports = router;

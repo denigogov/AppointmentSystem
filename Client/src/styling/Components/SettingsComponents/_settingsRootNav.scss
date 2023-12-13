@@ -1,0 +1,16 @@
+.settingsRootContainer {
+  nav {
+    padding: 20px;
+    ul {
+      display: flex;
+      justify-content: space-around;
+
+      li {
+        img {
+          margin: 0 auto;
+          width: 40px;
+        }
+      }
+    }
+  }
+}
