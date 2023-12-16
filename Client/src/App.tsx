@@ -21,6 +21,7 @@ import { RequireAuth } from "./helpers/RequireAuth";
 import Appointment from "./pages/App/Appointment/Appointment";
 import SettingsRoot from "./pages/App/Settings/SettingsRoot";
 import EditProfile from "./pages/App/Settings/EditProfile/EditProfile";
+import { OnlyEmployeesAccess } from "./helpers/AuthEmployee";
 
 const App = () => {
   const auth = useAuth();
@@ -66,9 +67,9 @@ const App = () => {
         <Route
           path="app"
           element={
-            <RequireAuth>
-              <AppRoot />
-            </RequireAuth>
+            // <RequireAuth>
+            <AppRoot />
+            // </RequireAuth>
           }
         >
           <Route index element={<Dashboard />} />
@@ -79,6 +80,7 @@ const App = () => {
           )}
 
           {/* Nested Routes for settings !  */}
+
           <Route path="settings" element={<SettingsRoot />}>
             <Route index element={<EditProfile />} />
             <Route path="edit-profile" element={<EditProfile />} />

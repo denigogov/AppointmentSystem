@@ -1,0 +1,94 @@
+@use "../colors";
+@use "../general";
+@use "../mixin";
+
+.dashboardEmployees__container {
+  // border-top: 1px solid green;
+  height: calc(100vh - 6rem);
+  overflow-y: auto;
+  display: flex;
+  gap: 20px;
+
+  &::-webkit-scrollbar {
+    width: 3px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: colors.$font-style;
+  }
+}
+
+.dashbaordEmployeeDataLeft,
+.dashboardEmployee__table {
+  border: 1px solid red;
+}
+
+.dashboardEmployee__table {
+  p {
+    padding: 20px;
+    border: 1px solid colors.$border-Primary-Dark;
+    color: colors.$font-Secound;
+    font-size: 17px;
+    font-weight: 500;
+    text-align: center;
+  }
+}
+
+.dashbaordEmployeeDataLeft {
+  flex: 1;
+  height: 100vh; //maybe we need to remove this enable scroll
+}
+.dashboardEmployee__table {
+  flex: 0.5;
+  height: 100vh; //maybe we need to remove this enable scroll
+}
+
+.dashboardEmployees--wrap {
+  // border: 1px solid rgb(0, 136, 255);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.employees__left--top,
+.employees__left--bottom {
+  border: 1px solid rgb(0, 136, 255);
+  flex: 1;
+}
+
+.employees__left--top,
+.employees__left--bottom {
+  display: flex;
+  gap: 10px;
+}
+
+.dashboardEmployees__chart--year,
+.dashboardEmployees__chart--hour {
+  flex: 1;
+  border: 1px solid blueviolet;
+}
+.dashboardEmployees__statistic--procent,
+.dashboardEmployees__statistic--statisticInfo {
+  flex: 0.6;
+  border: 1px solid blueviolet;
+}
+
+@media (max-width: general.$lg) {
+  .dashboardEmployees__container {
+    gap: 10px;
+    flex-direction: column;
+    height: 100vh;
+  }
+}
+@media (max-width: general.$md) {
+  .dashboardEmployee__table {
+    order: -1;
+  }
+
+  .employees__left--top,
+  .employees__left--bottom {
+    flex-direction: column;
+  }
+}

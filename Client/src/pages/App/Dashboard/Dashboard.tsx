@@ -24,7 +24,7 @@ const Dashboard = () => {
     default:
       // dashboardView = <p>Not found</p>;
       // TO BE ABLE TO VIEW WITHOUT LOGIN  FROM PHONE NEED TO REMOVE !
-      dashboardView = <DashboardCustomer />;
+      dashboardView = <DashboardEmployees />;
   }
 
   return (

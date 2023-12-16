@@ -1,0 +1,33 @@
+@use "../../../mixin";
+@use "../../../colors";
+@use "../../../general";
+
+.dashboardEmployees__table--container {
+  width: 100%;
+  //   height: calc(100vh - 100px); // I need to fix !!
+  padding: 20px;
+  overflow-y: auto;
+
+  th {
+    background-color: colors.$background-secondary;
+  }
+
+  &::-webkit-scrollbar {
+    width: 3px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: colors.$font-style;
+  }
+
+  @include mixin.table;
+}
+
+@media (max-width: general.$md) {
+  .dashboardEmployees__table--container {
+    padding: 0; //do not show scrolling if there is only one data !;
+
+    height: calc(100vh - 350px);
+  }
+}

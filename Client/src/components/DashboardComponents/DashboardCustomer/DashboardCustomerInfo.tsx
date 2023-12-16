@@ -1,6 +1,7 @@
 // import customerInfoIcon from "../../../assets/customerInfo.svg";
 import malePersonalIcon from "../../../assets/customerInfo1.svg";
 import femaleIcon from "../../../assets/femaleIcon.svg";
+import otherIcon from "../../../assets/genderOtherIcon.svg";
 
 import "../../../styling/Components/dashboard components/_dashboardCustomerInfo.scss";
 import { CustomerPersonalInfo } from "../../../types/tableApiTypes";
@@ -23,7 +24,9 @@ const DashboardCustomerInfo = ({
           src={
             customerInfoData[0]?.gender === "Male"
               ? malePersonalIcon
-              : femaleIcon
+              : customerInfoData[0]?.gender === "Female"
+              ? femaleIcon
+              : otherIcon
           }
           alt="customer icon"
         />

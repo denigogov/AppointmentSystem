@@ -43,14 +43,16 @@
   width: 30px;
   cursor: pointer;
   transition: general.$transition;
+  margin: 0 auto;
+  display: none;
 
   &:hover {
     filter: drop-shadow(8px 2px 3px rgb(0 0 0 / 0.5));
   }
 }
 
-.nav-footer,
-.mobile {
+.mobile,
+.nav-footer {
   display: none;
 }
 
@@ -97,6 +99,10 @@
       transition: general.$transition;
       transform: translateX(-240px);
     }
+  }
+
+  .logoutIcon {
+    display: block;
   }
 
   .logo {
