@@ -1,4 +1,5 @@
 const database = require("./database");
+const moment = require("moment");
 
 const getAllServices = async (_, res) => {
   try {
@@ -12,6 +13,7 @@ const getAllServices = async (_, res) => {
   }
 };
 
+// More info check serviceemployee Table !
 const getServiceEmployeesJoin = async (_, res) => {
   try {
     const [servicesEmployees] =
@@ -70,10 +72,46 @@ const deleteAppointment = async (req, res) => {
   }
 };
 
+// Fetching all appointmnet by date  and EmployeesID, default date =  TODAY! ,
+const getAllAppointmentByDataRange = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { startDate, endDate } = req.query;
+
+    // console.log("normalStart", startDate);
+    // const currentDate = moment().format("YYYY-MM-DD");
+
+    // const defaultStartDate = startDate ? startDate : currentDate;
+    // const defaultEndDate = endDate ? endDate : currentDate;
+
+    const [appointmentRange] = await database.query(
+      `
+    SELECT appointments.id as appointmentId, appointments.employee_id,customers.firstName, customers.lastName, customers.id as customerID, services.servicesName, services.id as serviceID,  appointments.scheduled_at  FROM haircut.appointments 
+    left join services on appointments.service_id = services.id
+    left join customers on appointments.customer_id = customers.id
+    WHERE  DATE(scheduled_at)  between  ?  and  ? AND employee_id = ?
+    ORDER BY appointments.scheduled_at
+    `,
+      [startDate, endDate, id]
+    );
+
+    // converting the appointment to currentTimezone with moment because for some reason mysql2 convert the date to UTC!
+    const formattedAppointments = appointmentRange.map((appointment) => ({
+      ...appointment,
+      scheduled_at: moment(appointment.scheduled_at),
+    }));
+
+    res.status(200).send(formattedAppointments);
+  } catch (err) {
+    res.sendStatus(500);
+  }
+};
+
 module.exports = {
   getAllServices,
   getServiceEmployeesJoin,
   getAllAppointments,
   postAppointment,
   deleteAppointment,
+  getAllAppointmentByDataRange,
 };

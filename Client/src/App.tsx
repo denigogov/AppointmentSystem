@@ -67,9 +67,9 @@ const App = () => {
         <Route
           path="app"
           element={
-            // <RequireAuth>
-            <AppRoot />
-            // </RequireAuth>
+            <RequireAuth>
+              <AppRoot />
+            </RequireAuth>
           }
         >
           <Route index element={<Dashboard />} />

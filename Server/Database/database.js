@@ -1,6 +1,8 @@
 require("dotenv").config();
+const moment = require("moment-timezone");
 
 const mysql = require("mysql2/promise");
+const formatTImeZone = moment.tz.setDefault;
 
 const database = mysql.createPool({
   host: process.env.DB_HOST,

@@ -22,7 +22,7 @@ export const calcDaysBetween = (StartDate: Date, EndDate: Date) => {
 export const dataMonthShow = (selectedData: Date | string) => {
   const format = new Date(selectedData).toUTCString().slice(0, 17);
 
-  return format;
+  return format; // Mon, 18 Dec 2023
 };
 
 export const convertISOtoLocalZone = (date: Date | string) => {
@@ -33,8 +33,8 @@ export const convertISOtoLocalZone = (date: Date | string) => {
 export const convertISOtoLocalZoneFORMATED = (date: Date | string) => {
   const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-  const localDate = moment(date).tz(userTimeZone); // Adjust the time zone as needed
-  return localDate.format("ddd, DD MMM YYYY HH:mm");
+  const localDate = moment(date).tz(userTimeZone);
+  return localDate.format("ddd, DD MMM YYYY HH:mm"); // Mon, 18 Dec 2023 13:10
 };
 
 export const calculateDaysLeft = (date: Date | string | undefined) => {

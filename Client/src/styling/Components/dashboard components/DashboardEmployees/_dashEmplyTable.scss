@@ -4,7 +4,7 @@
 
 .dashboardEmployees__table--container {
   width: 100%;
-  //   height: calc(100vh - 100px); // I need to fix !!
+  height: calc(100vh - 140px); // I need to fix !!
   padding: 20px;
   overflow-y: auto;
 
@@ -27,7 +27,28 @@
 @media (max-width: general.$md) {
   .dashboardEmployees__table--container {
     padding: 0; //do not show scrolling if there is only one data !;
-
     height: calc(100vh - 350px);
+  }
+}
+
+.tableSettings--wrap {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 15px;
+
+  select {
+    @include mixin.input;
+  }
+
+  .date-picker {
+    @include mixin.input;
+    text-align: center;
+  }
+
+  @media (max-width: general.$md) {
+    justify-content: center;
+    text-align: center;
+    gap: 20px;
   }
 }

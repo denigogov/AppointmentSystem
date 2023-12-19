@@ -1,5 +1,6 @@
 const database = require("./database");
 
+// I don't use anywere but I will use in OWNER DASHBOARD
 const getAllUsers = async (_, res) => {
   try {
     const [allUsers] = await database.query("select * from employees");
@@ -10,6 +11,7 @@ const getAllUsers = async (_, res) => {
   }
 };
 
+// I don't use anywere but I will use in OWNER DASHBOARD
 const createEmployee = async (req, res) => {
   try {
     const {

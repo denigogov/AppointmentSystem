@@ -1,4 +1,7 @@
-import { dataMonthShow } from "../../../helpers/Dates";
+import {
+  convertISOtoLocalZoneFORMATED,
+  dataMonthShow,
+} from "../../../helpers/Dates";
 import "../../../styling/Components/dashboard components/_dashboardTable.scss";
 import { CustomersDataTypes } from "../../../types/tableApiTypes";
 // import editIcon from "../../../assets/editIcon.svg";
@@ -95,7 +98,9 @@ const DashboardCustomerTableView = ({ cusomerTableDashboardData }: props) => {
                     {dataMonthShow(cust?.created_at ?? "not found")}
                   </td>
                   <td data-cell="Scheduled Date">
-                    {dataMonthShow(cust?.scheduled_at ?? "not found")}
+                    {convertISOtoLocalZoneFORMATED(
+                      cust?.scheduled_at ?? "not found"
+                    )}
                   </td>
                   <td data-cell="Price">{cust?.servicePrice ?? "Not Found"}</td>
 

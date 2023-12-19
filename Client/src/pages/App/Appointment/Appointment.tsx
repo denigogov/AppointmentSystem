@@ -40,7 +40,7 @@ const Appointment = () => {
     data: allServices,
     error: allServicesError,
     isLoading: allServicesLoading,
-  } = useSWR<AllServicesTypes[] | any>(["orderStatus", token], () =>
+  } = useSWR<AllServicesTypes[] | any>(["allServices", token], () =>
     fetchAllServices(token)
   );
 

@@ -1,5 +1,3 @@
-import { string } from "joi";
-
 export interface AllServicesTypes {
   id: number;
   servicesName: string;
@@ -77,6 +75,17 @@ export interface AllUserTypes {
   phoneNumber?: string;
   password: string;
   gender?: string;
+}
+
+export interface allAppointmentsByDataRangeAndEmployTypes {
+  appointmentId?: number;
+  employee_id?: number;
+  firstName?: string;
+  lastName?: string;
+  customerID?: number;
+  servicesName?: string;
+  serviceID?: number;
+  scheduled_at?: Date | string;
 }
 
 // Best Way  to set USESTATE as prop

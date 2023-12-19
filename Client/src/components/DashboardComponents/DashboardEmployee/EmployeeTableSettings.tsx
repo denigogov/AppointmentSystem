@@ -1,34 +1,54 @@
-import { useState } from "react";
+import ReactDatePicker from "react-datepicker";
+import "../../../styling/Components/dashboard components/DashboardEmployees/_dashEmplyTable.scss";
+import { AllServicesTypes } from "../../../types/tableApiTypes";
 
-const EmployeeTableSettings = () => {
-  const [, setStartDate] = useState<string | null>(null);
-  const [, setEndDate] = useState<string | null>(null);
+interface TableSettingsProp {
+  allServices: AllServicesTypes[];
+  setSelectedService: React.Dispatch<React.SetStateAction<string>>;
+  setStartDate: React.Dispatch<React.SetStateAction<Date | null>>;
+  setEndDate: React.Dispatch<React.SetStateAction<Date | null>>;
+  startDate: Date | null;
+  endDate: Date | null;
+}
 
-  const current: string = new Date().toISOString().slice(0, 10);
+const EmployeeTableSettings = ({
+  setSelectedService,
+  allServices,
+  setStartDate,
+  setEndDate,
+  startDate,
+  endDate,
+}: TableSettingsProp) => {
+  const handleDataRange = (dates: [Date | null, Date | null] | null) => {
+    if (dates) {
+      const [start, end] = dates;
+      setStartDate(start);
+      setEndDate(end);
+    }
+  };
 
   return (
-    <div style={{ padding: "15px", borderBottom: "1px solid gray" }}>
-      <input
-        value={current}
-        type="date"
-        min="2023-12-12"
-        max="2023-12-20"
-        onChange={(e) => setStartDate(e.target.value)}
-      />
-      <input
-        value={current}
-        type="date"
-        min="2023-12-12"
-        max="2023-12-20"
-        onChange={(e) => setEndDate(e.target.value)}
-      />
-      <select>
-        <option>select service</option>
-        <option>Haircut</option>
-        <option>Painting</option>
-        <option>blabla</option>
+    <div className="tableSettings--wrap">
+      <ReactDatePicker
+        className="form-control form-control-solid w-250px date-picker"
+        dateFormat="yyyy/MM/dd"
+        selected={startDate}
+        onChange={handleDataRange}
+        startDate={startDate}
+        endDate={endDate}
+        selectsRange
+      >
+        {/* <div style={{ color: "red" }}>Don't forget to check the weather!</div> */}
+      </ReactDatePicker>
+
+      <select onChange={(e) => setSelectedService(e.target.value)}>
+        <option value="all">select service</option>
+        {allServices?.map((service, index) => (
+          <option key={index} value={service.id}>
+            {service.servicesName}
+          </option>
+        ))}
       </select>
-      <p>{current}</p>
     </div>
   );
 };

@@ -1,0 +1,67 @@
+@use "./colors";
+
+// REACT DATE PICKER STYLING !!
+.react-datepicker__triangle {
+  display: none;
+}
+
+.react-datepicker-popper .react-datepicker__navigation {
+  padding-top: 12px;
+  color: #fb1a1a;
+}
+
+.react-datepicker {
+  -webkit-box-shadow: -3px 12px 50px 20px rgba(0, 0, 0, 0.35);
+  box-shadow: -3px 12px 50px 20px rgba(52, 52, 51, 0.182);
+  border: none !important;
+  font-family: "Poppins" !important;
+}
+
+.react-datepicker__header {
+  border-bottom: solid 2px #fba9a9 !important;
+  background: white !important;
+}
+
+.react-datepicker__current-month {
+  color: colors.$font-Primary !important;
+}
+
+.react-datepicker__day.react-datepicker__day--today {
+  border-radius: 7px;
+  border: solid 1px #fba9a9 !important;
+  background-color: white !important;
+  color: colors.$success !important;
+}
+
+.react-datepicker__day.react-datepicker__day--selected {
+  border: none;
+  border-radius: 7px;
+  background-color: black;
+  color: white;
+}
+
+.react-datepicker__day--selected:hover,
+.react-datepicker__day--in-selecting-range:hover,
+.react-datepicker__day--in-range:hover,
+.react-datepicker__month-text--selected:hover,
+.react-datepicker__month-text--in-selecting-range:hover,
+.react-datepicker__month-text--in-range:hover,
+.react-datepicker__quarter-text--selected:hover,
+.react-datepicker__quarter-text--in-selecting-range:hover,
+.react-datepicker__quarter-text--in-range:hover,
+.react-datepicker__year-text--selected:hover,
+.react-datepicker__year-text--in-selecting-range:hover,
+.react-datepicker__year-text--in-range:hover {
+  border: none;
+  border-radius: 7px !important;
+}
+
+.react-datepicker__day--in-selecting-range,
+.react-datepicker__day--selected {
+  background-color: rgb(219, 219, 15) !important;
+}
+
+// After selecting the range the color that stay !
+.react-datepicker__day--in-range {
+  background-color: rgb(219, 219, 15) !important;
+}

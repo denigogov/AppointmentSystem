@@ -6,6 +6,7 @@ import {
   ServiceEmloyeesTypes,
   TimeManagmentTypes,
   AllUserTypes,
+  allAppointmentsByDataRangeAndEmployTypes,
 } from "../types/tableApiTypes";
 
 const DEFAULT_URL: string = "http://localhost:4000/";
@@ -29,9 +30,12 @@ export const apiFetcher = async <T>(url: string, token: string) => {
   }
 };
 
+// Fetching ALL SERVICES !
 export const fetchAllServices = async (token: TokenType | undefined) => {
-  return apiFetcher<AllServicesTypes>(`tableRoute/services`, token || "");
+  return apiFetcher<AllServicesTypes[]>(`tableRoute/services`, token || "");
 };
+
+// More info check serviceemployee Table !
 export const fetchAllServiceEmployees = async (
   token: TokenType | undefined
 ) => {
@@ -41,6 +45,7 @@ export const fetchAllServiceEmployees = async (
   );
 };
 
+// Fetching all customer Data !
 export const fetchCustomerData = async ({
   id,
   type,
@@ -61,7 +66,7 @@ export const fetchTimeManagment = async (token: TokenType | undefined) => {
   return apiFetcher<TimeManagmentTypes>(`employees/timeManagment`, token || "");
 };
 
-// ALL Appointmnets
+// ALL Appointmnets for the date picker I need in customer Appointmnet NewAppointmnet3
 export const fetchAllAppointments = async (token: TokenType | undefined) => {
   return apiFetcher<AllAppointmentsTypes>(
     `tableRoute/appointment`,
@@ -79,7 +84,24 @@ export const fetchUserData = async ({
   token?: any;
 }) => {
   return apiFetcher<AllUserTypes[] | null>(
-    `tableRoute//accounts/${id}/${type}`,
+    `tableRoute/accounts/${id}/${type}`,
     token
+  );
+};
+
+export const fetchAllAppointmentsDataRange = async ({
+  id,
+  token,
+  startDateSelected,
+  endDateSelected,
+}: {
+  id?: number;
+  token?: string;
+  startDateSelected?: string | Date;
+  endDateSelected?: string | Date;
+}) => {
+  return apiFetcher<allAppointmentsByDataRangeAndEmployTypes[]>(
+    `employees/appointmentRange/${id}?startDate=${startDateSelected}&endDate=${endDateSelected}`,
+    token ?? ""
   );
 };
