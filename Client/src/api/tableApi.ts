@@ -51,11 +51,11 @@ export const fetchCustomerData = async ({
   type,
   token,
 }: {
-  id?: number;
+  id?: number | string; // I add string because useParam return type string! I try also to translate but not work
   type?: number;
   token?: any;
 }) => {
-  return apiFetcher<CustomersDataTypes[] | null>(
+  return apiFetcher<CustomersDataTypes[]>(
     `tableRoute/customers/${id}/${type}`,
     token
   );

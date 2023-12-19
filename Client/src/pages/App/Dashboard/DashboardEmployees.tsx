@@ -16,7 +16,11 @@ import moment from "moment-timezone";
 
 // import ChartTest from "./ChartTest";
 
-const DashboardEmployees = () => {
+interface DashboardEmployeeProps {
+  setPopupOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const DashboardEmployees = ({ setPopupOpen }: DashboardEmployeeProps) => {
   const [selectedService, setSelectedService] = useState<string>("all");
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
@@ -55,7 +59,6 @@ const DashboardEmployees = () => {
 
   const filterDataByService = appointmentsByDataRange
     ? appointmentsByDataRange.filter((appointments) => {
-        console.log(appointments);
         return (
           selectedService === "all" ||
           +selectedService === appointments?.serviceID
@@ -88,6 +91,7 @@ const DashboardEmployees = () => {
 
       <div className="dashboardEmployee__table">
         <p>upcoming appointments</p>
+
         <EmployeeTableSettings
           allServices={allServices || []}
           setSelectedService={setSelectedService}
@@ -97,6 +101,7 @@ const DashboardEmployees = () => {
           endDate={endDate}
         />
         <DashEmployeesTable
+          setPopupOpen={setPopupOpen}
           filterDataByService={filterDataByService}
           appointmentsByDataRange={appointmentsByDataRange}
         />

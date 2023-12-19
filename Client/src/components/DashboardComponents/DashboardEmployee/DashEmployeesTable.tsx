@@ -1,3 +1,4 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import { convertISOtoLocalZoneFORMATED } from "../../../helpers/Dates";
 import "../../../styling/Components/dashboard components/DashboardEmployees/_dashEmplyTable.scss";
 import "../../../styling/_datePickerStyling.scss";
@@ -6,10 +7,25 @@ import { allAppointmentsByDataRangeAndEmployTypes } from "../../../types/tableAp
 const DashEmployeesTable = ({
   filterDataByService,
   appointmentsByDataRange,
+  setPopupOpen,
 }: {
   filterDataByService: allAppointmentsByDataRangeAndEmployTypes[];
   appointmentsByDataRange?: allAppointmentsByDataRangeAndEmployTypes[];
+  setPopupOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const navigator = useNavigate();
+  let { pathname } = useLocation();
+
+  const handleDetails = (
+    customerData: allAppointmentsByDataRangeAndEmployTypes
+  ) => {
+    setPopupOpen((x) => !x);
+
+    pathname === "/app" // fetching the current url because in outlet dashboard is INDEX element(after logged in user can see the dashboard without go to the route Dashboard!)
+      ? navigator(`dashboard/user-details/${customerData.customerID}`)
+      : navigator(`user-details/${customerData.customerID}`);
+  };
+
   return (
     <div className="dashboardEmployees__table--container">
       <table>
@@ -28,7 +44,11 @@ const DashEmployeesTable = ({
                 return (
                   <tr key={index}>
                     <td data-cell="#">{index + 1}</td>
-                    <td data-cell="Customer">
+                    <td
+                      data-cell="Customer"
+                      onClick={() => handleDetails(appointment)}
+                      style={{ cursor: "pointer" }}
+                    >
                       {appointment?.firstName ?? "not found"}{" "}
                       {appointment?.lastName ?? ""}
                     </td>

@@ -22,6 +22,8 @@ import Appointment from "./pages/App/Appointment/Appointment";
 import SettingsRoot from "./pages/App/Settings/SettingsRoot";
 import EditProfile from "./pages/App/Settings/EditProfile/EditProfile";
 import { OnlyEmployeesAccess } from "./helpers/AuthEmployee";
+import { OnlyCustomersAccess } from "./helpers/AuthCustomers";
+import UserDetailsRoute from "./pages/App/Dashboard/UserDetailsRoute";
 
 const App = () => {
   const auth = useAuth();
@@ -73,14 +75,29 @@ const App = () => {
           }
         >
           <Route index element={<Dashboard />} />
-          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="dashboard" element={<Dashboard />}>
+            <Route
+              path="user-details/:id"
+              element={
+                //route only avaible to employers!
+                <OnlyEmployeesAccess>
+                  <UserDetailsRoute />
+                </OnlyEmployeesAccess>
+              }
+            />
+          </Route>
 
           {auth.userInfo?.type === 1 && (
-            <Route path="appointments" element={<Appointment />} />
+            <Route
+              path="appointments"
+              element={
+                // <OnlyCustomersAccess>  // If I add only auth it will redirect to the app but with current one when someone search for this route will give him error which is what I want !
+                <Appointment />
+                // </OnlyCustomersAccess>
+              }
+            />
           )}
-
           {/* Nested Routes for settings !  */}
-
           <Route path="settings" element={<SettingsRoot />}>
             <Route index element={<EditProfile />} />
             <Route path="edit-profile" element={<EditProfile />} />

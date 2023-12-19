@@ -33,7 +33,8 @@
 
 .tableSettings--wrap {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  gap: 5px;
   flex-wrap: wrap;
   padding: 15px;
 

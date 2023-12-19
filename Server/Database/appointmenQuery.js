@@ -98,7 +98,7 @@ const getAllAppointmentByDataRange = async (req, res) => {
     // converting the appointment to currentTimezone with moment because for some reason mysql2 convert the date to UTC!
     const formattedAppointments = appointmentRange.map((appointment) => ({
       ...appointment,
-      scheduled_at: moment(appointment.scheduled_at),
+      scheduled_at: moment(appointment.scheduled_at).format(),
     }));
 
     res.status(200).send(formattedAppointments);
