@@ -1,3 +1,6 @@
+@use "./colors";
+@use "./general";
+
 .popUp {
   position: fixed;
   top: 50%;
@@ -32,8 +35,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
 
+  @media (max-width: general.$md) {
+    width: 70%;
+    height: 50%;
+  }
+}
 .xsPopup {
   width: 20%;
   height: 30%;
