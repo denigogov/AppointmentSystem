@@ -37,7 +37,13 @@ const Login = () => {
       }
       return data.token as TokenType;
     } catch (err) {
-      setError(`Wrong email or password `);
+      const requestError = (err as Error).stack;
+
+      setError(
+        requestError?.includes("Too")
+          ? "Too Many Request, Please Try later ! "
+          : `Wrong email or password `
+      );
     } finally {
       setLoading(false);
     }
