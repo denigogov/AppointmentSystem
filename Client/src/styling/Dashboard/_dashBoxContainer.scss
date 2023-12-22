@@ -1,0 +1,38 @@
+@use "../colors";
+@use "../general";
+
+.dashBoxProcentView--wrap {
+  height: 100%; // in future if I add more boxes I will need to make this 150 for example !
+  display: flex;
+  // flex-wrap: wrap;
+  flex-direction: column;
+
+  .top-container,
+  .bottom-container {
+    flex: 1;
+    display: flex;
+    gap: 7px;
+    padding: 3px;
+
+    .top-section,
+    .bottom-section {
+      flex: 1;
+      border: 1px solid colors.$border-Primary;
+      border-radius: 20px;
+      background: linear-gradient(to left, #fdfbfb, #fff);
+      background-size: 300px;
+      transition: background 0.7s ease-out;
+
+      &:hover {
+        background-position: 150px;
+      }
+    }
+  }
+
+  @media (max-width: general.$md) {
+    .top-container,
+    .bottom-container {
+      flex-direction: column;
+    }
+  }
+}

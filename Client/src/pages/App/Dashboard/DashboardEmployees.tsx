@@ -13,6 +13,7 @@ import {
   fetchAllServices,
 } from "../../../api/tableApi";
 import moment from "moment-timezone";
+import DashBoxProcentContainer from "../../../components/DashboardComponents/DashboardEmployee/DashBoxProcentContainer";
 
 // import ChartTest from "./ChartTest";
 
@@ -77,7 +78,9 @@ const DashboardEmployees = ({ setPopupOpen }: DashboardEmployeeProps) => {
         <div className="dashboardEmployees--wrap">
           <div className="employees__left--top">
             <div className="dashboardEmployees__chart--year">chart</div>
-            <div className="dashboardEmployees__statistic--procent">box %</div>
+            <div className="dashboardEmployees__statistic--procent">
+              <DashBoxProcentContainer />
+            </div>
           </div>
           <div className="employees__left--bottom">
             <div className="dashboardEmployees__statistic--statisticInfo">

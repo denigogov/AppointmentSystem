@@ -67,7 +67,9 @@ const DashEmployeesTable = ({
 
           {filterDataByService.length < 1 ? (
             <tr>
-              <td colSpan={4}>No Appointments found</td>
+              <td data-cell="Status" colSpan={4}>
+                No Appointments found
+              </td>
             </tr>
           ) : (
             ""

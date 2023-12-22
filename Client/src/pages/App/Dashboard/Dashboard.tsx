@@ -41,6 +41,7 @@ const Dashboard = () => {
     <div style={{ borderTop: "1px solid #e0e0e0" }}>
       <main>{dashboardView}</main>
 
+      {/* PopUp for Employees when Employee click on the customer name from table to see details about customer !  */}
       {popUpOpen && (
         <div className="overlay" onClick={popupWindow}>
           <main className="popUp smPopup" onClick={(e) => e.stopPropagation()}>

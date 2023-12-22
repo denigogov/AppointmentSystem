@@ -21,13 +21,14 @@
 
 .dashbaordEmployeeDataLeft,
 .dashboardEmployee__table {
-  border: 1px solid red;
+  border-left: 1px solid colors.$border-Primary;
+  border-bottom: 1px solid colors.$border-Primary;
 }
 
 .dashboardEmployee__table {
   p {
     padding: 20px;
-    border: 1px solid colors.$border-Primary-Dark;
+    border-bottom: 1px solid colors.$border-Primary;
     color: colors.$font-Secound;
     font-size: 17px;
     font-weight: 500;
@@ -69,10 +70,23 @@
   flex: 1;
   border: 1px solid blueviolet;
 }
-.dashboardEmployees__statistic--procent,
+
 .dashboardEmployees__statistic--statisticInfo {
   flex: 0.6;
-  border: 1px solid blueviolet;
+}
+
+.dashboardEmployees__statistic--procent {
+  flex: 0.6;
+  border-left: 1px solid colors.$border-Primary;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 3px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: colors.$font-style;
+  }
 }
 
 @media (max-width: general.$lg) {
