@@ -37,6 +37,7 @@ const EmployeeTableSettings = ({
         startDate={startDate}
         endDate={endDate}
         selectsRange
+        withPortal
       >
         {/* <div style={{ color: "red" }}>Don't forget to check the weather!</div> */}
       </ReactDatePicker>

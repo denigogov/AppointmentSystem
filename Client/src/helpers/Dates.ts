@@ -47,3 +47,16 @@ export const calculateDaysLeft = (date: Date | string | undefined) => {
 
   return nonNegativeDays;
 };
+
+// export const getStartDateAndEndDateCurrentMonth = () => {
+//   // Get the current date
+//   const currentDate = moment();
+//   const startDate = currentDate.clone().startOf("month");
+//   const endDate = currentDate.clone();
+
+//   // Format Date
+//   const formattedStartDate = startDate.format("YYYY-MM-DD HH:mm:ss");
+//   const formattedEndDate = endDate.format("YYYY-MM-DD HH:mm:ss");
+
+//   return { startDate: formattedStartDate, endDate: formattedEndDate };
+// };

@@ -1,45 +1,33 @@
 import "../../../styling/Dashboard/_dashBoxContainer.scss";
+import { fetchServiceProcentCurrentMonthTypes } from "../../../types/tableApiTypes";
 import DashBoxProcentView from "./DashBoxProcentView";
 
-const DashBoxProcentContainer = () => {
+interface DashBoxProcentContainerProps {
+  serviceProcentCalc: fetchServiceProcentCurrentMonthTypes[];
+}
+const DashBoxProcentContainer = ({
+  serviceProcentCalc,
+}: DashBoxProcentContainerProps) => {
   return (
-    <div className="dashBoxProcentView--wrap">
-      <div className="top-container">
-        <article className="top-section">
-          <DashBoxProcentView
-            serviceTitle={"Haircut"}
-            iconName={"haircut"}
-            totalAppointments={210}
-            procentCalc={5}
-          />
-        </article>
-        <article className="bottom-section">
-          <DashBoxProcentView
-            serviceTitle={"Shaving"}
-            iconName={"shave"}
-            totalAppointments={6}
-            procentCalc={-20}
-          />
-        </article>
-      </div>
-      <div className="bottom-container">
-        <article className="top-section">
-          <DashBoxProcentView
-            serviceTitle={"Coloring"}
-            iconName={"coloring"}
-            totalAppointments={6}
-            procentCalc={100}
-          />
-        </article>
-        <article className="bottom-section">
-          <DashBoxProcentView
-            serviceTitle={"Haircut"}
-            iconName={"haircut"}
-            totalAppointments={6}
-            procentCalc={0}
-          />
-        </article>
-      </div>
+    <div
+      className={
+        serviceProcentCalc.length > 4
+          ? "dashBox--container-wrap dashBox--container-wrapExtraHigh"
+          : "dashBox--container-wrap"
+      }
+    >
+      {serviceProcentCalc.map((arr, i) => {
+        return (
+          <div className="dashBoxProcentView-container" key={i}>
+            <DashBoxProcentView
+              serviceTitle={arr?.servicesName}
+              iconName={arr?.servicesName}
+              totalAppointments={arr?.currentMonthAppointments}
+              procentCalc={arr?.percentageDifference ?? 0}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 };

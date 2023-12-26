@@ -79,6 +79,7 @@
   flex: 0.6;
   border-left: 1px solid colors.$border-Primary;
   overflow-y: auto;
+
   &::-webkit-scrollbar {
     width: 3px;
     background-color: transparent;
@@ -105,4 +106,10 @@
   .employees__left--bottom {
     flex-direction: column;
   }
+}
+
+// chart
+.chartLineHours {
+  height: 100%;
+  width: 100%;
 }

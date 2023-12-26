@@ -25,8 +25,8 @@ const DashboardCustomerTableView = ({ cusomerTableDashboardData }: props) => {
     .slice()
     .sort(
       (a, b) =>
-        new Date(a.scheduled_at as string).getTime() -
-        new Date(b.scheduled_at as string).getTime()
+        new Date(a.created_at as string).getTime() -
+        new Date(b.created_at as string).getTime()
     )
     .reverse();
 

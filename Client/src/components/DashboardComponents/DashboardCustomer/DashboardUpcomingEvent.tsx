@@ -2,6 +2,8 @@ import HaircutIcon from "../../../assets/haircutIcon.svg";
 import ColoringIcon from "../../../assets/ColoringIcon.svg";
 import ShaveIcon from "../../../assets/shave.svg";
 import defaultIcon from "../../../assets/defaultUpcomingEventIcon.svg";
+import MakeUpIcon from "../../../assets/makeupIcon.svg";
+import WashingIcon from "../../../assets/washingIcon.svg";
 
 import "../../../styling/Components/dashboard components/_dashboardUpcomingEvents.scss";
 import { CustomerUpcomingEventType } from "../../../types/tableApiTypes";
@@ -21,12 +23,16 @@ const DashboardUpcomingEvent = ({
     Haircut?: string;
     Coloring?: string;
     Shave?: string;
+    MakeUp?: string;
+    Washing?: string;
   }
 
   const serviceIcons: ServiceIconsTypes = {
     Haircut: HaircutIcon,
     Coloring: ColoringIcon,
     Shave: ShaveIcon,
+    MakeUp: MakeUpIcon,
+    Washing: WashingIcon,
   };
 
   return (

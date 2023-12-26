@@ -88,6 +88,17 @@ export interface allAppointmentsByDataRangeAndEmployTypes {
   scheduled_at?: Date | string;
 }
 
+export interface fetchServiceProcentCurrentMonthTypes {
+  servicesName: string;
+  currentMonthAppointments: number;
+  previousMonthAppointments: number;
+  percentageDifference: number;
+}
+
+export interface FetchAppointmentsByHourRangeTypes {
+  hour_of_day: number;
+  total_appointments: number;
+}
 // Best Way  to set USESTATE as prop
 // setAnyState: React.Dispatch<React.SetStateAction<TYPE>>
 //  Add useState TYPE !

@@ -107,6 +107,91 @@ const getAllAppointmentByDataRange = async (req, res) => {
   }
 };
 
+const getServiceStatisticProcent = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const [serviceStatistic] = await database.query(
+      `
+    SELECT
+    servicesName,
+    currentMonthAppointments,
+    previousMonthAppointments,
+    ((currentMonthAppointments - previousMonthAppointments) / previousMonthAppointments) * 100 as percentageDifference
+    FROM (
+    SELECT
+        servicesName,
+        COUNT(CASE WHEN MONTH(scheduled_at) = MONTH(CURRENT_DATE()) AND YEAR(scheduled_at) = YEAR(CURRENT_DATE()) THEN employee_id END) as currentMonthAppointments,
+        COUNT(CASE WHEN MONTH(scheduled_at) = MONTH(CURRENT_DATE()) - 1 AND YEAR(scheduled_at) = YEAR(CURRENT_DATE()) THEN employee_id END) as previousMonthAppointments
+    FROM appointments
+    LEFT JOIN services ON appointments.service_id = services.id
+    WHERE
+        (MONTH(scheduled_at) = MONTH(CURRENT_DATE()) OR MONTH(scheduled_at) = MONTH(CURRENT_DATE()) - 1)
+        AND YEAR(scheduled_at) = YEAR(CURRENT_DATE())   ${
+          id ? "AND employee_id = ?" : ""
+        } 
+    GROUP BY servicesName) AS subquery
+      `,
+      id ? [id] : [] // making the params optional !
+    );
+
+    serviceStatistic.length
+      ? res.status(200).send(serviceStatistic)
+      : res.sendStatus(404);
+  } catch (err) {
+    res.sendStatus(500);
+  }
+};
+
+const getAppointmentByHourRange = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { startDate, endDate } = req.query;
+
+    const [allAppointmentByHour] = await database.query(
+      `
+SELECT
+    all_hours.hour_of_day,
+    COUNT(appointments.id) AS total_appointments
+FROM
+    (
+        SELECT 0 AS hour_of_day
+        UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4
+        UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8
+        UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12
+        UNION SELECT 13 UNION SELECT 14 UNION SELECT 15 UNION SELECT 16
+        UNION SELECT 17 UNION SELECT 18 UNION SELECT 19 UNION SELECT 20
+        UNION SELECT 21 UNION SELECT 22 UNION SELECT 23
+    ) AS all_hours
+LEFT JOIN
+    appointments ON HOUR(appointments.scheduled_at) = all_hours.hour_of_day
+    ${
+      startDate
+        ? `AND appointments.created_at BETWEEN ? AND ?`
+        : `AND MONTH(appointments.created_at) = MONTH(CURDATE())
+    AND YEAR(appointments.created_at) = YEAR(CURDATE())`
+    }
+
+    ${id ? "AND appointments.employee_id = ?" : ""} 
+
+GROUP BY
+    all_hours.hour_of_day
+ORDER BY
+    all_hours.hour_of_day;
+  `,
+      [startDate, endDate, id]
+    );
+
+    allAppointmentByHour.length
+      ? res.status(200).send(allAppointmentByHour)
+      : res.sendStatus(404);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
+};
+
+//
 module.exports = {
   getAllServices,
   getServiceEmployeesJoin,
@@ -114,4 +199,6 @@ module.exports = {
   postAppointment,
   deleteAppointment,
   getAllAppointmentByDataRange,
+  getServiceStatisticProcent,
+  getAppointmentByHourRange,
 };

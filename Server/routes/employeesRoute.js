@@ -9,6 +9,20 @@ router
   .get("/", verifyToken, database.getAllUsers) // I don't use anywere but I will use in OWNER DASHBOARD
   .post("/", verifyToken, hashedPassword, database.createEmployee) // I don't use anywere but I will use in OWNER DASHBOARD
   .get("/timeManagment", verifyToken, database.employeesTimeManagment)
-  .get("/appointmentRange/:id", appointmenQuery.getAllAppointmentByDataRange);
+  .get(
+    "/appointmentRange/:id",
+    verifyToken,
+    appointmenQuery.getAllAppointmentByDataRange
+  )
+  .get(
+    "/serviceStatistic/:id?",
+    verifyToken,
+    appointmenQuery.getServiceStatisticProcent
+  )
+  .get(
+    "/appointmentsByHourRange/:id?",
+    verifyToken,
+    appointmenQuery.getAppointmentByHourRange
+  );
 
 module.exports = router;

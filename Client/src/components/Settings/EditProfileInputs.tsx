@@ -34,7 +34,6 @@ const EditProfileInputs = ({
     };
 
     const userReadyData = { ...userInputs, ...genderPasswordData };
-
     handlePutRequest(userReadyData as AllUserTypes);
   };
 
@@ -89,7 +88,7 @@ const EditProfileInputs = ({
               type="text"
               placeholder="your city"
               defaultValue={userInfoData![0]?.city}
-              pattern="^[A-Za-z0-9]{3,16}$"
+              pattern="^[A-Za-z0-9 ]{3,16}$"
             />
           )}
         </div>

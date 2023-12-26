@@ -7,9 +7,18 @@ import {
   TimeManagmentTypes,
   AllUserTypes,
   allAppointmentsByDataRangeAndEmployTypes,
+  fetchServiceProcentCurrentMonthTypes,
+  FetchAppointmentsByHourRangeTypes,
 } from "../types/tableApiTypes";
 
 const DEFAULT_URL: string = "http://localhost:4000/";
+
+/**
+ *
+ * @param url
+ * @param token
+ * @returns data
+ */
 
 export const apiFetcher = async <T>(url: string, token: string) => {
   try {
@@ -26,6 +35,7 @@ export const apiFetcher = async <T>(url: string, token: string) => {
 
     return data as T;
   } catch (err) {
+    console.error(err as Error);
     throw new Error("An error occurred while fetching the data");
   }
 };
@@ -102,6 +112,40 @@ export const fetchAllAppointmentsDataRange = async ({
 }) => {
   return apiFetcher<allAppointmentsByDataRangeAndEmployTypes[]>(
     `employees/appointmentRange/${id}?startDate=${startDateSelected}&endDate=${endDateSelected}`,
+    token ?? ""
+  );
+};
+
+export const fetchServiceProcentCurrentMonth = async ({
+  token,
+  id,
+}: {
+  id?: number;
+  token?: string;
+}) => {
+  return apiFetcher<fetchServiceProcentCurrentMonthTypes[]>(
+    `employees/serviceStatistic/${id ? id : ""}`,
+    token ?? ""
+  );
+};
+
+export const fetchAppointmentsByHourRange = async ({
+  token,
+  id,
+  startDateAndHour,
+  endDateAndHour,
+}: {
+  id?: number;
+  token?: string;
+  startDateAndHour?: string | Date;
+  endDateAndHour?: string | Date;
+}) => {
+  return apiFetcher<FetchAppointmentsByHourRangeTypes[]>(
+    `employees/appointmentsByHourRange/${id ? id : ""}${
+      startDateAndHour && endDateAndHour
+        ? `?startDate=${startDateAndHour}&endDate=${endDateAndHour}`
+        : ""
+    }`,
     token ?? ""
   );
 };

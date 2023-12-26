@@ -45,7 +45,7 @@ const EditProfile = () => {
           }
         );
 
-        console.log(res);
+        console.log("resposne", res);
 
         if (res.ok) {
           mutate(["userInfoData", token]);
