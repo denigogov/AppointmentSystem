@@ -32,7 +32,7 @@ const Dashboard = () => {
       break;
 
     default:
-      dashboardView = <p>Not found</p>;
+      dashboardView = <p>No View Found</p>;
     // TO BE ABLE TO VIEW WITHOUT LOGIN  FROM PHONE NEED TO REMOVE !
     // dashboardView = <DashboardEmployees setPopupOpen={setPopupOpen} />;
   }

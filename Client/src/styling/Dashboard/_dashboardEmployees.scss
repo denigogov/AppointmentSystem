@@ -65,8 +65,34 @@
   gap: 10px;
 }
 
-.dashboardEmployees__chart--year,
 .dashboardEmployees__chart--hour {
+  flex: 1;
+
+  .byHourRangeChartSettings {
+    padding: 10px;
+
+    .date-picker {
+      @include mixin.input;
+      //  I add the icon as global I just add this to create space between input and icon
+      @include mixin.inputFiledsAddIcon;
+    }
+
+    .chartHour-Wraper {
+      padding: 7px;
+    }
+  }
+
+  @media (max-width: general.$sm) {
+    .byHourRangeChartSettings {
+      text-align: center;
+    }
+
+    .chartHour-Wraper {
+      padding: 0px;
+    }
+  }
+}
+.dashboardEmployees__chart--year {
   flex: 1;
   border: 1px solid blueviolet;
 }
@@ -112,4 +138,13 @@
 .chartLineHours {
   height: 100%;
   width: 100%;
+}
+
+.chartLineDays {
+  height: 100%;
+  width: 100%;
+}
+
+.chartDays--wrap {
+  padding: 20px;
 }

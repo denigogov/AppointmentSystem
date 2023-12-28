@@ -44,6 +44,8 @@
 
   .date-picker {
     @include mixin.input;
+    // add the icon inside of the data-picker style as global !
+    @include mixin.inputFiledsAddIcon;
     text-align: center;
   }
 

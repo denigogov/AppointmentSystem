@@ -1,4 +1,11 @@
 @use "./colors";
+@use "./mixin";
+
+.date-picker {
+  // my own class
+  background: url(../assets/calendarNavigation.svg);
+  @include mixin.inputFiledsAddIcon;
+}
 
 // REACT DATE PICKER STYLING !!
 .react-datepicker__triangle {

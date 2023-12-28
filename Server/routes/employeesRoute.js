@@ -23,6 +23,11 @@ router
     "/appointmentsByHourRange/:id?",
     verifyToken,
     appointmenQuery.getAppointmentByHourRange
+  )
+  .get(
+    "/appointmentByDay/:id",
+    verifyToken,
+    appointmenQuery.countAppointmentsByWeekDay
   );
 
 module.exports = router;

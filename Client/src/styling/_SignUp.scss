@@ -13,7 +13,7 @@
     color: colors.$font-Secound;
   }
   select {
-    @include mixin.inputLogin();
+    @include mixin.input;
     background-color: white;
     padding: 10px;
   }

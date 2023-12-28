@@ -9,6 +9,7 @@ import {
   allAppointmentsByDataRangeAndEmployTypes,
   fetchServiceProcentCurrentMonthTypes,
   FetchAppointmentsByHourRangeTypes,
+  FetchAppointmentsByDayAndTotalTypes,
 } from "../types/tableApiTypes";
 
 const DEFAULT_URL: string = "http://localhost:4000/";
@@ -84,6 +85,7 @@ export const fetchAllAppointments = async (token: TokenType | undefined) => {
   );
 };
 
+// Fetching all user data !
 export const fetchUserData = async ({
   id,
   type,
@@ -116,6 +118,7 @@ export const fetchAllAppointmentsDataRange = async ({
   );
 };
 
+// Fetching Data for every service in % how many appointmnets for current Month
 export const fetchServiceProcentCurrentMonth = async ({
   token,
   id,
@@ -129,6 +132,15 @@ export const fetchServiceProcentCurrentMonth = async ({
   );
 };
 
+// fetching all appointmnet by hour also user can create data range !, optional id ,start and end Date
+/**
+ *
+ * @param  token token
+ * @param id employee id Optional Data
+ * @param startDateAndHour optional start Date
+ * @param endDateAndHour optional end Date
+ * @returns
+ */
 export const fetchAppointmentsByHourRange = async ({
   token,
   id,
@@ -146,6 +158,20 @@ export const fetchAppointmentsByHourRange = async ({
         ? `?startDate=${startDateAndHour}&endDate=${endDateAndHour}`
         : ""
     }`,
+    token ?? ""
+  );
+};
+
+// Fetching all appointmnets for every weeekday for current month and for hole year
+export const fetchAppointmentsByDayAndTotal = async ({
+  token,
+  id,
+}: {
+  id?: number;
+  token?: string;
+}) => {
+  return apiFetcher<FetchAppointmentsByDayAndTotalTypes[]>(
+    `employees/appointmentByDay/${id}`,
     token ?? ""
   );
 };

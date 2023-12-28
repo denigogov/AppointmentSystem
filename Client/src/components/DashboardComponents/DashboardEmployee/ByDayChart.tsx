@@ -3,29 +3,29 @@ import {
   CategoryScale,
   LinearScale,
   PointElement,
-  LineElement,
   Title,
   Tooltip,
   Legend,
+  BarElement,
 } from "chart.js";
-import { Bar, Line } from "react-chartjs-2";
-import { FetchAppointmentsByHourRangeTypes } from "../../../types/tableApiTypes";
+import { Line } from "react-chartjs-2";
+import { FetchAppointmentsByDayAndTotalTypes } from "../../../types/tableApiTypes";
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
   PointElement,
-  LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend
 );
 
-const ChartByHour = ({
-  appointmentsByHourRange,
-}: {
-  appointmentsByHourRange: FetchAppointmentsByHourRangeTypes[];
-}) => {
+interface ByDayChartProps {
+  allAppointmentsByDay: FetchAppointmentsByDayAndTotalTypes[];
+}
+
+const ByDayChart = ({ allAppointmentsByDay }: ByDayChartProps) => {
   const options: any = {
     maintainAspectRatio: false,
     scales: {
@@ -37,7 +37,7 @@ const ChartByHour = ({
     backgroundColor: ["rgba(245, 92, 132)"],
     borderColor: ["rgba(255, 99, 132, 0.6)"],
     borderWidth: 1,
-    tension: 0.1,
+    tension: 0.4,
     plugins: {
       tooltip: {
         callbacks: {
@@ -52,23 +52,33 @@ const ChartByHour = ({
     },
   };
 
-  const labels = appointmentsByHourRange.map((test) => test.hour_of_day);
+  const labels = allAppointmentsByDay.map((arr) => arr?.weekDay);
+  const currentMonth = allAppointmentsByDay.map(
+    (arr) => arr.currentMonthOrders
+  );
+  const totalYear = allAppointmentsByDay.map((arr) => arr.totalOrders);
 
   const data = {
     labels,
     datasets: [
       {
-        data: appointmentsByHourRange.map((test) => test.total_appointments),
+        data: currentMonth,
         label: "Appointments by Hour",
+      },
+      {
+        data: totalYear,
+        label: "Appointments by Year",
+        borderColor: ["rgba(19, 206, 143,0.5)"],
+        backgroundColor: ["rgba(19, 206, 143,0.3)"],
       },
     ],
   };
 
   return (
-    <div className="chartHour-Wraper">
-      <Line className="chartLineHours" options={options} data={data} />
+    <div className="chartDays--wrap">
+      <Line options={options} data={data} className="chartLineDays" />
     </div>
   );
 };
 
-export default ChartByHour;
+export default ByDayChart;

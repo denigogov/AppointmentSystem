@@ -99,6 +99,12 @@ export interface FetchAppointmentsByHourRangeTypes {
   hour_of_day: number;
   total_appointments: number;
 }
+
+export interface FetchAppointmentsByDayAndTotalTypes {
+  weekDay: string;
+  totalOrders: number;
+  currentMonthOrders: string | number;
+}
 // Best Way  to set USESTATE as prop
 // setAnyState: React.Dispatch<React.SetStateAction<TYPE>>
 //  Add useState TYPE !

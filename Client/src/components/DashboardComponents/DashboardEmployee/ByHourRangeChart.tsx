@@ -22,7 +22,7 @@ const ByHourRangeChartSettings = ({
   };
 
   return (
-    <div>
+    <div className="byHourRangeChartSettings">
       <ReactDatePicker
         className="form-control form-control-solid w-250px date-picker"
         dateFormat="yyyy/MM/dd"

@@ -6,6 +6,7 @@ import { useAuth } from "../../../helpers/Auth";
 import "../../../styling/Dashboard/_dashboardEmployees.scss";
 import {
   AllServicesTypes,
+  FetchAppointmentsByDayAndTotalTypes,
   FetchAppointmentsByHourRangeTypes,
   allAppointmentsByDataRangeAndEmployTypes,
   fetchServiceProcentCurrentMonthTypes,
@@ -14,6 +15,7 @@ import {
 import {
   fetchAllAppointmentsDataRange,
   fetchAllServices,
+  fetchAppointmentsByDayAndTotal,
   fetchAppointmentsByHourRange,
   fetchServiceProcentCurrentMonth,
 } from "../../../api/tableApi";
@@ -24,6 +26,7 @@ import DashBoxProcentContainer from "../../../components/DashboardComponents/Das
 
 import ChartByHour from "./ChartByHour";
 import ByHourRangeChartSettings from "../../../components/DashboardComponents/DashboardEmployee/ByHourRangeChart";
+import ByDayChart from "../../../components/DashboardComponents/DashboardEmployee/ByDayChart";
 
 interface DashboardEmployeeProps {
   setPopupOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -93,7 +96,7 @@ const DashboardEmployees = ({ setPopupOpen }: DashboardEmployeeProps) => {
     error: appointmentsByHourRangeError,
     isLoading: appointmentsByHourRangeLoading,
   } = useSWR<FetchAppointmentsByHourRangeTypes[]>(
-    ["appointmentByHourRange", token, startDateAndHour, endDateAndHour],
+    ["appointmentByHourRange", token, endDateAndHour],
     () =>
       fetchAppointmentsByHourRange({
         id,
@@ -111,17 +114,28 @@ const DashboardEmployees = ({ setPopupOpen }: DashboardEmployeeProps) => {
       })
     : [];
 
+  const {
+    data: allAppointmentsByDay,
+    error: allAppointmentsByDayError,
+    isLoading: allAppointmentsByDayLoading,
+  } = useSWR<FetchAppointmentsByDayAndTotalTypes[]>(
+    ["allAppointmentsByDay", token],
+    () => fetchAppointmentsByDayAndTotal({ token, id })
+  );
+
   if (
     allServicesError ||
     appointmentsByDataRangeError ||
     serviceProcentCalcError ||
-    appointmentsByHourRangeError
+    appointmentsByHourRangeError ||
+    allAppointmentsByDayError
   )
     return <h6>{"error happen"}</h6>;
   if (
     allServicesLoading ||
     appointmentsByDataRangeLoading ||
     serviceProcentCalcLoading ||
+    allAppointmentsByDayLoading ||
     appointmentsByHourRangeLoading
   )
     return <p>loading...</p>; // If I add some text there will be flicking because of data loading but anyway I need to add personal Loading message !!
@@ -131,7 +145,7 @@ const DashboardEmployees = ({ setPopupOpen }: DashboardEmployeeProps) => {
       <div className="dashbaordEmployeeDataLeft">
         <div className="dashboardEmployees--wrap">
           <div className="employees__left--top">
-            <div className="dashboardEmployees__chart--year">
+            <div className="dashboardEmployees__chart--hour">
               <ByHourRangeChartSettings
                 startDataHour={startDataHour}
                 endDataHour={endDataHour}
@@ -153,7 +167,9 @@ const DashboardEmployees = ({ setPopupOpen }: DashboardEmployeeProps) => {
               info statistc
             </div>
 
-            <div className="dashboardEmployees__chart--hour">chart hours</div>
+            <div className="dashboardEmployees__chart--year">
+              <ByDayChart allAppointmentsByDay={allAppointmentsByDay ?? []} />
+            </div>
           </div>
         </div>
       </div>

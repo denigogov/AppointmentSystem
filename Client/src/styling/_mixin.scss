@@ -29,14 +29,31 @@
 }
 
 @mixin input {
+  text-align: center;
+  padding: 13px;
+  border-radius: 25px;
   border: 1px solid colors.$border-Primary;
-  border-radius: 10px;
-  padding: 10px 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   &:focus {
-    outline: 1px solid colors.$border-Primary-Dark;
+    outline: 1px solid colors.$border-Primary;
   }
 }
+
+@mixin inputFiledsAddIcon() {
+  // add image before this mixing in the component
+  text-align: center;
+  padding-left: 26px;
+  background-repeat: no-repeat;
+  background-position: left 5px top 8px;
+
+  background-size: 25px;
+  background-color: #fff;
+}
+
+//   @mixin buttonHover($btnHoverColor: colors.$primary-darker) {
+//     background-color: $btnHoverColor;
+//   }
 
 @mixin overlay {
   position: fixed;

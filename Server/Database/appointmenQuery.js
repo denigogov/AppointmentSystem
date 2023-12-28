@@ -191,6 +191,41 @@ ORDER BY
   }
 };
 
+const countAppointmentsByWeekDay = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const [countAppointments] = await database.query(
+      `
+      SELECT
+      DATE_FORMAT(appointments.scheduled_at, '%W') AS weekDay,
+      COUNT(*) AS totalOrders,
+    
+      SUM(CASE WHEN DATE_FORMAT(appointments.scheduled_at, '%Y-%m') = DATE_FORMAT(CURRENT_DATE, '%Y-%m') THEN 1 ELSE 0 END) AS currentMonthOrders
+    FROM appointments
+    where employee_id = ?
+    GROUP BY weekDay
+    ORDER BY CASE
+      WHEN weekDay = 'Monday' THEN 1
+      WHEN weekDay = 'Tuesday' THEN 2
+      WHEN weekDay = 'Wednesday' THEN 3
+      WHEN weekDay = 'Thursday' THEN 4
+      WHEN weekDay = 'Friday' THEN 5
+      WHEN weekDay = 'Saturday' THEN 6
+      WHEN weekDay = 'Sunday' THEN 7
+      ELSE 8  
+    END;
+      `,
+      [id]
+    );
+
+    countAppointments.length
+      ? res.status(200).send(countAppointments)
+      : res.sendStatus(404);
+  } catch (err) {
+    res.sendStatus(500);
+  }
+};
+
 //
 module.exports = {
   getAllServices,
@@ -201,4 +236,5 @@ module.exports = {
   getAllAppointmentByDataRange,
   getServiceStatisticProcent,
   getAppointmentByHourRange,
+  countAppointmentsByWeekDay,
 };
