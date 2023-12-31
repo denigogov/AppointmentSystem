@@ -11,11 +11,11 @@
   .dashBoxProcentView-container {
     display: grid;
     border-radius: 15px;
-    background: linear-gradient(to left, #fdfbfb, #fff);
+    background: colors.$dashboard-Employees-Box;
     background-size: 300px;
     transition: background 0.7s ease-out;
     border: 1px solid colors.$border-Primary;
-
+    box-shadow: colors.$dashboard-Employees-Box--Shadow;
     &:hover {
       background-position: 150px;
     }

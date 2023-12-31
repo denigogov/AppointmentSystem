@@ -27,6 +27,9 @@ import DashBoxProcentContainer from "../../../components/DashboardComponents/Das
 import ChartByHour from "./ChartByHour";
 import ByHourRangeChartSettings from "../../../components/DashboardComponents/DashboardEmployee/ByHourRangeChart";
 import ByDayChart from "../../../components/DashboardComponents/DashboardEmployee/ByDayChart";
+import DashBoxTotal from "../../../components/DashboardComponents/DashboardEmployee/DashBoxTotal";
+import DashInfoBox from "../../../components/DashboardComponents/DashboardEmployee/DashInfoBox";
+import DashBoxServices from "../../../components/DashboardComponents/DashboardEmployee/DashBoxServices";
 
 interface DashboardEmployeeProps {
   setPopupOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -164,7 +167,13 @@ const DashboardEmployees = ({ setPopupOpen }: DashboardEmployeeProps) => {
           </div>
           <div className="employees__left--bottom">
             <div className="dashboardEmployees__statistic--statisticInfo">
-              info statistc
+              <div className="dashboardEmployees__container--dashBoxTotal">
+                <DashBoxTotal />
+              </div>
+              <div className="dashboardEmployees__container--info-service">
+                <DashInfoBox />
+                <DashBoxServices />
+              </div>
             </div>
 
             <div className="dashboardEmployees__chart--year">

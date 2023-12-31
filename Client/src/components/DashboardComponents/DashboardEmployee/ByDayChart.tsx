@@ -63,11 +63,11 @@ const ByDayChart = ({ allAppointmentsByDay }: ByDayChartProps) => {
     datasets: [
       {
         data: currentMonth,
-        label: "Appointments by Hour",
+        label: "Daily Appointment Count - Monthly",
       },
       {
         data: totalYear,
-        label: "Appointments by Year",
+        label: "Daily Appointment Count - Yearly",
         borderColor: ["rgba(19, 206, 143,0.5)"],
         backgroundColor: ["rgba(19, 206, 143,0.3)"],
       },

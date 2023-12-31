@@ -14,6 +14,6 @@ const loginLimit = rateLimit({
 
 router
   .get("/", verifyToken, database.getUserIdNext, sendUserInfo)
-  .post("/", loginLimit, database.findUserLogin, verifyPassword);
+  .post("/", database.findUserLogin, verifyPassword);
 
 module.exports = router;

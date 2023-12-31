@@ -55,12 +55,7 @@
 
 .employees__left--top,
 .employees__left--bottom {
-  border: 1px solid rgb(0, 136, 255);
   flex: 1;
-}
-
-.employees__left--top,
-.employees__left--bottom {
   display: flex;
   gap: 10px;
 }
@@ -94,11 +89,123 @@
 }
 .dashboardEmployees__chart--year {
   flex: 1;
-  border: 1px solid blueviolet;
 }
 
 .dashboardEmployees__statistic--statisticInfo {
   flex: 0.6;
+  padding: 5px;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+
+  .dashboardEmployees__container--dashBoxTotal {
+    flex: 1;
+
+    .dashBoxTotalWrap {
+      display: flex;
+      gap: 10px;
+      height: 100%;
+      .dashBoxTotalMonth,
+      .dashBoxTotalYear {
+        flex: 1;
+      }
+
+      // DashboxTotal VIEW!
+      .dashBoxTotalView__container {
+        height: 100%;
+        border-radius: 15px;
+        background: colors.$dashboard-Employees-Box;
+        background-size: 300px;
+        transition: background 0.7s ease-out;
+        border: 1px solid colors.$border-Primary;
+        box-shadow: colors.$dashboard-Employees-Box--Shadow;
+
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        text-align: center;
+
+        &:hover {
+          background-position: 150px;
+        }
+
+        .dashbox-TotalView--title {
+          font-weight: 700;
+          font-size: 13px;
+        }
+
+        .dashbox-TotalView--subTitle {
+          font-weight: 400;
+          font-size: 10px;
+          color: colors.$font-Secound;
+        }
+
+        .dashbox-TotalView--count {
+          font-weight: 700;
+          color: rgba(19, 206, 143, 0.4);
+        }
+      }
+    }
+  }
+
+  // Expertise & Services
+  // upcoming info
+  .dashboardEmployees__container--info-service {
+    flex: 1;
+    height: 100%;
+    overflow-y: auto;
+
+    display: flex;
+    gap: 10px;
+  }
+
+  .dashBoxAllServices--employees,
+  .dashInfoBox--employees {
+    text-align: center;
+    padding: 10px;
+    flex: 1;
+    height: 100%;
+    border-radius: 15px;
+    background: colors.$dashboard-Employees-Box;
+    background-size: 300px;
+    transition: background 0.7s ease-out;
+    border: 1px solid colors.$border-Primary;
+    box-shadow: colors.$dashboard-Employees-Box--Shadow;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    &:hover {
+      background-position: 150px;
+    }
+
+    .dashBoxAllServices--employees__title {
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    ul {
+      font-size: 12px;
+      color: colors.$font-Secound;
+      text-align: start;
+
+      overflow: auto;
+      &::-webkit-scrollbar {
+        width: 3px;
+        background-color: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: colors.$font-style;
+      }
+    }
+
+    .dashInfoBox--employees__title {
+      font-weight: 700;
+      font-size: 13px;
+    }
+  }
 }
 
 .dashboardEmployees__statistic--procent {
@@ -134,7 +241,7 @@
   }
 }
 
-// chart
+// charts
 .chartLineHours {
   height: 100%;
   width: 100%;
