@@ -8,6 +8,7 @@ import {
   AllServicesTypes,
   FetchAppointmentsByDayAndTotalTypes,
   FetchAppointmentsByHourRangeTypes,
+  FetchAppointmentsTotalTypes,
   allAppointmentsByDataRangeAndEmployTypes,
   fetchServiceProcentCurrentMonthTypes,
 } from "../../../types/tableApiTypes";
@@ -17,6 +18,7 @@ import {
   fetchAllServices,
   fetchAppointmentsByDayAndTotal,
   fetchAppointmentsByHourRange,
+  fetchAppointmentsTotal,
   fetchServiceProcentCurrentMonth,
 } from "../../../api/tableApi";
 
@@ -125,13 +127,21 @@ const DashboardEmployees = ({ setPopupOpen }: DashboardEmployeeProps) => {
     ["allAppointmentsByDay", token],
     () => fetchAppointmentsByDayAndTotal({ token, id })
   );
+  const {
+    data: totalAppointments,
+    error: totalAppointmentsError,
+    isLoading: totalAppointmentsLoading,
+  } = useSWR<FetchAppointmentsTotalTypes[]>(["totalAppointments", token], () =>
+    fetchAppointmentsTotal({ token, id })
+  );
 
   if (
     allServicesError ||
     appointmentsByDataRangeError ||
     serviceProcentCalcError ||
     appointmentsByHourRangeError ||
-    allAppointmentsByDayError
+    allAppointmentsByDayError ||
+    totalAppointmentsError
   )
     return <h6>{"error happen"}</h6>;
   if (
@@ -139,7 +149,8 @@ const DashboardEmployees = ({ setPopupOpen }: DashboardEmployeeProps) => {
     appointmentsByDataRangeLoading ||
     serviceProcentCalcLoading ||
     allAppointmentsByDayLoading ||
-    appointmentsByHourRangeLoading
+    appointmentsByHourRangeLoading ||
+    totalAppointmentsLoading
   )
     return <p>loading...</p>; // If I add some text there will be flicking because of data loading but anyway I need to add personal Loading message !!
 
@@ -168,11 +179,11 @@ const DashboardEmployees = ({ setPopupOpen }: DashboardEmployeeProps) => {
           <div className="employees__left--bottom">
             <div className="dashboardEmployees__statistic--statisticInfo">
               <div className="dashboardEmployees__container--dashBoxTotal">
-                <DashBoxTotal />
+                <DashBoxTotal totalAppointments={totalAppointments![0]} />
               </div>
               <div className="dashboardEmployees__container--info-service">
                 <DashInfoBox />
-                <DashBoxServices />
+                <DashBoxServices allServices={allServices ?? []} />
               </div>
             </div>
 

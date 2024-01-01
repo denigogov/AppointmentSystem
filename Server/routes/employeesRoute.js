@@ -25,9 +25,14 @@ router
     appointmenQuery.getAppointmentByHourRange
   )
   .get(
-    "/appointmentByDay/:id",
+    "/appointmentByDay/:id?",
     verifyToken,
     appointmenQuery.countAppointmentsByWeekDay
+  )
+  .get(
+    "/appointmentsTotal/:id?",
+    verifyToken,
+    appointmenQuery.countTotalAppointments
   );
 
 module.exports = router;

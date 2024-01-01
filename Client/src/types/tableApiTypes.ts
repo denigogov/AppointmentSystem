@@ -1,7 +1,7 @@
 export interface AllServicesTypes {
   id: number;
   servicesName: string;
-  servicesPrice: string;
+  servicePrice: string;
 }
 
 export interface ServiceEmloyeesTypes {
@@ -104,6 +104,12 @@ export interface FetchAppointmentsByDayAndTotalTypes {
   weekDay: string;
   totalOrders: number;
   currentMonthOrders: string | number;
+}
+
+export interface FetchAppointmentsTotalTypes {
+  totalAppointments: number;
+  monthlyAppointments: number;
+  yearlyAppointments: number;
 }
 // Best Way  to set USESTATE as prop
 // setAnyState: React.Dispatch<React.SetStateAction<TYPE>>

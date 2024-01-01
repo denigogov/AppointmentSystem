@@ -1,20 +1,26 @@
+import { FetchAppointmentsTotalTypes } from "../../../types/tableApiTypes";
 import DashBoxTotalView from "./DashBoxTotalView";
 
-const DashBoxTotal = () => {
+interface DashBoxTotalProps {
+  totalAppointments: FetchAppointmentsTotalTypes;
+}
+
+const DashBoxTotal = ({ totalAppointments }: DashBoxTotalProps) => {
   return (
     <div className="dashBoxTotalWrap">
       <div className="dashBoxTotalMonth">
         <DashBoxTotalView
           title={"Monthly Overview"}
           subTitle={"Total Appointments This Month"}
-          count={26}
+          count={totalAppointments.monthlyAppointments}
         />
       </div>
       <div className="dashBoxTotalYear">
         <DashBoxTotalView
           title={"Yearly Overview"}
           subTitle={"Total Appointments This Year"}
-          count={140}
+          count={totalAppointments.yearlyAppointments}
+          totalTime={totalAppointments.totalAppointments}
         />
       </div>
     </div>

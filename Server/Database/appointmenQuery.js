@@ -113,25 +113,24 @@ const getServiceStatisticProcent = async (req, res) => {
 
     const [serviceStatistic] = await database.query(
       `
-    SELECT
+      SELECT
     servicesName,
     currentMonthAppointments,
     previousMonthAppointments,
     ((currentMonthAppointments - previousMonthAppointments) / previousMonthAppointments) * 100 as percentageDifference
-    FROM (
+FROM (
     SELECT
         servicesName,
         COUNT(CASE WHEN MONTH(scheduled_at) = MONTH(CURRENT_DATE()) AND YEAR(scheduled_at) = YEAR(CURRENT_DATE()) THEN employee_id END) as currentMonthAppointments,
-        COUNT(CASE WHEN MONTH(scheduled_at) = MONTH(CURRENT_DATE()) - 1 AND YEAR(scheduled_at) = YEAR(CURRENT_DATE()) THEN employee_id END) as previousMonthAppointments
+        COUNT(CASE WHEN MONTH(scheduled_at) = MONTH(DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH)) AND YEAR(scheduled_at) = YEAR(DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH)) THEN employee_id END) as previousMonthAppointments
     FROM appointments
     LEFT JOIN services ON appointments.service_id = services.id
     WHERE
-        (MONTH(scheduled_at) = MONTH(CURRENT_DATE()) OR MONTH(scheduled_at) = MONTH(CURRENT_DATE()) - 1)
-        AND YEAR(scheduled_at) = YEAR(CURRENT_DATE())   ${
-          id ? "AND employee_id = ?" : ""
-        } 
-    GROUP BY servicesName) AS subquery
-      `,
+        (MONTH(scheduled_at) = MONTH(CURRENT_DATE()) OR (MONTH(scheduled_at) = MONTH(DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH)) AND YEAR(scheduled_at) = YEAR(DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH))))
+        ${id ? "AND employee_id = ?" : ""}
+    GROUP BY servicesName
+) AS subquery;
+`,
       id ? [id] : [] // making the params optional !
     );
 
@@ -142,6 +141,8 @@ const getServiceStatisticProcent = async (req, res) => {
     res.sendStatus(500);
   }
 };
+
+// id ? [id] : [] // making the params optional !
 
 const getAppointmentByHourRange = async (req, res) => {
   try {
@@ -195,14 +196,17 @@ const countAppointmentsByWeekDay = async (req, res) => {
   try {
     const { id } = req.params;
     const [countAppointments] = await database.query(
+      // I need to change that  ` COUNT(CASE WHEN MONTH(created_at) = MONTH(CURRENT_DATE())  THEN id END) AS totalOrders,` to
+      // COUNT(CASE WHEN MONTH(scheduled_at) = MONTH(CURRENT_DATE())  THEN id END) AS totalOrders,
       `
       SELECT
       DATE_FORMAT(appointments.scheduled_at, '%W') AS weekDay,
-      COUNT(*) AS totalOrders,
+      COUNT(CASE WHEN MONTH(created_at) = MONTH(CURRENT_DATE())  THEN id END) AS totalOrders,
+      
     
       SUM(CASE WHEN DATE_FORMAT(appointments.scheduled_at, '%Y-%m') = DATE_FORMAT(CURRENT_DATE, '%Y-%m') THEN 1 ELSE 0 END) AS currentMonthOrders
     FROM appointments
-    where employee_id = ?
+   ${id ? " where employee_id = ?" : ""}
     GROUP BY weekDay
     ORDER BY CASE
       WHEN weekDay = 'Monday' THEN 1
@@ -226,6 +230,31 @@ const countAppointmentsByWeekDay = async (req, res) => {
   }
 };
 
+const countTotalAppointments = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const [countAppointments] = await database.query(
+      `
+    SELECT
+    COUNT(id) AS totalAppointments,
+    COUNT(CASE WHEN MONTH(scheduled_at) = MONTH(CURRENT_DATE()) THEN id END) AS monthlyAppointments,
+    COUNT(CASE WHEN YEAR(scheduled_at) = YEAR(CURRENT_DATE()) THEN id END) AS yearlyAppointments
+    FROM haircut.appointments
+    ${id ? "WHERE employee_id = ?" : ""}
+      `,
+      [id]
+    );
+
+    countAppointments.length
+      ? res.status(200).send(countAppointments)
+      : res.sendStatus(404);
+  } catch (err) {
+    res.sendStatus(500);
+    console.log(err);
+  }
+};
+
 //
 module.exports = {
   getAllServices,
@@ -237,4 +266,5 @@ module.exports = {
   getServiceStatisticProcent,
   getAppointmentByHourRange,
   countAppointmentsByWeekDay,
+  countTotalAppointments,
 };

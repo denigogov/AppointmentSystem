@@ -10,6 +10,7 @@ import {
   fetchServiceProcentCurrentMonthTypes,
   FetchAppointmentsByHourRangeTypes,
   FetchAppointmentsByDayAndTotalTypes,
+  FetchAppointmentsTotalTypes,
 } from "../types/tableApiTypes";
 
 const DEFAULT_URL: string = "http://localhost:4000/";
@@ -29,6 +30,8 @@ export const apiFetcher = async <T>(url: string, token: string) => {
       },
     });
 
+    // console.log(res);
+
     if (!res.ok) {
       throw new Error("API request failed");
     }
@@ -41,12 +44,17 @@ export const apiFetcher = async <T>(url: string, token: string) => {
   }
 };
 
-// Fetching ALL SERVICES !
+/**
+ * Fetching ALL SERVICES
+ * @returns
+ */
 export const fetchAllServices = async (token: TokenType | undefined) => {
   return apiFetcher<AllServicesTypes[]>(`tableRoute/services`, token || "");
 };
 
-// More info check serviceemployee Table !
+/**
+ * More info check serviceemployee Table
+ */
 export const fetchAllServiceEmployees = async (
   token: TokenType | undefined
 ) => {
@@ -56,7 +64,10 @@ export const fetchAllServiceEmployees = async (
   );
 };
 
-// Fetching all customer Data !
+/**
+ *  Fetching all customer Data !
+ * @returns
+ */
 export const fetchCustomerData = async ({
   id,
   type,
@@ -72,12 +83,18 @@ export const fetchCustomerData = async ({
   );
 };
 
-// TIME MANAGMENT TABLE -- ALL values
+/**
+ * TIME MANAGMENT TABLE -- ALL values
+ * @returns
+ */
 export const fetchTimeManagment = async (token: TokenType | undefined) => {
   return apiFetcher<TimeManagmentTypes>(`employees/timeManagment`, token || "");
 };
 
-// ALL Appointmnets for the date picker I need in customer Appointmnet NewAppointmnet3
+/**
+ * ALL Appointmnets for the date picker I need in customer Appointmnet NewAppointmnet3
+ * @returns
+ */
 export const fetchAllAppointments = async (token: TokenType | undefined) => {
   return apiFetcher<AllAppointmentsTypes>(
     `tableRoute/appointment`,
@@ -85,7 +102,10 @@ export const fetchAllAppointments = async (token: TokenType | undefined) => {
   );
 };
 
-// Fetching all user data !
+/**
+ * Fetching all user data !
+ * @returns
+ */
 export const fetchUserData = async ({
   id,
   type,
@@ -101,6 +121,11 @@ export const fetchUserData = async ({
   );
 };
 
+/**
+ *
+ * Fething all Appointmnets by Data range Default date Today
+ * @returns
+ */
 export const fetchAllAppointmentsDataRange = async ({
   id,
   token,
@@ -118,7 +143,11 @@ export const fetchAllAppointmentsDataRange = async ({
   );
 };
 
-// Fetching Data for every service in % how many appointmnets for current Month
+/**
+ * Fetching Data for every service in % how many appointmnets for current Month
+ * @param id - optional
+ * @returns
+ */
 export const fetchServiceProcentCurrentMonth = async ({
   token,
   id,
@@ -132,9 +161,8 @@ export const fetchServiceProcentCurrentMonth = async ({
   );
 };
 
-// fetching all appointmnet by hour also user can create data range !, optional id ,start and end Date
 /**
- *
+ *fetching all appointmnet by hour also user can create data range !, optional id ,start and end Date
  * @param  token token
  * @param id employee id Optional Data
  * @param startDateAndHour optional start Date
@@ -162,7 +190,11 @@ export const fetchAppointmentsByHourRange = async ({
   );
 };
 
-// Fetching all appointmnets for every weeekday for current month and for hole year
+/**
+ * Fetching all appointmnets by every weeekday for current month and for hole year
+ * @param id - optional
+ * @returns
+ */
 export const fetchAppointmentsByDayAndTotal = async ({
   token,
   id,
@@ -171,7 +203,25 @@ export const fetchAppointmentsByDayAndTotal = async ({
   token?: string;
 }) => {
   return apiFetcher<FetchAppointmentsByDayAndTotalTypes[]>(
-    `employees/appointmentByDay/${id}`,
+    `employees/appointmentByDay/${id ? id : ""}`,
+    token ?? ""
+  );
+};
+
+/**
+ * Count Appointmnets By Total, Year and Month
+ * @param id - optional
+ * @returns
+ */
+export const fetchAppointmentsTotal = async ({
+  token,
+  id,
+}: {
+  id?: number;
+  token?: string;
+}) => {
+  return apiFetcher<FetchAppointmentsTotalTypes[]>(
+    `employees/appointmentsTotal/${id ? id : ""}`,
     token ?? ""
   );
 };

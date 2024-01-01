@@ -62,10 +62,11 @@
 
 .dashboardEmployees__chart--hour {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 
   .byHourRangeChartSettings {
-    padding: 10px;
-
     .date-picker {
       @include mixin.input;
       //  I add the icon as global I just add this to create space between input and icon
@@ -163,21 +164,51 @@
   .dashBoxAllServices--employees,
   .dashInfoBox--employees {
     text-align: center;
-    padding: 10px;
+    padding: 4px 10px;
     flex: 1;
-    height: 100%;
+
     border-radius: 15px;
     background: colors.$dashboard-Employees-Box;
     background-size: 300px;
     transition: background 0.7s ease-out;
     border: 1px solid colors.$border-Primary;
     box-shadow: colors.$dashboard-Employees-Box--Shadow;
+
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    gap: 4px;
 
     &:hover {
       background-position: 150px;
+    }
+
+    .dashBoxAllServices--employees--listWrap {
+      text-align: start;
+      overflow: auto;
+      &::-webkit-scrollbar {
+        width: 3px;
+        background-color: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: colors.$font-style;
+      }
+    }
+
+    .dashBoxAllServices--employees__footer {
+      font-size: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: general.$transition;
+
+      &:hover {
+        color: colors.$NavLinkActive;
+      }
+
+      &:active {
+        transform: scale(0.9);
+      }
     }
 
     .dashBoxAllServices--employees__title {
@@ -188,17 +219,6 @@
     ul {
       font-size: 12px;
       color: colors.$font-Secound;
-      text-align: start;
-
-      overflow: auto;
-      &::-webkit-scrollbar {
-        width: 3px;
-        background-color: transparent;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background-color: colors.$font-style;
-      }
     }
 
     .dashInfoBox--employees__title {
