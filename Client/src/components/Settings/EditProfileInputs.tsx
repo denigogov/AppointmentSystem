@@ -34,6 +34,9 @@ const EditProfileInputs = ({
     };
 
     const userReadyData = { ...userInputs, ...genderPasswordData };
+
+    console.log(userReadyData);
+
     handlePutRequest(userReadyData as AllUserTypes);
   };
 

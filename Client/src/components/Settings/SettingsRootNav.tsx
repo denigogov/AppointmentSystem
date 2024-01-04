@@ -12,15 +12,16 @@ const SettingsRootNav = () => {
         <ul>
           <li>
             <NavLink to="edit-profile">
-              <img src={editIcon} alt="" /> Personal Info
+              <img src={editIcon} alt="editProfile icon" /> Personal Info
             </NavLink>
           </li>
 
           {auth.userInfo?.type !== 1 && (
             <>
               <li>
-                <NavLink to="edit-profile1">
-                  <img src={editIcon} alt="" /> Personal Info{" "}
+                <NavLink to="time-management">
+                  <img src={editIcon} alt="time management icon" /> Time
+                  Management
                 </NavLink>
               </li>
 

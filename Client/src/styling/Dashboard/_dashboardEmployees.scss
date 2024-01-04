@@ -60,11 +60,22 @@
   gap: 10px;
 }
 
+@media (max-width: general.$sm) {
+  .employees__left--top,
+  .employees__left--bottom {
+    gap: 20px;
+  }
+  .employees__left--bottom {
+    height: 100%;
+  }
+}
+
 .dashboardEmployees__chart--hour {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  text-align: center;
 
   .byHourRangeChartSettings {
     .date-picker {
@@ -90,14 +101,37 @@
 }
 .dashboardEmployees__chart--year {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  .welcomeMessageEmployee {
+    h3 {
+      font-size: 16px;
+      color: colors.$font-Primary;
+    }
+    p {
+      font-size: 10px;
+      color: colors.$font-Primary;
+      font-weight: 700;
+    }
+
+    @media (max-width: general.$md) {
+      display: none;
+    }
+  }
 }
 
 .dashboardEmployees__statistic--statisticInfo {
   flex: 0.6;
   padding: 5px;
   display: flex;
-  gap: 10px;
   flex-direction: column;
+  gap: 10px;
+
+  @media (max-width: general.$sm) {
+    height: 100%;
+  }
 
   .dashboardEmployees__container--dashBoxTotal {
     flex: 1;
@@ -106,6 +140,7 @@
       display: flex;
       gap: 10px;
       height: 100%;
+
       .dashBoxTotalMonth,
       .dashBoxTotalYear {
         flex: 1;
@@ -184,8 +219,13 @@
     }
 
     .dashBoxAllServices--employees--listWrap {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
       text-align: start;
       overflow: auto;
+
       &::-webkit-scrollbar {
         width: 3px;
         background-color: transparent;
@@ -273,5 +313,9 @@
 }
 
 .chartDays--wrap {
-  padding: 20px;
+  width: 100%;
+
+  @media (max-width: general.$sm) {
+    height: 70%;
+  }
 }

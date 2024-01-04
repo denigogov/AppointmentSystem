@@ -107,6 +107,7 @@ const getAllAppointmentByDataRange = async (req, res) => {
   }
 };
 
+// Service
 const getServiceStatisticProcent = async (req, res) => {
   try {
     const { id } = req.params;
@@ -230,6 +231,7 @@ const countAppointmentsByWeekDay = async (req, res) => {
   }
 };
 
+// Count total appointmnets!
 const countTotalAppointments = async (req, res) => {
   try {
     const { id } = req.params;

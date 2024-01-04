@@ -11,11 +11,11 @@ const getAllUsers = async (_, res) => {
   }
 };
 
-// I don't use anywere but I will use in OWNER DASHBOARD
+// I don't use anywere but I will use in OWNER DASHBOARD only owner to be able to create employees user
 const createEmployee = async (req, res) => {
   try {
     const {
-      employeesType_id,
+      employeesUserType_id,
       username,
       firstName,
       lastName,
@@ -26,9 +26,9 @@ const createEmployee = async (req, res) => {
     } = req.body;
 
     const [allAppointments] = await database.query(
-      "insert into employees (employeesType_id, username, firstName,lastName, city, email, phoneNumber, password) values(?,?,?,?,?,?,?,?)",
+      "insert into employees (employeesUserType_id, username, firstName,lastName, city, email, phoneNumber, password) values(?,?,?,?,?,?,?,?)",
       [
-        employeesType_id,
+        employeesUserType_id,
         username,
         firstName,
         lastName,
@@ -46,7 +46,7 @@ const createEmployee = async (req, res) => {
   }
 };
 
-const employeesTimeManagment = async (req, res) => {
+const employeesTimeManagment = async (_, res) => {
   try {
     const [timeManagment] = await database.query(
       `SELECT * FROM haircut.timemanagment`

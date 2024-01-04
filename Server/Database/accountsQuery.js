@@ -7,17 +7,16 @@ const editUserAllData = async (req, res) => {
 
     const [employees] = await database.query(
       `SELECT 
-          employees.id, 
-          usertypes.id as userType_id , 
-          firstName, 
-          lastName, 
-          city,
-          email ,
-          phoneNumber,
-          password 
-        FROM employees 
-        LEFT JOIN usertypes ON employees.employeesType_id = usertypes.id
-        WHERE employees.id = ? AND usertypes.id = ?`,
+      id, 
+      employeesUserType_id as userType_id , 
+      firstName, 
+      lastName, 
+      city,
+      email ,
+      phoneNumber,
+      password 
+      FROM employees 
+      WHERE employees.id = ? AND   employeesUserType_id  = ?`,
       [id, type]
     );
 
@@ -50,7 +49,10 @@ const updateUserData = async (req, res) => {
       if (password) {
         await hashedPassword(req, res, async () => {
           const [updateEmployee] = await database.query(
-            `UPDATE employees SET firstName = ?, lastName = ?, city = ?, email = ?, phoneNumber = ?, password = ? WHERE id = ? AND employeesType_id = ?`,
+            `UPDATE employees
+            SET firstName = ?, lastName = ?, city = ?, email = ?, phoneNumber = ?, password = ?
+            WHERE id = ? AND employeesUserType_id = ?
+            `,
             [
               firstName,
               lastName,
@@ -99,7 +101,9 @@ const updateUserData = async (req, res) => {
       } else {
         // Password is not provided, update without hashing
         const [updateEmployee] = await database.query(
-          `UPDATE employees SET firstName = ?, lastName = ?, city = ?, email = ?, phoneNumber = ? WHERE id = ? AND employeesType_id = ?`,
+          `UPDATE employees
+          SET firstName = ?, lastName = ?, city = ?, email = ?, phoneNumber = ?
+          WHERE id = ? AND employeesUserType_id = ?`,
           [firstName, lastName, city, email, phoneNumber, id, type]
         );
 

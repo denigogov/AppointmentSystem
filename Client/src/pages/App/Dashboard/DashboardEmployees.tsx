@@ -159,16 +159,12 @@ const DashboardEmployees = ({ setPopupOpen }: DashboardEmployeeProps) => {
       <div className="dashbaordEmployeeDataLeft">
         <div className="dashboardEmployees--wrap">
           <div className="employees__left--top">
-            <div className="dashboardEmployees__chart--hour">
-              <ByHourRangeChartSettings
-                startDataHour={startDataHour}
-                endDataHour={endDataHour}
-                setEndDataHour={setEndDataHour}
-                setStartDataHour={setStartDataHour}
-              />
-              <ChartByHour
-                appointmentsByHourRange={appointmentsByHourRange ?? []}
-              />
+            <div className="dashboardEmployees__chart--year">
+              <div className="welcomeMessageEmployee">
+                <h3>Welcome, {auth.userInfo?.username ?? "username"}! </h3>
+                <p>Your chair, your rules</p>
+              </div>
+              <ByDayChart allAppointmentsByDay={allAppointmentsByDay ?? []} />
             </div>
             <div className="dashboardEmployees__statistic--procent">
               <DashBoxProcentContainer
@@ -186,9 +182,16 @@ const DashboardEmployees = ({ setPopupOpen }: DashboardEmployeeProps) => {
                 <DashBoxServices allServices={allServices ?? []} />
               </div>
             </div>
-
-            <div className="dashboardEmployees__chart--year">
-              <ByDayChart allAppointmentsByDay={allAppointmentsByDay ?? []} />
+            <div className="dashboardEmployees__chart--hour">
+              <ByHourRangeChartSettings
+                startDataHour={startDataHour}
+                endDataHour={endDataHour}
+                setEndDataHour={setEndDataHour}
+                setStartDataHour={setStartDataHour}
+              />
+              <ChartByHour
+                appointmentsByHourRange={appointmentsByHourRange ?? []}
+              />
             </div>
           </div>
         </div>

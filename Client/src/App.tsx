@@ -25,6 +25,8 @@ import { OnlyEmployeesAccess } from "./helpers/AuthEmployee";
 import { OnlyCustomersAccess } from "./helpers/AuthCustomers";
 import UserDetailsRoute from "./pages/App/Dashboard/UserDetailsRoute";
 
+import TimeManagement from "./pages/App/Settings/TimeManagement/TimeManagement";
+
 const App = () => {
   const auth = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
@@ -101,6 +103,14 @@ const App = () => {
           <Route path="settings" element={<SettingsRoot />}>
             <Route index element={<EditProfile />} />
             <Route path="edit-profile" element={<EditProfile />} />
+            <Route
+              path="time-management"
+              element={
+                <OnlyEmployeesAccess>
+                  <TimeManagement />
+                </OnlyEmployeesAccess>
+              }
+            />
           </Route>
         </Route>
 

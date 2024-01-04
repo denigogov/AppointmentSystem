@@ -10,7 +10,7 @@ const usersSchema = Joi.object({
 
 const updateUserSchema = Joi.object({
   firstName: Joi.string().min(3).max(16),
-  lastName: Joi.string().max(3).max(16),
+  lastName: Joi.string().max(16),
   email: Joi.string().email(),
   password: Joi.string()
     .pattern(
@@ -42,12 +42,12 @@ const validateCustomer = (req, res, next) => {
 };
 
 const validateUpdateUser = (req, res, next) => {
-  const { firstName, lastName, email, password, phoneNumber, street, gender } =
+  const { firstName, lastName, email, password, phoneNumber, gender, city } =
     req.body;
 
-  if (street) {
+  if (gender) {
     const { error } = updateUserSchema.validate(
-      { firstName, lastName, email, password, phoneNumber, street },
+      { firstName, lastName, email, password, phoneNumber, city },
       { abortEarly: false }
     );
 
@@ -56,9 +56,9 @@ const validateUpdateUser = (req, res, next) => {
     } else {
       next();
     }
-  } else if (gender) {
+  } else if (city) {
     const { error } = updateUserSchema.validate(
-      { firstName, lastName, email, password, phoneNumber, gender },
+      { firstName, lastName, email, password, phoneNumber, city },
       { abortEarly: false }
     );
 
@@ -67,6 +67,11 @@ const validateUpdateUser = (req, res, next) => {
     } else {
       next();
     }
+  } else {
+    res.status(400).json({
+      error:
+        'Either "street", "gender", or "city" must be present in the request body',
+    });
   }
 };
 

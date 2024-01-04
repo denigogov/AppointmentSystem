@@ -45,8 +45,6 @@ const EditProfile = () => {
           }
         );
 
-        console.log("resposne", res);
-
         if (res.ok) {
           mutate(["userInfoData", token]);
           Swal.fire({
