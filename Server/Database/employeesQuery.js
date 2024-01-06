@@ -46,10 +46,14 @@ const createEmployee = async (req, res) => {
   }
 };
 
-const employeesTimeManagment = async (_, res) => {
+const employeesTimeManagment = async (req, res) => {
   try {
+    const { id } = req.params;
     const [timeManagment] = await database.query(
-      `SELECT * FROM haircut.timemanagment`
+      `SELECT * FROM haircut.timemanagment ${
+        id ? "where employee_id = ?" : ""
+      }`,
+      [id]
     );
 
     timeManagment.length

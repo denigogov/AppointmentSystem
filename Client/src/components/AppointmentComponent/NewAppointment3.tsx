@@ -40,6 +40,8 @@ const NewAppointment3 = ({
     const endHour = filteTimeManagment[0]?.endHour ?? 15;
     const endMinute = filteTimeManagment[0]?.endMinute ?? 0;
 
+    console.log(filteTimeManagment[0].startDate);
+
     const isFutureTime = currentDate.getTime() < selectedDate.getTime();
     const selectedMinutes =
       selectedDate.getHours() * 60 + selectedDate.getMinutes();
@@ -81,14 +83,12 @@ const NewAppointment3 = ({
           {
             start: subDays(
               new Date(
-                filteTimeManagment[0]?.startDate ?? "'2023-12-01 00:00:00'"
+                filteTimeManagment[0]?.startDate ?? "2024-01-01 00:00:00"
               ),
-              1
+              0
             ),
             end: addDays(
-              new Date(
-                filteTimeManagment[0]?.endDate ?? "'2023-12-05 00:00:00'"
-              ),
+              new Date(filteTimeManagment[0]?.endDate ?? "2024-01-02 00:00:00"),
               0
             ),
           },

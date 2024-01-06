@@ -1,4 +1,5 @@
 import { AllServicesTypes } from "../../../types/tableApiTypes";
+import { Link } from "react-router-dom";
 
 interface DashBoxServicesProps {
   allServices: AllServicesTypes[];
@@ -25,7 +26,7 @@ const DashBoxServices = ({ allServices }: DashBoxServicesProps) => {
       </div>
       <br />
       <p className="dashBoxAllServices--employees__footer">
-        Request New Service
+        <Link to="/app/settings/time-management">Request New Service</Link>
       </p>
     </div>
   );

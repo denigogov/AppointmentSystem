@@ -19,13 +19,15 @@ import WebPage from "./pages/Home/WebPage";
 import SignUp from "./pages/SignUp/SignUp";
 import { RequireAuth } from "./helpers/RequireAuth";
 import Appointment from "./pages/App/Appointment/Appointment";
+
+// Settings Routes!
 import SettingsRoot from "./pages/App/Settings/SettingsRoot";
-import EditProfile from "./pages/App/Settings/EditProfile/EditProfile";
+import EditProfile from "./pages/App/Settings/EditProfile";
+import TimeManagement from "./pages/App/Settings/TimeManagement";
+
 import { OnlyEmployeesAccess } from "./helpers/AuthEmployee";
 import { OnlyCustomersAccess } from "./helpers/AuthCustomers";
 import UserDetailsRoute from "./pages/App/Dashboard/UserDetailsRoute";
-
-import TimeManagement from "./pages/App/Settings/TimeManagement/TimeManagement";
 
 const App = () => {
   const auth = useAuth();
@@ -105,6 +107,15 @@ const App = () => {
             <Route path="edit-profile" element={<EditProfile />} />
             <Route
               path="time-management"
+              element={
+                <OnlyEmployeesAccess>
+                  <TimeManagement />
+                </OnlyEmployeesAccess>
+              }
+            />
+
+            <Route
+              path="service-requests"
               element={
                 <OnlyEmployeesAccess>
                   <TimeManagement />

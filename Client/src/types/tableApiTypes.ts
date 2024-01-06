@@ -46,8 +46,8 @@ export interface CustomersDataTypes
 
 export interface TimeManagmentTypes {
   id: number;
-  startDate: Date | null;
-  endDate: Date | null;
+  startDate: string | null;
+  endDate: string | null;
   startHour: number | null;
   endHour: number | null;
   startMinute: number | null;

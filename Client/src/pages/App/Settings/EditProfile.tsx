@@ -1,9 +1,9 @@
 import useSWR, { mutate } from "swr";
-import { useAuth } from "../../../../helpers/Auth";
-import { fetchUserData } from "../../../../api/tableApi";
-import EditProfileInputs from "../../../../components/Settings/EditProfileInputs";
-import "../.././../../styling/Components/SettingsComponents/_editProfileInputs.scss";
-import { AllUserTypes } from "../../../../types/tableApiTypes";
+import { useAuth } from "../../../helpers/Auth";
+import { fetchUserData } from "../../../api/tableApi";
+import EditProfileInputs from "../../../components/Settings/EditProfileInputs";
+import "../../../styling/Components/SettingsComponents/_editProfileInputs.scss";
+import { AllUserTypes } from "../../../types/tableApiTypes";
 import Swal from "sweetalert2";
 
 const EditProfile = () => {

@@ -56,9 +56,11 @@ const Appointment = () => {
     data: timeManagment,
     error: timeManagmentError,
     isLoading: timeManagmentLoading,
-  } = useSWR<TimeManagmentTypes[] | any>(["timeManagment", token], () =>
-    fetchTimeManagment(token)
+  } = useSWR<TimeManagmentTypes[]>(["timeManagment", token], () =>
+    fetchTimeManagment({ token })
   );
+
+  console.log(timeManagment);
 
   const {
     data: allAppointments,
@@ -87,7 +89,7 @@ const Appointment = () => {
     return e.services_id === +selectedService;
   });
 
-  const filteTimeManagment = timeManagment.filter(
+  const filteTimeManagment = timeManagment?.filter(
     (arr: TimeManagmentTypes) => arr.employee_id === +selectedUser
   );
 
@@ -157,7 +159,7 @@ const Appointment = () => {
 
       {selectedService && selectedUser && (
         <NewAppointment3
-          filteTimeManagment={filteTimeManagment}
+          filteTimeManagment={filteTimeManagment ?? []}
           filterAppointments={filterAppointments}
           selectedUser={selectedUser}
           setSelectedDate={setSelectedDate}

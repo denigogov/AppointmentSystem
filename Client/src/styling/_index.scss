@@ -47,3 +47,8 @@ a {
     color: colors.$font-style;
   }
 }
+
+.active {
+  color: colors.$font-Primary;
+  font-weight: 600;
+}

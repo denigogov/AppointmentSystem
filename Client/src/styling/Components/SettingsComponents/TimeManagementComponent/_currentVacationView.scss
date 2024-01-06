@@ -1,0 +1,35 @@
+@use "../../../colors";
+@use "../../../general";
+
+.currentVacationView--container {
+  padding: 10px;
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  p {
+    strong {
+      color: #000;
+    }
+    &:nth-child(1) {
+      font-size: 16px;
+      font-weight: 700;
+      color: colors.$font-Primary;
+    }
+
+    &:nth-child(2),
+    &:nth-child(3),
+    &:nth-child(4) {
+      font-size: 14px;
+      font-weight: 500;
+      color: colors.$font-Secound;
+    }
+  }
+
+  @media (max-width: general.$sm) {
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+}

@@ -27,7 +27,7 @@ export const dataMonthShow = (selectedData: Date | string) => {
 
 export const convertISOtoLocalZone = (date: Date | string) => {
   const localDate = moment(date);
-  return localDate.toISOString();
+  return localDate.toISOString(); // 2024-01-14T23:00:00.000Z
 };
 
 export const convertISOtoLocalZoneFORMATED = (date: Date | string) => {
@@ -45,7 +45,7 @@ export const calculateDaysLeft = (date: Date | string | undefined) => {
   const daysBetween = calcDaysBetween(startDate, endDate);
   const nonNegativeDays = daysBetween >= 0 ? daysBetween : null;
 
-  return nonNegativeDays;
+  return nonNegativeDays; // 5 days left | 5 days ago
 };
 
 // export const getStartDateAndEndDateCurrentMonth = () => {

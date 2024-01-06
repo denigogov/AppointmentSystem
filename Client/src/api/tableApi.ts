@@ -48,7 +48,7 @@ export const apiFetcher = async <T>(url: string, token: string) => {
  * Fetching ALL SERVICES
  * @returns
  */
-export const fetchAllServices = async (token: TokenType | undefined) => {
+export const fetchAllServices = async (token?: TokenType) => {
   return apiFetcher<AllServicesTypes[]>(`tableRoute/services`, token || "");
 };
 
@@ -87,8 +87,17 @@ export const fetchCustomerData = async ({
  * TIME MANAGMENT TABLE -- ALL values
  * @returns
  */
-export const fetchTimeManagment = async (token: TokenType | undefined) => {
-  return apiFetcher<TimeManagmentTypes>(`employees/timeManagment`, token || "");
+export const fetchTimeManagment = async ({
+  token,
+  userId,
+}: {
+  token?: TokenType;
+  userId?: number;
+}) => {
+  return apiFetcher<TimeManagmentTypes[]>(
+    `employees/timeManagment/${userId ? userId : ""}`,
+    token ?? ""
+  );
 };
 
 /**

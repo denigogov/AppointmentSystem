@@ -1,5 +1,7 @@
 import { NavLink } from "react-router-dom";
-import editIcon from "../../assets/editUserIcon1.svg";
+import editIcon from "../../assets/userInfoPink.svg";
+import timeManagementIcon from "../../assets/time-management-clock-svgrepo-com (1).svg";
+import serviceRequestIcon from "../../assets/serviceRequest.svg";
 import "../../styling/Components/SettingsComponents/_settingsRootNav.scss";
 import { useAuth } from "../../helpers/Auth";
 
@@ -20,26 +22,14 @@ const SettingsRootNav = () => {
             <>
               <li>
                 <NavLink to="time-management">
-                  <img src={editIcon} alt="time management icon" /> Time
-                  Management
+                  <img src={timeManagementIcon} alt="time management icon" />
+                  Time Management
                 </NavLink>
               </li>
-
               <li>
-                <NavLink to="edit-profile1">
-                  <img src={editIcon} alt="" /> Personal Info{" "}
-                </NavLink>
-              </li>
-
-              <li>
-                <NavLink to="edit-profil1e">
-                  <img src={editIcon} alt="" /> Personal Info{" "}
-                </NavLink>
-              </li>
-
-              <li>
-                <NavLink to="edit-profile1">
-                  <img src={editIcon} alt="" /> Personal Info{" "}
+                <NavLink to="service-requests">
+                  <img src={serviceRequestIcon} alt="service request icon" />
+                  Service Requests
                 </NavLink>
               </li>
             </>

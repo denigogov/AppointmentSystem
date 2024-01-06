@@ -1,9 +1,13 @@
 .settingsRootContainer {
   nav {
-    padding: 20px;
+    padding: 15px;
+    // border: 1px solid red;
+
     ul {
+      height: 100%;
       display: flex;
       justify-content: space-around;
+      text-align: center;
 
       li {
         img {

@@ -1,0 +1,31 @@
+@use "../../../colors";
+@use "../../../general";
+
+.timeManagemen-title {
+  padding: 20px;
+  font-weight: 600;
+  color: colors.$font-Primary;
+}
+
+.timeManagement--text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  .timeManagemen-subTitle {
+    width: 50%;
+    font-size: 14px;
+    color: colors.$font-Secound;
+    text-align: center;
+  }
+  @media (max-width: general.$md) {
+    .timeManagemen-subTitle {
+      width: 70%;
+    }
+  }
+  @media (max-width: general.$sm) {
+    .timeManagemen-subTitle {
+      width: 100%;
+    }
+  }
+}
