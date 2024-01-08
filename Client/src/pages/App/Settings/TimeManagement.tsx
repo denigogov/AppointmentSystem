@@ -4,6 +4,7 @@ import TimeManagementView from "../../../components/Settings/TimeManagement/Time
 import { useAuth } from "../../../helpers/Auth";
 import { TimeManagmentTypes } from "../../../types/tableApiTypes";
 import CurrentVacationView from "../../../components/Settings/TimeManagement/CurrentVacationView";
+import "../../../styling/Components/SettingsComponents/TimeManagementComponent/_timeManagementPage.scss";
 
 const TimeManagement = () => {
   const auth = useAuth();
@@ -11,7 +12,7 @@ const TimeManagement = () => {
   const userId = auth.userInfo?.id;
 
   const {
-    data: timeManagment,
+    data: timeManagement,
     error: timeManagmentError,
     isLoading: timeManagmentLoading,
   } = useSWR<TimeManagmentTypes[]>(["timeManagment", token], () =>
@@ -27,9 +28,7 @@ const TimeManagement = () => {
   }
 
   return (
-    <div
-      style={{ border: "1px solid #e0e0e0", minHeight: "calc(100vh - 220px)" }}
-    >
+    <div className="timeManagement__main-container">
       <h2 className="timeManagemen-title">Time Management</h2>
 
       <div className="timeManagement--text-container">
@@ -40,15 +39,12 @@ const TimeManagement = () => {
         </p>
       </div>
 
-      <div
-        style={{
-          display: "flex",
-        }}
-      >
-        {timeManagment![0].startDate && (
-          <CurrentVacationView timeManagment={timeManagment![0]} />
+      <div className="timeManagement--wrap-components">
+        <TimeManagementView timeManagement={timeManagement![0]} />
+
+        {timeManagement![0].startDate && (
+          <CurrentVacationView timeManagement={timeManagement![0]} />
         )}
-        <TimeManagementView timeManagment={timeManagment![0]} />
       </div>
     </div>
   );

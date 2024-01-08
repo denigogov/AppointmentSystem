@@ -1,0 +1,57 @@
+@use "../../../colors";
+@use "../../../general";
+@use "../../../mixin";
+
+.timeManagement__main-container {
+  gap: 20px;
+  border-top: 1px solid #e0e0e0;
+  height: calc(100vh - 200px);
+  @include mixin.overflowScroll;
+
+  @media (max-width: general.$md) {
+    height: 100vh;
+  }
+}
+
+.timeManagemen-title {
+  padding: 20px;
+  font-weight: 600;
+  color: colors.$font-Primary;
+}
+
+.timeManagement--text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  .timeManagemen-subTitle {
+    width: 50%;
+    font-size: 14px;
+    color: colors.$font-Secound;
+    text-align: center;
+  }
+  @media (max-width: general.$md) {
+    .timeManagemen-subTitle {
+      width: 70%;
+    }
+  }
+  @media (max-width: general.$sm) {
+    .timeManagemen-subTitle {
+      width: 100%;
+    }
+  }
+}
+
+.timeManagement--wrap-components {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 20px;
+  width: 50%;
+  margin: 0 auto;
+
+  @media (max-width: general.$sm) {
+    width: 80%;
+  }
+}

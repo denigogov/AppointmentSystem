@@ -1,26 +1,45 @@
 @use "../../../colors";
 @use "../../../general";
+@use "../../../mixin";
 
 .currentVacationView--container {
-  padding: 10px;
-  border: 1px solid red;
+  height: 100%;
+  text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  justify-content: space-around;
+  box-shadow: general.$box-shadow-secondary;
+  border-radius: 25px;
 
+  background-color: white;
+  height: 100%;
+}
+.currentVacationView--title {
+  font-size: 16px;
+  font-weight: 700;
+  color: colors.$font-Primary;
+}
+
+.currentVacationView--wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.currentVacationView--dates {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   p {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
     strong {
       color: #000;
     }
-    &:nth-child(1) {
-      font-size: 16px;
-      font-weight: 700;
-      color: colors.$font-Primary;
-    }
 
+    &:nth-child(1),
     &:nth-child(2),
-    &:nth-child(3),
-    &:nth-child(4) {
+    &:nth-child(3) {
       font-size: 14px;
       font-weight: 500;
       color: colors.$font-Secound;
@@ -31,5 +50,21 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
+  }
+}
+
+.currentVacationView__currentTime-btn {
+  @include mixin.editButton;
+}
+
+@media (max-width: general.$md) {
+  .currentVacationView--title {
+    padding: 10px;
+  }
+
+  .currentVacationView--wrap {
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-evenly;
   }
 }

@@ -127,3 +127,67 @@
     }
   }
 }
+
+@mixin overflowScroll() {
+  // height: calc(100vh - 6rem); // also need to adjust the screen size ! viewport
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 3px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: colors.$font-style;
+  }
+}
+
+@mixin editButton() {
+  width: 100px;
+  height: 40px;
+  border: 1px solid #333;
+  font-size: 17px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 0;
+  transition: 1s;
+
+  &:active {
+    transform: scale(0.9);
+    background: colors.$background-secondary;
+  }
+
+  &:hover {
+    border-radius: 15px;
+  }
+  &::before,
+  &::after {
+    position: absolute;
+    background: #fff;
+    z-index: -1;
+    transition: 1s;
+    content: "";
+  }
+
+  &::before {
+    height: 50px;
+    width: 70px;
+  }
+
+  &::after {
+    width: 100px;
+    height: 30px;
+  }
+
+  &:hover::before {
+    width: 0px;
+  }
+
+  &:hover::after {
+    height: 0px;
+  }
+}

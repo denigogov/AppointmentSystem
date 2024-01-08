@@ -48,6 +48,13 @@ export const calculateDaysLeft = (date: Date | string | undefined) => {
   return nonNegativeDays; // 5 days left | 5 days ago
 };
 
+export const formatWorkHours = (hour: number, minute: number) => {
+  const formated = `${hour < 10 ? "0" + hour : hour} : ${
+    minute < 10 ? "0" + minute : minute
+  }`;
+  return formated; // it return with + one more 0  - 09:00 - 00:00
+};
+
 // export const getStartDateAndEndDateCurrentMonth = () => {
 //   // Get the current date
 //   const currentDate = moment();

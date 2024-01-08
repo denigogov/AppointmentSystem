@@ -165,14 +165,3 @@
     }
   }
 }
-// Mobile View End
-
-a.active {
-  border-bottom: 1px solid colors.$font-style;
-  padding: 4px;
-
-  img {
-    filter: brightness(0) saturate(100%) invert(87%) sepia(38%) saturate(3081%)
-      hue-rotate(299deg) brightness(99%) contrast(103%);
-  }
-}
