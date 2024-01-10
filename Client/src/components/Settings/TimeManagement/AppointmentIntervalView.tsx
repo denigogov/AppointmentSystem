@@ -1,65 +1,59 @@
 import { Link } from "react-router-dom";
-import { formatWorkHours } from "../../../helpers/Dates";
-import "../../../styling/Components/SettingsComponents/TimeManagementComponent/_timeManagementView.scss";
+import "../../../styling/Components/SettingsComponents/TimeManagementComponent/_appointmentIntervalView.scss";
 import { TimeManagmentTypes } from "../../../types/tableApiTypes";
 import Swal from "sweetalert2";
 
-interface TimeManagementViewProps {
+interface AppointmentIntervalViewProps {
   timeManagement: TimeManagmentTypes;
   setPopupOpen: React.Dispatch<React.SetStateAction<boolean>>;
   handleResetDefaultValues: (e: React.MouseEvent<HTMLHeadingElement>) => void;
 }
 
-const TimeManagementView = ({
-  timeManagement,
+const AppointmentIntervalView = ({
   setPopupOpen,
+  timeManagement,
   handleResetDefaultValues,
-}: TimeManagementViewProps) => {
+}: AppointmentIntervalViewProps) => {
   const handlePopUp = () => {
     setPopupOpen((x) => !x);
   };
 
-  const startTime = formatWorkHours(
-    timeManagement?.startHour ?? 9,
-    timeManagement?.startMinute ?? 0
-  );
-
-  const endTime = formatWorkHours(
-    timeManagement?.endHour ?? 17,
-    timeManagement?.endMinute ?? 0
-  );
-
   const handleResetDefault = async (
     e: React.MouseEvent<HTMLHeadingElement>
   ) => {
+    // http://localhost:4000/tableRoute/timeManagement/50
     const sendPrompt = Swal.fire({
       title: "Confirm Reset to Default",
-      html: "Resetting to default will set your work hours to the standard configuration from <strong>09:00 - 17:00</strong>. Any personalized work hours entries will be cleared. Continue?",
+      html: "Are you sure you want to reset the appointment interval to the default setting? Confirming will revert the interval to the standard duration of <strong>30 minutes</strong>",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#ffda79",
       cancelButtonColor: "#b7b7b7",
       confirmButtonText: "Confirm !",
     });
+
     if ((await sendPrompt).isConfirmed) {
       handleResetDefaultValues(e);
     }
   };
-
   return (
-    <div className="timeManagementView--container">
-      <p className="timeManagementView--title">Current Work Time</p>
+    <div className="appointmentIntervalView__container">
+      <div className="intervalView__container--title">
+        <p>Current Appointment Interval</p>
+      </div>
 
-      <p className="workTime-current">
-        Current Work Time
-        <strong>
-          {startTime} - {endTime}
-        </strong>
-      </p>
+      <div className="interval--current">
+        <p>
+          Current Duration for Each Appointment
+          <span>
+            <strong>{timeManagement?.timeInterval ?? "30"} minutes</strong>
+          </span>
+        </p>
+      </div>
 
       <span>
         <Link
-          to="work-time"
+          to="interval"
           className="timeManagement__currentTime-btn"
           onClick={handlePopUp}
         >
@@ -71,4 +65,5 @@ const TimeManagementView = ({
     </div>
   );
 };
-export default TimeManagementView;
+
+export default AppointmentIntervalView;

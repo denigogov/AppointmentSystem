@@ -1,0 +1,31 @@
+@use "../../../colors";
+@use "../../../general";
+@use "../../../mixin";
+
+.appointmentIntervalView__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  box-shadow: general.$box-shadow-secondary;
+  border-radius: 25px;
+  text-align: center;
+
+  background: colors.$timeManagementBoxes;
+
+  .intervalView__container--title {
+    font-size: 16px;
+    font-weight: 700;
+    color: colors.$font-Primary;
+  }
+  .interval--current {
+    font-size: 14px;
+    font-weight: 500;
+    color: colors.$font-Secound;
+
+    strong {
+      color: #000;
+    }
+  }
+}

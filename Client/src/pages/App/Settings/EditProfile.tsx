@@ -70,6 +70,8 @@ const EditProfile = () => {
         icon: "error",
         title: "Oops...",
         text: "Something went wrong, please try again !!",
+        cancelButtonColor: "#ffda79",
+        confirmButtonColor: "#ffda79",
       });
     }
   };

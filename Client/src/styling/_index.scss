@@ -59,3 +59,8 @@ a.active {
       hue-rotate(299deg) brightness(99%) contrast(103%);
   }
 }
+
+// Remove the PromptAlert outline border !
+.swal2-popup .swal2-styled:focus {
+  box-shadow: none !important;
+}

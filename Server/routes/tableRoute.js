@@ -6,6 +6,7 @@ const customerEmailConfirm = require("../Database/emailConfirm");
 const customerQuery = require("../Database/customerQuery");
 const appointmenQuery = require("../Database/appointmenQuery");
 const accountsQuery = require("../Database/accountsQuery");
+const employeeQuery = require("../Database/employeesQuery");
 
 const { hashedPassword, verifyToken } = require("../auth");
 const {
@@ -33,6 +34,7 @@ router
     validateUpdateUser,
     verifyToken,
     accountsQuery.updateUserData
-  );
+  )
+  .put("/timeManagement/:id", verifyToken, employeeQuery.UpdateTimeManagement);
 
 module.exports = router;

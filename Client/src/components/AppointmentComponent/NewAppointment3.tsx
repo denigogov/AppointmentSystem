@@ -35,9 +35,9 @@ const NewAppointment3 = ({
   const filterPassedTime = (time: Date) => {
     const currentDate = new Date();
     const selectedDate = new Date(time);
-    const startHour = filteTimeManagment[0]?.startHour ?? 8;
+    const startHour = filteTimeManagment[0]?.startHour ?? 9;
     const startMinute = filteTimeManagment[0]?.startMinute ?? 0;
-    const endHour = filteTimeManagment[0]?.endHour ?? 15;
+    const endHour = filteTimeManagment[0]?.endHour ?? 17;
     const endMinute = filteTimeManagment[0]?.endMinute ?? 0;
 
     console.log(filteTimeManagment[0].startDate);

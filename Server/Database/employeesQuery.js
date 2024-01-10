@@ -64,4 +64,78 @@ const employeesTimeManagment = async (req, res) => {
   }
 };
 
-module.exports = { getAllUsers, createEmployee, employeesTimeManagment };
+const UpdateTimeManagement = async (req, res) => {
+  const { id } = req.params;
+
+  const {
+    startDate,
+    endDate,
+    startHour,
+    endHour,
+    startMinute,
+    endMinute,
+    timeInterval,
+  } = req.body;
+
+  const updateFields = [];
+  const updateValues = [];
+
+  if (startDate !== undefined) {
+    updateFields.push("startDate = ?");
+    updateValues.push(startDate);
+  }
+
+  if (endDate !== undefined) {
+    updateFields.push("endDate = ?");
+    updateValues.push(endDate);
+  }
+
+  if (startHour !== undefined) {
+    updateFields.push("startHour = ?");
+    updateValues.push(startHour);
+  }
+
+  if (endHour !== undefined) {
+    updateFields.push("endHour = ?");
+    updateValues.push(endHour);
+  }
+
+  if (startMinute !== undefined) {
+    updateFields.push("startMinute = ?");
+    updateValues.push(startMinute);
+  }
+
+  if (endMinute !== undefined) {
+    updateFields.push("endMinute = ?");
+    updateValues.push(endMinute);
+  }
+
+  if (timeInterval !== undefined) {
+    updateFields.push("timeInterval = ?");
+    updateValues.push(timeInterval);
+  }
+
+  const updateQuery = `UPDATE timemanagment SET ${updateFields.join(
+    ", "
+  )} WHERE employee_id = ?`;
+
+  try {
+    const [updateTable] = await database.query(updateQuery, [
+      ...updateValues,
+      id,
+    ]);
+
+    updateTable.affectedRows ? res.sendStatus(200) : res.sendStatus(400);
+  } catch (err) {
+    console.log(err);
+
+    req.sendStatus(500);
+  }
+};
+
+module.exports = {
+  getAllUsers,
+  createEmployee,
+  employeesTimeManagment,
+  UpdateTimeManagement,
+};

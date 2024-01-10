@@ -28,6 +28,9 @@ import TimeManagement from "./pages/App/Settings/TimeManagement";
 import { OnlyEmployeesAccess } from "./helpers/AuthEmployee";
 import { OnlyCustomersAccess } from "./helpers/AuthCustomers";
 import UserDetailsRoute from "./pages/App/Dashboard/UserDetailsRoute";
+import Vacation from "./pages/App/Settings/Vacation";
+import WorkTime from "./pages/App/Settings/WorkTime";
+import AppointmentInterval from "./pages/App/Settings/AppointmentInterval";
 
 const App = () => {
   const auth = useAuth();
@@ -112,7 +115,11 @@ const App = () => {
                   <TimeManagement />
                 </OnlyEmployeesAccess>
               }
-            />
+            >
+              <Route path="vacation" element={<Vacation />} />
+              <Route path="work-time" element={<WorkTime />} />
+              <Route path="interval" element={<AppointmentInterval />} />
+            </Route>
 
             <Route
               path="service-requests"

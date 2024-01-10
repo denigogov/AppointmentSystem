@@ -3,7 +3,6 @@
 @use "../../../mixin";
 .timeManagementView--container {
   height: 100%;
-  background-color: white;
   text-align: center;
   border-radius: 25px;
   box-shadow: general.$box-shadow-secondary;
@@ -11,6 +10,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+
+  background: colors.$timeManagementBoxes;
 
   .timeManagementView--title {
     padding: 10px;
@@ -36,4 +37,17 @@
 .timeManagement__currentTime-btn {
   margin: 0 auto;
   @include mixin.editButton;
+}
+
+// POP UP when user click edit or ADD
+.workTimeEdit--container {
+  height: 100%;
+  background-color: #fff;
+  text-align: center;
+  border-radius: 25px;
+  box-shadow: general.$box-shadow-secondary;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }

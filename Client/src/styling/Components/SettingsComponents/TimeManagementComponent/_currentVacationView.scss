@@ -4,15 +4,17 @@
 
 .currentVacationView--container {
   height: 100%;
-  text-align: center;
+
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  align-items: center;
+
   box-shadow: general.$box-shadow-secondary;
   border-radius: 25px;
+  text-align: center;
 
-  background-color: white;
-  height: 100%;
+  background: colors.$timeManagementBoxes;
 }
 .currentVacationView--title {
   font-size: 16px;
@@ -20,11 +22,6 @@
   color: colors.$font-Primary;
 }
 
-.currentVacationView--wrap {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
 .currentVacationView--dates {
   display: flex;
   flex-direction: column;
@@ -45,12 +42,6 @@
       color: colors.$font-Secound;
     }
   }
-
-  @media (max-width: general.$sm) {
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-  }
 }
 
 .currentVacationView__currentTime-btn {
@@ -60,11 +51,5 @@
 @media (max-width: general.$md) {
   .currentVacationView--title {
     padding: 10px;
-  }
-
-  .currentVacationView--wrap {
-    height: 100%;
-    flex-direction: column;
-    justify-content: space-evenly;
   }
 }

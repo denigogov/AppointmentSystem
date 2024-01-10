@@ -3,13 +3,14 @@
 @use "../../../mixin";
 
 .timeManagement__main-container {
+  height: calc(100vh - 200px);
+  width: 100%;
   gap: 20px;
   border-top: 1px solid #e0e0e0;
-  height: calc(100vh - 200px);
   @include mixin.overflowScroll;
 
-  @media (max-width: general.$md) {
-    height: 100vh;
+  @media (max-width: general.$sm) {
+    height: 140vh;
   }
 }
 
@@ -24,6 +25,7 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+
   .timeManagemen-subTitle {
     width: 50%;
     font-size: 14px;
@@ -43,15 +45,56 @@
 }
 
 .timeManagement--wrap-components {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
   height: 100%;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
-  width: 50%;
   margin: 0 auto;
 
-  @media (max-width: general.$sm) {
+  @media (max-width: general.$lg) {
+    // grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    height: 100vh;
+  }
+
+  @media (max-width: general.$md) {
+    height: 200vh;
     width: 80%;
+  }
+}
+
+// Time Empty Slot
+.timemanagementEmpty__container {
+  height: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: general.$box-shadow-secondary;
+  border-radius: 25px;
+
+  background: colors.$timeManagementBoxes;
+
+  .timeManagement__emtpy--subTitle {
+    width: 70%;
+    font-size: 13px;
+  }
+}
+
+span {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  cursor: pointer;
+
+  h6 {
+    transition: general.$transition;
+    &:hover {
+      color: colors.$font-style;
+    }
+    &:active {
+      transform: scale(0.9);
+    }
   }
 }
