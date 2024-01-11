@@ -26,8 +26,9 @@ export const dataMonthShow = (selectedData: Date | string) => {
 };
 
 export const convertISOtoLocalZone = (date: Date | string) => {
-  const localDate = moment(date);
-  return localDate.toISOString(); // 2024-01-14T23:00:00.000Z
+  const localDate = moment(date).local();
+
+  return localDate.format("YYYY-MM-DDTHH:mm:ss.SSSZ"); // 2024-01-14T23:00:00.000Z
 };
 
 export const convertISOtoLocalZoneFORMATED = (date: Date | string) => {

@@ -7,6 +7,7 @@
   width: 100%;
   gap: 20px;
   border-top: 1px solid #e0e0e0;
+
   @include mixin.overflowScroll;
 
   @media (max-width: general.$sm) {
@@ -82,7 +83,7 @@
   }
 }
 
-span {
+.resetBtn--wrap {
   display: flex;
   flex-direction: column;
   gap: 20px;

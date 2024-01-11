@@ -17,7 +17,7 @@ const CurrentVacationView = ({
 }: CurrentVacationViewProps) => {
   const startDate: Date = new Date(timeManagement?.startDate ?? "");
   const endDate: Date = new Date(timeManagement?.endDate ?? "");
-  const totalVacationDays = calcDaysBetween(startDate, endDate);
+  const totalVacationDays = calcDaysBetween(startDate, endDate) + 1;
 
   const startDateFormated = dataMonthShow(timeManagement?.startDate ?? "");
   const endDateFormated = dataMonthShow(timeManagement?.endDate ?? "");
@@ -60,7 +60,7 @@ const CurrentVacationView = ({
           </strong>
         </p>
       </div>
-      <span>
+      <span className="resetBtn--wrap">
         <Link
           to="vacation"
           className="currentVacationView__currentTime-btn"

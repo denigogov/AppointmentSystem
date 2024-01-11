@@ -27,7 +27,7 @@ const NewAppointment3 = ({
     new Date(new Date().toLocaleString("en", { timeZone: userTimeZone }))
   );
 
-  const handleDateChange = (date: Date) => {
+  const handleDateChange = (date: Date): void => {
     setStartDate(date);
     setSelectedDate(date);
   };
@@ -68,6 +68,15 @@ const NewAppointment3 = ({
     return !isBooked;
   };
 
+  // I can't find what type is it !
+  const startDateDefault: Date | string = filteTimeManagment[0]?.endDate
+    ? filteTimeManagment[0]?.startDate ?? "2024-01-01T00:00:00.000Z"
+    : "2024-01-01T00:00:00.000Z";
+
+  const endDateDefault: Date | string = filteTimeManagment[0]?.endDate
+    ? filteTimeManagment[0]?.endDate
+    : "2024-01-01T23:59:59.000Z";
+
   return (
     <div>
       <DatePicker
@@ -81,16 +90,8 @@ const NewAppointment3 = ({
         timeIntervals={filteTimeManagment[0]?.timeInterval ?? 30}
         excludeDateIntervals={[
           {
-            start: subDays(
-              new Date(
-                filteTimeManagment[0]?.startDate ?? "2024-01-01 00:00:00"
-              ),
-              0
-            ),
-            end: addDays(
-              new Date(filteTimeManagment[0]?.endDate ?? "2024-01-02 00:00:00"),
-              0
-            ),
+            start: subDays(new Date(startDateDefault), 0),
+            end: addDays(new Date(endDateDefault), 0),
           },
         ]}
         excludeTimes={[

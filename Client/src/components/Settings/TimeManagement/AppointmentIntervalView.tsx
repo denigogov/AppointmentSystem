@@ -51,7 +51,7 @@ const AppointmentIntervalView = ({
         </p>
       </div>
 
-      <span>
+      <span className="resetBtn--wrap">
         <Link
           to="interval"
           className="timeManagement__currentTime-btn"

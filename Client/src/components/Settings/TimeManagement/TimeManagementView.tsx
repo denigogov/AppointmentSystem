@@ -57,7 +57,7 @@ const TimeManagementView = ({
         </strong>
       </p>
 
-      <span>
+      <span className="resetBtn--wrap">
         <Link
           to="work-time"
           className="timeManagement__currentTime-btn"

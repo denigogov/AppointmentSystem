@@ -179,8 +179,8 @@ const TimeManagement = () => {
 
       {popUpOpen && (
         <div className="overlay" onClick={popupWindow}>
-          <main className="popUp smPopup" onClick={(e) => e.stopPropagation()}>
-            <Outlet context={[timeManagement![0]]} />
+          <main className="popUp mdPopup" onClick={(e) => e.stopPropagation()}>
+            <Outlet context={[timeManagement![0], setPopupOpen]} />
           </main>
         </div>
       )}
@@ -189,7 +189,9 @@ const TimeManagement = () => {
 };
 
 export const useTimeManagementData = () => {
-  return useOutletContext<TimeManagmentTypes[]>();
+  return useOutletContext<
+    [TimeManagmentTypes[], React.Dispatch<React.SetStateAction<boolean>>]
+  >();
 };
 
 export default TimeManagement;

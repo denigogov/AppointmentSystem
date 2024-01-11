@@ -53,3 +53,33 @@
     padding: 10px;
   }
 }
+
+//Vacation Create or Edit PopUp !
+.vacation__page--container {
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+
+  p {
+    &:first-child {
+      font-size: 18px;
+      font-weight: 600;
+      color: colors.$font-Primary;
+    }
+
+    &:last-child {
+      font-size: 15px;
+      font-weight: 500;
+      color: colors.$font-Primary;
+    }
+  }
+}
+
+.edit--save--btn {
+  @include mixin.saveAddBtn;
+}
