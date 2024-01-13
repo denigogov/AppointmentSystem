@@ -33,6 +33,7 @@ const CurrentVacationView = ({
       title: "Confirm Reset to Default",
       text: "Are you sure you want to reset the vacation tracker to its default settings? This action will revert your customized settings to the standard configuration. Any personalized vacation days entries will be cleared.",
       icon: "warning",
+      iconColor: "#ffda79",
       showCancelButton: true,
       confirmButtonColor: "#ffda79",
       cancelButtonColor: "#b7b7b7",

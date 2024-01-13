@@ -15,7 +15,7 @@
   flex: 0 0 15%; // 15% of the screen -- shorthand (grow, shrink, flex-basis)
   flex-direction: column;
   justify-content: space-between;
-
+  background: colors.$background-AppNavBar;
   ul {
     display: flex;
     flex-direction: column;

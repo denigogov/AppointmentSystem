@@ -63,6 +63,7 @@ const Vacation = () => {
           Swal.fire({
             position: "center",
             icon: "success",
+            iconColor: "#ffda79",
             title: "Edited!",
             text: "Vacation booked successfully. Enjoy your time off!",
             showConfirmButton: false,
@@ -83,7 +84,7 @@ const Vacation = () => {
           }!!`,
         });
       }
-    } else {
+    } else if (!sendQuery.endDate) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -113,7 +114,7 @@ const Vacation = () => {
       </div>
 
       <button onClick={handleUpdateVacation} className="edit--save--btn">
-        <span>Save</span>
+        <span>Submit</span>
       </button>
     </div>
   );

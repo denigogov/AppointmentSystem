@@ -44,7 +44,7 @@ const AppointmentIntervalView = ({
 
       <div className="interval--current">
         <p>
-          Current Duration for Each Appointment
+          Current Duration for Each Appointment <br />
           <span>
             <strong>{timeManagement?.timeInterval ?? "30"} minutes</strong>
           </span>

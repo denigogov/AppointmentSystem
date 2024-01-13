@@ -76,7 +76,7 @@ const NewAppointment3 = ({
   const endDateDefault: Date | string = filteTimeManagment[0]?.endDate
     ? filteTimeManagment[0]?.endDate
     : "2024-01-01T23:59:59.000Z";
-
+  console.log(endDateDefault);
   return (
     <div>
       <DatePicker
@@ -90,7 +90,7 @@ const NewAppointment3 = ({
         timeIntervals={filteTimeManagment[0]?.timeInterval ?? 30}
         excludeDateIntervals={[
           {
-            start: subDays(new Date(startDateDefault), 0),
+            start: subDays(new Date(startDateDefault), 1),
             end: addDays(new Date(endDateDefault), 0),
           },
         ]}

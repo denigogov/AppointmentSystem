@@ -41,6 +41,7 @@ const TimeManagement = () => {
     navigator("/app/settings/time-management");
   };
 
+  // RESET DEFAULT BUTTON !
   // I didn't find the type for e.target.previousSibling.href;
   const handleResetDefaultValues = async (e: any) => {
     const findClickedTarget = e.target.previousSibling.href;
@@ -96,6 +97,7 @@ const TimeManagement = () => {
         Swal.fire({
           position: "center",
           icon: "success",
+          iconColor: "#ffda79",
           title: "Edited!",
           text: "Your Updates has been saved.",
           showConfirmButton: false,
@@ -180,7 +182,7 @@ const TimeManagement = () => {
       {popUpOpen && (
         <div className="overlay" onClick={popupWindow}>
           <main className="popUp mdPopup" onClick={(e) => e.stopPropagation()}>
-            <Outlet context={[timeManagement![0], setPopupOpen]} />
+            <Outlet key={"he"} context={[timeManagement![0], setPopupOpen]} />
           </main>
         </div>
       )}
@@ -190,7 +192,7 @@ const TimeManagement = () => {
 
 export const useTimeManagementData = () => {
   return useOutletContext<
-    [TimeManagmentTypes[], React.Dispatch<React.SetStateAction<boolean>>]
+    [TimeManagmentTypes, React.Dispatch<React.SetStateAction<boolean>>]
   >();
 };
 

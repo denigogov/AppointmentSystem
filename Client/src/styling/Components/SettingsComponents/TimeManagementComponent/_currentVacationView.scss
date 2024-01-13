@@ -67,6 +67,7 @@
 
   p {
     &:first-child {
+      letter-spacing: 0.4px;
       font-size: 18px;
       font-weight: 600;
       color: colors.$font-Primary;

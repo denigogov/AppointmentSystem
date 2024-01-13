@@ -36,6 +36,7 @@ const TimeManagementView = ({
       title: "Confirm Reset to Default",
       html: "Resetting to default will set your work hours to the standard configuration from <strong>09:00 - 17:00</strong>. Any personalized work hours entries will be cleared. Continue?",
       icon: "warning",
+      iconColor: "#ffda79",
       showCancelButton: true,
       confirmButtonColor: "#ffda79",
       cancelButtonColor: "#b7b7b7",
