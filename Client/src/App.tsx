@@ -31,6 +31,7 @@ import UserDetailsRoute from "./pages/App/Dashboard/UserDetailsRoute";
 import Vacation from "./pages/App/Settings/Vacation";
 import WorkTime from "./pages/App/Settings/WorkTime";
 import AppointmentInterval from "./pages/App/Settings/AppointmentInterval";
+import ServiceRequest from "./pages/App/Settings/ServiceRequest";
 
 const App = () => {
   const auth = useAuth();
@@ -125,7 +126,7 @@ const App = () => {
               path="service-requests"
               element={
                 <OnlyEmployeesAccess>
-                  <TimeManagement />
+                  <ServiceRequest />
                 </OnlyEmployeesAccess>
               }
             />

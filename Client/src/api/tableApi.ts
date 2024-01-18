@@ -46,21 +46,26 @@ export const apiFetcher = async <T>(url: string, token: string) => {
 
 /**
  * Fetching ALL SERVICES
- * @returns
+ * @returns all aproved and unemproved services !
  */
-export const fetchAllServices = async (token?: TokenType) => {
+
+export const fetchAllServices = async ({ token }: { token?: string }) => {
   return apiFetcher<AllServicesTypes[]>(`tableRoute/services`, token || "");
 };
 
 /**
- * More info check serviceemployee Table
+ * @async
+ * @param token {string}
+ * @param id {number} optional
  */
+// BUG
 export const fetchAllServiceEmployees = async (
-  token: TokenType | undefined
+  token: TokenType | undefined,
+  id?: number
 ) => {
-  return apiFetcher<ServiceEmloyeesTypes>(
-    `tableRoute/serviceemloyees`,
-    token || ""
+  return apiFetcher<ServiceEmloyeesTypes[]>(
+    `tableRoute/serviceemloyees/${id ? id : ""}`,
+    token ?? ""
   );
 };
 
@@ -155,7 +160,7 @@ export const fetchAllAppointmentsDataRange = async ({
 /**
  * Fetching Data for every service in % how many appointmnets for current Month
  * @param id - optional
- * @returns
+
  */
 export const fetchServiceProcentCurrentMonth = async ({
   token,

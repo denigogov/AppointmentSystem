@@ -5,10 +5,14 @@ export interface AllServicesTypes {
 }
 
 export interface ServiceEmloyeesTypes {
+  id: number;
   services_id: number;
   employees_id: number;
   firstName: string;
   lastName: string;
+  approved?: boolean | number;
+  servicesName: string;
+  servicePrice: number;
 }
 
 export interface CustomerPersonalInfo {

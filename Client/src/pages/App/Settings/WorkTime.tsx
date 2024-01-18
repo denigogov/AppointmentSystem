@@ -39,9 +39,9 @@ const WorkTime = () => {
       typeof endHourRef.current?.value === "string" &&
       /^(0|[1-5]?\d|24)$/.test(endHourRef.current?.value) &&
       typeof startMinuteRef.current?.value === "string" &&
-      /^(0|[1-5]?\d|60)$/.test(startMinuteRef.current?.value) &&
+      /^(?:[0-5]?[0-9]|60)$/.test(startMinuteRef.current?.value) &&
       typeof endMinuteRef.current?.value === "string" &&
-      /^(0|[1-5]?\d|60)$/.test(endMinuteRef.current?.value);
+      /^(?:[0-5]?[0-9]|60)$/.test(endMinuteRef.current?.value);
 
     if (!isValid) {
       Swal.fire({

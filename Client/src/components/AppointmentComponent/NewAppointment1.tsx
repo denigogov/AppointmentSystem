@@ -1,17 +1,21 @@
-import { AllServicesTypes } from "../../types/tableApiTypes";
+import { ServiceEmloyeesTypes } from "../../types/tableApiTypes";
 
 interface SignUpFormProps {
-  allServices: AllServicesTypes[] | undefined;
   setSelectedService: React.Dispatch<React.SetStateAction<string>>;
+  servicesEmpolyees: ServiceEmloyeesTypes[];
 }
 
 const NewAppointment1 = ({
-  allServices,
   setSelectedService,
+  servicesEmpolyees,
 }: SignUpFormProps) => {
   const handleSelectedService = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedService(e.target.value);
   };
+  const uniqueServicesNames = servicesEmpolyees.filter(
+    (service, i, arr) =>
+      i === arr.findIndex((v) => v.servicesName === service.servicesName)
+  );
 
   return (
     <div style={{ padding: "30px" }}>
@@ -19,8 +23,8 @@ const NewAppointment1 = ({
 
       <select onChange={handleSelectedService}>
         <option value="">Select a service</option>
-        {allServices?.map((a) => (
-          <option key={a.id} value={a.id}>
+        {uniqueServicesNames?.map((a) => (
+          <option key={a.id} value={a.services_id}>
             {a.servicesName}
           </option>
         ))}

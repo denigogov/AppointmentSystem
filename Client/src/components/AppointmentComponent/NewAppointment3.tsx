@@ -40,8 +40,6 @@ const NewAppointment3 = ({
     const endHour = filteTimeManagment[0]?.endHour ?? 17;
     const endMinute = filteTimeManagment[0]?.endMinute ?? 0;
 
-    console.log(filteTimeManagment[0].startDate);
-
     const isFutureTime = currentDate.getTime() < selectedDate.getTime();
     const selectedMinutes =
       selectedDate.getHours() * 60 + selectedDate.getMinutes();
@@ -76,7 +74,7 @@ const NewAppointment3 = ({
   const endDateDefault: Date | string = filteTimeManagment[0]?.endDate
     ? filteTimeManagment[0]?.endDate
     : "2024-01-01T23:59:59.000Z";
-  console.log(endDateDefault);
+
   return (
     <div>
       <DatePicker

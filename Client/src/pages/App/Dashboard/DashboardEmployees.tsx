@@ -5,17 +5,17 @@ import { useAuth } from "../../../helpers/Auth";
 
 import "../../../styling/Dashboard/_dashboardEmployees.scss";
 import {
-  AllServicesTypes,
   FetchAppointmentsByDayAndTotalTypes,
   FetchAppointmentsByHourRangeTypes,
   FetchAppointmentsTotalTypes,
+  ServiceEmloyeesTypes,
   allAppointmentsByDataRangeAndEmployTypes,
   fetchServiceProcentCurrentMonthTypes,
 } from "../../../types/tableApiTypes";
 
 import {
   fetchAllAppointmentsDataRange,
-  fetchAllServices,
+  fetchAllServiceEmployees,
   fetchAppointmentsByDayAndTotal,
   fetchAppointmentsByHourRange,
   fetchAppointmentsTotal,
@@ -53,11 +53,15 @@ const DashboardEmployees = ({ setPopupOpen }: DashboardEmployeeProps) => {
   const id = auth.userInfo?.id;
 
   const {
-    data: allServices,
-    error: allServicesError,
-    isLoading: allServicesLoading,
-  } = useSWR<AllServicesTypes[]>(["allServices", token], () =>
-    fetchAllServices(token)
+    data: servicesEmpolyees,
+    error: servicesEmpolyeesError,
+    isLoading: servicesEmpolyeesLoading,
+  } = useSWR<ServiceEmloyeesTypes[]>(["employeesCurrentServices", token], () =>
+    fetchAllServiceEmployees(token, id)
+  );
+
+  const approvedServices = servicesEmpolyees?.filter(
+    (user) => user.approved === 1
   );
 
   const startDateSelected = startDate
@@ -136,16 +140,16 @@ const DashboardEmployees = ({ setPopupOpen }: DashboardEmployeeProps) => {
   );
 
   if (
-    allServicesError ||
     appointmentsByDataRangeError ||
     serviceProcentCalcError ||
     appointmentsByHourRangeError ||
     allAppointmentsByDayError ||
-    totalAppointmentsError
+    totalAppointmentsError ||
+    servicesEmpolyeesError
   )
     return <h6>{"error happen"}</h6>;
   if (
-    allServicesLoading ||
+    servicesEmpolyeesLoading ||
     appointmentsByDataRangeLoading ||
     serviceProcentCalcLoading ||
     allAppointmentsByDayLoading ||
@@ -179,7 +183,7 @@ const DashboardEmployees = ({ setPopupOpen }: DashboardEmployeeProps) => {
               </div>
               <div className="dashboardEmployees__container--info-service">
                 <DashInfoBox />
-                <DashBoxServices allServices={allServices ?? []} />
+                <DashBoxServices approvedServices={approvedServices || []} />
               </div>
             </div>
             <div className="dashboardEmployees__chart--hour">
@@ -201,7 +205,7 @@ const DashboardEmployees = ({ setPopupOpen }: DashboardEmployeeProps) => {
         <p>upcoming appointments</p>
 
         <EmployeeTableSettings
-          allServices={allServices || []}
+          approvedServices={approvedServices || []}
           setSelectedService={setSelectedService}
           setStartDate={setStartDate}
           setEndDate={setEndDate}

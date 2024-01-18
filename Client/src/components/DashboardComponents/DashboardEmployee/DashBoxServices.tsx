@@ -1,11 +1,11 @@
-import { AllServicesTypes } from "../../../types/tableApiTypes";
+import { ServiceEmloyeesTypes } from "../../../types/tableApiTypes";
 import { Link } from "react-router-dom";
 
 interface DashBoxServicesProps {
-  allServices: AllServicesTypes[];
+  approvedServices: ServiceEmloyeesTypes[];
 }
 
-const DashBoxServices = ({ allServices }: DashBoxServicesProps) => {
+const DashBoxServices = ({ approvedServices }: DashBoxServicesProps) => {
   return (
     <div className="dashBoxAllServices--employees">
       <p className="dashBoxAllServices--employees__title">
@@ -13,12 +13,12 @@ const DashBoxServices = ({ allServices }: DashBoxServicesProps) => {
       </p>
 
       <div className="dashBoxAllServices--employees--listWrap">
-        {allServices.map((arr, i) => {
+        {approvedServices.map((arr, i) => {
           return (
             <ul key={i}>
               <li>
                 {arr?.servicesName ?? "no service avaiable"} -{" "}
-                {arr.servicePrice} €
+                {arr.servicePrice ?? "/"} €
               </li>
             </ul>
           );
@@ -26,7 +26,7 @@ const DashBoxServices = ({ allServices }: DashBoxServicesProps) => {
       </div>
       <br />
       <p className="dashBoxAllServices--employees__footer">
-        <Link to="/app/settings/time-management">Request New Service</Link>
+        <Link to="/app/settings/service-requests">Request New Service</Link>
       </p>
     </div>
   );

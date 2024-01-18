@@ -1,0 +1,10 @@
+@use "../../../colors";
+@use "../../../general";
+
+.serviceRequest__container {
+  height: calc(100vh - 190px);
+
+  @media (max-width: general.$sm) {
+    height: 100vh;
+  }
+}

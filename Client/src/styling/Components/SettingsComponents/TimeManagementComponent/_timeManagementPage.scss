@@ -22,12 +22,8 @@
 }
 
 .timeManagement--text-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-
   .timeManagemen-subTitle {
+    margin: 0 auto;
     width: 50%;
     font-size: 14px;
     color: colors.$font-Secound;

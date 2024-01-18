@@ -9,7 +9,7 @@ export const OnlyEmployeesAccess: React.FC<{ children: ReactNode }> = ({
   const auth = useAuth();
   const location = useLocation();
 
-  if (auth.userInfo?.type === 1) {
+  if (auth.userInfo?.type !== 2) {
     return <Navigate to="/app" state={{ path: location.pathname }} />;
   }
 

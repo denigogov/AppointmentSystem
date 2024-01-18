@@ -1,9 +1,9 @@
 import ReactDatePicker from "react-datepicker";
 import "../../../styling/Components/dashboard components/DashboardEmployees/_dashEmplyTable.scss";
-import { AllServicesTypes } from "../../../types/tableApiTypes";
+import { ServiceEmloyeesTypes } from "../../../types/tableApiTypes";
 
 interface TableSettingsProp {
-  allServices: AllServicesTypes[];
+  approvedServices: ServiceEmloyeesTypes[];
   setSelectedService: React.Dispatch<React.SetStateAction<string>>;
   setStartDate: React.Dispatch<React.SetStateAction<Date | null>>;
   setEndDate: React.Dispatch<React.SetStateAction<Date | null>>;
@@ -13,7 +13,7 @@ interface TableSettingsProp {
 
 const EmployeeTableSettings = ({
   setSelectedService,
-  allServices,
+  approvedServices,
   setStartDate,
   setEndDate,
   startDate,
@@ -44,8 +44,8 @@ const EmployeeTableSettings = ({
 
       <select onChange={(e) => setSelectedService(e.target.value)}>
         <option value="all">select service</option>
-        {allServices?.map((service, index) => (
-          <option key={index} value={service.id}>
+        {approvedServices?.map((service, index) => (
+          <option key={index} value={service.services_id}>
             {service.servicesName}
           </option>
         ))}

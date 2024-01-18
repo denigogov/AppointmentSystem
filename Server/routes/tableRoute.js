@@ -15,8 +15,8 @@ const {
 } = require("../Validations/tableQueryValidation");
 
 router
-  .get("/services", verifyToken, database.getAllServices)
-  .get("/serviceemloyees", verifyToken, database.getServiceEmployeesJoin)
+  .get("/services/:id?", verifyToken, database.getAllServices)
+  .get("/serviceemloyees/:id?", verifyToken, database.getServiceEmployeesJoin)
   .post(
     "/customers",
     validateCustomer,

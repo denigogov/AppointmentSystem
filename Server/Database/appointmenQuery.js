@@ -3,7 +3,8 @@ const moment = require("moment");
 
 const getAllServices = async (_, res) => {
   try {
-    const [services] = await database.query("select * from services");
+    // With DISTINCT I remove the duplicate because I'm comparing the joinet table
+    const [services] = await database.query(`select * from services`);
 
     if (services.length) {
       res.status(200).send(services);
@@ -14,13 +15,23 @@ const getAllServices = async (_, res) => {
 };
 
 // More info check serviceemployee Table !
-const getServiceEmployeesJoin = async (_, res) => {
+// Route "tableRoute/serviceemloyees"
+const getServiceEmployeesJoin = async (req, res) => {
   try {
-    const [servicesEmployees] =
-      await database.query(`SELECT services_id, employees_id, firstName, lastName FROM haircut.serviceemployee join employees on serviceemployee.employees_id = employees.id
-    `);
+    const { id } = req.params;
 
-    return res.status(200).send(servicesEmployees || []);
+    const [servicesEmployees] = await database.query(
+      `SELECT serviceemployee.id,  services_id, employees_id, firstName, lastName,  serviceemployee.approved,servicesName,servicePrice FROM haircut.serviceemployee 
+      left join employees on serviceemployee.employees_id = employees.id
+      left join services on serviceemployee.services_id = services.id
+      ${id ? "where employees_id = ?" : ""}
+    `,
+      [id]
+    );
+
+    servicesEmployees
+      ? res.status(200).send(servicesEmployees)
+      : res.sendStatus(404);
   } catch (err) {
     return res.status(500).send("Internal Server Error");
   }

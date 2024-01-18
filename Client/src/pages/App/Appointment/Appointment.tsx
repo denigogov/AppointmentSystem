@@ -1,13 +1,11 @@
 import {
   fetchAllAppointments,
   fetchAllServiceEmployees,
-  fetchAllServices,
   fetchTimeManagment,
 } from "../../../api/tableApi.ts";
 import useSWR from "swr";
 import {
   AllAppointmentsTypes,
-  AllServicesTypes,
   ServiceEmloyeesTypes,
   TimeManagmentTypes,
 } from "../../../types/tableApiTypes.ts";
@@ -37,14 +35,6 @@ const Appointment = () => {
   const navigate = useNavigate();
 
   const {
-    data: allServices,
-    error: allServicesError,
-    isLoading: allServicesLoading,
-  } = useSWR<AllServicesTypes[] | any>(["allServices", token], () =>
-    fetchAllServices(token)
-  );
-
-  const {
     data: servicesEmpolyees,
     error: servicesEmpolyeesError,
     isLoading: servicesEmpolyeesLoading,
@@ -60,8 +50,6 @@ const Appointment = () => {
     fetchTimeManagment({ token })
   );
 
-  console.log(timeManagment);
-
   const {
     data: allAppointments,
     error: allAppointmentsError,
@@ -70,15 +58,9 @@ const Appointment = () => {
     fetchAllAppointments(token)
   );
 
-  if (
-    allServicesError ||
-    servicesEmpolyeesError ||
-    timeManagmentError ||
-    allAppointmentsError
-  )
+  if (servicesEmpolyeesError || timeManagmentError || allAppointmentsError)
     return <h6>{"error happen"}</h6>;
   if (
-    allServicesLoading ||
     servicesEmpolyeesLoading ||
     timeManagmentLoading ||
     allAppointmentsLoading
@@ -86,7 +68,7 @@ const Appointment = () => {
     return <p>loading...</p>; // If I add some text there will be flicking because of data loading but anyway I need to add personal Loading message !!
 
   const findEmployee = servicesEmpolyees?.filter((e: ServiceEmloyeesTypes) => {
-    return e.services_id === +selectedService;
+    return e.services_id === +selectedService && e.approved === 1;
   });
 
   const filteTimeManagment = timeManagment?.filter(
@@ -146,8 +128,8 @@ const Appointment = () => {
       <h4>Create new Account</h4>
 
       <NewAppointment1
-        allServices={allServices}
         setSelectedService={setSelectedService}
+        servicesEmpolyees={servicesEmpolyees}
       />
 
       {selectedService && (

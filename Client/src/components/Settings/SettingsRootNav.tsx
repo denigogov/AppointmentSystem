@@ -18,7 +18,7 @@ const SettingsRootNav = () => {
             </NavLink>
           </li>
 
-          {auth.userInfo?.type !== 1 && (
+          {auth.userInfo?.type === 2 && (
             <>
               <li>
                 <NavLink to="time-management">
