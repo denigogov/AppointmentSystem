@@ -142,6 +142,7 @@
   }
 }
 
+// Edit btn in Employee Time Management
 @mixin editButton() {
   width: 100px;
   height: 40px;
@@ -192,6 +193,12 @@
   }
 }
 
+// Submit btn in employees Time Management
+
+// HTML Stucture
+//  <button >
+//      <span>button name</span>
+//   </button>
 @mixin saveAddBtn() {
   position: relative;
   padding: 5px 12px;

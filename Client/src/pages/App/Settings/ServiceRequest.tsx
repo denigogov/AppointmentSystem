@@ -17,6 +17,7 @@ import { useState } from "react";
 
 const ServiceRequest = () => {
   const [stepOne, setStepOne] = useState<boolean>(false);
+  const [selectedService, setSelectedService] = useState<string[]>([]);
   const auth = useAuth();
   const token = auth.token ?? "";
   const employeeId = auth.userInfo?.id;
@@ -29,6 +30,7 @@ const ServiceRequest = () => {
     fetchAllServiceEmployees(token)
   );
 
+  console.log(selectedService);
   const {
     data: allServices,
     error: allServicesError,
@@ -45,7 +47,6 @@ const ServiceRequest = () => {
     );
     return !isServicePresentForEmp;
   });
-  console.log(filterNewServices);
 
   const approvedServices = servicesEmpolyees?.filter(
     (user) => user.approved === 1 && user.employees_id === employeeId
@@ -65,6 +66,7 @@ const ServiceRequest = () => {
   return (
     <div className="serviceRequest__container">
       {/* USING THE SAME CLASSES BECAUSE THE LAYOUT IS THE SAME of the TITLE AND SUBTITLE! */}
+
       <div className="timeManagement--text-container">
         <h2 className="timeManagemen-title">Service Requests</h2>
         <p className="timeManagemen-subTitle">
@@ -75,22 +77,37 @@ const ServiceRequest = () => {
         </p>
       </div>
 
-      <div className="serviceRequest__component-displayOnly--wrap">
-        <ServiceApprovedView approvedServices={approvedServices} />
-        <ServicePendingView
-          setStepOne={setStepOne}
-          pendingServices={pendingServices || []}
-        />
-      </div>
+      <div
+        className={
+          stepOne
+            ? "serviceRequest__component--container   stepOne__active"
+            : "serviceRequest__component--container"
+        }
+      >
+        <section className="serviceRequest__component-displayOnly--wrap">
+          <ServiceApprovedView
+            approvedServices={approvedServices || []}
+            stepOne={stepOne}
+          />
+          <ServicePendingView
+            setStepOne={setStepOne}
+            stepOne={stepOne}
+            pendingServices={pendingServices || []}
+            setSelectedService={setSelectedService}
+          />
+        </section>
 
-      {stepOne && (
-        <>
-          <div className="serviceRequst__component-addService--wrap">
-            <ServiceListView filterNewServices={filterNewServices || []} />
-            <ServiceSelectView />
-          </div>
-        </>
-      )}
+        {stepOne && (
+          <section className="serviceRequst__component-addService--wrap">
+            <ServiceListView
+              filterNewServices={filterNewServices || []}
+              selectedService={selectedService}
+              setSelectedService={setSelectedService}
+            />
+            <ServiceSelectView selectedService={selectedService} />
+          </section>
+        )}
+      </div>
     </div>
   );
 };

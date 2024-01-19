@@ -73,11 +73,6 @@
 @media (max-width: general.$sm) {
   .appRoot-container {
     flex-direction: column;
-
-    ul {
-      height: 240px; // Max the size for mobile because  the dashboard goint up to the app menu ! with this I fix the problem!
-      overflow: auto; //in future if I add more pages nav... i will be on scroll in phone only
-    }
   }
 
   .appRoot-navigation {
@@ -88,6 +83,11 @@
     // Hidding the logout for desktop !
     .appRoot-nav_footer {
       display: none;
+    }
+
+    ul {
+      height: 240px; // Max the size for mobile because  the dashboard goint up to the app menu ! with this I fix the problem!
+      overflow: auto; //in future if I add more pages nav... i will be on scroll in phone only
     }
   }
 

@@ -1,0 +1,130 @@
+@use "../../../general";
+@use "../../../colors";
+@use "../../../mixin";
+
+// All containers
+.serviceApprovedView__container,
+.servicePendingView__container,
+.serviceListView__container,
+.serviceSelectView__container {
+  height: 100%;
+  flex: 1;
+  box-shadow: general.$box-shadow-secondary;
+  background: colors.$timeManagementBoxes;
+  padding: 10px;
+  border-radius: 20px;
+
+  // JUST FOR TEST IF WORK I WILL LEAVE !
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  // OPTIONAL !!
+  align-items: center;
+
+  &:first-child {
+    border-right: 2px solid colors.$border-Primary-Dark;
+    @media (max-width: general.$md) {
+      border: none;
+    }
+  }
+
+  &:last-child {
+    border-left: 2px solid colors.$border-Primary-Dark;
+    @media (max-width: general.$md) {
+      border: none;
+    }
+  }
+}
+
+//in case when user didn't click add service
+.notActiveAddService {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.approvedServices__wrap,
+.pendingService__wrap {
+  @include mixin.overflowScroll;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.emptyServices__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.servicePendingView__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+// GENERAL STYLING
+.serviceRequest__header--text {
+  p {
+    text-align: center;
+    padding: 10px;
+    &:first-child {
+      font-weight: 500;
+      color: colors.$font-Primary;
+      font-size: 17px;
+      letter-spacing: 0.6px;
+    }
+
+    &:last-child {
+      font-size: 14px;
+      color: colors.$font-Secound;
+    }
+  }
+}
+// BUTTON STYLING
+.addServiceBtn {
+  @include mixin.saveAddBtn;
+}
+
+// from ServiceListView !!
+.serviceList__checkbox-wrap {
+  height: 100%;
+  @include mixin.overflowScroll;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+
+  label {
+    cursor: pointer;
+    font-size: 15px;
+
+    // To make on the same line with checkbox !
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .serviceList__checkbox--active {
+    animation: selectedItem 0.7s 1 linear forwards;
+
+    @keyframes selectedItem {
+      from {
+        opacity: 0;
+        text-decoration: none;
+      }
+      to {
+        opacity: 1;
+        text-decoration: line-through;
+        text-decoration-color: red;
+      }
+    }
+  }
+}

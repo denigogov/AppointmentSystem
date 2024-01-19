@@ -1,10 +1,73 @@
 @use "../../../colors";
 @use "../../../general";
+@use "../../../mixin";
 
 .serviceRequest__container {
+  border-top: 1px solid colors.$border-Primary;
   height: calc(100vh - 190px);
 
+  @media (min-width: general.$lg), (max-width: general.$xxl) {
+    @include mixin.overflowScroll;
+  }
   @media (max-width: general.$sm) {
     height: 100vh;
+  }
+}
+
+// container that wrap all components
+.serviceRequest__component--container {
+  // border: 1px solid blue;
+  height: calc(100% - 25%);
+
+  @media (max-width: general.$xl) {
+    height: 100%;
+  }
+
+  @media (max-width: general.$lg) {
+    height: 100%;
+  }
+}
+
+// WHEN WE PRESS ADD SERVICE BTN
+.stepOne__active {
+  display: flex;
+
+  @media (max-width: general.$lg) {
+    flex-direction: column;
+  }
+
+  @media (max-width: general.$md) {
+    display: block;
+  }
+
+  .serviceRequst__component-addService--wrap {
+    animation: componentShow 0.5s 1 linear;
+
+    @keyframes componentShow {
+      from {
+        transform: translateY(200px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0px);
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.serviceRequest__component-displayOnly--wrap,
+.serviceRequst__component-addService--wrap {
+  padding: 20px;
+  display: flex;
+  gap: 10px;
+
+  @media (min-width: general.$md) {
+    height: 100%;
+  }
+
+  @media (max-width: general.$md) {
+    display: flex;
+    flex-direction: column;
   }
 }
