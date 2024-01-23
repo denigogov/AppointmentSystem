@@ -11,6 +11,8 @@ import { useState } from "react";
 import { mutate } from "swr";
 import AppointmentIntervalView from "../../../components/Settings/TimeManagement/AppointmentIntervalView";
 import Swal from "sweetalert2";
+import { apiGeneralErrorHandle } from "../../../helpers/api";
+const API_URL = import.meta.env.VITE_API_URL as string;
 
 const TimeManagement = () => {
   const [popUpOpen, setPopupOpen] = useState<boolean>(false);
@@ -81,7 +83,7 @@ const TimeManagement = () => {
       const sendQuery = queringData[0] || null;
 
       const res = await fetch(
-        `http://localhost:4000/tableRoute/timeManagement/${userId}`,
+        `${API_URL}/tableRoute/timeManagement/${userId}`,
         {
           method: "PUT",
           headers: {
@@ -105,14 +107,7 @@ const TimeManagement = () => {
         });
       } else throw new Error(`${res.statusText}`);
     } catch (err) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        confirmButtonColor: "#ffda79",
-        text: `${(err as Error).message}, please try again  ${
-          (err as Error).message
-        }!!`,
-      });
+      apiGeneralErrorHandle(err);
     }
   };
 

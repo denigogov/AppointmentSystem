@@ -1,8 +1,9 @@
 // import Swal from "sweetalert2";
 import Swal from "sweetalert2";
 import { errorMessageBtn } from "../components/ErrorSuccesMessage";
+const API_URL = import.meta.env.VITE_API_URL as string;
 
-const BASE_URL: string = "http://localhost:4000";
+const BASE_URL: string = API_URL;
 
 type SetterFn = React.Dispatch<React.SetStateAction<string>>;
 

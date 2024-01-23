@@ -6,6 +6,8 @@ import { mutate } from "swr";
 import Swal from "sweetalert2";
 import { convertISOtoLocalZone } from "../../../helpers/Dates";
 import { useNavigate } from "react-router-dom";
+import { apiGeneralErrorHandle } from "../../../helpers/api";
+const API_URL = import.meta.env.VITE_API_URL as string;
 
 const Vacation = () => {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
@@ -46,7 +48,7 @@ const Vacation = () => {
     if ((await sendPrompt).isConfirmed && sendQuery.endDate) {
       try {
         const res = await fetch(
-          `http://localhost:4000/tableRoute/timeManagement/${userId}`,
+          `${API_URL}/tableRoute/timeManagement/${userId}`,
           {
             method: "PUT",
             headers: {
@@ -75,14 +77,7 @@ const Vacation = () => {
           setPopupOpen(false);
         } else throw new Error(`${res.statusText}`);
       } catch (err) {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          confirmButtonColor: "#ffda79",
-          text: `${(err as Error).message}, please try again  ${
-            (err as Error).message
-          }!!`,
-        });
+        apiGeneralErrorHandle(err);
       }
     } else if (!sendQuery.endDate) {
       Swal.fire({

@@ -9,6 +9,7 @@ import deleteIcon from "../../../assets/deleteIcon.svg";
 import Swal from "sweetalert2";
 import { mutate } from "swr";
 import { useAuth } from "../../../helpers/Auth";
+const API_URL = import.meta.env.VITE_API_URL as string;
 
 interface props {
   cusomerTableDashboardData: CustomersDataTypes[];
@@ -42,7 +43,7 @@ const DashboardCustomerTableView = ({ cusomerTableDashboardData }: props) => {
         confirmButtonText: "Yes, delete it!",
       }).then(async (res) => {
         if (res.isConfirmed) {
-          await fetch(`http://localhost:4000/tableRoute/appointment/${id}`, {
+          await fetch(`${API_URL}/tableRoute/appointment/${id}`, {
             method: "DELETE",
             headers: {
               Authorization: `Bearer ${token}`,

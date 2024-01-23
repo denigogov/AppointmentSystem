@@ -26,6 +26,7 @@ const UserDetailsRoute = () => {
   return (
     <div>
       user details {selectedCustomerId.id}
+      {/* I need to build when user click on the table in dashboard I'm not sure what data to show ! */}
       {/* <p>{customerData[0]?.CustomerFirstName ?? ""}</p> */}
     </div>
   );

@@ -13,7 +13,9 @@ import {
   FetchAppointmentsTotalTypes,
 } from "../types/tableApiTypes";
 
-const DEFAULT_URL: string = "http://localhost:4000/";
+const apiUrl = import.meta.env.VITE_API_URL as string;
+
+const DEFAULT_URL: string = `${apiUrl}/`;
 
 /**
  *

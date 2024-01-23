@@ -5,6 +5,8 @@ import EditProfileInputs from "../../../components/Settings/EditProfileInputs";
 import "../../../styling/Components/SettingsComponents/_editProfileInputs.scss";
 import { AllUserTypes } from "../../../types/tableApiTypes";
 import Swal from "sweetalert2";
+import { apiGeneralErrorHandle } from "../../../helpers/api";
+const API_URL = import.meta.env.VITE_API_URL as string;
 
 const EditProfile = () => {
   const auth = useAuth();
@@ -34,7 +36,7 @@ const EditProfile = () => {
 
       if ((await sendMessage).isConfirmed) {
         const res = await fetch(
-          `http://localhost:4000/tableRoute/accounts/${id}/${type}`,
+          `${API_URL}/tableRoute/accounts/${id}/${type}`,
           {
             method: "PUT",
             headers: {
@@ -66,13 +68,7 @@ const EditProfile = () => {
         }
       }
     } catch (err) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Something went wrong, please try again !!",
-        cancelButtonColor: "#ffda79",
-        confirmButtonColor: "#ffda79",
-      });
+      apiGeneralErrorHandle(err);
     }
   };
 

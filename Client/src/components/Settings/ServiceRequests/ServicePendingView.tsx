@@ -1,13 +1,14 @@
-import {
-  AllServicesTypes,
-  ServiceEmloyeesTypes,
-} from "../../../types/tableApiTypes";
+import { ServiceEmloyeesTypes } from "../../../types/tableApiTypes";
+import deleteIcon from "../../../assets/deleteIcon.svg";
 
 interface ServicePendingViewProps {
   setStepOne: React.Dispatch<React.SetStateAction<boolean>>;
   stepOne: boolean;
   pendingServices: ServiceEmloyeesTypes[];
   setSelectedService: React.Dispatch<React.SetStateAction<string[]>>;
+  handleDeleteService: (
+    ServiceEmloyeesTypes: ServiceEmloyeesTypes
+  ) => Promise<void>;
 }
 
 const ServicePendingView = ({
@@ -15,12 +16,18 @@ const ServicePendingView = ({
   setStepOne,
   pendingServices,
   setSelectedService,
+  handleDeleteService,
 }: ServicePendingViewProps) => {
   const handleStepOne = () => {
     setStepOne((e) => !e);
     // clean up the state if user click on close btn !
     setSelectedService([]);
   };
+
+  const handleDelete = (service: ServiceEmloyeesTypes) => {
+    handleDeleteService(service);
+  };
+
   return (
     // Styling for class  "servicePendingView__container" is inside of _serviceApprovedView
     <div
@@ -43,7 +50,12 @@ const ServicePendingView = ({
           <div className="pendingService__wrap">
             {pendingServices?.map((service) => (
               <ul key={service.id}>
-                <li>• {service.servicesName}</li>
+                <li>• {service.servicesName} </li>
+                <img
+                  src={deleteIcon}
+                  alt="delete icon"
+                  onClick={() => handleDelete(service)}
+                />
               </ul>
             ))}
           </div>
@@ -58,9 +70,11 @@ const ServicePendingView = ({
         </div>
       )}
 
-      <button className="addServiceBtn" onClick={handleStepOne}>
-        <span>{stepOne ? "close" : "Add Service"}</span>
-      </button>
+      {stepOne || (
+        <button className="addServiceBtn" onClick={handleStepOne}>
+          <span>Add Service</span>
+        </button>
+      )}
     </div>
   );
 };

@@ -16,15 +16,20 @@ const {
 
 router
   .get("/services/:id?", verifyToken, database.getAllServices)
+
   .get("/serviceemloyees/:id?", verifyToken, database.getServiceEmployeesJoin)
+  .post("/serviceemloyees", verifyToken, database.addNewEmployeesService)
+  .delete("/serviceemloyees/:id", verifyToken, database.deleteServiceEmployees)
+
   .post(
     "/customers",
     validateCustomer,
     hashedPassword,
     customerEmailConfirm.createCustomer
   )
-  .get("/confirm", customerEmailConfirm.customerConfirm) // not need to add verify token !
   .get("/customers/:id/:type", verifyToken, customerQuery.customerAllData)
+
+  .get("/confirm", customerEmailConfirm.customerConfirm) // not need to add verify token !
   .get("/appointment", verifyToken, appointmenQuery.getAllAppointments)
   .post("/appointment", verifyToken, appointmenQuery.postAppointment)
   .delete("/appointment/:id", verifyToken, appointmenQuery.deleteAppointment)

@@ -20,6 +20,8 @@ import {
   errorMessageBtn,
   succesMessageNoBtn,
 } from "../../../components/ErrorSuccesMessage.ts";
+import { apiGeneralErrorHandle } from "../../../helpers/api.ts";
+const API_URL = import.meta.env.VITE_API_URL as string;
 
 const Appointment = () => {
   const [selectedService, setSelectedService] = useState<string>("");
@@ -80,6 +82,8 @@ const Appointment = () => {
       return arr.employee_id === +selectedUser;
     }
   );
+
+  //  I did it as test for universal API but I need to refactore !! REFACTORE
   const postData = {
     customer_id: auth.userInfo?.id ?? null,
     employee_id: +selectedUser,
@@ -91,7 +95,7 @@ const Appointment = () => {
 
   const AppointmentPOSTrequest = async () => {
     try {
-      const res = await fetch(`http://localhost:4000/tableRoute/appointment`, {
+      const res = await fetch(`${API_URL}/tableRoute/appointment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -116,6 +120,8 @@ const Appointment = () => {
         "Please try again later.",
         ""
       );
+
+      apiGeneralErrorHandle(err);
     }
   };
 

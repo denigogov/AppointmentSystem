@@ -1,10 +1,20 @@
 interface ServiceSelectViewProp {
   selectedService: string[];
+  postSelectedServices: () => Promise<void>;
 }
 
-const ServiceSelectView = ({ selectedService }: ServiceSelectViewProp) => {
+const ServiceSelectView = ({
+  selectedService,
+  postSelectedServices,
+}: ServiceSelectViewProp) => {
+  // const vane = selectedService.length
+  //   ? selectedService.reduce((acc, mov) => ({ ...acc, [mov]: mov }), {})
+  //   : [];
+
+  // console.log(vane);
+
   const handleNewService = () => {
-    return alert("yes");
+    postSelectedServices();
   };
 
   return (
@@ -22,7 +32,7 @@ const ServiceSelectView = ({ selectedService }: ServiceSelectViewProp) => {
       <div>
         {selectedService.map((service, i) => (
           <ul key={i}>
-            <li>{service}</li>
+            <li className="selectedService--addedItem">{service}</li>
           </ul>
         ))}
       </div>

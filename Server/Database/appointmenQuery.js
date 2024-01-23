@@ -37,6 +37,57 @@ const getServiceEmployeesJoin = async (req, res) => {
   }
 };
 
+const addNewEmployeesService = async (req, res) => {
+  try {
+    const serviceEmployeePairs = req.body;
+
+    if (!Array.isArray(serviceEmployeePairs)) {
+      return res
+        .status(400)
+        .send("Invalid request format. Expecting an array.");
+    }
+
+    const insertionPromises = serviceEmployeePairs.map(
+      async ({ services_id, employees_id }) => {
+        const [addService] = await database.query(
+          `INSERT INTO serviceemployee (services_id, employees_id) VALUES (?, ?)`,
+          [services_id, employees_id]
+        );
+
+        return addService.affectedRows;
+      }
+    );
+
+    const results = await Promise.all(insertionPromises);
+    const success = results.some((affectedRows) => affectedRows > 0);
+
+    success
+      ? res.sendStatus(201)
+      : res
+          .status(400)
+          .send("Invalid input: Please provide a valid parameter.");
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
+
+const deleteServiceEmployees = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const [deletePendingService] = await database.query(
+      `delete from serviceemployee where id = ?`,
+      [id]
+    );
+
+    deletePendingService.affectedRows
+      ? res.sendStatus(200)
+      : res.status(400).send("record not found");
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
+
 const getAllAppointments = async (_, res) => {
   try {
     const [appointmnets] = await database.query(`SELECT * from appointments`);
@@ -272,6 +323,7 @@ const countTotalAppointments = async (req, res) => {
 module.exports = {
   getAllServices,
   getServiceEmployeesJoin,
+  addNewEmployeesService,
   getAllAppointments,
   postAppointment,
   deleteAppointment,
@@ -280,4 +332,5 @@ module.exports = {
   getAppointmentByHourRange,
   countAppointmentsByWeekDay,
   countTotalAppointments,
+  deleteServiceEmployees,
 };

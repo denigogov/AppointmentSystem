@@ -12,6 +12,7 @@ import { generateInputs } from "./SignUpInputs";
 import { errorMessageBtn } from "../../components/ErrorSuccesMessage";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+const API_URL = import.meta.env.VITE_API_URL as string;
 
 const SignUp = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -51,7 +52,7 @@ const SignUp = () => {
     // );
 
     try {
-      const res = await fetch(`http://localhost:4000/tableRoute/customers`, {
+      const res = await fetch(`${API_URL}/tableRoute/customers`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

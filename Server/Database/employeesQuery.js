@@ -5,7 +5,7 @@ const getAllUsers = async (_, res) => {
   try {
     const [allUsers] = await database.query("select * from employees");
 
-    res.status(200).send(allUsers);
+    allUsers.length ? res.status(200).send(allUsers) : res.sendStatus(404);
   } catch (err) {
     res.sendStatus(404);
   }
