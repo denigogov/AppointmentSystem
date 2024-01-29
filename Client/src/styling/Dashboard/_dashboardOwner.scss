@@ -1,0 +1,35 @@
+@use "../colors";
+@use "../mixin";
+@use "../general";
+
+.dashboard__container--main {
+  height: calc(100vh - 6rem);
+  @include mixin.overflowScroll;
+  //   add display flex to be able to split the screen
+  display: flex;
+
+  .dashboard__left--owner {
+    flex: 1;
+  }
+
+  @media (max-width: general.$sm) {
+    height: 100vh;
+  }
+
+  @media (max-width: general.$md) {
+    flex-direction: column;
+
+    .dashboard__left--owner {
+      flex: none; // with this I'm braking the screen split but I have to test  is it work with full container //- like this I give the default size of any object probably
+    }
+  }
+}
+
+.dashboard__table--owner {
+  border: 1px solid red;
+  flex: 0.37; // keep the width of the screen when I split the screen on 2
+
+  display: flex; // spliting the 2 tables in half
+  flex-direction: column;
+  gap: 20px;
+}

@@ -90,7 +90,7 @@ const Login = () => {
           required
           type="text"
           name="email"
-          defaultValue="gogov@yahoo.com"
+          defaultValue="owner@gmail.com"
           placeholder="email"
           ref={emailRef}
         />

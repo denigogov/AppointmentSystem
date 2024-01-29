@@ -1,0 +1,18 @@
+@use "../../../mixin";
+@use "../../../colors";
+@use "../../../general";
+
+.topCustTableView__container,
+.allEmployeesTableView__container {
+  flex: 1; // keeping the size equeal
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.dashboard__tableView_wrap {
+  padding: 0 15px;
+
+  @include mixin.table;
+}

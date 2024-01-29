@@ -36,20 +36,40 @@ const createCustomer = async (req, res) => {
     if (createCustomer.affectedRows) {
       // Sending the message when user create account
       const message = {
-        to: email,
-        from: process.env.EMAIL,
-        subject: `Hello ${firstName}`,
-        html: `
-        <h5>${firstName}, welcome to our platform!</h5>
-        <p>We're excited to have you as a member of our community. To get started, click the following link to confirm your email address:</p>
-        <a href="${confirmationLink}">confirmation link</a>
-    
-        <p><strong>Your Link expires after 15 minutes!</strong></p>
-    
-        <p>Thank you for choosing our Scheduler Suite System. If you have any questions or need assistance, feel free to contact our support team.</p>
-    
-        <p>Best regards,<br>Dejan</p>
-      `,
+        //   to: email,
+        //   from: process.env.EMAIL,
+        //   subject: `Hello ${firstName}`,
+        //   html: `
+        //   <h5>${firstName}, welcome to our platform!</h5>
+        //   <p>We're excited to have you as a member of our community. To get started, click the following link to confirm your email address:</p>
+        //   <a href="${confirmationLink}">confirmation link</a>
+
+        //   <p><strong>Your Link expires after 15 minutes!</strong></p>
+
+        //   <p>Thank you for choosing our Scheduler Suite System. If you have any questions or need assistance, feel free to contact our support team.</p>
+
+        //   <p>Best regards,<br>Dejan</p>
+        // `,
+
+        from: {
+          email: process.env.EMAIL,
+        },
+
+        personalizations: [
+          {
+            to: [
+              {
+                email: `${email}`,
+              },
+            ],
+            subject: `Please confirm your SalonPro Email account`,
+            dynamic_template_data: {
+              link: `${confirmationLink}`,
+              name: `${firstName}`,
+            },
+          },
+        ],
+        template_id: "d-74486dd077084ef9ba4005af78ff8f7c",
       };
       sgMail
         .send(message)
