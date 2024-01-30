@@ -49,7 +49,7 @@ const DashEmployeesTable = ({
                       onClick={() => handleDetails(appointment)}
                       style={{ cursor: "pointer" }}
                     >
-                      {appointment?.firstName ?? "not found"}{" "}
+                      {appointment?.firstName ?? "not found"}
                       {appointment?.lastName ?? ""}
                     </td>
                     <td data-cell="Time">

@@ -9,7 +9,6 @@ import "../../../styling/_popUpWindow.scss";
 const Dashboard = () => {
   const [popUpOpen, setPopupOpen] = useState<boolean>(false);
   const navigator = useNavigate();
-
   const auth = useAuth();
 
   const popupWindow = () => {
@@ -28,7 +27,7 @@ const Dashboard = () => {
       break;
 
     case 3:
-      dashboardView = <DashboardOwner />;
+      dashboardView = <DashboardOwner setPopupOpen={setPopupOpen} />;
       break;
 
     default:

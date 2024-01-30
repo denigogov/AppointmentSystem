@@ -90,7 +90,10 @@ const deleteServiceEmployees = async (req, res) => {
 
 const getAllAppointments = async (_, res) => {
   try {
-    const [appointmnets] = await database.query(`SELECT * from appointments`);
+    //I'm fetching all AllAppointments From Today On..
+    const [appointmnets] = await database.query(
+      `SELECT * from appointments WHERE scheduled_at > CURRENT_TIMESTAMP`
+    );
 
     appointmnets
       ? res.status(200).send(appointmnets)

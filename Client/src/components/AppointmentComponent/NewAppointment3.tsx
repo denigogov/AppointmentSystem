@@ -56,7 +56,6 @@ const NewAppointment3 = ({
     }
 
     const selectedTimeISO = convertISOtoLocalZone(selectedDate);
-
     const isBooked = filterAppointments.some(
       (app) =>
         app.employee_id === +selectedUser &&

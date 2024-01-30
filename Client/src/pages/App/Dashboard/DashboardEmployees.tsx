@@ -131,6 +131,8 @@ const DashboardEmployees = ({ setPopupOpen }: DashboardEmployeeProps) => {
     ["allAppointmentsByDay", token],
     () => fetchAppointmentsByDayAndTotal({ token, id })
   );
+
+  console.log(allAppointmentsByDay);
   const {
     data: totalAppointments,
     error: totalAppointmentsError,

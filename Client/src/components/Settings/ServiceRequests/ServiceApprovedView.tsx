@@ -28,7 +28,7 @@ const ServiceApprovedView = ({
 
       <div className="approvedServices__wrap">
         {approvedServices.length ? (
-          approvedServices.map((services, i) => (
+          approvedServices.map((services) => (
             <ul key={services.id}>
               <li>• {services?.servicesName}</li>
             </ul>

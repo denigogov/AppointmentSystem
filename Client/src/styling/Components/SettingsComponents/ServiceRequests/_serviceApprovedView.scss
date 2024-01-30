@@ -127,6 +127,10 @@
     gap: 10px;
   }
 
+  input[type="checkbox"] {
+    accent-color: red;
+  }
+
   .serviceList__checkbox--active {
     animation: selectedItem 0.7s 1 linear forwards;
 

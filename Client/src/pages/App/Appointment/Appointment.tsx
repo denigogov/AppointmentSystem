@@ -1,5 +1,5 @@
 import {
-  fetchAllAppointments,
+  fetchAllAppointmentsFromTodayOn,
   fetchAllServiceEmployees,
   fetchTimeManagment,
 } from "../../../api/tableApi.ts";
@@ -52,12 +52,13 @@ const Appointment = () => {
     fetchTimeManagment({ token })
   );
 
+  // fetchAllAppointmentsFromTodayOn
   const {
     data: allAppointments,
     error: allAppointmentsError,
     isLoading: allAppointmentsLoading,
   } = useSWR<AllAppointmentsTypes[] | any>(["allAppointments", token], () =>
-    fetchAllAppointments(token)
+    fetchAllAppointmentsFromTodayOn(token)
   );
 
   if (servicesEmpolyeesError || timeManagmentError || allAppointmentsError)

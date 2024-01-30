@@ -5,14 +5,21 @@
 .topCustTableView__container,
 .allEmployeesTableView__container {
   flex: 1; // keeping the size equeal
-  border: 1px solid red;
+  border: 1px solid colors.$border-Primary;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+
+  .dashboard--TableTitle--owner {
+    text-align: center;
+    padding: 4px;
+    font-weight: 500;
+    font-size: 15px;
+    color: colors.$font-Primary;
+  }
 }
 
 .dashboard__tableView_wrap {
-  padding: 0 15px;
+  padding: 15px;
 
   @include mixin.table;
 }

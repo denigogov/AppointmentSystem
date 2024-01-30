@@ -20,6 +20,8 @@ const UserDetailsRoute = () => {
     fetchCustomerData({ id, type, token })
   );
 
+  console.log("customer", customerData);
+
   if (customerDataError) return <h6>{customerDataError.message}</h6>;
   if (customerDataLoading) return <p>loading...</p>;
 

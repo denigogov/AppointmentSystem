@@ -28,7 +28,7 @@ router
     customerEmailConfirm.createCustomer
   )
   .get("/customers/:id/:type", verifyToken, customerQuery.customerAllData)
-
+  .get("/customersTop5", verifyToken, customerQuery.top5Customers)
   .get("/confirm", customerEmailConfirm.customerConfirm) // not need to add verify token !
   .get("/appointment", verifyToken, appointmenQuery.getAllAppointments)
   .post("/appointment", verifyToken, appointmenQuery.postAppointment)

@@ -1,14 +1,32 @@
 import "../../../styling/Components/dashboard components/DashboardOwner/_dashboardTableView.scss";
+import searchIcon from "../../../assets/searchIcon.svg";
+import {
+  FetchAllEmployeesTypes,
+  FetchTop5CustomersTypes,
+} from "../../../types/tableApiTypes";
 
 interface TableViewDashboardProps {
-  // Define props here
+  handleDetails: (user: any) => void;
+  apiData?: (FetchTop5CustomersTypes | FetchAllEmployeesTypes)[];
 }
 
-const TableViewDashboard: React.FC<TableViewDashboardProps> = (
-  {
-    /* destructure props here */
-  }
-) => {
+const TableViewDashboard: React.FC<TableViewDashboardProps> = ({
+  handleDetails,
+  apiData,
+}) => {
+  // Type Guard
+
+  const isFetchTop5Customers = (
+    user: FetchTop5CustomersTypes | FetchAllEmployeesTypes
+  ): user is FetchTop5CustomersTypes => {
+    return (user as FetchTop5CustomersTypes).customerName !== undefined;
+  };
+
+  const isFetchAllEmployees = (
+    user: FetchTop5CustomersTypes | FetchAllEmployeesTypes
+  ): user is FetchAllEmployeesTypes => {
+    return (user as FetchAllEmployeesTypes).firstName !== undefined;
+  };
   return (
     <div className="dashboard__tableView_wrap">
       <table>
@@ -20,35 +38,34 @@ const TableViewDashboard: React.FC<TableViewDashboardProps> = (
           </tr>
         </thead>
         <tbody>
-          <td data-cell="#">1</td>
-          <td data-cell="First Name">Dejan Gogov</td>
-          <td data-cell="Details">Icon</td>
-        </tbody>{" "}
-        <tbody>
-          <td data-cell="#">2</td>
-          <td data-cell="First Name">Dejan Gogov</td>
-          <td data-cell="Details">Icon</td>
-        </tbody>{" "}
-        <tbody>
-          <td data-cell="#">3</td>
-          <td data-cell="First Name">Dejan Gogov</td>
-          <td data-cell="Details">Icon</td>
-        </tbody>{" "}
-        <tbody>
-          <td data-cell="#">4</td>
-          <td data-cell="First Name">Dejan Gogov</td>
-          <td data-cell="Details">Icon</td>
-        </tbody>{" "}
-        <tbody>
-          <td data-cell="#">5</td>
-          <td data-cell="First Name">Dejan Gogov</td>
-          <td data-cell="Details">Icon</td>
-        </tbody>{" "}
-        {/* // <tbody>
-            //   <tr>
-            //     <td colSpan={parseInt("11")}>No Appointments found</td>
-            //   </tr>
-            // </tbody> */}
+          {apiData?.length ? (
+            apiData?.map((user, i) => (
+              <tr key={i}>
+                <td data-cell="#">{i + 1}</td>
+                <td data-cell="Name">
+                  {isFetchTop5Customers(user)
+                    ? user.customerName ?? "account deleted"
+                    : isFetchAllEmployees(user)
+                    ? `${user.firstName} ${user.lastName}`
+                    : "account deleted"}
+                </td>
+                <td data-cell="Details">
+                  <img
+                    src={searchIcon}
+                    alt="more detailsIcon"
+                    onClick={() => handleDetails(user)}
+                  />
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td data-cell="Status" colSpan={3}>
+                no available data
+              </td>
+            </tr>
+          )}
+        </tbody>
       </table>
     </div>
   );

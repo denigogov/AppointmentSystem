@@ -32,6 +32,7 @@ import Vacation from "./pages/App/Settings/Vacation";
 import WorkTime from "./pages/App/Settings/WorkTime";
 import AppointmentInterval from "./pages/App/Settings/AppointmentInterval";
 import ServiceRequest from "./pages/App/Settings/ServiceRequest";
+import EmployeesDetailsRoute from "./pages/App/Dashboard/EmployeesDetailsRoute";
 
 const App = () => {
   const auth = useAuth();
@@ -88,10 +89,15 @@ const App = () => {
               path="user-details/:id"
               element={
                 //route only avaible to employers!
-                <OnlyEmployeesAccess>
-                  <UserDetailsRoute />
-                </OnlyEmployeesAccess>
+                // <OnlyEmployeesAccess>
+                <UserDetailsRoute />
+                // </OnlyEmployeesAccess>
               }
+            />
+
+            <Route
+              path="employee-details/:id"
+              element={<EmployeesDetailsRoute />}
             />
           </Route>
 

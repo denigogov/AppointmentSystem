@@ -1,9 +1,11 @@
 const database = require("./database");
 
 // I don't use anywere but I will use in OWNER DASHBOARD
-const getAllUsers = async (_, res) => {
+const getAllEmployees = async (_, res) => {
   try {
-    const [allUsers] = await database.query("select * from employees");
+    const [allUsers] = await database.query(
+      `SELECT id, employeesUserType_id, username, firstName, lastName, city, email, phoneNumber FROM employees where employeesUserType_id = 2 `
+    );
 
     allUsers.length ? res.status(200).send(allUsers) : res.sendStatus(404);
   } catch (err) {
@@ -134,7 +136,7 @@ const UpdateTimeManagement = async (req, res) => {
 };
 
 module.exports = {
-  getAllUsers,
+  getAllEmployees,
   createEmployee,
   employeesTimeManagment,
   UpdateTimeManagement,

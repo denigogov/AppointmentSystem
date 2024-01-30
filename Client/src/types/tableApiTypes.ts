@@ -115,6 +115,23 @@ export interface FetchAppointmentsTotalTypes {
   monthlyAppointments: number;
   yearlyAppointments: number;
 }
+
+export interface FetchTop5CustomersTypes {
+  totalAppointments: number;
+  customer_id: number;
+  customerName: string;
+}
+
+export interface FetchAllEmployeesTypes {
+  id: number;
+  employeesUserType_id: number;
+  username: string;
+  firstName: string;
+  lastName: string;
+  city: string;
+  email: string;
+  phoneNumber: string;
+}
 // Best Way  to set USESTATE as prop
 // setAnyState: React.Dispatch<React.SetStateAction<TYPE>>
 //  Add useState TYPE !

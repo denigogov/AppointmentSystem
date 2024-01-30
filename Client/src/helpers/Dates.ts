@@ -26,9 +26,12 @@ export const dataMonthShow = (selectedData: Date | string) => {
 };
 
 export const convertISOtoLocalZone = (date: Date | string) => {
-  const localDate = moment(date).local();
+  // its not working with moment , already booked app its not showing
+  // const localDate = moment(date).local();
+  // return localDate.format("YYYY-MM-DDTHH:mm:ss.SSSZ"); // 2024-01-14T23:00:00.000Z
 
-  return localDate.format("YYYY-MM-DDTHH:mm:ss.SSSZ"); // 2024-01-14T23:00:00.000Z
+  const localDate = moment(date).local();
+  return localDate.toISOString();
 };
 
 export const convertISOtoLocalZoneFORMATED = (date: Date | string) => {

@@ -11,6 +11,8 @@ import {
   FetchAppointmentsByHourRangeTypes,
   FetchAppointmentsByDayAndTotalTypes,
   FetchAppointmentsTotalTypes,
+  FetchTop5CustomersTypes,
+  FetchAllEmployeesTypes,
 } from "../types/tableApiTypes";
 
 const apiUrl = import.meta.env.VITE_API_URL as string;
@@ -72,25 +74,6 @@ export const fetchAllServiceEmployees = async (
 };
 
 /**
- *  Fetching all customer Data !
- * @returns
- */
-export const fetchCustomerData = async ({
-  id,
-  type,
-  token,
-}: {
-  id?: number | string; // I add string because useParam return type string! I try also to translate but not work
-  type?: number;
-  token?: any;
-}) => {
-  return apiFetcher<CustomersDataTypes[]>(
-    `tableRoute/customers/${id}/${type}`,
-    token
-  );
-};
-
-/**
  * TIME MANAGMENT TABLE -- ALL values
  * @returns
  */
@@ -111,7 +94,9 @@ export const fetchTimeManagment = async ({
  * ALL Appointmnets for the date picker I need in customer Appointmnet NewAppointmnet3
  * @returns
  */
-export const fetchAllAppointments = async (token: TokenType | undefined) => {
+export const fetchAllAppointmentsFromTodayOn = async (
+  token: TokenType | undefined
+) => {
   return apiFetcher<AllAppointmentsTypes>(
     `tableRoute/appointment`,
     token || ""
@@ -119,7 +104,26 @@ export const fetchAllAppointments = async (token: TokenType | undefined) => {
 };
 
 /**
- * Fetching all user data !
+ *  Fetching all customer Data !
+ * @returns
+ */
+export const fetchCustomerData = async ({
+  id,
+  type,
+  token,
+}: {
+  id?: number | string; // I add string because useParam return type string! I try also to translate but not work
+  type?: number;
+  token?: any;
+}) => {
+  return apiFetcher<CustomersDataTypes[]>(
+    `tableRoute/customers/${id}/${type}`,
+    token
+  );
+};
+
+/**
+ * Fetching user Data for all type -- Edit User api
  * @returns
  */
 export const fetchUserData = async ({
@@ -240,4 +244,19 @@ export const fetchAppointmentsTotal = async ({
     `employees/appointmentsTotal/${id ? id : ""}`,
     token ?? ""
   );
+};
+
+/**
+ * Count Appointmnets By Total, Year and Month
+ * @returns top 5 customers by most appointments
+ */
+export const fetchTop5Customers = async (token: string) => {
+  return apiFetcher<FetchTop5CustomersTypes[]>(
+    `tableRoute/customersTop5`,
+    token ?? ""
+  );
+};
+
+export const fetchAllEmployees = async (token: string) => {
+  return apiFetcher<FetchAllEmployeesTypes[]>(`employees/`, token ?? "");
 };

@@ -37,6 +37,25 @@ const customerAllData = async (req, res) => {
   }
 };
 
+const top5Customers = async (_, res) => {
+  try {
+    const [findCustomers] = await database.query(`
+SELECT count(appointments.id) as totalAppointments, appointments.customer_id, 
+concat(customers.firstName, ' ' ,customers.lastName ) as customerName
+from appointments 
+left join customers on appointments.customer_id = customers.id
+group by customer_id  
+ORDER BY totalAppointments DESC
+limit 5
+`);
+    findCustomers ? res.status(200).send(findCustomers) : res.status(400);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err.message);
+  }
+};
+
 module.exports = {
   customerAllData,
+  top5Customers,
 };
