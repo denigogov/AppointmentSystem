@@ -5,6 +5,7 @@ import CalendarNavigation from "../assets/calendarNavigation.svg";
 import SettingsNavIcon from "../assets/settingsNavIcon.svg";
 import HelpNavIcon from "../assets/helpNavIcon.svg";
 import UserNavMenu from "../assets/UserNavMenu.svg";
+import ManagementNavIcon from "../assets/managementIcon.svg";
 
 import { NavLink } from "react-router-dom";
 import { Outlet } from "react-router-dom";
@@ -48,12 +49,22 @@ const AppRoot = () => {
               </li>
             </NavLink>
           )}
+          {auth.userInfo?.type === 3 && (
+            <NavLink to="management">
+              <li>
+                Management
+                <img src={ManagementNavIcon} alt="Settings Icon" />
+              </li>
+            </NavLink>
+          )}
+
           <NavLink to="settings">
             <li>
               Settings
               <img src={SettingsNavIcon} alt="Settings Icon" />
             </li>
           </NavLink>
+
           <NavLink to="help">
             <li>
               Help

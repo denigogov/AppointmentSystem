@@ -33,6 +33,8 @@ import WorkTime from "./pages/App/Settings/WorkTime";
 import AppointmentInterval from "./pages/App/Settings/AppointmentInterval";
 import ServiceRequest from "./pages/App/Settings/ServiceRequest";
 import EmployeesDetailsRoute from "./pages/App/Dashboard/EmployeesDetailsRoute";
+import ManagementRoot from "./pages/App/Management/ManagementRoot";
+import { OnlyOwnerAccess } from "./helpers/AuthOwner";
 
 const App = () => {
   const auth = useAuth();
@@ -137,6 +139,18 @@ const App = () => {
               }
             />
           </Route>
+
+          {/* I'm adding the loggic with user type also just to show on other   */}
+          {auth.userInfo?.type === 3 && (
+            <Route
+              path="management"
+              element={
+                <OnlyOwnerAccess>
+                  <ManagementRoot />
+                </OnlyOwnerAccess>
+              }
+            ></Route>
+          )}
         </Route>
 
         {/* IF USER IS ALREADY SIGN IN , Don't show the router (show as error) */}

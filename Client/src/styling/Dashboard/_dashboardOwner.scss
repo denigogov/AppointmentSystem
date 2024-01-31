@@ -33,3 +33,30 @@
   flex-direction: column;
   gap: 20px;
 }
+
+// left side of dashboard
+
+.dashboardleft__owner--WelcomeText {
+  padding: 10px;
+
+  h3 {
+    font-size: 16px;
+    color: colors.$font-Primary;
+  }
+  p {
+    font-size: 10px;
+    color: colors.$font-Primary;
+    font-weight: 700;
+  }
+}
+
+.dashboardLeft__cards--top {
+  padding: 10px;
+  display: flex;
+  gap: 30px;
+  justify-content: space-around;
+
+  @media (max-width: general.$lg) {
+    flex-direction: column;
+  }
+}

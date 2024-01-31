@@ -1,20 +1,21 @@
 import useSWR from "swr";
-import { fetchAllEmployees, fetchTop5Customers } from "../../../api/tableApi";
-import AllEmployeesTableView from "../../../components/DashboardComponents/DashboardOwner/AllEmployeesTableView";
-import TopCustTableView from "../../../components/DashboardComponents/DashboardOwner/TopCustTableView";
 import "../../../styling/Dashboard/_dashboardOwner.scss";
+import { fetchAllEmployees, fetchTop5Customers } from "../../../api/tableApi";
 import {
   FetchAllEmployeesTypes,
   FetchTop5CustomersTypes,
 } from "../../../types/tableApiTypes";
+import AllEmployeesTableView from "../../../components/DashboardComponents/DashboardOwner/AllEmployeesTableView";
+import TopCustTableView from "../../../components/DashboardComponents/DashboardOwner/TopCustTableView";
 import { useAuth } from "../../../helpers/Auth";
+import DashboardCardTop from "../../../components/DashboardComponents/DashboardOwner/DashboardCardTop";
 
 interface DashboardOwnerProps {
   setPopupOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const DashboardOwner: React.FC<DashboardOwnerProps> = ({ setPopupOpen }) => {
-  const { token } = useAuth();
+  const { token, userInfo } = useAuth();
 
   const {
     data: top5Customers,
@@ -37,7 +38,28 @@ const DashboardOwner: React.FC<DashboardOwnerProps> = ({ setPopupOpen }) => {
 
   return (
     <div className="dashboard__container--main">
-      <div className="dashboard__left--owner">Left Side Charter ....</div>
+      <div className="dashboard__left--owner">
+        {/* Username Title */}
+        <div className="dashboardleft__owner--WelcomeText">
+          <h3>Welcome {userInfo?.username ?? "username"}</h3>
+          <p>Lorem, ipsum dolor. lorem</p>
+        </div>
+
+        <div className="dashboardLeft__cards--top">
+          <DashboardCardTop
+            title="Budget"
+            value="€750.90"
+            footer="Total Revenue"
+            hexColor="#e5d4ef"
+          />
+          <DashboardCardTop
+            title="Clients"
+            value={60}
+            footer="Clients total"
+            hexColor="#80b3ff"
+          />
+        </div>
+      </div>
       <div className="dashboard__table--owner">
         <TopCustTableView
           setPopupOpen={setPopupOpen}

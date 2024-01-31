@@ -1,0 +1,37 @@
+@use "../../colors";
+@use "../../general";
+
+.managementNav__root {
+  nav {
+    padding: 15px;
+    border-bottom: 1px solid colors.$border-Primary;
+
+    ul {
+      display: flex;
+      justify-content: space-around;
+      text-align: center;
+
+      li {
+        img {
+          margin: 0 auto;
+          width: 40px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: general.$sm) {
+  // split into 2 column the nav menu on phone !
+  .managementNav__root {
+    nav {
+      ul {
+        flex-wrap: wrap;
+
+        li {
+          flex: 1 0 50%; /* Two columns in each row */
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+@use "../../../mixin";
+@use "../../../colors";
+@use "../../../general";
+
+.dashboardCardTop__container {
+  box-shadow: colors.$dashboard-Owner-Box--Shadow;
+  display: flex;
+  justify-content: space-between;
+
+  //   hover change color effect !
+
+  // - I pass the --c from the component! and use dynamicly to fit with the background color of the icon
+  @include mixin.hoverCardsEffect;
+
+  padding: 1.5rem;
+  flex: 0.2 20%;
+  border-radius: 0.75rem;
+}
+
+//all data
+.dashboardCard__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  .dashboardCard__title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: colors.$font-Secound; // if I remove the color will apply hover settings
+  }
+
+  .dashboardCard__value {
+    font-weight: 600;
+    font-size: 1.5rem;
+  }
+
+  .dashboardCard__footer {
+    font-size: 0.8rem;
+    color: colors.$font-Secound;
+  }
+}
+
+// Icon
+.dashboarCardIcon {
+  img {
+    background-color: #e1dbd6;
+    border-radius: 50%;
+    padding: 0.6rem;
+    // width: 50px;
+    width: 3.15rem;
+  }
+}

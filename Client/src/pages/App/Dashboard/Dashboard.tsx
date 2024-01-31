@@ -43,7 +43,7 @@ const Dashboard = () => {
       {/* PopUp for Employees when Employee click on the customer name from table to see details about customer !  */}
       {popUpOpen && (
         <div className="overlay" onClick={popupWindow}>
-          <main className="popUp smPopup" onClick={(e) => e.stopPropagation()}>
+          <main className="popUp mdPopup" onClick={(e) => e.stopPropagation()}>
             <Outlet context={[setPopupOpen]} />
           </main>
         </div>
