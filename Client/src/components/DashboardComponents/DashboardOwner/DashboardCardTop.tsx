@@ -1,11 +1,12 @@
 import "../../../styling/Components/dashboard components/DashboardOwner/_dashboardCardTop.scss";
-import testIcon from "../../../assets/calendarNavigation.svg";
 
 interface DashboardCardTopProps {
-  title: string;
-  value: string | number;
-  footer: string;
-  hexColor: string;
+  title?: string;
+  value?: string | number;
+  footer?: string;
+  hexColor?: string;
+  svgIcon?: string;
+  cardFlexSize?: string;
 }
 
 const DashboardCardTop: React.FC<DashboardCardTopProps> = ({
@@ -13,9 +14,12 @@ const DashboardCardTop: React.FC<DashboardCardTopProps> = ({
   value,
   footer,
   hexColor,
+  cardFlexSize,
+  svgIcon,
 }) => {
   const cardStyleChangeColor = {
     "--c": hexColor || "#ff8080", // --c is added inside of mixin its work ! (can change css property direclty from component dynamicly !!)
+    flex: `${cardFlexSize}`,
   } as React.CSSProperties;
 
   return (
@@ -26,7 +30,7 @@ const DashboardCardTop: React.FC<DashboardCardTopProps> = ({
         <p className="dashboardCard__footer">{footer}</p>
       </div>
       <div className="dashboarCardIcon">
-        <img src={testIcon} alt="" style={{ backgroundColor: hexColor }} />
+        <img src={svgIcon} alt="" style={{ backgroundColor: hexColor }} />
       </div>
     </div>
   );

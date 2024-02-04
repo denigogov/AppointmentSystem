@@ -132,7 +132,6 @@ const DashboardEmployees = ({ setPopupOpen }: DashboardEmployeeProps) => {
     () => fetchAppointmentsByDayAndTotal({ token, id })
   );
 
-  console.log(allAppointmentsByDay);
   const {
     data: totalAppointments,
     error: totalAppointmentsError,
@@ -170,7 +169,7 @@ const DashboardEmployees = ({ setPopupOpen }: DashboardEmployeeProps) => {
                 <h3>Welcome, {auth.userInfo?.username ?? "username"}! </h3>
                 <p>Your chair, your rules</p>
               </div>
-              <ByDayChart allAppointmentsByDay={allAppointmentsByDay ?? []} />
+              <ByDayChart allAppointmentsByDay={allAppointmentsByDay} />
             </div>
             <div className="dashboardEmployees__statistic--procent">
               <DashBoxProcentContainer

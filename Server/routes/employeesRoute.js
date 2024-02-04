@@ -4,6 +4,7 @@ const router = express.Router();
 const { hashedPassword, verifyToken } = require("../auth");
 const database = require("../Database/employeesQuery");
 const appointmenQuery = require("../Database/appointmenQuery");
+const chartQuery = require("../Database/chartQuery");
 
 router
   .get("/", verifyToken, database.getAllEmployees) // I don't use anywere but I will use in OWNER DASHBOARD
@@ -29,10 +30,12 @@ router
     verifyToken,
     appointmenQuery.countAppointmentsByWeekDay
   )
+
   .get(
     "/appointmentsTotal/:id?",
     verifyToken,
     appointmenQuery.countTotalAppointments
-  );
+  )
+  .get("/test", chartQuery.totalMoneyAppService);
 
 module.exports = router;

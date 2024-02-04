@@ -11,9 +11,8 @@
 
   // - I pass the --c from the component! and use dynamicly to fit with the background color of the icon
   @include mixin.hoverCardsEffect;
-
+  background-color: colors.$ownerTopCards;
   padding: 1.5rem;
-  flex: 0.2 20%;
   border-radius: 0.75rem;
 }
 

@@ -262,15 +262,12 @@ const countAppointmentsByWeekDay = async (req, res) => {
   try {
     const { id } = req.params;
     const [countAppointments] = await database.query(
-      // I need to change that  ` COUNT(CASE WHEN MONTH(created_at) = MONTH(CURRENT_DATE())  THEN id END) AS totalOrders,` to
-      // COUNT(CASE WHEN MONTH(scheduled_at) = MONTH(CURRENT_DATE())  THEN id END) AS totalOrders,
       `
       SELECT
       DATE_FORMAT(appointments.scheduled_at, '%W') AS weekDay,
-      COUNT(CASE WHEN MONTH(created_at) = MONTH(CURRENT_DATE())  THEN id END) AS totalOrders,
-      
+      COUNT(CASE WHEN MONTH(appointments.scheduled_at) = MONTH(CURRENT_DATE()) THEN appointments.id END) AS currentMonthOrders,
+      COUNT(CASE WHEN YEAR(appointments.scheduled_at) = YEAR(CURRENT_DATE()) THEN appointments.id END) AS totalOrders
     
-      SUM(CASE WHEN DATE_FORMAT(appointments.scheduled_at, '%Y-%m') = DATE_FORMAT(CURRENT_DATE, '%Y-%m') THEN 1 ELSE 0 END) AS currentMonthOrders
     FROM appointments
    ${id ? " where employee_id = ?" : ""}
     GROUP BY weekDay

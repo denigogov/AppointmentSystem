@@ -2,14 +2,21 @@
 @use "../mixin";
 @use "../general";
 
+.typeServiceChart {
+  @include mixin.input;
+}
+
 .dashboard__container--main {
   height: calc(100vh - 6rem);
   @include mixin.overflowScroll;
   //   add display flex to be able to split the screen
   display: flex;
 
-  .dashboard__left--owner {
+  .dashboard__left--owner-container {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 
   @media (max-width: general.$sm) {
@@ -18,8 +25,7 @@
 
   @media (max-width: general.$md) {
     flex-direction: column;
-
-    .dashboard__left--owner {
+    .dashboard__left--owner-container {
       flex: none; // with this I'm braking the screen split but I have to test  is it work with full container //- like this I give the default size of any object probably
     }
   }
@@ -36,9 +42,20 @@
 
 // left side of dashboard
 
-.dashboardleft__owner--WelcomeText {
+// wrapping the text and date picker !
+.dashboardTop--wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 10px;
 
+  @media (max-width: general.$sm) {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+.dashboardleft__owner--WelcomeText {
   h3 {
     font-size: 16px;
     color: colors.$font-Primary;
@@ -54,9 +71,47 @@
   padding: 10px;
   display: flex;
   gap: 30px;
-  justify-content: space-around;
+  justify-content: space-between;
 
   @media (max-width: general.$lg) {
     flex-direction: column;
+  }
+}
+.date-picker {
+  @include mixin.input;
+  // add the icon inside of the data-picker style as global !
+  @include mixin.inputFiledsAddIcon;
+  text-align: center;
+}
+
+//midle section of the dashbaord // chart and small info cards
+
+.dashboardOwner__chart-card--container {
+  height: 320px; // the main size of the container !! i ADDED dynamicly if the size is change also the size of the other elements will change to the same size -- I add height: 100%
+  display: flex;
+  justify-content: space-around;
+
+  @media (max-width: general.$lg) {
+    height: 600px;
+    flex-direction: column;
+  }
+
+  .dashOwner__infoCard {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 15px;
+
+    @include mixin.overflowScroll;
+  }
+
+  // chart main container from parrent component
+  .dashOwner__lineChart {
+    flex: 1;
+  }
+  .dashLine__chart {
+    width: 100%;
+    height: 100%;
   }
 }

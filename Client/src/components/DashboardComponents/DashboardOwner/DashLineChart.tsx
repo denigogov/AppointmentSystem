@@ -11,6 +11,8 @@ import {
 import { Line } from "react-chartjs-2";
 import { FetchAppointmentsByDayAndTotalTypes } from "../../../types/tableApiTypes";
 
+// styling for this component can be found in _dashboardOwner.scss
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -21,29 +23,11 @@ ChartJS.register(
   Legend
 );
 
-interface ByDayChartProps {
+interface DashLineChartProps {
   allAppointmentsByDay?: FetchAppointmentsByDayAndTotalTypes[];
 }
 
-const ByDayChart = ({ allAppointmentsByDay }: ByDayChartProps) => {
-  // interface OptionsType {
-  //   maintainAspectRatio: boolean;
-
-  //   scales: {
-  //     y: {
-  //       beginAtZero: boolean;
-  //     };
-  //   };
-  //   responsive: boolean;
-  //   backgroundColor: string[];
-  //   borderColor: string[];
-  //   borderWidth: number;
-  //   tension: number;
-  //   plugins: {
-  //     tooltip: {};
-  //   };
-  // }
-
+const DashLineChart = ({ allAppointmentsByDay }: DashLineChartProps) => {
   const options: any = {
     maintainAspectRatio: false,
     scales: {
@@ -52,8 +36,7 @@ const ByDayChart = ({ allAppointmentsByDay }: ByDayChartProps) => {
       },
     },
     responsive: true,
-    backgroundColor: ["rgba(245, 92, 132)"],
-    borderColor: ["rgba(255, 99, 132, 0.6)"],
+
     borderWidth: 1,
     tension: 0.4,
     plugins: {
@@ -70,11 +53,13 @@ const ByDayChart = ({ allAppointmentsByDay }: ByDayChartProps) => {
     },
   };
 
-  const labels = allAppointmentsByDay?.map((arr) => arr?.weekDay);
+  const labels = allAppointmentsByDay?.map((arr) => arr?.weekDay ?? "empty");
   const currentMonth = allAppointmentsByDay?.map(
     (arr) => arr.currentMonthOrders
   );
-  const totalYear = allAppointmentsByDay?.map((arr) => arr.totalOrders);
+  const totalYear = allAppointmentsByDay?.map(
+    (arr) => arr?.totalOrders ?? "no data"
+  );
 
   const data = {
     labels,
@@ -82,21 +67,23 @@ const ByDayChart = ({ allAppointmentsByDay }: ByDayChartProps) => {
       {
         data: currentMonth,
         label: "Daily Appointment Count - Monthly",
+        backgroundColor: ["rgba(245, 92, 132)"],
+        borderColor: ["rgba(255, 99, 132, 0.6)"],
       },
       {
         data: totalYear,
         label: "Daily Appointment Count - Yearly",
-        borderColor: ["rgba(19, 206, 143,0.5)"],
-        backgroundColor: ["rgba(19, 206, 143,0.3)"],
+        borderColor: ["#ffca3a"],
+        backgroundColor: ["#ffca6a"],
       },
     ],
   };
 
   return (
-    <div className="chartDays--wrap">
-      <Line options={options} data={data} className="chartLineDays" />
+    <div className="dashLine__chart">
+      <Line options={options} data={data} />
     </div>
   );
 };
 
-export default ByDayChart;
+export default DashLineChart;
