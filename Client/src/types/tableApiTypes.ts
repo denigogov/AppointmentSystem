@@ -132,6 +132,20 @@ export interface FetchAllEmployeesTypes {
   email: string;
   phoneNumber: string;
 }
+
+export interface FetchTotalMoneyAppServiceProps {
+  totalMoney?: string;
+  totalAppointments?: number;
+  topService?: string;
+}
+
+export interface FetchDataByServiceProps {
+  servicesName: string;
+  totalAppointments: number;
+  totalMoney: string | number;
+  bestEmployer: string;
+}
+
 // Best Way  to set USESTATE as prop
 // setAnyState: React.Dispatch<React.SetStateAction<TYPE>>
 //  Add useState TYPE !

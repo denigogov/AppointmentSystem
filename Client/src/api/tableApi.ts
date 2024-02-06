@@ -13,6 +13,8 @@ import {
   FetchAppointmentsTotalTypes,
   FetchTop5CustomersTypes,
   FetchAllEmployeesTypes,
+  FetchTotalMoneyAppServiceProps,
+  FetchDataByServiceProps,
 } from "../types/tableApiTypes";
 
 const apiUrl = import.meta.env.VITE_API_URL as string;
@@ -259,4 +261,40 @@ export const fetchTop5Customers = async (token: string) => {
 
 export const fetchAllEmployees = async (token: string) => {
   return apiFetcher<FetchAllEmployeesTypes[]>(`employees/`, token ?? "");
+};
+
+/**
+ *
+ * @param startDate optional
+ * @param startDate optional
+ * @returns Total Money, Top Service, Total Appointments by default is current month
+ */
+export const fetchTotalMoneyAppService = async ({
+  token,
+  formatStartDate,
+  formatEndDate,
+}: {
+  token?: string;
+  formatStartDate?: Date | String | null;
+  formatEndDate?: Date | String | null;
+}) => {
+  return apiFetcher<FetchTotalMoneyAppServiceProps[]>(
+    `employees/totalMoneyAppService/${
+      formatStartDate && formatEndDate
+        ? `?startDate=${formatStartDate}&endDate=${formatEndDate}`
+        : ""
+    }`,
+    token ?? ""
+  );
+};
+
+/**
+ *
+ * @returns  data: Total Money ,Best Employer Total Appointment by service
+ */
+export const fetchDataByService = async (token: string) => {
+  return apiFetcher<FetchDataByServiceProps[]>(
+    `employees/dataByService`,
+    token ?? ""
+  );
 };

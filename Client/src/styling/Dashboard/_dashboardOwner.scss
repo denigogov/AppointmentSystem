@@ -69,12 +69,17 @@
 
 .dashboardLeft__cards--top {
   padding: 10px;
-  display: flex;
-  gap: 30px;
-  justify-content: space-between;
 
-  @media (max-width: general.$lg) {
-    flex-direction: column;
+  // DashboardCardWrap Component Styling !!
+  .dashboardCardWrapTop {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    justify-content: space-between;
+
+    @media (max-width: general.$lg) {
+      flex-direction: column;
+    }
   }
 }
 .date-picker {
@@ -97,11 +102,15 @@
   }
 
   .dashOwner__infoCard {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    gap: 15px;
+    // height: 100%;
+
+    //DashboardCardWrapMiddle component Style!!
+    .dashboardCardWrapMiddle--Wrap {
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+      gap: 15px;
+    }
 
     @include mixin.overflowScroll;
   }
@@ -113,5 +122,16 @@
   .dashLine__chart {
     width: 100%;
     height: 100%;
+  }
+
+  // DashboardSelectOption component Styling !!
+  .typeService__owner-dashboard {
+    text-align: center;
+
+    select {
+      @include mixin.input;
+      padding: 10px 40px;
+      text-align: start;
+    }
   }
 }

@@ -36,6 +36,7 @@ router
     verifyToken,
     appointmenQuery.countTotalAppointments
   )
-  .get("/test", chartQuery.totalMoneyAppService);
+  .get("/totalMoneyAppService", verifyToken, chartQuery.totalMoneyAppService)
+  .get("/dataByService", verifyToken, chartQuery.dataByService);
 
 module.exports = router;

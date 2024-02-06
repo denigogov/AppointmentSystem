@@ -25,9 +25,9 @@ const DashboardCardTop: React.FC<DashboardCardTopProps> = ({
   return (
     <div className="dashboardCardTop__container" style={cardStyleChangeColor}>
       <div className="dashboardCard__text">
-        <p className="dashboardCard__title">{title}</p>
-        <p className="dashboardCard__value">{value}</p>
-        <p className="dashboardCard__footer">{footer}</p>
+        <p className="dashboardCard__title">{title ?? "error"}</p>
+        <p className="dashboardCard__value">{value ?? "error"}</p>
+        <p className="dashboardCard__footer">{footer ?? "error"}</p>
       </div>
       <div className="dashboarCardIcon">
         <img src={svgIcon} alt="" style={{ backgroundColor: hexColor }} />

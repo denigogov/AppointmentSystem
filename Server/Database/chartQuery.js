@@ -39,4 +39,54 @@ JOIN services ON appointments.service_id = services.id
   }
 };
 
-module.exports = { totalMoneyAppService };
+const dataByService = async (_, res) => {
+  try {
+    const [findDataByService] = await database.query(
+      `
+      SELECT
+  servicesData.servicesName,
+  servicesData.totalAppointments,
+  servicesData.totalMoney,
+  bestEmployeeData.bestEmployer
+FROM (
+  SELECT
+    servicesName,
+    COUNT(*) AS totalAppointments,
+    SUM(servicePrice) AS totalMoney
+  FROM
+    appointments
+  LEFT JOIN
+    services ON services.id = appointments.service_id
+  LEFT JOIN
+    employees ON employees.id = appointments.employee_id
+  GROUP BY
+    servicesName
+) servicesData
+LEFT JOIN (
+  SELECT
+    servicesName,
+    employees.firstName AS bestEmployer,
+    RANK() OVER (PARTITION BY servicesName ORDER BY COUNT(*) DESC) AS rankAlias
+  FROM
+    appointments
+  LEFT JOIN
+    services ON services.id = appointments.service_id
+  LEFT JOIN
+    employees ON employees.id = appointments.employee_id
+  GROUP BY
+    servicesName, bestEmployer
+) bestEmployeeData ON servicesData.servicesName = bestEmployeeData.servicesName AND bestEmployeeData.rankAlias = 1;
+
+      `
+    );
+
+    findDataByService.length
+      ? res.status(200).send(findDataByService)
+      : res.sendStatus(400);
+  } catch (err) {
+    res.sendStatus(500);
+    console.log(err.message);
+  }
+};
+
+module.exports = { totalMoneyAppService, dataByService };

@@ -1,44 +1,67 @@
-import useSWR from "swr";
-import ReactDatePicker from "react-datepicker";
-import { useState } from "react";
 import {
   fetchAllEmployees,
   fetchAppointmentsByDayAndTotal,
+  fetchDataByService,
   fetchTop5Customers,
+  fetchTotalMoneyAppService,
 } from "../../../api/tableApi";
 import {
   FetchAllEmployeesTypes,
   FetchAppointmentsByDayAndTotalTypes,
+  FetchDataByServiceProps,
   FetchTop5CustomersTypes,
+  FetchTotalMoneyAppServiceProps,
 } from "../../../types/tableApiTypes";
+
+import useSWR from "swr";
+import ReactDatePicker from "react-datepicker";
+import { useState } from "react";
+import moment from "moment-timezone";
+import { useAuth } from "../../../helpers/Auth";
+
 import AllEmployeesTableView from "../../../components/DashboardComponents/DashboardOwner/AllEmployeesTableView";
 import TopCustTableView from "../../../components/DashboardComponents/DashboardOwner/TopCustTableView";
-import { useAuth } from "../../../helpers/Auth";
-import DashboardCardTop from "../../../components/DashboardComponents/DashboardOwner/DashboardCardTop";
+
 import DashLineChart from "../../../components/DashboardComponents/DashboardOwner/DashLineChart";
+import DashboardCardWrapTop from "../../../components/DashboardComponents/DashboardOwner/DashboardCardWrapTop";
+import DashboardCardWrapMiddle from "../../../components/DashboardComponents/DashboardOwner/DashboardCardWrapMiddle";
 
 import "../../../styling/Dashboard/_dashboardOwner.scss";
-
-import moneyRevenue from "../../../assets/moneyRevenue.svg";
-import topServiceRocketIcon from "../../../assets/topServiceRocketIcon.svg";
-import totalAppDashIcon from "../../../assets/totalAppDashIcon.svg";
-import totalAppDashIcon1 from "../../../assets/totalAppDashIcon1.svg";
-import bestEmployee from "../../../assets/bestEmployee.svg";
-import daylyCountAppIcon from "../../../assets/daylyCountAppIcon.svg";
+import DashboardSelectOption from "../../../components/DashboardComponents/DashboardOwner/DashboardSelectOption";
 
 interface DashboardOwnerProps {
   setPopupOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const DashboardOwner: React.FC<DashboardOwnerProps> = ({ setPopupOpen }) => {
-  const [startDate, setStartDate] = useState<any>(new Date());
-  const [endDate, setEndDate] = useState<any>(null);
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [selectedService, setSelectedService] = useState<string>("All");
+
+  console.log(selectedService);
 
   const auth = useAuth();
   const token = auth.token ?? "";
   const userInfo = auth.userInfo;
 
-  // data for table
+  const formatStartDate = startDate
+    ? moment(startDate).format("YYYY-MM-DD HH:mm:ss")
+    : "";
+  const formatEndDate = endDate
+    ? moment(endDate).format("YYYY-MM-DD HH:mm:ss")
+    : "";
+
+  // Data for Top Cards ..Total Revenue, Top Performing Service, Total Appointmnets
+  const {
+    data: totalMoneyAppService,
+    error: totalMoneyAppServiceError,
+    isLoading: totalMoneyAppServiceLoading,
+  } = useSWR<FetchTotalMoneyAppServiceProps[]>(
+    ["totalMoneyAppService", token, formatStartDate, formatEndDate],
+    () => fetchTotalMoneyAppService({ token, formatStartDate, formatEndDate })
+  );
+
+  // data for table (top 5 customers)
   const {
     data: top5Customers,
     error: top5CustomersError,
@@ -46,13 +69,23 @@ const DashboardOwner: React.FC<DashboardOwnerProps> = ({ setPopupOpen }) => {
   } = useSWR<FetchTop5CustomersTypes[]>(["top5Customers", token], () =>
     fetchTop5Customers(token ?? "")
   );
-  // data for table
+
+  // data for table (Employee Overview)
   const {
     data: allEmployees,
     error: allEmployeesError,
     isLoading: allEmployeesLoading,
   } = useSWR<FetchAllEmployeesTypes[]>(["allCustomers", token], () =>
     fetchAllEmployees(token ?? "")
+  );
+
+  // * @returns  Total Money ,Best Employer Total Appointment by service
+  const {
+    data: dataByService,
+    error: dataByServiceError,
+    isLoading: dataByServiceLoading,
+  } = useSWR<FetchDataByServiceProps[]>(["dataByService", token], () =>
+    fetchDataByService(token ?? "")
   );
 
   // chart Data data for every day of the week ... monday,thuesday ... by year and month
@@ -70,12 +103,16 @@ const DashboardOwner: React.FC<DashboardOwnerProps> = ({ setPopupOpen }) => {
       <h6>
         {top5CustomersError?.message ||
           allEmployeesError?.message ||
+          totalMoneyAppServiceError ||
+          dataByServiceError.message ||
           allAppointmentsByDayError?.message}
       </h6>
     );
   if (
     top5CustomersLoading ||
     allEmployeesLoading ||
+    totalMoneyAppServiceLoading ||
+    dataByServiceLoading ||
     allAppointmentsByDayLoading
   )
     return <p>loading...</p>;
@@ -87,6 +124,25 @@ const DashboardOwner: React.FC<DashboardOwnerProps> = ({ setPopupOpen }) => {
       setEndDate(end);
     }
   };
+
+  const filteredDataByService = dataByService?.filter(
+    (service) => service.servicesName === selectedService
+  );
+
+  // when user click in select option (ALL)
+  const calcTotalMoneyAndApp = dataByService
+    ?.filter((e) => e.totalAppointments && e.totalMoney)
+    .map((e) => ({
+      totalAppointments: e.totalAppointments,
+      totalMoney: e.totalMoney,
+    }))
+    .reduce(
+      (acc, mov) => ({
+        totalAppointments: acc?.totalAppointments + mov?.totalAppointments,
+        totalMoney: +acc?.totalMoney + +mov?.totalMoney,
+      }),
+      { totalAppointments: 0, totalMoney: 0 }
+    );
 
   return (
     <div className="dashboard__container--main">
@@ -104,41 +160,19 @@ const DashboardOwner: React.FC<DashboardOwnerProps> = ({ setPopupOpen }) => {
               className="form-control form-control-solid w-250px date-picker"
               dateFormat="yyyy/MM/dd"
               selected={startDate}
+              placeholderText="Default Current Month"
               onChange={handleDataRange}
               startDate={startDate}
               endDate={endDate}
               selectsRange
               withPortal
-            ></ReactDatePicker>
+            />
           </div>
         </div>
 
         {/* CardsTop */}
         <div className="dashboardLeft__cards--top">
-          <DashboardCardTop
-            title="Total Revenue"
-            value="€750.90"
-            footer="Financial Overview"
-            hexColor="#e91e63"
-            svgIcon={moneyRevenue}
-            cardFlexSize="0.3 20%"
-          />
-          <DashboardCardTop
-            title="Top Performing Service"
-            value="Haircut"
-            footer="Service Analytics"
-            hexColor="#e67e22"
-            svgIcon={topServiceRocketIcon}
-            cardFlexSize="0.3 20%"
-          />
-          <DashboardCardTop
-            title="Total Appointments"
-            value={30}
-            footer="Period History"
-            hexColor="#2ecc71"
-            cardFlexSize="0.3 20%"
-            svgIcon={totalAppDashIcon}
-          />
+          <DashboardCardWrapTop totalMoneyAppService={totalMoneyAppService} />
         </div>
 
         {/* Middle Section of the Dashboard */}
@@ -147,38 +181,14 @@ const DashboardOwner: React.FC<DashboardOwnerProps> = ({ setPopupOpen }) => {
             <DashLineChart allAppointmentsByDay={allAppointmentsByDay} />
           </div>
           <div className="dashOwner__infoCard">
-            <DashboardCardTop
-              title="Total Revenue"
-              value="€750.90"
-              footer="Total Appointments"
-              hexColor="#80b3ff"
-              cardFlexSize="0.3 20%"
-              svgIcon={topServiceRocketIcon}
+            <DashboardSelectOption
+              dataByService={dataByService}
+              setSelectedService={setSelectedService}
             />
-            <DashboardCardTop
-              title="Total Appointments"
-              value={30}
-              // footer="Today's Schedule"
-              footer="From beggining default All service"
-              hexColor="#f1c40f"
-              cardFlexSize="0.3 20%"
-              svgIcon={daylyCountAppIcon}
-            />
-            <DashboardCardTop
-              title="Top Performers"
-              value={"Dejan"}
-              footer="Top Achievers default All service"
-              hexColor="#e74c3c"
-              cardFlexSize="0.3 20%"
-              svgIcon={bestEmployee}
-            />{" "}
-            <DashboardCardTop
-              title="Daily Appointments"
-              value={30}
-              footer="Today's Schedule"
-              hexColor="#1abc9c"
-              cardFlexSize="0.3 20%"
-              svgIcon={totalAppDashIcon1}
+            <DashboardCardWrapMiddle
+              filteredDataByService={filteredDataByService}
+              calcTotalMoneyAndApp={calcTotalMoneyAndApp}
+              selectedService={selectedService}
             />
           </div>
         </div>
