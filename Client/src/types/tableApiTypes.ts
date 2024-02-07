@@ -146,6 +146,12 @@ export interface FetchDataByServiceProps {
   bestEmployer: string;
 }
 
+export interface FetchServiceByMonthProps {
+  year: number;
+  month: string;
+  totalMoney: string | number;
+}
+
 // Best Way  to set USESTATE as prop
 // setAnyState: React.Dispatch<React.SetStateAction<TYPE>>
 //  Add useState TYPE !

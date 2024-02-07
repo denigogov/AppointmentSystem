@@ -1,14 +1,18 @@
 import {
   fetchAllEmployees,
+  fetchAllServices,
   fetchAppointmentsByDayAndTotal,
   fetchDataByService,
+  fetchServiceByMonth,
   fetchTop5Customers,
   fetchTotalMoneyAppService,
 } from "../../../api/tableApi";
 import {
+  AllServicesTypes,
   FetchAllEmployeesTypes,
   FetchAppointmentsByDayAndTotalTypes,
   FetchDataByServiceProps,
+  FetchServiceByMonthProps,
   FetchTop5CustomersTypes,
   FetchTotalMoneyAppServiceProps,
 } from "../../../types/tableApiTypes";
@@ -25,9 +29,11 @@ import TopCustTableView from "../../../components/DashboardComponents/DashboardO
 import DashLineChart from "../../../components/DashboardComponents/DashboardOwner/DashLineChart";
 import DashboardCardWrapTop from "../../../components/DashboardComponents/DashboardOwner/DashboardCardWrapTop";
 import DashboardCardWrapMiddle from "../../../components/DashboardComponents/DashboardOwner/DashboardCardWrapMiddle";
+import DashboardSelectOption from "../../../components/DashboardComponents/DashboardOwner/DashboardSelectOption";
+import DashChartOption from "../../../components/DashboardComponents/DashboardOwner/DashChartOption";
 
 import "../../../styling/Dashboard/_dashboardOwner.scss";
-import DashboardSelectOption from "../../../components/DashboardComponents/DashboardOwner/DashboardSelectOption";
+import DashChartMonth from "../../../components/DashboardComponents/DashboardOwner/DashChartMonth";
 
 interface DashboardOwnerProps {
   setPopupOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -37,8 +43,10 @@ const DashboardOwner: React.FC<DashboardOwnerProps> = ({ setPopupOpen }) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [selectedService, setSelectedService] = useState<string>("All");
-
-  console.log(selectedService);
+  const [selectedServiceChart, setSelectedServiceChart] = useState<string>("");
+  const [selectedYear, setSelectedYear] = useState<number>(
+    new Date().getFullYear()
+  );
 
   const auth = useAuth();
   const token = auth.token ?? "";
@@ -98,13 +106,32 @@ const DashboardOwner: React.FC<DashboardOwnerProps> = ({ setPopupOpen }) => {
     () => fetchAppointmentsByDayAndTotal({ token })
   );
 
+  const {
+    data: serviceByMonth,
+    error: serviceByMonthError,
+    isLoading: serviceByMonthLoading,
+  } = useSWR<FetchServiceByMonthProps[]>(
+    ["serviceByMonth", token, selectedServiceChart],
+    () => fetchServiceByMonth({ token, selectedServiceChart })
+  );
+
+  const {
+    data: allServices,
+    error: allServicesError,
+    isLoading: allServiceshLoading,
+  } = useSWR<AllServicesTypes[]>(["allServices", token], () =>
+    fetchAllServices({ token })
+  );
+
   if (top5CustomersError || allEmployeesError || allAppointmentsByDayError)
     return (
       <h6>
         {top5CustomersError?.message ||
+          allServicesError.message ||
           allEmployeesError?.message ||
           totalMoneyAppServiceError ||
           dataByServiceError.message ||
+          serviceByMonthError.message ||
           allAppointmentsByDayError?.message}
       </h6>
     );
@@ -113,6 +140,8 @@ const DashboardOwner: React.FC<DashboardOwnerProps> = ({ setPopupOpen }) => {
     allEmployeesLoading ||
     totalMoneyAppServiceLoading ||
     dataByServiceLoading ||
+    serviceByMonthLoading ||
+    allServiceshLoading ||
     allAppointmentsByDayLoading
   )
     return <p>loading...</p>;
@@ -143,6 +172,10 @@ const DashboardOwner: React.FC<DashboardOwnerProps> = ({ setPopupOpen }) => {
       }),
       { totalAppointments: 0, totalMoney: 0 }
     );
+
+  const filterDataByYear = serviceByMonth?.filter(
+    (arr) => arr.year === selectedYear
+  );
 
   return (
     <div className="dashboard__container--main">
@@ -178,7 +211,14 @@ const DashboardOwner: React.FC<DashboardOwnerProps> = ({ setPopupOpen }) => {
         {/* Middle Section of the Dashboard */}
         <div className="dashboardOwner__chart-card--container">
           <div className="dashOwner__lineChart">
-            <DashLineChart allAppointmentsByDay={allAppointmentsByDay} />
+            <DashChartOption
+              setSelectedYear={setSelectedYear}
+              setSelectedServiceChart={setSelectedServiceChart}
+              allServices={allServices}
+              serviceByMonth={serviceByMonth}
+            />
+            <DashChartMonth filterDataByYear={filterDataByYear} />
+            {/* <DashLineChart allAppointmentsByDay={allAppointmentsByDay} /> */}
           </div>
           <div className="dashOwner__infoCard">
             <DashboardSelectOption

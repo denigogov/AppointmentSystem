@@ -118,10 +118,27 @@
   // chart main container from parrent component
   .dashOwner__lineChart {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    //Styling for Select Option
+    .dashChartOption--wrap {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      select {
+        @include mixin.input;
+        padding: 10px 40px;
+        text-align: start;
+      }
+    }
   }
   .dashLine__chart {
+    // size of the line chart
     width: 100%;
-    height: 100%;
+    // height: 100%;
+    height: 300px;
   }
 
   // DashboardSelectOption component Styling !!

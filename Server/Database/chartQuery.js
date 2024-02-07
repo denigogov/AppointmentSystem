@@ -82,11 +82,47 @@ LEFT JOIN (
 
     findDataByService.length
       ? res.status(200).send(findDataByService)
-      : res.sendStatus(400);
+      : res.sendStatus(404);
   } catch (err) {
     res.sendStatus(500);
     console.log(err.message);
   }
 };
 
-module.exports = { totalMoneyAppService, dataByService };
+const serviceByMonth = async (req, res) => {
+  try {
+    const { services } = req.query;
+
+    const [fetchByMonthMoney] = await database.query(
+      `
+  SELECT
+  YEAR(scheduled_at) AS year,
+  MONTHNAME(scheduled_at) AS month,
+  SUM(servicePrice) AS totalMoney
+FROM
+  appointments
+
+JOIN
+  services ON services.id = appointments.service_id
+${services ? ` where services.servicesName = ?` : ""}   
+GROUP BY
+  YEAR(scheduled_at),
+  MONTH(scheduled_at),
+  MONTHNAME(scheduled_at)
+ORDER BY
+  year ASC,
+  MONTH(scheduled_at) ASC
+  `,
+      [services ? services : []]
+    );
+
+    fetchByMonthMoney.length
+      ? res.status(200).send(fetchByMonthMoney)
+      : req.sendStatus(400);
+  } catch (err) {
+    console.log(err.message);
+    res.sendStatus(500);
+  }
+};
+
+module.exports = { totalMoneyAppService, dataByService, serviceByMonth };

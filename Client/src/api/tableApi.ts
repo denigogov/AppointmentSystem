@@ -15,6 +15,7 @@ import {
   FetchAllEmployeesTypes,
   FetchTotalMoneyAppServiceProps,
   FetchDataByServiceProps,
+  FetchServiceByMonthProps,
 } from "../types/tableApiTypes";
 
 const apiUrl = import.meta.env.VITE_API_URL as string;
@@ -295,6 +296,26 @@ export const fetchTotalMoneyAppService = async ({
 export const fetchDataByService = async (token: string) => {
   return apiFetcher<FetchDataByServiceProps[]>(
     `employees/dataByService`,
+    token ?? ""
+  );
+};
+
+/**
+ *
+ * @param ServiceName -- optional
+ * @returns Total Money By Month and Year for each service By Default is no ServiceName return for all total
+ */
+export const fetchServiceByMonth = async ({
+  token,
+  selectedServiceChart,
+}: {
+  selectedServiceChart?: string;
+  token?: string;
+}) => {
+  return apiFetcher<FetchServiceByMonthProps[]>(
+    `employees/serviceByMonth/?services=${
+      selectedServiceChart ? selectedServiceChart : ""
+    }`,
     token ?? ""
   );
 };

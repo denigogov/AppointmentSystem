@@ -32,7 +32,7 @@ const DashboardCardWrapMiddle: React.FC<DashboardCardWrapMiddleProps> = ({
             ? filteredDataByService![0]?.totalMoney
             : calcTotalMoneyAndApp?.totalMoney ?? "/"
         }`}
-        footer="Calculation service "
+        footer="Full-Year Insights"
         hexColor="#80b3ff"
         cardFlexSize="0.3 20%"
         svgIcon={topServiceRocketIcon}
