@@ -30,12 +30,12 @@ interface DashLineChartProps {
 const DashLineChart = ({ allAppointmentsByDay }: DashLineChartProps) => {
   const options: any = {
     maintainAspectRatio: false,
+    responsive: true,
     scales: {
       y: {
         beginAtZero: true,
       },
     },
-    responsive: true,
 
     borderWidth: 1,
     tension: 0.4,

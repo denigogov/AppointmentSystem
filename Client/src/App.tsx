@@ -36,6 +36,12 @@ import EmployeesDetailsRoute from "./pages/App/Dashboard/EmployeesDetailsRoute";
 import ManagementRoot from "./pages/App/Management/ManagementRoot";
 import { OnlyOwnerAccess } from "./helpers/AuthOwner";
 
+// Owner Management Components
+import CustomersRoot from "./pages/App/Management/Customers/CustomersRoot";
+import EmployeesRoot from "./pages/App/Management/Employees/EmployeesRoot";
+import ServicesRoot from "./pages/App/Management/Services/ServicesRoot";
+import Approvals from "./pages/App/Management/Approvals/Approvals";
+
 const App = () => {
   const auth = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
@@ -149,7 +155,12 @@ const App = () => {
                   <ManagementRoot />
                 </OnlyOwnerAccess>
               }
-            ></Route>
+            >
+              <Route path="customers" element={<CustomersRoot />} />
+              <Route path="employees" element={<EmployeesRoot />} />
+              <Route path="service" element={<ServicesRoot />} />
+              <Route path="approvals" element={<Approvals />} />
+            </Route>
           )}
         </Route>
 

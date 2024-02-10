@@ -30,8 +30,11 @@ interface DashChartMonthProps {
 const DashChartMonth: React.FC<DashChartMonthProps> = ({
   filterDataByYear,
 }) => {
+  const screenSize: number = window.innerWidth;
+
   const options: any = {
     maintainAspectRatio: false,
+    indexAxis: `${screenSize <= 640 ? "y" : "x"}`,
     scales: {
       y: {
         beginAtZero: true,
@@ -47,7 +50,7 @@ const DashChartMonth: React.FC<DashChartMonthProps> = ({
           // no idea what type is context !
           label: function (context: any) {
             let label = context?.dataset.label || "";
-            label ? (label += ` Total: ${context?.parsed?.y}`) : "";
+            label ? (label += ` Total : ${context?.parsed?.y} €`) : "";
             return label;
           },
         },
@@ -58,14 +61,16 @@ const DashChartMonth: React.FC<DashChartMonthProps> = ({
   const labels = filterDataByYear?.map((arr) => arr?.month ?? "empty");
   const montlyData = filterDataByYear?.map((arr) => arr.totalMoney);
 
+  console.log(montlyData);
+
   const data = {
     labels,
     datasets: [
       {
         data: montlyData,
         label: "Total Revenue - Monthly",
-        backgroundColor: ["rgba(245, 92, 132)"],
-        borderColor: ["rgba(255, 99, 132, 0.6)"],
+        backgroundColor: ["#c9dfff"],
+        borderColor: ["#3586ff"],
       },
     ],
   };

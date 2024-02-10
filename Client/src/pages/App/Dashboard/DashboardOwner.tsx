@@ -111,9 +111,11 @@ const DashboardOwner: React.FC<DashboardOwnerProps> = ({ setPopupOpen }) => {
     error: serviceByMonthError,
     isLoading: serviceByMonthLoading,
   } = useSWR<FetchServiceByMonthProps[]>(
-    ["serviceByMonth", token, selectedServiceChart],
+    ["serviceByMonth", token, selectedServiceChart ?? ""],
     () => fetchServiceByMonth({ token, selectedServiceChart })
   );
+
+  console.log(serviceByMonth);
 
   const {
     data: allServices,
@@ -211,14 +213,7 @@ const DashboardOwner: React.FC<DashboardOwnerProps> = ({ setPopupOpen }) => {
         {/* Middle Section of the Dashboard */}
         <div className="dashboardOwner__chart-card--container">
           <div className="dashOwner__lineChart">
-            <DashChartOption
-              setSelectedYear={setSelectedYear}
-              setSelectedServiceChart={setSelectedServiceChart}
-              allServices={allServices}
-              serviceByMonth={serviceByMonth}
-            />
-            <DashChartMonth filterDataByYear={filterDataByYear} />
-            {/* <DashLineChart allAppointmentsByDay={allAppointmentsByDay} /> */}
+            <DashLineChart allAppointmentsByDay={allAppointmentsByDay} />
           </div>
           <div className="dashOwner__infoCard">
             <DashboardSelectOption
@@ -231,6 +226,17 @@ const DashboardOwner: React.FC<DashboardOwnerProps> = ({ setPopupOpen }) => {
               selectedService={selectedService}
             />
           </div>
+        </div>
+
+        {/* Middle 2row */}
+        <div className="dashboard__middle_secoundRow">
+          <DashChartOption
+            setSelectedYear={setSelectedYear}
+            setSelectedServiceChart={setSelectedServiceChart}
+            allServices={allServices}
+            serviceByMonth={serviceByMonth}
+          />
+          <DashChartMonth filterDataByYear={filterDataByYear} />
         </div>
 
         {/*  */}
