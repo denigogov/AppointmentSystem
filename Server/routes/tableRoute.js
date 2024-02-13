@@ -27,7 +27,8 @@ router
     hashedPassword,
     customerEmailConfirm.createCustomer
   )
-  .get("/customers/:id/:type", verifyToken, customerQuery.customerAllData)
+  .get("/customers/:id?/:type?", verifyToken, customerQuery.customerAllData)
+  .get("/customers-limit", verifyToken, customerQuery.allCustomersPagination)
   .get("/customersTop5", verifyToken, customerQuery.top5Customers)
   .get("/confirm", customerEmailConfirm.customerConfirm) // not need to add verify token !
   .get("/appointment", verifyToken, appointmenQuery.getAllAppointments)

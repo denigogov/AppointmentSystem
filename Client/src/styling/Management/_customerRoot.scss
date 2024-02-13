@@ -1,0 +1,41 @@
+@use "../mixin";
+@use "../general";
+
+.customersRoot--container {
+  height: calc(100vh - 12rem); // main container size to be enable scrolling !
+  @include mixin.overflowScroll;
+}
+
+.customerTableView--container {
+  @include mixin.table();
+  img {
+    filter: invert(13%) sepia(73%) saturate(4921%) hue-rotate(360deg)
+      brightness(83%) contrast(117%);
+  }
+
+  @media (max-width: general.$lg) {
+    td {
+      display: grid;
+      gap: 0.5rem;
+      grid-template-columns: 15ch auto;
+
+      &:first-child {
+        margin-top: 2rem;
+      }
+
+      &:last-child {
+        margin-bottom: 2rem;
+      }
+
+      &::before {
+        content: attr(data-cell) ": ";
+        font-weight: 600;
+        float: left;
+      }
+    }
+
+    th {
+      display: none;
+    }
+  }
+}

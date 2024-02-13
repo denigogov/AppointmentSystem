@@ -152,6 +152,17 @@ export interface FetchServiceByMonthProps {
   totalMoney: string | number;
 }
 
+export interface FetchCustomersLimitProps {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  confirmation: number;
+  created_at: string | null;
+  gender: string;
+}
+
 // Best Way  to set USESTATE as prop
 // setAnyState: React.Dispatch<React.SetStateAction<TYPE>>
 //  Add useState TYPE !

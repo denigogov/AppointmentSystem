@@ -41,7 +41,8 @@
 }
 
 @mixin inputFiledsAddIcon() {
-  // add image before this mixing in the component
+  // To be able to use I need to combine with mixin input ! ... I did that because maybe in the future I will add different styling to the btn
+  // add image before this mixing in the component background:url('')
   text-align: center;
   padding-left: 26px;
   background-repeat: no-repeat;

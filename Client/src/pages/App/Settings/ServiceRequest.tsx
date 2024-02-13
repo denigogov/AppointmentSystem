@@ -16,6 +16,10 @@ import ServiceListView from "../../../components/Settings/ServiceRequests/Servic
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { apiGeneralErrorHandle } from "../../../helpers/api";
+import {
+  confirmDeletePrompt,
+  deleteActionPrompt,
+} from "../../../components/ErrorSuccesMessage";
 const apiUrl = import.meta.env.VITE_API_URL as string;
 
 const ServiceRequest = () => {
@@ -112,17 +116,12 @@ const ServiceRequest = () => {
   };
 
   const handleDeleteService = async (service: ServiceEmloyeesTypes) => {
-    const sendPrompt = Swal.fire({
-      title: "Delete Service ?",
-      html: `Are you sure you want to remove the <strong>'${
+    const sendPrompt = confirmDeletePrompt(
+      "Delete Service ?",
+      `Are you sure you want to remove the <strong>'${
         service?.servicesName ?? "service not found"
-      }'</strong>service? This action is irreversible, and you won't have access to its benefits. Confirm your decision below.`,
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#ffda79",
-      cancelButtonColor: "#b7b7b7",
-      confirmButtonText: "Confirm !",
-    });
+      }'</strong>service? This action is irreversible, and you won't have access to its benefits. Confirm your decision below.`
+    );
 
     try {
       if ((await sendPrompt).isConfirmed) {
@@ -138,14 +137,8 @@ const ServiceRequest = () => {
 
         if (res.ok) {
           mutate(["servicesemployees", token]);
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            iconColor: "#ffda79",
-            title: "Deleted!",
-            showConfirmButton: false,
-            timer: 1500,
-          });
+          // prompt after user click delete
+          deleteActionPrompt();
         } else throw new Error(`${res.statusText}`);
       }
     } catch (err) {

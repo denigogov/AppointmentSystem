@@ -22,7 +22,8 @@ export const calcDaysBetween = (StartDate: Date, EndDate: Date) => {
 export const dataMonthShow = (selectedData: Date | string) => {
   const format = new Date(selectedData).toUTCString().slice(0, 17);
 
-  return format; // Mon, 18 Dec 2023
+  // when data is with wrong Format or There is no Data Providet !
+  return format === "Invalid Date" ? "Not Found" : format; // Mon, 18 Dec 2023
 };
 
 export const convertISOtoLocalZone = (date: Date | string) => {

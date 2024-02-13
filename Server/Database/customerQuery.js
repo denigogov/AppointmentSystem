@@ -4,8 +4,7 @@ const customerAllData = async (req, res) => {
   try {
     const { id, type } = req.params;
 
-    const [findCustomer] = await database.query(
-      `SELECT 
+    const query = `SELECT 
       appointments.scheduled_at, 
       appointments.created_at, 
       employees.lastName as EmployeeLastName, 
@@ -20,13 +19,15 @@ const customerAllData = async (req, res) => {
       customers.phoneNumber as customerPhone, 
       customers.created_at as customerRegistration,
       customers.gender 
-  FROM customers
-  LEFT JOIN appointments ON customers.id = appointments.customer_id
-  LEFT JOIN employees ON appointments.employee_id = employees.id
-  LEFT JOIN services ON appointments.service_id = services.id
-  WHERE customers.id = ? AND userType_id = ?`,
-      [id, type]
-    );
+    FROM customers
+    LEFT JOIN appointments ON customers.id = appointments.customer_id
+    LEFT JOIN employees ON appointments.employee_id = employees.id
+    LEFT JOIN services ON appointments.service_id = services.id
+    ${id && type ? "WHERE customers.id = ? AND userType_id = ?" : ""}`;
+
+    const params = id && type ? [id, type] : [];
+
+    const [findCustomer] = await database.query(query, params);
 
     findCustomer.length
       ? res.status(200).send(findCustomer)
@@ -55,7 +56,45 @@ limit 5
   }
 };
 
+const allCustomersPagination = async (req, res) => {
+  const { page, limit } = req.query;
+
+  const offset = (page - 1) * limit;
+
+  try {
+    const [limitResults] = await database.query(
+      `SELECT 
+      id,  firstName, lastName, email,  phoneNumber, confirmation, gender, created_at from customers
+
+    
+    limit ? offset ?`,
+      [+limit, +offset]
+    );
+
+    // const [totalPageData] = await database.query(
+    //   `select count(*) as count from appointments`
+    // );
+
+    // console.log("totalSIze", +totalPageData[0]?.count);
+
+    // const totalPages = Math.ceil(+totalPageData[0]?.count / limit);
+
+    // const paginationData = {
+    //   data: limitResults,
+    //   pagination: {
+    //     page: +page,
+    //     limit: +limit,
+    //     totalPages,
+    //   },
+    // };
+
+    limitResults ? res.status(200).send(limitResults) : res.sendstatus(400);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
 module.exports = {
   customerAllData,
   top5Customers,
+  allCustomersPagination,
 };

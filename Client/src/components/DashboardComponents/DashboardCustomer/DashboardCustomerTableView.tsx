@@ -6,9 +6,13 @@ import "../../../styling/Components/dashboard components/_dashboardTable.scss";
 import { CustomersDataTypes } from "../../../types/tableApiTypes";
 // import editIcon from "../../../assets/editIcon.svg";
 import deleteIcon from "../../../assets/deleteIcon.svg";
-import Swal from "sweetalert2";
 import { mutate } from "swr";
 import { useAuth } from "../../../helpers/Auth";
+import {
+  confirmDeletePrompt,
+  deleteActionPrompt,
+} from "../../ErrorSuccesMessage";
+import { apiGeneralErrorHandle } from "../../../helpers/api";
 const API_URL = import.meta.env.VITE_API_URL as string;
 
 interface props {
@@ -33,36 +37,26 @@ const DashboardCustomerTableView = ({ cusomerTableDashboardData }: props) => {
 
   const handleDeleteAppointment = async (id: number) => {
     try {
-      await Swal.fire({
-        title: "Cancel Appointment",
-        text: "This action will cancel the appointment. Confirm your choice to proceed",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#ffda79    ",
-        cancelButtonColor: "#b7b7b7",
-        confirmButtonText: "Yes, delete it!",
-      }).then(async (res) => {
-        if (res.isConfirmed) {
-          await fetch(`${API_URL}/tableRoute/appointment/${id}`, {
-            method: "DELETE",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Deleted!",
-            text: "Your appointment has been deleted.",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        }
-      });
+      const deletePrompt = await confirmDeletePrompt(
+        "Cancel Appointment",
+        "This action will cancel the appointment. Confirm your choice to proceed"
+      );
+      if (deletePrompt.isConfirmed) {
+        const res = await fetch(`${API_URL}/tableRoute/appointment/${id}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-      mutate(["customerData", token]);
-    } catch (error) {
-      console.error("Error deleting user", error);
+        if (res.ok) {
+          mutate(["customerData", token]);
+          // popUp after user click delete
+          deleteActionPrompt();
+        }
+      }
+    } catch (err) {
+      apiGeneralErrorHandle(err);
     }
   };
 

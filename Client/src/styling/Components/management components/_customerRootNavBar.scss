@@ -1,0 +1,22 @@
+@use "../../colors";
+@use "../../mixin";
+
+.customerRoot--navBar {
+  nav {
+    padding: 7px;
+
+    ul {
+      display: flex;
+      justify-content: space-around;
+
+      li {
+        input {
+          background: url(../../../assets/searchIcon.svg);
+          @include mixin.input;
+          @include mixin.inputFiledsAddIcon;
+          text-align: center;
+        }
+      }
+    }
+  }
+}

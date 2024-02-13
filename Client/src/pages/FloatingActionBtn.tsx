@@ -3,14 +3,10 @@ import iconexample from "../assets/deleteIcon.svg";
 import iconDetails from "../assets/editUserIcon1.svg";
 import moreIcon from "../assets/moreDetailsIcon.svg";
 interface FloatingActionBtnProps {
-  // Define props here
+  //  propsTypes
 }
 
-const FloatingActionBtn: React.FC<FloatingActionBtnProps> = (
-  {
-    /* destructure props here */
-  }
-) => {
+const FloatingActionBtn: React.FC<FloatingActionBtnProps> = ({}) => {
   return (
     <div className="float-container--dashboard">
       <div className="wrapper">

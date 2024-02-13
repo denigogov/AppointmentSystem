@@ -14,6 +14,8 @@ const getAllEmployees = async (_, res) => {
 };
 
 // I don't use anywere but I will use in OWNER DASHBOARD only owner to be able to create employees user
+
+// I need also to add working time because app will be broken or I can add by default !
 const createEmployee = async (req, res) => {
   try {
     const {

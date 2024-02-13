@@ -61,8 +61,6 @@ const DashChartMonth: React.FC<DashChartMonthProps> = ({
   const labels = filterDataByYear?.map((arr) => arr?.month ?? "empty");
   const montlyData = filterDataByYear?.map((arr) => arr.totalMoney);
 
-  console.log(montlyData);
-
   const data = {
     labels,
     datasets: [

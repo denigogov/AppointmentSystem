@@ -115,8 +115,6 @@ const DashboardOwner: React.FC<DashboardOwnerProps> = ({ setPopupOpen }) => {
     () => fetchServiceByMonth({ token, selectedServiceChart })
   );
 
-  console.log(serviceByMonth);
-
   const {
     data: allServices,
     error: allServicesError,

@@ -16,9 +16,11 @@ import {
   FetchTotalMoneyAppServiceProps,
   FetchDataByServiceProps,
   FetchServiceByMonthProps,
+  FetchCustomersLimitProps,
 } from "../types/tableApiTypes";
 
 const apiUrl = import.meta.env.VITE_API_URL as string;
+const PAGE_SIZE = import.meta.env.VITE_PAGE_SIZE as string;
 
 const DEFAULT_URL: string = `${apiUrl}/`;
 
@@ -318,4 +320,21 @@ export const fetchServiceByMonth = async ({
     }`,
     token ?? ""
   );
+};
+
+// Infinity Scroll Limited Data for Showing all Customers
+/**
+ *
+ * @param pageIndex number of the page by default I made it to 1
+ * @param previousPageData  by default is this there is the previouse data already loaded!
+ * @returns inifinity scroll by default set 15 data to read
+ */
+export const fetchCustomersLimit = (
+  pageIndex: number,
+  previousPageData: FetchCustomersLimitProps[]
+) => {
+  if (previousPageData && !previousPageData.length) return null;
+  return `${apiUrl}/tableRoute/customers-limit/?page=${
+    pageIndex + 1
+  }&limit=${PAGE_SIZE}`; // SWR key
 };
