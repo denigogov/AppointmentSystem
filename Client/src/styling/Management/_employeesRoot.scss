@@ -1,0 +1,27 @@
+@use "../colors";
+@use "../mixin";
+
+.employeesRoot--container {
+  height: calc(100vh - 12rem);
+  @include mixin.overflowScroll;
+}
+
+.empTableView--container {
+  @include mixin.table;
+
+  img {
+    filter: invert(13%) sepia(73%) saturate(4921%) hue-rotate(360deg)
+      brightness(83%) contrast(117%);
+    &:active {
+      transform: scale(0.9);
+    }
+  }
+}
+
+.addUserIcon {
+  @include mixin.iconAddText;
+
+  &::after {
+    content: "Create an Employer";
+  }
+}

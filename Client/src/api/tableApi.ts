@@ -21,7 +21,6 @@ import {
 
 const apiUrl = import.meta.env.VITE_API_URL as string;
 const PAGE_SIZE = import.meta.env.VITE_PAGE_SIZE as string;
-
 const DEFAULT_URL: string = `${apiUrl}/`;
 
 /**
@@ -262,6 +261,7 @@ export const fetchTop5Customers = async (token: string) => {
   );
 };
 
+// Fetch all Employees
 export const fetchAllEmployees = async (token: string) => {
   return apiFetcher<FetchAllEmployeesTypes[]>(`employees/`, token ?? "");
 };
@@ -331,7 +331,7 @@ export const fetchServiceByMonth = async ({
  */
 export const fetchCustomersLimit = (
   pageIndex: number,
-  previousPageData: FetchCustomersLimitProps[]
+  previousPageData: FetchCustomersLimitProps[] | null
 ) => {
   if (previousPageData && !previousPageData.length) return null;
   return `${apiUrl}/tableRoute/customers-limit/?page=${

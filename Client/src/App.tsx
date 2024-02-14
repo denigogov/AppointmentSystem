@@ -41,6 +41,7 @@ import CustomersRoot from "./pages/App/Management/Customers/CustomersRoot";
 import EmployeesRoot from "./pages/App/Management/Employees/EmployeesRoot";
 import ServicesRoot from "./pages/App/Management/Services/ServicesRoot";
 import Approvals from "./pages/App/Management/Approvals/Approvals";
+import CustomerDetails from "./pages/App/Management/Customers/CustomerDetails";
 
 const App = () => {
   const auth = useAuth();
@@ -156,7 +157,10 @@ const App = () => {
                 </OnlyOwnerAccess>
               }
             >
-              <Route path="customers" element={<CustomersRoot />} />
+              <Route path="customers" element={<CustomersRoot />}>
+                <Route path="details/:id" element={<CustomerDetails />} />
+              </Route>
+
               <Route path="employees" element={<EmployeesRoot />} />
               <Route path="service" element={<ServicesRoot />} />
               <Route path="approvals" element={<Approvals />} />

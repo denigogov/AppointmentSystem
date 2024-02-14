@@ -7,7 +7,7 @@ const appointmenQuery = require("../Database/appointmenQuery");
 const chartQuery = require("../Database/chartQuery");
 
 router
-  .get("/", verifyToken, database.getAllEmployees) // I don't use anywere but I will use in OWNER DASHBOARD
+  .get("/", verifyToken, database.getAllEmployees)
   .post("/", verifyToken, hashedPassword, database.createEmployee) // I don't use anywere but I will use in OWNER DASHBOARD
   .get("/timeManagment/:id?", verifyToken, database.employeesTimeManagment)
   .get(

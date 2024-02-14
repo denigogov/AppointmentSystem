@@ -27,6 +27,7 @@ router
     hashedPassword,
     customerEmailConfirm.createCustomer
   )
+  .delete("/customers/:id", verifyToken, customerQuery.deleteCustomer)
   .get("/customers/:id?/:type?", verifyToken, customerQuery.customerAllData)
   .get("/customers-limit", verifyToken, customerQuery.allCustomersPagination)
   .get("/customersTop5", verifyToken, customerQuery.top5Customers)

@@ -124,7 +124,7 @@ export interface FetchTop5CustomersTypes {
 
 export interface FetchAllEmployeesTypes {
   id: number;
-  employeesUserType_id: number;
+  userType_name: string;
   username: string;
   firstName: string;
   lastName: string;

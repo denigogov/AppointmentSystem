@@ -1,5 +1,7 @@
 const database = require("./database");
 const moment = require("moment");
+const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.APIEMAILKEY);
 
 const getAllServices = async (_, res) => {
   try {
@@ -112,9 +114,44 @@ const postAppointment = async (req, res) => {
       [customer_id, employee_id, service_id, scheduled_at]
     );
 
-    if (createAppointment.affectedRows) {
-      res.sendStatus(201);
-    } else throw new Error();
+    const [findCustomerEmail] = await database.query(
+      `Select email ,firstName from customers where id = ?  `,
+      [customer_id]
+    );
+
+    const customerEmail = findCustomerEmail[0]?.email ?? "";
+    const customerName = findCustomerEmail[0]?.firstName ?? "";
+
+    const message = {
+      from: {
+        email: process.env.EMAIL,
+      },
+
+      personalizations: [
+        {
+          to: [
+            {
+              email: `${customerEmail}`,
+            },
+          ],
+          subject: `Appointment Confirmation`,
+          dynamic_template_data: {
+            hour: `${scheduled_at}`,
+            date: `${scheduled_at}`,
+            employerName: `${customerName}`,
+            customerName: `${customerName}`,
+            employeePhone: `${employee_id}`,
+          },
+        },
+      ],
+      template_id: "d-705814d4e12c496980238d0777a28ecc",
+    };
+
+    sgMail.send(message).then(() => {
+      res.status(201).send("Email confirmation sent successfully.");
+    });
+
+    if (!createAppointment.affectedRows) throw new Error();
   } catch (err) {
     console.log(err);
     res.status(500).send(err.message);

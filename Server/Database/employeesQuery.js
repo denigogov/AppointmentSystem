@@ -4,7 +4,8 @@ const database = require("./database");
 const getAllEmployees = async (_, res) => {
   try {
     const [allUsers] = await database.query(
-      `SELECT id, employeesUserType_id, username, firstName, lastName, city, email, phoneNumber FROM employees where employeesUserType_id = 2 `
+      `SELECT employees.id, userType_name, username, firstName, lastName, city, email, phoneNumber FROM employees 
+      left join usertypes on employees.employeesUserType_id = usertypes.id`
     );
 
     allUsers.length ? res.status(200).send(allUsers) : res.sendStatus(404);

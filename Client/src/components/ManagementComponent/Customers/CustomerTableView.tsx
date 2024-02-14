@@ -12,12 +12,14 @@ import { apiGeneralErrorHandle } from "../../../helpers/api";
 
 interface CustomerTableViewProps {
   handleDeleteCustomer: (e: FetchCustomersLimitProps) => void;
+  handlePopUp: (e: number) => void;
 }
 
 const PAGE_SIZE = import.meta.env.VITE_PAGE_SIZE as string;
 
 const CustomerTableView: React.FC<CustomerTableViewProps> = ({
   handleDeleteCustomer,
+  handlePopUp,
 }) => {
   const { token } = useAuth();
 
@@ -36,7 +38,8 @@ const CustomerTableView: React.FC<CustomerTableViewProps> = ({
 
   const { data, size, setSize, isLoading } = useSWRInfinite(
     fetchCustomersLimit,
-    fetcher
+    fetcher,
+    { refreshInterval: 4000 } // Refreshing data every 4 secounds because of the delete btn ... mutate hook is not working inside of the event Handler because of the nature of useSWRInfinity (probably)
   );
 
   const { ref, inView } = useInView({
@@ -61,6 +64,10 @@ const CustomerTableView: React.FC<CustomerTableViewProps> = ({
 
   const submitDeleteCustomer = (e: FetchCustomersLimitProps) => {
     handleDeleteCustomer(e);
+  };
+
+  const handleDetails = (id: number) => {
+    handlePopUp(id);
   };
 
   return (
@@ -99,8 +106,13 @@ const CustomerTableView: React.FC<CustomerTableViewProps> = ({
                 <td data-cell="Confirmed">
                   {data?.confirmation === 1 ? "Yes" : "No"}
                 </td>
+
                 <td data-cell="Details">
-                  <img src={moreDetailsIcon} alt="Details Icon" />
+                  <img
+                    src={moreDetailsIcon}
+                    alt="Details Icon"
+                    onClick={() => handleDetails(data?.id)}
+                  />
                 </td>
                 <td data-cell="Delete">
                   <img

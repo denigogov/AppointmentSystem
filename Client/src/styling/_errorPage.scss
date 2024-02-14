@@ -4,6 +4,7 @@
 .errorContainer {
   background-color: colors.$background;
   width: 100%;
+  text-wrap: balance;
   height: calc(100vh - 80px);
 }
 
@@ -65,4 +66,10 @@
   100% {
     transform: rotateX(0deg);
   }
+}
+.navigateTo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 13px;
 }

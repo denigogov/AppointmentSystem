@@ -93,8 +93,25 @@ const allCustomersPagination = async (req, res) => {
     res.status(500).send(err.message);
   }
 };
+
+const deleteCustomer = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const [customer] = await database.query(
+      "DELETE FROM customers WHERE id = ? ",
+      [id]
+    );
+
+    customer.affectedRows ? res.sendStatus(202) : res.sendStatus(404);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
+
 module.exports = {
   customerAllData,
   top5Customers,
   allCustomersPagination,
+  deleteCustomer,
 };

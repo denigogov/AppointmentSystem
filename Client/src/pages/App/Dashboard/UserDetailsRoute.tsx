@@ -3,6 +3,7 @@ import useSWR from "swr";
 import { fetchCustomerData } from "../../../api/tableApi";
 import { useAuth } from "../../../helpers/Auth";
 import { CustomersDataTypes } from "../../../types/tableApiTypes";
+import ErrorPage1 from "../../ErrorPage";
 
 const UserDetailsRoute = () => {
   const selectedCustomerId = useParams();
@@ -20,7 +21,15 @@ const UserDetailsRoute = () => {
     fetchCustomerData({ id, type, token })
   );
 
-  if (customerDataError) return <h6>{customerDataError.message}</h6>;
+  if (customerDataError)
+    return (
+      <ErrorPage1
+        errorMessage="User Not Found"
+        navigateTo1={"/home"}
+        navigateTo2={"/home2"}
+      />
+    );
+
   if (customerDataLoading) return <p>loading...</p>;
 
   return (
