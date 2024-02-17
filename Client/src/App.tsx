@@ -42,6 +42,8 @@ import EmployeesRoot from "./pages/App/Management/Employees/EmployeesRoot";
 import ServicesRoot from "./pages/App/Management/Services/ServicesRoot";
 import Approvals from "./pages/App/Management/Approvals/Approvals";
 import CustomerDetails from "./pages/App/Management/Customers/CustomerDetails";
+import EmployeesEdit from "./pages/App/Management/Employees/EmployeesEdit";
+import EmployeesCreate from "./pages/App/Management/Employees/EmployeesCreate";
 
 const App = () => {
   const auth = useAuth();
@@ -161,7 +163,11 @@ const App = () => {
                 <Route path="details/:id" element={<CustomerDetails />} />
               </Route>
 
-              <Route path="employees" element={<EmployeesRoot />} />
+              <Route path="employees" element={<EmployeesRoot />}>
+                <Route path="details/:id" element={<EmployeesDetailsRoute />} />
+                <Route path="edit/:id" element={<EmployeesEdit />} />
+                <Route path="create" element={<EmployeesCreate />} />
+              </Route>
               <Route path="service" element={<ServicesRoot />} />
               <Route path="approvals" element={<Approvals />} />
             </Route>

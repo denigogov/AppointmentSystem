@@ -98,6 +98,10 @@ const deleteCustomer = async (req, res) => {
   try {
     const { id } = req.params;
 
+    if (isNaN(id)) {
+      return res.status(400).send("Invalid ID");
+    }
+
     const [customer] = await database.query(
       "DELETE FROM customers WHERE id = ? ",
       [id]

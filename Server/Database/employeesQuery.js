@@ -1,6 +1,5 @@
 const database = require("./database");
 
-// I don't use anywere but I will use in OWNER DASHBOARD
 const getAllEmployees = async (_, res) => {
   try {
     const [allUsers] = await database.query(
@@ -13,8 +12,6 @@ const getAllEmployees = async (_, res) => {
     res.sendStatus(404);
   }
 };
-
-// I don't use anywere but I will use in OWNER DASHBOARD only owner to be able to create employees user
 
 // I need also to add working time because app will be broken or I can add by default !
 const createEmployee = async (req, res) => {
@@ -138,9 +135,31 @@ const UpdateTimeManagement = async (req, res) => {
   }
 };
 
+const deleteEmployer = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (isNaN(id)) {
+      return res.status(400).send("Invalid ID");
+    }
+
+    const [findEmployerAndDelete] = await database.query(
+      `DELETE FROM employees WHERE id = ? `,
+      [id]
+    );
+
+    findEmployerAndDelete.affectedRows
+      ? res.sendStatus(202)
+      : res.sendStatus(404);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
+
 module.exports = {
   getAllEmployees,
   createEmployee,
   employeesTimeManagment,
   UpdateTimeManagement,
+  deleteEmployer,
 };

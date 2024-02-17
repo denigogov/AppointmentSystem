@@ -9,6 +9,7 @@ const chartQuery = require("../Database/chartQuery");
 router
   .get("/", verifyToken, database.getAllEmployees)
   .post("/", verifyToken, hashedPassword, database.createEmployee) // I don't use anywere but I will use in OWNER DASHBOARD
+  .delete("/:id", verifyToken, database.deleteEmployer)
   .get("/timeManagment/:id?", verifyToken, database.employeesTimeManagment)
   .get(
     "/appointmentRange/:id",

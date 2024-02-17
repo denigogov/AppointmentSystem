@@ -1,0 +1,12 @@
+.progressBar {
+  //   width: 400px;
+  height: 10px;
+  background-color: white;
+  margin-bottom: 4rem;
+
+  div {
+    width: 33.3%;
+    height: 100%;
+    background-color: red;
+  }
+}
