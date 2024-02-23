@@ -5,6 +5,7 @@ import coloringIcon from "../../../assets/ColoringIcon.svg";
 import arrowUpIcon from "../../../assets/arrowUpIcon.svg";
 import makeUpIcon from "../../../assets/makeupIcon.svg";
 import WashingIcon from "../../../assets/washingIcon.svg";
+import notFoundIcon from "../../../assets/notFoundIcon.svg";
 
 interface DashbBoxViewProp {
   iconName?: string;
@@ -25,9 +26,10 @@ const DashBoxProcentView = ({
     Coloring: coloringIcon,
     MakeUp: makeUpIcon,
     Washing: WashingIcon,
+    NotFound: notFoundIcon,
   };
   // Use the iconName prop to get the corresponding icon path from the map
-  const iconPath = iconName ? iconMap[iconName] : undefined;
+  const iconPath = iconName ? iconMap[iconName] : notFoundIcon;
 
   return (
     <div className="dashBoxProcentView--wrap">

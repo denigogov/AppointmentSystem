@@ -76,7 +76,6 @@ LEFT JOIN (
   GROUP BY
     servicesName, bestEmployer
 ) bestEmployeeData ON servicesData.servicesName = bestEmployeeData.servicesName AND bestEmployeeData.rankAlias = 1;
-
       `
     );
 

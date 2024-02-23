@@ -1,6 +1,6 @@
 const database = require("./database");
 
-const getAllEmployees = async (_, res) => {
+const getAllEmployees = async (req, res) => {
   try {
     const [allUsers] = await database.query(
       `SELECT employees.id, userType_name, username, firstName, lastName, city, email, phoneNumber FROM employees 
@@ -13,12 +13,27 @@ const getAllEmployees = async (_, res) => {
   }
 };
 
-// I need also to add working time because app will be broken or I can add by default !
+const getSingleEmployer = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const [allUsers] = await database.query(
+      `SELECT employees.id, userType_name, username, firstName, lastName, city, email, phoneNumber FROM employees 
+      left join usertypes on employees.employeesUserType_id = usertypes.id
+     ${id ? "where employees.id = ?" : ""}`,
+      [id]
+    );
+
+    allUsers.length ? res.status(200).send(allUsers) : res.sendStatus(404);
+  } catch (err) {
+    res.sendStatus(404);
+  }
+};
+
 const createEmployee = async (req, res) => {
   try {
     const {
       employeesUserType_id,
-      username,
       firstName,
       lastName,
       city,
@@ -27,11 +42,10 @@ const createEmployee = async (req, res) => {
       password,
     } = req.body;
 
-    const [allAppointments] = await database.query(
-      "insert into employees (employeesUserType_id, username, firstName,lastName, city, email, phoneNumber, password) values(?,?,?,?,?,?,?,?)",
+    const [createEmployerQuery] = await database.query(
+      "insert into employees (employeesUserType_id,  firstName,lastName, city, email, phoneNumber, password) values(?,?,?,?,?,?,?)",
       [
         employeesUserType_id,
-        username,
         firstName,
         lastName,
         city,
@@ -40,9 +54,65 @@ const createEmployee = async (req, res) => {
         password,
       ]
     );
-    if (allAppointments.affectedRows) {
-      res.sendStatus(201);
+    createEmployerQuery.affectedRows
+      ? res.sendStatus(201)
+      : res.sendStatus(400);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
+
+const updateEmployer = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const { firstName, lastName, city, email, phoneNumber, password } =
+      req.body;
+
+    console.log("body", req.body);
+
+    const updateFields = [];
+    const updateValues = [];
+
+    console.log(`${updateFields} : ${updateValues}`);
+
+    if (firstName !== undefined) {
+      updateFields.push("firstName = ?");
+      updateValues.push(firstName);
     }
+    if (lastName !== undefined) {
+      updateFields.push("lastName = ?");
+      updateValues.push(lastName);
+    }
+    if (city !== undefined) {
+      updateFields.push("city = ?");
+      updateValues.push(city);
+    }
+    if (email !== undefined) {
+      updateFields.push("email = ?");
+      updateValues.push(email);
+    }
+    if (phoneNumber !== undefined) {
+      updateFields.push("phoneNumber = ?");
+      updateValues.push(phoneNumber);
+    }
+
+    // BUG I need to fix password when its created to be hashed !
+    if (password !== undefined) {
+      updateFields.push("password = ?");
+      updateValues.push(password);
+    }
+
+    const updateEmployer = `UPDATE employees SET ${updateFields.join(
+      ", "
+    )} WHERE id = ?`;
+
+    const [updateTable] = await database.query(updateEmployer, [
+      ...updateValues,
+      id,
+    ]);
+
+    updateTable.affectedRows ? res.sendStatus(200) : res.sendStatus(400);
   } catch (err) {
     res.status(500).send(err.message);
   }
@@ -156,10 +226,40 @@ const deleteEmployer = async (req, res) => {
   }
 };
 
+const userTypesTable = async (_, res) => {
+  try {
+    const [usersTypes] = await database.query("SELECT * FROM usertypes");
+
+    usersTypes.length ? res.status(200).send(usersTypes) : res.sendStatus(404);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
+
+const createEmployerWorkTime = async (req, res) => {
+  try {
+    const { startHour, endHour, startMinute, endMinute, employee_id } =
+      req.body;
+
+    const [createWorkTime] = await database.query(
+      "INSERT INTO  timemanagment  ( startHour, endHour, startMinute, endMinute, employee_id ) values(?,?,?,?,?)",
+      [startHour, endHour, startMinute, endMinute, employee_id]
+    );
+
+    createWorkTime.affectedRows ? res.sendStatus(201) : res.sendStatus(400);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
+
 module.exports = {
   getAllEmployees,
   createEmployee,
   employeesTimeManagment,
   UpdateTimeManagement,
   deleteEmployer,
+  userTypesTable,
+  createEmployerWorkTime,
+  getSingleEmployer,
+  updateEmployer,
 };

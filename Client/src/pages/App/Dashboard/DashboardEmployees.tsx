@@ -141,15 +141,6 @@ const DashboardEmployees = ({ setPopupOpen }: DashboardEmployeeProps) => {
   );
 
   if (
-    appointmentsByDataRangeError ||
-    serviceProcentCalcError ||
-    appointmentsByHourRangeError ||
-    allAppointmentsByDayError ||
-    totalAppointmentsError ||
-    servicesEmpolyeesError
-  )
-    return <h6>{"error happen"}</h6>;
-  if (
     servicesEmpolyeesLoading ||
     appointmentsByDataRangeLoading ||
     serviceProcentCalcLoading ||
@@ -172,9 +163,20 @@ const DashboardEmployees = ({ setPopupOpen }: DashboardEmployeeProps) => {
               <ByDayChart allAppointmentsByDay={allAppointmentsByDay} />
             </div>
             <div className="dashboardEmployees__statistic--procent">
-              <DashBoxProcentContainer
-                serviceProcentCalc={serviceProcentCalc ?? []}
-              />
+              {serviceProcentCalc ? (
+                <DashBoxProcentContainer
+                  serviceProcentCalc={serviceProcentCalc}
+                />
+              ) : (
+                <p
+                  style={{
+                    textAlign: "center",
+                  }}
+                >
+                  Service percentage data is available only when you have
+                  appointments scheduled.
+                </p>
+              )}
             </div>
           </div>
           <div className="employees__left--bottom">

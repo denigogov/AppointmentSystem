@@ -95,7 +95,16 @@ const App = () => {
           }
         >
           <Route index element={<Dashboard />} />
-          <Route path="dashboard" element={<Dashboard />}>
+          <Route
+            path="dashboard"
+            element={<Dashboard />}
+            errorElement={
+              <ErrorPage
+                errorMessage="Something Went Very Wrong"
+                navigateTo1="/app/dashboard"
+              />
+            }
+          >
             <Route
               path="user-details/:id"
               element={
@@ -158,6 +167,7 @@ const App = () => {
                   <ManagementRoot />
                 </OnlyOwnerAccess>
               }
+              errorElement={<ErrorPage navigateTo1="/app/dashboard" />}
             >
               <Route path="customers" element={<CustomersRoot />}>
                 <Route path="details/:id" element={<CustomerDetails />} />
@@ -183,6 +193,12 @@ const App = () => {
           element={
             <ErrorPage
               errorMessage="Page Not Found"
+              navigateTo1="/app/dashboard"
+            />
+          }
+          errorElement={
+            <ErrorPage
+              errorMessage="Something Went Very Wrong"
               navigateTo1="/app/dashboard"
             />
           }

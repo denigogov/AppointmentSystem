@@ -1,12 +1,48 @@
-.progressBar {
-  //   width: 400px;
-  height: 10px;
-  background-color: white;
-  margin-bottom: 4rem;
+@use "../../mixin";
+@use "../../general";
+@use "../../colors";
 
-  div {
-    width: 33.3%;
-    height: 100%;
-    background-color: red;
+.multiForm-employees__container {
+  padding: 2rem 0;
+  @include mixin.overflowScroll;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (max-width: general.$lg) {
+    align-items: none;
+  }
+}
+
+.form__container {
+  padding: 2rem;
+  margin: 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+
+  input[type="text"],
+  input[type="email"],
+  input[type="phone"],
+  input[type="number"],
+  input[type="password"],
+  input[type="tel"],
+  select {
+    @include mixin.input;
+  }
+
+  label {
+    color: colors.$font-Primary;
+  }
+}
+
+.multiForm__button-wrap {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  button {
+    @include mixin.saveAddBtn;
   }
 }

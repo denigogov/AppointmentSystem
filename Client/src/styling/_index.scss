@@ -1,5 +1,6 @@
 @use "./general";
 @use "./colors";
+@use "./mixin";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 * {
@@ -63,4 +64,29 @@ a.active {
 // Remove the PromptAlert outline border !
 .swal2-popup .swal2-styled:focus {
   box-shadow: none !important;
+}
+
+// Global Styling Classes
+.form__container--edit {
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+
+  input[type="text"],
+  input[type="email"],
+  input[type="phone"],
+  input[type="number"],
+  input[type="password"],
+  input[type="tel"],
+  select {
+    @include mixin.input;
+  }
+
+  label {
+    color: colors.$font-Primary;
+  }
+}
+
+.button__submit {
+  @include mixin.saveAddBtn;
 }

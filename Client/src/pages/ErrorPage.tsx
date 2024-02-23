@@ -2,7 +2,7 @@ import "../styling/_errorPage.scss";
 import { Link, useLocation } from "react-router-dom";
 
 interface ErrorProps {
-  errorMessage: string;
+  errorMessage?: string;
   navigateTo1?: any;
   navigateTo2?: any;
 }
@@ -16,7 +16,7 @@ const ErrorPage1 = ({ errorMessage, navigateTo1, navigateTo2 }: ErrorProps) => {
         <div className="message">
           <h2>Oops! Something went wrong</h2>
           <p style={{ color: "#636363", fontSize: "13px" }}>
-            {apiUrl}
+            {apiUrl} <br />
             {pathname}
           </p>
           <p>

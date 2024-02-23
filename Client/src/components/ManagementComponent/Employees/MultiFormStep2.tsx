@@ -1,47 +1,43 @@
+import { AllServicesTypes } from "../../../types/tableApiTypes";
 import MultiFormWraper from "./MultiFormWraper";
-
-type UserData = {
-  phone: string;
-  blabla: string;
-  blabla2: string;
-};
+import LoadingRing from "../../loadingRing";
+import React from "react";
 
 // Partial is makeing the userDataProps optional!!
-type MultiFormStep2Props = UserData & {
-  updateFileds: (fileds: Partial<UserData>) => void;
+type MultiFormStep2Props = {
+  allServices?: AllServicesTypes[];
+  checkboxData: number[];
+  setCheckBoxData: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
 const MultiFormStep2: React.FC<MultiFormStep2Props> = ({
-  updateFileds,
-  phone,
-  blabla,
-  blabla2,
+  allServices,
+  checkboxData,
+  setCheckBoxData,
 }) => {
+  const handleCheckbox = (serviceId: number) => {
+    if (checkboxData.includes(serviceId)) {
+      setCheckBoxData(checkboxData.filter((id) => id !== serviceId));
+    } else {
+      setCheckBoxData([...checkboxData, serviceId]);
+    }
+  };
   return (
-    <MultiFormWraper title="Step 2">
-      <label>Phone</label>
-      <input
-        type="text"
-        required
-        autoFocus
-        value={phone}
-        onChange={(e) => updateFileds({ phone: e.target.value })}
-      />
-      <label>Blabla1</label>
-      <input
-        type="text"
-        required
-        value={blabla}
-        onChange={(e) => updateFileds({ blabla: e.target.value })}
-      />
-
-      <label>Number</label>
-      <input
-        type="tel"
-        maxLength={15}
-        value={blabla2}
-        onChange={(e) => updateFileds({ blabla2: e.target.value })}
-      />
+    <MultiFormWraper title="Add New Services">
+      {allServices?.length ? (
+        allServices?.map((service) => (
+          <React.Fragment key={service.id}>
+            <label>{service?.servicesName ?? "Not Found"}</label>
+            <input
+              type="checkbox"
+              checked={checkboxData.includes(service.id)}
+              onChange={() => handleCheckbox(service.id)}
+            />
+          </React.Fragment>
+        ))
+      ) : (
+        <LoadingRing />
+      )}
     </MultiFormWraper>
   );
 };

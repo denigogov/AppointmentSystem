@@ -26,6 +26,24 @@ const updateUserSchema = Joi.object({
   city: Joi.string().min(3).max(20),
 });
 
+const createEmployee = Joi.object({
+  employeesUserType_id: Joi.number(),
+  firstName: Joi.string().min(3).max(16).required(),
+  lastName: Joi.string().min(3).max(16),
+  city: Joi.string().min(3).max(16),
+  email: Joi.string().email().required(),
+  phoneNumber: Joi.string().min(5).max(16).required(),
+  password: Joi.string(),
+});
+
+const createEmployerWorkTimeSchema = Joi.object({
+  startHour: Joi.number().greater(-1).less(25),
+  endHour: Joi.number().greater(-1).less(25),
+  startMinute: Joi.number().greater(-1).less(60),
+  endMinute: Joi.number().greater(-1).less(60),
+  employee_id: Joi.number(),
+});
+
 const validateCustomer = (req, res, next) => {
   const { firstName, lastName, email, password, phoneNumber } = req.body;
 
@@ -75,4 +93,61 @@ const validateUpdateUser = (req, res, next) => {
   }
 };
 
-module.exports = { validateCustomer, validateUpdateUser };
+const validateEmployer = (req, res, next) => {
+  const {
+    employeesUserType_id,
+    firstName,
+    lastName,
+    city,
+    email,
+    phoneNumber,
+    password,
+  } = req.body;
+
+  const { error } = createEmployee.validate(
+    {
+      employeesUserType_id,
+      firstName,
+      lastName,
+      city,
+      email,
+      phoneNumber,
+      password,
+    },
+    { abortEarly: false }
+  );
+
+  if (error) {
+    res.status(422).json({ validationErrors: error.details });
+  } else {
+    next();
+  }
+};
+
+const validateCreateEmployerWorkTime = (req, res, next) => {
+  const { startHour, endHour, startMinute, endMinute, employee_id } = req.body;
+
+  const { error } = createEmployerWorkTimeSchema.validate(
+    {
+      startHour,
+      endHour,
+      startMinute,
+      endMinute,
+      employee_id,
+    },
+    { abortEarly: false }
+  );
+
+  if (error) {
+    res.status(422).json({ validationErrors: error.details });
+  } else {
+    next();
+  }
+};
+
+module.exports = {
+  validateCustomer,
+  validateUpdateUser,
+  validateEmployer,
+  validateCreateEmployerWorkTime,
+};

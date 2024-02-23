@@ -32,7 +32,9 @@ export const succesMessageNoBtn = (title: string) => {
   return Swal.fire({
     position: "center",
     icon: "success",
-    title: title,
+    iconColor: "#ffda79",
+    title: "Created!",
+    text: title,
     showConfirmButton: false,
     timer: 1500,
   });

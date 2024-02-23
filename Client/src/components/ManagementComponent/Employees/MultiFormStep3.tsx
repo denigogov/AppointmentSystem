@@ -1,44 +1,57 @@
+import { RestDataProsp } from "../../../pages/App/Management/Employees/EmployeesCreate";
 import MultiFormWraper from "./MultiFormWraper";
 
-type UserData = {
-  age1: string;
-  mejdz: string;
-  kukuraK: string;
+// Partial is makeing the userDataProps optional!!
+type MultiFormStep3Props = RestDataProsp & {
+  updateFileds: (fileds: Partial<RestDataProsp>) => void;
 };
 
-// Partial is makeing the userDataProps optional!!
-type MultiFormStep3Props = UserData & {
-  updateFileds: (fileds: Partial<UserData>) => void;
-};
 const MultiFormStep3: React.FC<MultiFormStep3Props> = ({
   updateFileds,
-  age1,
-  mejdz,
-  kukuraK,
+  startHour,
+  endHour,
+  startMinute,
+  endMinute,
 }) => {
   return (
     <MultiFormWraper title="Step 3">
-      <label>Age1</label>
+      <label>Start Hour</label>
       <input
-        type="text"
-        required
+        type="number"
+        placeholder="Start hour (e.g., 9)"
+        min="1"
+        max="24"
         autoFocus
-        value={age1}
-        onChange={(e) => updateFileds({ age1: e.target.value })}
+        value={startHour}
+        onChange={(e) => updateFileds({ startHour: +e.target.value })}
       />
-      <label>Nekaaa</label>
+      <label>End Hour</label>
       <input
-        type="text"
-        required
-        value={mejdz}
-        onChange={(e) => updateFileds({ mejdz: e.target.value })}
+        type="number"
+        placeholder="End hour (e.g, 17)"
+        min="1"
+        max="24"
+        value={endHour}
+        onChange={(e) => updateFileds({ endHour: +e.target.value })}
       />
-      <label>Number</label>
+      <label>Start Minute</label>
       <input
-        type="tel"
-        maxLength={15}
-        value={kukuraK}
-        onChange={(e) => updateFileds({ kukuraK: e.target.value })}
+        type="number"
+        placeholder="Start minute (e.g., 00)"
+        min="0"
+        max="60"
+        value={startMinute}
+        onChange={(e) => updateFileds({ startMinute: +e.target.value })}
+      />
+
+      <label>End Minute</label>
+      <input
+        type="number"
+        placeholder="End minute (e.g., 30)"
+        min="0"
+        max="60"
+        value={endMinute}
+        onChange={(e) => updateFileds({ endMinute: +e.target.value })}
       />
     </MultiFormWraper>
   );

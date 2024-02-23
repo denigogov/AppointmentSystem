@@ -42,7 +42,7 @@ const ServiceRequest = () => {
     error: allServicesError,
     isLoading: allServicesLoading,
   } = useSWR<AllServicesTypes[]>(["allServices", token], () =>
-    fetchAllServices({ token })
+    fetchAllServices(token)
   );
 
   const filterNewServices = allServices?.filter((service) => {
@@ -75,6 +75,8 @@ const ServiceRequest = () => {
     selectedServices.includes(service.servicesName)
   );
 
+  console.log(selectedServiceId);
+
   const queryData = selectedServiceId
     ? selectedServiceId.map((service) => {
         const data = {
@@ -85,6 +87,7 @@ const ServiceRequest = () => {
       })
     : [];
 
+  console.log(queryData);
   const postSelectedServices = async () => {
     try {
       const res = await fetch(`${apiUrl}/tableRoute/serviceemloyees/`, {

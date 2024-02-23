@@ -50,16 +50,17 @@ const addNewEmployeesService = async (req, res) => {
     }
 
     const insertionPromises = serviceEmployeePairs.map(
-      async ({ services_id, employees_id }) => {
+      async ({ services_id, employees_id, approved }) => {
         const [addService] = await database.query(
-          `INSERT INTO serviceemployee (services_id, employees_id) VALUES (?, ?)`,
-          [services_id, employees_id]
+          `INSERT INTO serviceemployee (services_id, employees_id,approved) VALUES (?, ?, ?)`,
+          [services_id, employees_id, approved || null]
         );
 
         return addService.affectedRows;
       }
     );
 
+    console.log(serviceEmployeePairs);
     const results = await Promise.all(insertionPromises);
     const success = results.some((affectedRows) => affectedRows > 0);
 

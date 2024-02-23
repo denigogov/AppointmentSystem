@@ -83,7 +83,7 @@ const DashboardOwner: React.FC<DashboardOwnerProps> = ({ setPopupOpen }) => {
     data: allEmployees,
     error: allEmployeesError,
     isLoading: allEmployeesLoading,
-  } = useSWR<FetchAllEmployeesTypes[]>(["allCustomers", token], () =>
+  } = useSWR<FetchAllEmployeesTypes[]>(["allEmployees", token], () =>
     fetchAllEmployees(token ?? "")
   );
 
@@ -120,10 +120,19 @@ const DashboardOwner: React.FC<DashboardOwnerProps> = ({ setPopupOpen }) => {
     error: allServicesError,
     isLoading: allServiceshLoading,
   } = useSWR<AllServicesTypes[]>(["allServices", token], () =>
-    fetchAllServices({ token })
+    fetchAllServices(token ?? "")
   );
 
-  if (top5CustomersError || allEmployeesError || allAppointmentsByDayError)
+  if (
+    top5CustomersError ||
+    allEmployeesError ||
+    allAppointmentsByDayError ||
+    allServicesError ||
+    totalMoneyAppServiceError ||
+    dataByServiceError ||
+    serviceByMonthError ||
+    allAppointmentsByDayError
+  )
     return (
       <h6>
         {top5CustomersError?.message ||

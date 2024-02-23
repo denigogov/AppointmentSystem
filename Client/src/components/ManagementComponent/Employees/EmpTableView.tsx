@@ -2,6 +2,7 @@ import addUserIcon from "../../../assets/addCreateIcon.svg";
 import moreDetailsIcon from "../../../assets/customerMoreDetailsIcon.svg";
 import deleteIcon from "../../../assets/deleteIcon.svg";
 import editIcon from "../../../assets/editUserIcon.svg";
+import { useAuth } from "../../../helpers/Auth";
 import { FetchAllEmployeesTypes } from "../../../types/tableApiTypes";
 
 interface EmpTableViewProps {
@@ -21,6 +22,9 @@ const EmpTableView: React.FC<EmpTableViewProps> = ({
 }) => {
   //Target for Mobile Phone because of the Create employees Icon
   const isPhone: boolean = window.innerWidth < 768; // or lg 1024px
+  const auth = useAuth();
+  // Prevent Delete of current user
+  const preventDeleteCurrentUser = auth.userInfo?.id;
 
   return (
     // Styling inside of employeerRoot component
@@ -79,11 +83,13 @@ const EmpTableView: React.FC<EmpTableViewProps> = ({
                   />
                 </td>
                 <td data-cell="Delete">
-                  <img
-                    src={deleteIcon}
-                    alt="deleteIcon"
-                    onClick={() => handleDeleteClick(employees)}
-                  />
+                  {preventDeleteCurrentUser !== employees?.id && (
+                    <img
+                      src={deleteIcon}
+                      alt="deleteIcon"
+                      onClick={() => handleDeleteClick(employees)}
+                    />
+                  )}
                 </td>
               </tr>
             ))

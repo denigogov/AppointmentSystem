@@ -1,8 +1,20 @@
 import "../styling/_progressBar.scss";
 
-const ProgressBar = ({ currentStepIndex }: { currentStepIndex: number }) => {
+type ProgressBarProps = {
+  currentStepIndex: number;
+  step1Name: string;
+  step2Name: string;
+  step3Name: string;
+};
+
+const ProgressBar: React.FC<ProgressBarProps> = ({
+  currentStepIndex,
+  step1Name,
+  step2Name,
+  step3Name,
+}) => {
   return (
-    <div>
+    <div className="progressBar__wraper">
       <section className="step-wizard">
         <ul className="step-wizard-list">
           <li
@@ -13,7 +25,7 @@ const ProgressBar = ({ currentStepIndex }: { currentStepIndex: number }) => {
             }
           >
             <span className="progress-count">1</span>
-            <span className="progress-label">Employer Info</span>
+            <span className="progress-label">{step1Name ?? ""}</span>
           </li>
           <li
             className={
@@ -23,7 +35,7 @@ const ProgressBar = ({ currentStepIndex }: { currentStepIndex: number }) => {
             }
           >
             <span className="progress-count">2</span>
-            <span className="progress-label">Work Time</span>
+            <span className="progress-label">{step2Name ?? ""}</span>
           </li>
           <li
             className={
@@ -33,7 +45,7 @@ const ProgressBar = ({ currentStepIndex }: { currentStepIndex: number }) => {
             }
           >
             <span className="progress-count">3</span>
-            <span className="progress-label">Authorisation</span>
+            <span className="progress-label">{step3Name ?? ""}</span>
           </li>
         </ul>
       </section>

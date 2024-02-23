@@ -22,7 +22,7 @@ const EmployeesRoot = ({}) => {
     data: allEmployees,
     error: allEmployeesError,
     isLoading: allEmployeesLoading,
-  } = useSWR<FetchAllEmployeesTypes[]>(["allCustomers", token], () =>
+  } = useSWR<FetchAllEmployeesTypes[]>(["allEmployees", token], () =>
     fetchAllEmployees(token ?? "")
   );
 
@@ -72,7 +72,7 @@ const EmployeesRoot = ({}) => {
         });
 
         if (res.ok) {
-          mutate(["allCustomers", token]);
+          mutate(["allEmployees", token]);
 
           // prompt after user click delete
           deleteActionPrompt();

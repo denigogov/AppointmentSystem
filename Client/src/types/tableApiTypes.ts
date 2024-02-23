@@ -163,6 +163,11 @@ export interface FetchCustomersLimitProps {
   gender: string;
 }
 
+export interface FetchUserTypesProps {
+  id: number;
+  userType_name: string;
+}
+
 // Best Way  to set USESTATE as prop
 // setAnyState: React.Dispatch<React.SetStateAction<TYPE>>
 //  Add useState TYPE !

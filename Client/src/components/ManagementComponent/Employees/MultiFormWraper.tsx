@@ -1,8 +1,9 @@
 import { ReactNode } from "react";
+import "../../../styling/Components/management components/_multiFormWraper.scss";
 
 interface MultiFormWraperProps {
   children: ReactNode;
-  title: string;
+  title?: string;
 }
 
 const MultiFormWraper: React.FC<MultiFormWraperProps> = ({
@@ -11,17 +12,8 @@ const MultiFormWraper: React.FC<MultiFormWraperProps> = ({
 }) => {
   return (
     <>
-      <h3 style={{ color: "blue", marginBottom: "2rem" }}>{title}</h3>
-      <div
-        style={{
-          display: "grid",
-          gap: "1rem .5rem",
-          justifyContent: "flex-start",
-          gridTemplateColumns: "auto minmax(auto,400px)",
-        }}
-      >
-        {children}
-      </div>
+      {title && <h3 className="multiFormWraper__title">{title}</h3>}
+      <div className="multiForm-wrap__children">{children}</div>
     </>
   );
 };

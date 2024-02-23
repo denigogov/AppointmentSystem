@@ -3,26 +3,28 @@ import { fetchServiceProcentCurrentMonthTypes } from "../../../types/tableApiTyp
 import DashBoxProcentView from "./DashBoxProcentView";
 
 interface DashBoxProcentContainerProps {
-  serviceProcentCalc: fetchServiceProcentCurrentMonthTypes[];
+  serviceProcentCalc?: fetchServiceProcentCurrentMonthTypes[];
 }
-const DashBoxProcentContainer = ({
+const DashBoxProcentContainer: React.FC<DashBoxProcentContainerProps> = ({
   serviceProcentCalc,
-}: DashBoxProcentContainerProps) => {
+}) => {
   return (
     <div
       className={
-        serviceProcentCalc.length > 4
+        !serviceProcentCalc?.length ?? 0 > 4
           ? "dashBox--container-wrap dashBox--container-wrapExtraHigh"
           : "dashBox--container-wrap"
       }
     >
-      {serviceProcentCalc.map((arr, i) => {
+      {serviceProcentCalc?.map((arr, i) => {
         return (
           <div className="dashBoxProcentView-container" key={i}>
             <DashBoxProcentView
-              serviceTitle={arr?.servicesName}
-              iconName={arr?.servicesName}
-              totalAppointments={arr?.currentMonthAppointments}
+              serviceTitle={arr?.servicesName ?? "No Avaiable Data"}
+              iconName={arr?.servicesName ?? "NotFound"}
+              totalAppointments={
+                arr?.currentMonthAppointments ?? "No Avaiable Data"
+              }
               procentCalc={arr?.percentageDifference ?? 0}
             />
           </div>

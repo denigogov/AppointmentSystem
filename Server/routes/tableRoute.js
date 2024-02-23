@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
+const {
+  validateCreateEmployerWorkTime,
+} = require("../Validations/tableQueryValidation");
 const database = require("../Database/appointmenQuery");
 const customerEmailConfirm = require("../Database/emailConfirm");
 const customerQuery = require("../Database/customerQuery");
@@ -29,6 +32,7 @@ router
   )
   .delete("/customers/:id", verifyToken, customerQuery.deleteCustomer)
   .get("/customers/:id?/:type?", verifyToken, customerQuery.customerAllData)
+  .get("/userTypes", verifyToken, employeeQuery.userTypesTable)
   .get("/customers-limit", verifyToken, customerQuery.allCustomersPagination)
   .get("/customersTop5", verifyToken, customerQuery.top5Customers)
   .get("/confirm", customerEmailConfirm.customerConfirm) // not need to add verify token !
@@ -42,6 +46,12 @@ router
     verifyToken,
     accountsQuery.updateUserData
   )
-  .put("/timeManagement/:id", verifyToken, employeeQuery.UpdateTimeManagement);
+  .put("/timeManagement/:id", verifyToken, employeeQuery.UpdateTimeManagement)
+  .post(
+    "/timeManagement",
+    verifyToken,
+    validateCreateEmployerWorkTime,
+    employeeQuery.createEmployerWorkTime
+  );
 
 module.exports = router;

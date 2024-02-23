@@ -25,7 +25,7 @@ interface ByDayChartProps {
   allAppointmentsByDay?: FetchAppointmentsByDayAndTotalTypes[];
 }
 
-const ByDayChart = ({ allAppointmentsByDay }: ByDayChartProps) => {
+const ByDayChart: React.FC<ByDayChartProps> = ({ allAppointmentsByDay }) => {
   // interface OptionsType {
   //   maintainAspectRatio: boolean;
 
@@ -70,11 +70,15 @@ const ByDayChart = ({ allAppointmentsByDay }: ByDayChartProps) => {
     },
   };
 
-  const labels = allAppointmentsByDay?.map((arr) => arr?.weekDay);
+  const labels = allAppointmentsByDay?.map((arr) => arr?.weekDay) ?? [
+    "Not Found",
+  ];
   const currentMonth = allAppointmentsByDay?.map(
     (arr) => arr.currentMonthOrders
-  );
-  const totalYear = allAppointmentsByDay?.map((arr) => arr.totalOrders);
+  ) ?? [0, 0, 0];
+  const totalYear = allAppointmentsByDay?.map((arr) => arr.totalOrders) ?? [
+    0, 0, 0,
+  ];
 
   const data = {
     labels,

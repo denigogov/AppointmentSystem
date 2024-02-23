@@ -27,6 +27,7 @@ export const useMultiStepFormEmployees = (steps: ReactElement[]) => {
     previuse,
     steps,
     isFirstStep: currentStepIndex === 0,
+    isSecoundStep: currentStepIndex === 1,
     isLastStep: currentStepIndex === steps.length - 1,
   };
 };

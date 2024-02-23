@@ -17,6 +17,7 @@ import {
   FetchDataByServiceProps,
   FetchServiceByMonthProps,
   FetchCustomersLimitProps,
+  FetchUserTypesProps,
 } from "../types/tableApiTypes";
 
 const apiUrl = import.meta.env.VITE_API_URL as string;
@@ -57,7 +58,7 @@ export const apiFetcher = async <T>(url: string, token: string) => {
  * @returns all aproved and unemproved services !
  */
 
-export const fetchAllServices = async ({ token }: { token?: string }) => {
+export const fetchAllServices = async (token?: string) => {
   return apiFetcher<AllServicesTypes[]>(`tableRoute/services`, token || "");
 };
 
@@ -266,6 +267,23 @@ export const fetchAllEmployees = async (token: string) => {
   return apiFetcher<FetchAllEmployeesTypes[]>(`employees/`, token ?? "");
 };
 
+// THEY ARE THE SAME BUT ONE IS FETCHING SINGLE EMPLOYER ANOTHER ONE ALL EMPLOYEERS ...THE PROBLEM IS IN THE BACKEND I NEED TO FIX when I add param in the root the another api are brake thats why I add separte till I found solution
+
+/**
+ * @param employerId Optional!
+ * @param token
+ * @returns Fetch all Employees also single Employer
+ */
+export const fetchSingleEmployees = async (
+  token: string,
+  employerId?: string
+) => {
+  return apiFetcher<FetchAllEmployeesTypes[]>(
+    `employees/singleEmployer/${employerId ? employerId : ""}`,
+    token ?? ""
+  );
+};
+
 /**
  *
  * @param startDate optional
@@ -337,4 +355,13 @@ export const fetchCustomersLimit = (
   return `${apiUrl}/tableRoute/customers-limit/?page=${
     pageIndex + 1
   }&limit=${PAGE_SIZE}`; // SWR key
+};
+
+/**
+ *
+ * @param token
+ * @returns Return All userTypes not employees types !
+ */
+export const fetchUserTypes = async (token?: string) => {
+  return apiFetcher<FetchUserTypesProps[]>(`tableRoute/userTypes`, token ?? "");
 };
