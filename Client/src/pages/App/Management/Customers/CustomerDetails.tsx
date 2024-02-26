@@ -3,6 +3,7 @@ import { useAuth } from "../../../../helpers/Auth";
 import useSWR from "swr";
 import { CustomersDataTypes } from "../../../../types/tableApiTypes";
 import { fetchCustomerData } from "../../../../api/tableApi";
+import UnderConstruction from "../../../UnderConstruction";
 
 interface CustomerDetails {}
 
@@ -27,7 +28,7 @@ const CustomerDetails: React.FC<CustomerDetails> = ({}) => {
 
   return (
     <div>
-      <strong>
+      {/* <strong>
         Maybe I can add new Route -- Appointment Details and only customer Info{" "}
         Ideas:
       </strong>
@@ -46,7 +47,9 @@ const CustomerDetails: React.FC<CustomerDetails> = ({}) => {
       <br />
       <strong>
         I can do the same view as in the dashboard when owner click
-      </strong>
+      </strong> */}
+
+      <UnderConstruction titleText="View" />
     </div>
   );
 };

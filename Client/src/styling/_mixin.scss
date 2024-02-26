@@ -148,6 +148,7 @@
 }
 
 // Edit btn in Employee Time Management
+// Only avaiable on White Background
 @mixin editButton() {
   width: 100px;
   height: 40px;
@@ -302,6 +303,7 @@
   }
 }
 
+// Example inside of the owner account top
 @mixin hoverCardsEffect {
   //on hover  //Artist: Temani Afif
 

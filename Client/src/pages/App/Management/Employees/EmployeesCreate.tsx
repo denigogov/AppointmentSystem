@@ -74,6 +74,8 @@ const EmployeesCreate = () => {
   const [lastEmployeeId, setLastEmployeeId] = useState<number | null>(null);
   const [stepOneSuccess, setStepOneSuccess] = useState<boolean>(false);
 
+  const isOwner = userData.employeesUserType_id === 3;
+
   const updateFileds = (
     fileds: Partial<EmployeesCreateProps | RestDataProsp>
   ) => {
@@ -208,7 +210,7 @@ const EmployeesCreate = () => {
       );
 
       if (res.ok || sendWorkTime.ok) {
-        succesMessageNoBtn("Employer Created");
+        succesMessageNoBtn("Employer Account Created");
       } else throw new Error(`${res.statusText}`);
     } catch (err) {
       apiGeneralErrorHandle(err);
@@ -237,6 +239,13 @@ const EmployeesCreate = () => {
   useEffect(() => {
     if (stepOneSuccess && isFirstStep) {
       next(); // Move to the next step
+    }
+
+    // When is Owner Account Created !
+    if (isOwner) {
+      succesMessageNoBtn("Owner Account Created");
+      setPopupOpen((e) => !e);
+      navigate("/app/management/employees/");
     }
   }, [stepOneSuccess]);
 

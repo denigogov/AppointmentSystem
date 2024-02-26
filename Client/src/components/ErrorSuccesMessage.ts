@@ -63,3 +63,30 @@ export const deleteActionPrompt = () =>
     showConfirmButton: false,
     timer: 1500,
   });
+
+export const confirmUpdatePrompt = (
+  title: string,
+  htmlText: string,
+  confirmBtnText: string
+) =>
+  Swal.fire({
+    title: title,
+    html: htmlText,
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#ffda79",
+    cancelButtonColor: "#b7b7b7",
+    confirmButtonText: confirmBtnText,
+  });
+
+export const updateActionPrompt = (title: string, htmlText: string) => {
+  Swal.fire({
+    position: "center",
+    icon: "success",
+    iconColor: "#ffda79",
+    title: title,
+    text: htmlText,
+    showConfirmButton: false,
+    timer: 2000,
+  });
+};

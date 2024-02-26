@@ -1,4 +1,5 @@
 const database = require("./database");
+const { hashedPassword } = require("../auth");
 
 const getAllEmployees = async (req, res) => {
   try {
@@ -69,12 +70,8 @@ const updateEmployer = async (req, res) => {
     const { firstName, lastName, city, email, phoneNumber, password } =
       req.body;
 
-    console.log("body", req.body);
-
     const updateFields = [];
     const updateValues = [];
-
-    console.log(`${updateFields} : ${updateValues}`);
 
     if (firstName !== undefined) {
       updateFields.push("firstName = ?");
@@ -97,7 +94,6 @@ const updateEmployer = async (req, res) => {
       updateValues.push(phoneNumber);
     }
 
-    // BUG I need to fix password when its created to be hashed !
     if (password !== undefined) {
       updateFields.push("password = ?");
       updateValues.push(password);

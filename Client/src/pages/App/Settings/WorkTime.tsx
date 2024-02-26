@@ -5,6 +5,10 @@ import { useAuth } from "../../../helpers/Auth";
 import { useNavigate } from "react-router-dom";
 import { mutate } from "swr";
 import { apiGeneralErrorHandle } from "../../../helpers/api";
+import {
+  confirmUpdatePrompt,
+  updateActionPrompt,
+} from "../../../components/ErrorSuccesMessage";
 const API_URL = import.meta.env.VITE_API_URL as string;
 
 const WorkTime = () => {
@@ -55,17 +59,13 @@ const WorkTime = () => {
       return;
     }
 
-    const sendPrompt = Swal.fire({
-      title: "Confirm Your Customized Work Schedule",
-      text: "Before you proceed,  confirm your customized work schedule. Ensure it fits your preferences and needs.",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#ffda79",
-      cancelButtonColor: "#b7b7b7",
-      confirmButtonText: "Confirm !",
-    });
+    const confirmMessage = await confirmUpdatePrompt(
+      "Confirm Your Customized Work Schedule",
+      "Before you proceed,  confirm your customized work schedule. Ensure it fits your preferences and needs.",
+      "Confirm !"
+    );
 
-    if ((await sendPrompt).isConfirmed) {
+    if (confirmMessage.isConfirmed) {
       try {
         const res = await fetch(
           `${API_URL}/tableRoute/timeManagement/${userId}`,
@@ -82,15 +82,7 @@ const WorkTime = () => {
         if (res.ok) {
           mutate(["timeManagment", token]);
 
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            iconColor: "#ffda79",
-            title: "Edited!",
-            text: "Schedule Updated Successfully!",
-            showConfirmButton: false,
-            timer: 2000,
-          });
+          updateActionPrompt("Edited!", "Schedule Updated Successfully!");
 
           navigate("/app/settings/time-management");
 

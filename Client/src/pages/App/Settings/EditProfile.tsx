@@ -6,6 +6,7 @@ import "../../../styling/Components/SettingsComponents/_editProfileInputs.scss";
 import { AllUserTypes } from "../../../types/tableApiTypes";
 import Swal from "sweetalert2";
 import { apiGeneralErrorHandle } from "../../../helpers/api";
+import { confirmUpdatePrompt } from "../../../components/ErrorSuccesMessage";
 const API_URL = import.meta.env.VITE_API_URL as string;
 
 const EditProfile = () => {
@@ -24,17 +25,13 @@ const EditProfile = () => {
 
   const handlePutRequest = async (queryData: AllUserTypes) => {
     try {
-      const sendMessage = Swal.fire({
-        title: "Update User",
-        text: "Are you sure you want to save the changes you made to your profile? This action will update your user information.",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#ffda79    ",
-        cancelButtonColor: "#b7b7b7",
-        confirmButtonText: "Yes, delete it!",
-      });
+      const confirmUpdateMessage = await confirmUpdatePrompt(
+        "Update User",
+        "Are you sure you want to save the changes you made to your profile? This action will update your user information.",
+        "Yes, update it!"
+      );
 
-      if ((await sendMessage).isConfirmed) {
+      if (confirmUpdateMessage.isConfirmed) {
         const res = await fetch(
           `${API_URL}/tableRoute/accounts/${id}/${type}`,
           {

@@ -35,8 +35,6 @@ const EditProfileInputs = ({
 
     const userReadyData = { ...userInputs, ...genderPasswordData };
 
-    console.log(userReadyData);
-
     handlePutRequest(userReadyData as AllUserTypes);
   };
 
@@ -56,7 +54,7 @@ const EditProfileInputs = ({
             name="firstName"
             type="text"
             placeholder="your name"
-            defaultValue={userInfoData![0]?.firstName}
+            defaultValue={userInfoData?.[0]?.firstName}
             pattern="^[A-Za-z0-9]{3,16}$"
           />
 
@@ -66,21 +64,21 @@ const EditProfileInputs = ({
             name="lastName"
             type="text"
             placeholder="your last name"
-            defaultValue={userInfoData![0]?.lastName}
+            defaultValue={userInfoData?.[0]?.lastName}
             pattern="^[A-Za-z0-9]{3,16}$"
           />
 
-          <label>{userInfoData![0].gender ? "Gender" : "City"}</label>
+          <label>{userInfoData?.[0].gender ? "Gender" : "City"}</label>
 
           {userInfoData![0]?.gender ? (
             <select ref={genderRef}>
-              <option value={userInfoData![0]?.gender}>
-                {userInfoData![0]?.gender}
+              <option value={userInfoData?.[0]?.gender}>
+                {userInfoData?.[0]?.gender}
               </option>
               <option
-                value={userInfoData![0]?.gender === "Male" ? "Female" : "Male"}
+                value={userInfoData?.[0]?.gender === "Male" ? "Female" : "Male"}
               >
-                {userInfoData![0]?.gender === "Male" ? "Female" : "Male"}
+                {userInfoData?.[0]?.gender === "Male" ? "Female" : "Male"}
               </option>{" "}
               <option value="other">Other</option>
             </select>
@@ -90,7 +88,7 @@ const EditProfileInputs = ({
               name="city"
               type="text"
               placeholder="your city"
-              defaultValue={userInfoData![0]?.city}
+              defaultValue={userInfoData?.[0]?.city}
               pattern="^[A-Za-z0-9 ]{3,16}$"
             />
           )}
@@ -102,7 +100,7 @@ const EditProfileInputs = ({
             name="phoneNumber"
             type="text"
             placeholder="your phone number"
-            defaultValue={userInfoData![0]?.phoneNumber}
+            defaultValue={userInfoData?.[0]?.phoneNumber}
           />
 
           <label>Password</label>
@@ -119,7 +117,7 @@ const EditProfileInputs = ({
             name="email"
             type="text"
             placeholder="your email"
-            defaultValue={userInfoData![0]?.email}
+            defaultValue={userInfoData?.[0]?.email}
             pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
           />
         </div>

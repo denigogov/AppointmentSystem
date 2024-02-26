@@ -4,6 +4,7 @@ import { fetchCustomerData } from "../../../api/tableApi";
 import { useAuth } from "../../../helpers/Auth";
 import { CustomersDataTypes } from "../../../types/tableApiTypes";
 import ErrorPage1 from "../../ErrorPage";
+import UnderConstruction from "../../UnderConstruction";
 
 const UserDetailsRoute = () => {
   const selectedCustomerId = useParams();
@@ -34,7 +35,8 @@ const UserDetailsRoute = () => {
 
   return (
     <div>
-      user details {selectedCustomerId.id}
+      {/* user details {selectedCustomerId.id} */}
+      <UnderConstruction titleText="View" />
       {/* I need to build when user click on the table in dashboard I'm not sure what data to show ! */}
       {/* <p>{customerData[0]?.CustomerFirstName ?? ""}</p> */}
     </div>

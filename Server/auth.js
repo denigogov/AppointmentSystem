@@ -11,14 +11,14 @@ const hashOption = {
 
 const hashedPassword = async (req, res, next) => {
   try {
-    const hashpass = await argon2.hash(req.body.password, hashOption);
-
-    req.body.password = hashpass;
-
+    if (req.body.password) {
+      const hashpass = await argon2.hash(req.body.password, hashOption);
+      req.body.password = hashpass;
+    }
     next();
   } catch (err) {
     console.log(err);
-    res.sendStatus(500);
+    res.status(500).send(err.message);
   }
 };
 

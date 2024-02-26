@@ -131,6 +131,7 @@ export interface FetchAllEmployeesTypes {
   city: string;
   email: string;
   phoneNumber: string;
+  password?: string;
 }
 
 export interface FetchTotalMoneyAppServiceProps {

@@ -12,6 +12,7 @@ import { mutate } from "swr";
 import AppointmentIntervalView from "../../../components/Settings/TimeManagement/AppointmentIntervalView";
 import Swal from "sweetalert2";
 import { apiGeneralErrorHandle } from "../../../helpers/api";
+import { updateActionPrompt } from "../../../components/ErrorSuccesMessage";
 const API_URL = import.meta.env.VITE_API_URL as string;
 
 const TimeManagement = () => {
@@ -96,15 +97,8 @@ const TimeManagement = () => {
 
       if (res.ok) {
         mutate(["timeManagment", token]);
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          iconColor: "#ffda79",
-          title: "Edited!",
-          text: "Your Updates has been saved.",
-          showConfirmButton: false,
-          timer: 1500,
-        });
+
+        updateActionPrompt("Edited!", "Your Updates has been saved.");
       } else throw new Error(`${res.statusText}`);
     } catch (err) {
       apiGeneralErrorHandle(err);

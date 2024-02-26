@@ -87,7 +87,6 @@ const ServiceRequest = () => {
       })
     : [];
 
-  console.log(queryData);
   const postSelectedServices = async () => {
     try {
       const res = await fetch(`${apiUrl}/tableRoute/serviceemloyees/`, {

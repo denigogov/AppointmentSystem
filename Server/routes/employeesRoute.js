@@ -2,7 +2,10 @@ const express = require("express");
 const router = express.Router();
 
 const { hashedPassword, verifyToken } = require("../auth");
-const { validateEmployer } = require("../Validations/tableQueryValidation");
+const {
+  validateEmployer,
+  validateUpdateEmployer,
+} = require("../Validations/tableQueryValidation");
 const database = require("../Database/employeesQuery");
 const appointmenQuery = require("../Database/appointmenQuery");
 const chartQuery = require("../Database/chartQuery");
@@ -16,7 +19,13 @@ router
     hashedPassword,
     database.createEmployee
   )
-  .put("/:id", verifyToken, database.updateEmployer)
+  .put(
+    "/:id",
+    verifyToken,
+    validateUpdateEmployer,
+    hashedPassword,
+    database.updateEmployer
+  )
   .delete("/:id", verifyToken, database.deleteEmployer)
   .get("/singleEmployer/:id?", verifyToken, database.getSingleEmployer)
   .get("/timeManagment/:id?", verifyToken, database.employeesTimeManagment)

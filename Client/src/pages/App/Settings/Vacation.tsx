@@ -7,6 +7,10 @@ import Swal from "sweetalert2";
 import { convertISOtoLocalZone } from "../../../helpers/Dates";
 import { useNavigate } from "react-router-dom";
 import { apiGeneralErrorHandle } from "../../../helpers/api";
+import {
+  confirmUpdatePrompt,
+  updateActionPrompt,
+} from "../../../components/ErrorSuccesMessage";
 const API_URL = import.meta.env.VITE_API_URL as string;
 
 const Vacation = () => {
@@ -35,17 +39,13 @@ const Vacation = () => {
       endDate: formatEndDate || null,
     };
 
-    const sendPrompt = Swal.fire({
-      title: "Finalize Your Adventure: Confirm Your Booking!",
-      text: "Seize the moment and embark on the vacation you've always imagined",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#ffda79",
-      cancelButtonColor: "#b7b7b7",
-      confirmButtonText: "Confirm !",
-    });
+    const confirmPrompt = await confirmUpdatePrompt(
+      "Finalize Your Adventure: Confirm Your Booking!",
+      "Seize the moment and embark on the vacation you've always imagined",
+      "Confirm !"
+    );
 
-    if ((await sendPrompt).isConfirmed && sendQuery.endDate) {
+    if (confirmPrompt.isConfirmed && sendQuery.endDate) {
       try {
         const res = await fetch(
           `${API_URL}/tableRoute/timeManagement/${userId}`,
@@ -62,15 +62,10 @@ const Vacation = () => {
         if (res.ok) {
           mutate(["timeManagment", token]);
 
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            iconColor: "#ffda79",
-            title: "Edited!",
-            text: "Vacation booked successfully. Enjoy your time off!",
-            showConfirmButton: false,
-            timer: 2000,
-          });
+          updateActionPrompt(
+            "Edited!",
+            "Vacation booked successfully. Enjoy your time off!"
+          );
 
           navigate("/app/settings/time-management");
 

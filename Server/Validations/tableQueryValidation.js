@@ -44,6 +44,15 @@ const createEmployerWorkTimeSchema = Joi.object({
   employee_id: Joi.number(),
 });
 
+const updateEmployerDataSchema = Joi.object({
+  firstName: Joi.string().min(3).max(16),
+  lastName: Joi.string().min(3).max(16),
+  city: Joi.string().min(3).max(16),
+  email: Joi.string().email(),
+  phoneNumber: Joi.string().min(5).max(16),
+  password: Joi.string(),
+});
+
 const validateCustomer = (req, res, next) => {
   const { firstName, lastName, email, password, phoneNumber } = req.body;
 
@@ -145,9 +154,32 @@ const validateCreateEmployerWorkTime = (req, res, next) => {
   }
 };
 
+const validateUpdateEmployer = (req, res, next) => {
+  const { firstName, lastName, city, email, phoneNumber, password } = req.body;
+
+  const { error } = updateEmployerDataSchema.validate(
+    {
+      firstName,
+      lastName,
+      city,
+      email,
+      phoneNumber,
+      password,
+    },
+    { abortEarly: false }
+  );
+
+  if (error) {
+    res.status(422).json({ validationErrors: error.details });
+  } else {
+    next();
+  }
+};
+
 module.exports = {
   validateCustomer,
   validateUpdateUser,
   validateEmployer,
   validateCreateEmployerWorkTime,
+  validateUpdateEmployer,
 };

@@ -90,3 +90,8 @@ a.active {
 .button__submit {
   @include mixin.saveAddBtn;
 }
+
+// Only avaiable on White Background
+.button__edit {
+  @include mixin.button;
+}
