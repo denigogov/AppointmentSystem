@@ -26,7 +26,7 @@ const CustomersRoot: React.FC<CustomersRootProps> = ({}) => {
   const handleDeleteCustomer = async (customer: FetchCustomersLimitProps) => {
     try {
       const confirmDelete = confirmDeletePrompt(
-        "Delete Service ?",
+        "Delete Customer",
         `Are you sure you want to remove  <strong>${
           customer?.firstName ?? "customer not found"
         } </strong>from customers list? This action is irreversible, and you won't have access to its benefits. Confirm your decision below.`

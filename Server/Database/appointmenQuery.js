@@ -5,7 +5,6 @@ sgMail.setApiKey(process.env.APIEMAILKEY);
 
 const getAllServices = async (_, res) => {
   try {
-    // With DISTINCT I remove the duplicate because I'm comparing the joinet table
     const [services] = await database.query(`select * from services`);
 
     if (services.length) {
@@ -14,6 +13,32 @@ const getAllServices = async (_, res) => {
   } catch (err) {
     return res.status(500).send(err.message);
   }
+};
+
+const createNewservices = async (req, res) => {
+  try {
+    const { servicesName, servicePrice } = req.body;
+
+    const [queryCreateService] = await database.query(
+      "INSERT INTO services (servicesName, servicePrice) values (?, ?)",
+      [servicesName, servicePrice]
+    );
+
+    queryCreateService.affectedRows ? res.sendStatus(201) : res.sendStatus(400);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
+
+const deleteServices = async (req, res) => {
+  const { id } = req.params;
+
+  const [deleteQuery] = await database.query(
+    "Delete from services where id  = ? ",
+    [id]
+  );
+
+  deleteQuery.affectedRows ? res.sendStatus(200) : res.sendStatus(404);
 };
 
 // More info check serviceemployee Table !
@@ -39,6 +64,22 @@ const getServiceEmployeesJoin = async (req, res) => {
   }
 };
 
+const updateServices = async (req, res) => {
+  const { id } = req.params;
+  const { servicesName, servicePrice } = req.body;
+
+  try {
+    const [updateQuery] = await database.query(
+      "UPDATE services set servicesName = ?,  servicePrice = ? WHERE id = ? ",
+      [servicesName, servicePrice, id]
+    );
+
+    updateQuery.affectedRows ? res.sendStatus(200) : res.sendStatus(404);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
+
 const addNewEmployeesService = async (req, res) => {
   try {
     const serviceEmployeePairs = req.body;
@@ -60,7 +101,6 @@ const addNewEmployeesService = async (req, res) => {
       }
     );
 
-    console.log(serviceEmployeePairs);
     const results = await Promise.all(insertionPromises);
     const success = results.some((affectedRows) => affectedRows > 0);
 
@@ -371,4 +411,7 @@ module.exports = {
   countAppointmentsByWeekDay,
   countTotalAppointments,
   deleteServiceEmployees,
+  createNewservices,
+  deleteServices,
+  updateServices,
 };

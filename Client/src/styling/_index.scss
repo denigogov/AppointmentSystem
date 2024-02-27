@@ -95,3 +95,10 @@ a.active {
 .button__edit {
   @include mixin.button;
 }
+
+.button__table {
+  @include mixin.button;
+  letter-spacing: general.$spacing;
+  background: colors.$font-Primary;
+  padding: 7px 20px;
+}

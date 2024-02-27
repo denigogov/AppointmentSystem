@@ -3,7 +3,9 @@ const router = express.Router();
 
 const {
   validateCreateEmployerWorkTime,
+  validateCreateNewService,
 } = require("../Validations/tableQueryValidation");
+
 const database = require("../Database/appointmenQuery");
 const customerEmailConfirm = require("../Database/emailConfirm");
 const customerQuery = require("../Database/customerQuery");
@@ -19,6 +21,19 @@ const {
 
 router
   .get("/services/:id?", verifyToken, database.getAllServices)
+  .put(
+    "/services/:id",
+    verifyToken,
+    validateCreateNewService,
+    database.updateServices
+  )
+  .post(
+    "/services",
+    verifyToken,
+    validateCreateNewService,
+    database.createNewservices
+  )
+  .delete("/services/:id", verifyToken, database.deleteServices)
 
   .get("/serviceemloyees/:id?", verifyToken, database.getServiceEmployeesJoin)
   .post("/serviceemloyees", verifyToken, database.addNewEmployeesService)

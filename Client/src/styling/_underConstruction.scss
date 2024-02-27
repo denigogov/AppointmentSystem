@@ -1,15 +1,15 @@
+@use "./colors";
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700);
 
 .underConstructiont--container {
   text-wrap: balance;
   color: #999;
   font-family: Roboto;
-  height: 50vh;
 
   h1 {
     font-weight: 100;
     font-size: 27pt;
-    color: #e43;
+    color: #ff8080;
   }
 
   p {
@@ -17,11 +17,71 @@
   }
 
   .warning-content {
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100%;
-    text-align: center;
+    gap: 20px;
+  }
+
+  svg {
+    width: 240px;
+    height: 240px;
+  }
+
+  /* SMOKE */
+  #smoke-1 {
+    stroke-dasharray: 0, 10;
+    animation: smoke 6s ease infinite;
+  }
+
+  #smoke-2 {
+    stroke-dasharray: 0, 10;
+    animation: smoke 6s 0.5s ease infinite;
+  }
+
+  @keyframes smoke {
+    0% {
+      stroke-dasharray: 0, 10;
+    }
+    50% {
+      stroke-dasharray: 10, 0;
+    }
+    100% {
+      stroke-dasharray: 10, 0;
+      opacity: 0;
+    }
+  }
+
+  /* WRITING */
+  #line-1 {
+    opacity: 0;
+    animation: writing 0.5s linear forwards;
+  }
+
+  #line-2 {
+    opacity: 0;
+    animation: writing 0.5s 1s linear forwards;
+  }
+
+  #line-3 {
+    opacity: 0;
+    animation: writing 0.5s 1.5s linear forwards;
+  }
+
+  #line-4 {
+    opacity: 0;
+    animation: writing 2s 2s infinite linear forwards;
+  }
+
+  @keyframes writing {
+    0% {
+      width: 0px;
+      opacity: 1;
+    }
+    100% {
+      width: 14px;
+      opacity: 1;
+    }
   }
 }

@@ -45,6 +45,8 @@ const ServiceRequest = () => {
     fetchAllServices(token)
   );
 
+  console.log(servicesEmpolyees);
+
   const filterNewServices = allServices?.filter((service) => {
     const isServicePresentForEmp = servicesEmpolyees?.some(
       (empService) =>

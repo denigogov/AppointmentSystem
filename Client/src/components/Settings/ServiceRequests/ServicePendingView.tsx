@@ -28,16 +28,20 @@ const ServicePendingView = ({
     handleDeleteService(service);
   };
 
+  const onlyPendingServices = pendingServices.filter(
+    (services) => services?.approved !== 0
+  );
+
   return (
     // Styling for class  "servicePendingView__container" is inside of _serviceApprovedView
     <div
       className={
-        pendingServices.length || !stepOne
+        onlyPendingServices.length || !stepOne
           ? "servicePendingView__container notActiveAddService "
           : "servicePendingView__container  emptyServices__container  "
       }
     >
-      {pendingServices.length ? (
+      {onlyPendingServices.length ? (
         <>
           <div className="serviceRequest__header--text">
             <p>Pending Service Requests</p>
@@ -48,7 +52,7 @@ const ServicePendingView = ({
           </div>
 
           <div className="pendingService__wrap">
-            {pendingServices?.map((service) => (
+            {onlyPendingServices?.map((service) => (
               <ul key={service.id}>
                 <li>• {service.servicesName} </li>
                 <img

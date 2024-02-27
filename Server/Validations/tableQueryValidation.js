@@ -53,6 +53,11 @@ const updateEmployerDataSchema = Joi.object({
   password: Joi.string(),
 });
 
+const createNewServicesSchema = Joi.object({
+  servicesName: Joi.string().min(2).max(16),
+  servicePrice: Joi.number().positive(),
+});
+
 const validateCustomer = (req, res, next) => {
   const { firstName, lastName, email, password, phoneNumber } = req.body;
 
@@ -176,10 +181,26 @@ const validateUpdateEmployer = (req, res, next) => {
   }
 };
 
+const validateCreateNewService = (req, res, next) => {
+  const { servicesName, servicePrice } = req.body;
+
+  const { error } = createNewServicesSchema.validate(
+    { servicesName, servicePrice },
+    { abortEarly: false }
+  );
+
+  if (error) {
+    res.status(422).json({ validationErrors: error.details });
+  } else {
+    next();
+  }
+};
+
 module.exports = {
   validateCustomer,
   validateUpdateUser,
   validateEmployer,
   validateCreateEmployerWorkTime,
   validateUpdateEmployer,
+  validateCreateNewService,
 };

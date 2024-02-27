@@ -1,0 +1,54 @@
+@use "../../colors";
+@use "../../general";
+@use "../../mixin";
+
+.createService__container {
+  height: calc(100vh - 25rem);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 20px;
+
+  .createService__text {
+    text-align: center;
+    padding: 10px;
+    display: grid;
+    gap: 5px;
+
+    .createService--title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: colors.$font-Primary;
+      letter-spacing: 0.5px;
+    }
+
+    .createService--subTitle {
+      font-size: 0.8rem;
+      color: colors.$font-Secound;
+      font-weight: 300;
+    }
+  }
+
+  .createService__form-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    height: 100%;
+    gap: 10px;
+    input {
+      @include mixin.input;
+    }
+
+    button {
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: general.$lg) {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+}

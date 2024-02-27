@@ -53,15 +53,11 @@ const EmployeesRoot = ({}) => {
   const handleDeleteClick = async (employees: FetchAllEmployeesTypes) => {
     try {
       const confirmDelete = confirmDeletePrompt(
-        "Delete Service ?",
+        "Delete Employer",
         `Are you sure you want to remove  <strong>${
-          employees?.firstName ?? "Employer not found"
+          employees?.firstName ?? "employer"
         } </strong>from employees list? This action is irreversible, and you won't have access to its benefits. Confirm your decision below.`
       );
-
-      if ((await confirmDelete).isConfirmed) {
-        deleteActionPrompt();
-      }
 
       if ((await confirmDelete).isConfirmed) {
         const res = await fetch(`${apiUrl}/employees/${employees?.id}`, {

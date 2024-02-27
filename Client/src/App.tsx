@@ -44,6 +44,7 @@ import Approvals from "./pages/App/Management/Approvals/Approvals";
 import CustomerDetails from "./pages/App/Management/Customers/CustomerDetails";
 import EmployeesEdit from "./pages/App/Management/Employees/EmployeesEdit";
 import EmployeesCreate from "./pages/App/Management/Employees/EmployeesCreate";
+import ServiceCreate from "./pages/App/Management/Services/ServiceCreate";
 
 const App = () => {
   const auth = useAuth();
@@ -178,7 +179,9 @@ const App = () => {
                 <Route path="edit/:id" element={<EmployeesEdit />} />
                 <Route path="create" element={<EmployeesCreate />} />
               </Route>
-              <Route path="service" element={<ServicesRoot />} />
+              <Route path="service" element={<ServicesRoot />}>
+                <Route path="create" element={<ServiceCreate />} />
+              </Route>
               <Route path="approvals" element={<Approvals />} />
             </Route>
           )}

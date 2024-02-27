@@ -4,15 +4,9 @@
 
 .service__tableView--container {
   @include mixin.table;
-}
 
-.button__table {
-  button {
-    border: 1px solid red;
-
-    @include mixin.button;
-    letter-spacing: general.$spacing;
-    background: colors.$font-Primary;
-    padding: 7px 20px;
+  input {
+    @include mixin.input;
+    padding: 6px;
   }
 }
