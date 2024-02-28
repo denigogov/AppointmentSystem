@@ -54,12 +54,12 @@ export const confirmDeletePrompt = (title: string, htmlText: string) =>
   });
 
 // When Delete Confirm is true !
-export const deleteActionPrompt = () =>
+export const deleteActionPrompt = (title?: string) =>
   Swal.fire({
     position: "center",
     icon: "success",
     iconColor: "#da0404",
-    title: "Deleted!",
+    title: !title ? "Deleted!" : title,
     showConfirmButton: false,
     timer: 1500,
   });

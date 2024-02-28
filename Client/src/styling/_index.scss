@@ -102,3 +102,7 @@ a.active {
   background: colors.$font-Primary;
   padding: 7px 20px;
 }
+
+.table {
+  @include mixin.table;
+}

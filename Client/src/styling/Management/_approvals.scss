@@ -1,0 +1,30 @@
+@use "../colors";
+@use "../general";
+@use "../mixin";
+
+.approved {
+  background-color: #f7cb73;
+  color: white;
+  padding: 7px 20px;
+  border: none;
+  border-radius: 25px;
+}
+
+.rejected {
+  background-color: #999999;
+  color: white;
+  padding: 7px 20px;
+  border: none;
+  border-radius: 25px;
+}
+
+.approvalsTableView__container {
+  height: calc(100vh - 12rem);
+  @include mixin.overflowScroll;
+
+  img {
+    &:active {
+      transform: scale(0.9);
+    }
+  }
+}
