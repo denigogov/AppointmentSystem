@@ -23,8 +23,27 @@
   @include mixin.overflowScroll;
 
   img {
+    width: 27px !important;
     &:active {
       transform: scale(0.9);
+    }
+  }
+
+  // Orange
+  .approveIcon {
+    transition: all 0.6s ease;
+    &:hover {
+      filter: brightness(0) saturate(100%) invert(87%) sepia(38%)
+        saturate(3081%) hue-rotate(299deg) brightness(99%) contrast(103%);
+    }
+  }
+
+  // Red color
+  .rejectIcon {
+    transition: all 0.6s ease;
+    &:hover {
+      filter: invert(15%) sepia(82%) saturate(6514%) hue-rotate(21deg)
+        brightness(90%) contrast(130%);
     }
   }
 }

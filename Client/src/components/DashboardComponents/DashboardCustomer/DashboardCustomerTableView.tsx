@@ -17,13 +17,19 @@ const API_URL = import.meta.env.VITE_API_URL as string;
 
 interface props {
   cusomerTableDashboardData: CustomersDataTypes[];
+  customerDataError: Error;
 }
 
 // TODO !! !!
 //  1. if is possible to take appointment number 3 component to use for edit and user to be able to create new data
 //  2  I send appointmentID and EmployeeID (appID I need for delete request ) and (EmployeeID for if we want to edit date and service !)
 
-const DashboardCustomerTableView = ({ cusomerTableDashboardData }: props) => {
+const DashboardCustomerTableView = ({
+  cusomerTableDashboardData,
+  customerDataError,
+}: props) => {
+  if (customerDataError) return <h6>{customerDataError.message}</h6>;
+
   const { token } = useAuth();
 
   const sortedData = cusomerTableDashboardData

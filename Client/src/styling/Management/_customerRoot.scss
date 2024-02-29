@@ -7,7 +7,6 @@
 }
 
 .customerTableView--container {
-  @include mixin.table();
   img {
     filter: invert(13%) sepia(73%) saturate(4921%) hue-rotate(360deg)
       brightness(83%) contrast(117%);

@@ -16,7 +16,7 @@ import { calculateDaysLeft } from "../../../helpers/Dates";
 
 const DashboardCustomer = () => {
   const auth = useAuth();
-  const token = auth?.token;
+  const token = auth?.token ?? "";
   const { id, type } = auth.userInfo ?? {};
 
   const {
@@ -27,7 +27,6 @@ const DashboardCustomer = () => {
     fetchCustomerData({ id, type, token })
   );
 
-  if (customerDataError) return <h6>{customerDataError.message}</h6>;
   if (customerDataLoading) return <p>loading...</p>;
 
   const customerInfoData: CustomerPersonalInfo[] = [
@@ -109,6 +108,7 @@ const DashboardCustomer = () => {
       <div className="customerRightInfo--dashboard">
         <DashboardCustomerDataBox customerDataBox={customerDataBox} />
         <DashboardCustomerTableView
+          customerDataError={customerDataError}
           cusomerTableDashboardData={cusomerTableDashboardData}
         />
       </div>

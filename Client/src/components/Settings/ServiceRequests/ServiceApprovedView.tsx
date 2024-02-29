@@ -30,7 +30,7 @@ const ServiceApprovedView = ({
         {approvedServices.length ? (
           approvedServices.map((services) => (
             <ul key={services.id}>
-              <li>• {services?.servicesName}</li>
+              <li>• {services?.servicesName ?? "Service Deleted"}</li>
             </ul>
           ))
         ) : (

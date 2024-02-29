@@ -30,15 +30,46 @@ const createNewservices = async (req, res) => {
   }
 };
 
+// When delete some service we make sure that will be deleted from everywhere
 const deleteServices = async (req, res) => {
-  const { id } = req.params;
+  try {
+    const { id } = req.params;
 
-  const [deleteQuery] = await database.query(
-    "Delete from services where id  = ? ",
-    [id]
-  );
+    // Checking if the service exsist in serviceemployee
+    const [findDataWithThisId] = await database.query(
+      "Select * from serviceemployee where services_id  = ?",
+      [id]
+    );
 
-  deleteQuery.affectedRows ? res.sendStatus(200) : res.sendStatus(404);
+    // if service exsist than delete from serviceemployee and after that from services
+    if (findDataWithThisId.length) {
+      const [deleteQuery] = await database.query(
+        `Delete from serviceemployee where services_id  = ? `,
+        [id]
+      );
+
+      console.log("deleted from serviceemployee");
+
+      if (deleteQuery.affectedRows) {
+        const [updateQuery] = await database.query(
+          `Delete from services where id = ? `,
+          [id]
+        );
+        updateQuery.affectedRows ? res.sendStatus(204) : res.sendStatus(404);
+      }
+    } else {
+      // is service not exsist in serviceemployee than only delete from services
+      const [onlyFromServiceDelete] = await database.query(
+        `Delete from services where id = ? `,
+        [id]
+      );
+      onlyFromServiceDelete.affectedRows
+        ? res.sendStatus(204)
+        : res.sendStatus(404);
+    }
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
 };
 
 // More info check serviceemployee Table !
@@ -126,6 +157,22 @@ const deleteServiceEmployees = async (req, res) => {
     deletePendingService.affectedRows
       ? res.sendStatus(200)
       : res.status(400).send("record not found");
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
+
+const updateServiceEmployees = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { approved } = req.body;
+
+    const [updateQuery] = await database.query(
+      `update serviceemployee set approved = ?	 where id = ?`,
+      [approved, id]
+    );
+
+    updateQuery.affectedRows ? res.sendStatus(200) : res.sendStatus(400);
   } catch (err) {
     res.status(500).send(err.message);
   }
@@ -414,4 +461,5 @@ module.exports = {
   createNewservices,
   deleteServices,
   updateServices,
+  updateServiceEmployees,
 };

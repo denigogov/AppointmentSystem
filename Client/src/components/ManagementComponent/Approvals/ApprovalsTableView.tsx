@@ -7,6 +7,7 @@ import {
   handleDelete,
   handleReject,
 } from "../../../pages/App/Management/Approvals/approveRequest";
+import { useAuth } from "../../../helpers/Auth";
 
 interface ApprovalsTableViewProps {
   requestToApprove?: ServiceEmloyeesTypes[];
@@ -15,6 +16,7 @@ interface ApprovalsTableViewProps {
 const ApprovalsTableView: React.FC<ApprovalsTableViewProps> = ({
   requestToApprove,
 }) => {
+  const { token } = useAuth();
   return (
     // Table styling inside of approvals Root
     <div className="approvalsTableView__container table">
@@ -52,32 +54,37 @@ const ApprovalsTableView: React.FC<ApprovalsTableViewProps> = ({
                 </td>
                 <td data-cell="Approve">
                   <img
+                    className="approveIcon"
                     src={approveServiceIcon}
                     alt="approveServiceIcon"
-                    onClick={() => handleApprove(service)}
+                    onClick={() => handleApprove(service, token ?? "")}
                   />
                 </td>
                 <td data-cell="Reject">
                   {service.approved === 0 || (
                     <img
+                      className="rejectIcon"
                       src={rejectIcon}
                       alt="approveServiceIcon"
-                      onClick={() => handleReject(service)}
+                      onClick={() => handleReject(service, token ?? "")}
                     />
                   )}
                 </td>
-                <td data-cell="Remove">
+                <td data-cell="Delete">
                   <img
+                    className="rejectIcon"
                     src={deleteIcon}
                     alt="approveServiceIcon"
-                    onClick={() => handleDelete(service)}
+                    onClick={() => handleDelete(service, token ?? "")}
                   />
                 </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan={5}>Not Found</td>
+              <td colSpan={7} data-cell="Status">
+                No Request Found
+              </td>
             </tr>
           )}
         </tbody>

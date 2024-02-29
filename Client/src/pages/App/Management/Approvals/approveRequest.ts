@@ -5,11 +5,15 @@ import {
   deleteActionPrompt,
   updateActionPrompt,
 } from "../../../../components/ErrorSuccesMessage";
-import { useAuth } from "../../../../helpers/Auth";
 import { apiGeneralErrorHandle } from "../../../../helpers/api";
 import { ServiceEmloyeesTypes } from "../../../../types/tableApiTypes";
 
-export const handleApprove = async (service: ServiceEmloyeesTypes) => {
+const API_URL = import.meta.env.VITE_API_URL as string;
+
+export const handleApprove = async (
+  service: ServiceEmloyeesTypes,
+  token?: string
+) => {
   try {
     const confirmPrompt = confirmUpdatePrompt(
       "Confirm Service Approval",
@@ -21,16 +25,27 @@ export const handleApprove = async (service: ServiceEmloyeesTypes) => {
 
     if ((await confirmPrompt).isConfirmed) {
       // request
-      const res = {
-        ok: "",
-      };
+      const res = await fetch(
+        `${API_URL}/tableRoute/serviceemloyees/${service.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ approved: 1 }),
+        }
+      );
 
-      if (!res.ok) {
+      if (res.ok) {
         updateActionPrompt(
           "Great!",
           "The service has been approved successfully. You can now proceed with further actions."
         );
-        //   mutate(["servicesemployees", token]);
+        mutate(["servicesemployees", token]);
+      } else {
+        const errorMessage = await res.text();
+        throw new Error(`${res.status} - ${errorMessage}`);
       }
     }
   } catch (err: unknown) {
@@ -38,7 +53,10 @@ export const handleApprove = async (service: ServiceEmloyeesTypes) => {
   }
 };
 
-export const handleReject = async (service: ServiceEmloyeesTypes) => {
+export const handleReject = async (
+  service: ServiceEmloyeesTypes,
+  token?: string
+) => {
   try {
     const confirmPrompt = confirmDeletePrompt(
       "Confirm Service Rejection",
@@ -50,14 +68,24 @@ export const handleReject = async (service: ServiceEmloyeesTypes) => {
     );
 
     if ((await confirmPrompt).isConfirmed) {
-      // request
-      const res = {
-        ok: "",
-      };
+      const res = await fetch(
+        `${API_URL}/tableRoute/serviceemloyees/${service.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ approved: 0 }),
+        }
+      );
 
-      if (!res.ok) {
+      if (res.ok) {
         deleteActionPrompt("Service Rejected");
-        // mutate(["servicesemployees", token]);
+        mutate(["servicesemployees", token]);
+      } else {
+        const errorMessage = await res.text();
+        throw new Error(`${res.status} - ${errorMessage}`);
       }
     }
   } catch (err: unknown) {
@@ -65,8 +93,10 @@ export const handleReject = async (service: ServiceEmloyeesTypes) => {
   }
 };
 
-export const handleDelete = async (service: ServiceEmloyeesTypes) => {
-  console.log(service);
+export const handleDelete = async (
+  service: ServiceEmloyeesTypes,
+  token?: string
+) => {
   try {
     const confirmPrompt = confirmDeletePrompt(
       "Confirm Service Deletion",
@@ -75,13 +105,23 @@ export const handleDelete = async (service: ServiceEmloyeesTypes) => {
 
     if ((await confirmPrompt).isConfirmed) {
       // request
-      const res = {
-        ok: "",
-      };
+      const res = await fetch(
+        `${API_URL}/tableRoute/serviceemloyees/${service.id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-      if (!res.ok) {
+      if (res.ok) {
         deleteActionPrompt();
-        // mutate(["servicesemployees", token]);
+        mutate(["servicesemployees", token]);
+      } else {
+        // Reading the Error message from backend !!
+        const errorMessage = await res.text();
+        throw new Error(`${res.status} - ${errorMessage}`);
       }
     }
   } catch (err: unknown) {

@@ -23,7 +23,7 @@ app.use("/employees", employeesRoute);
 app.use("/tableRoute", tableRoute);
 
 const welcome = (_, res) => {
-  res.send("Appointment System by Dejan Gogov, v1 ");
+  res.status(404).send("Resource not found");
 };
 
 app.use("/", welcome);

@@ -2,24 +2,20 @@ import { ServiceEmloyeesTypes } from "../../types/tableApiTypes";
 
 interface SignUpFormProps {
   setSelectedService: React.Dispatch<React.SetStateAction<string>>;
-  servicesEmpolyees: ServiceEmloyeesTypes[];
+  uniqueServicesNames: ServiceEmloyeesTypes[];
 }
 
 const NewAppointment1 = ({
   setSelectedService,
-  servicesEmpolyees,
+  uniqueServicesNames,
 }: SignUpFormProps) => {
   const handleSelectedService = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedService(e.target.value);
   };
-  const uniqueServicesNames = servicesEmpolyees.filter(
-    (service, i, arr) =>
-      i === arr.findIndex((v) => v.servicesName === service.servicesName)
-  );
 
   return (
     <div style={{ padding: "30px" }}>
-      <h6>to create new account you need first to create an appoinment</h6>
+      <h6>Create a new appointment to book your spot at the hair salon</h6>
 
       <select onChange={handleSelectedService}>
         <option value="">Select a service</option>

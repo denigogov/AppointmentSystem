@@ -5,7 +5,7 @@ import { ServiceEmloyeesTypes } from "../../../../types/tableApiTypes";
 import { useAuth } from "../../../../helpers/Auth";
 import LoadingRing from "../../../../components/loadingRing";
 import ApprovalsTableView from "../../../../components/ManagementComponent/Approvals/ApprovalsTableView";
-import { handleApprove, handleReject } from "./approveRequest";
+
 interface ApprovalsProps {
   // propType
 }

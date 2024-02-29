@@ -72,7 +72,7 @@ const CustomerTableView: React.FC<CustomerTableViewProps> = ({
 
   return (
     // styling inside of the main container -- customerRoot
-    <div className="customerTableView--container">
+    <div className="customerTableView--container table">
       <table>
         <thead>
           <tr>

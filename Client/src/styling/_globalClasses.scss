@@ -1,0 +1,77 @@
+@use "./mixin";
+@use "./general";
+@use "./colors";
+
+.errorMessage {
+  font-size: 0.75em;
+  color: colors.$error;
+}
+
+.navLinkInfo,
+.navLinkInfo__link {
+  font-size: 0.75em; //12px
+  color: colors.$font-Secound;
+  transition: general.$transition;
+
+  // Only for the link to be highLigth !!
+  &:hover {
+    color: colors.$font-style;
+  }
+}
+
+a.active {
+  border-bottom: 1px solid colors.$font-style;
+  color: colors.$font-Primary;
+  font-weight: 600;
+
+  img {
+    filter: brightness(0) saturate(100%) invert(87%) sepia(38%) saturate(3081%)
+      hue-rotate(299deg) brightness(99%) contrast(103%);
+  }
+}
+
+// Remove the PromptAlert outline border !
+.swal2-popup .swal2-styled:focus {
+  box-shadow: none !important;
+}
+
+// Global Styling Classes
+.form__container--edit {
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+
+  input[type="text"],
+  input[type="email"],
+  input[type="phone"],
+  input[type="number"],
+  input[type="password"],
+  input[type="tel"],
+  select {
+    @include mixin.input;
+  }
+
+  label {
+    color: colors.$font-Primary;
+  }
+}
+
+.button__submit {
+  @include mixin.saveAddBtn;
+}
+
+// Only avaiable on White Background
+.button__edit {
+  @include mixin.button;
+}
+
+.button__table {
+  @include mixin.button;
+  letter-spacing: general.$spacing;
+  background: colors.$font-Primary;
+  padding: 7px 20px;
+}
+
+.table {
+  @include mixin.table;
+}

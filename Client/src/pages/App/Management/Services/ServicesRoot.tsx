@@ -62,7 +62,9 @@ const ServicesRoot = () => {
         if (res.ok) {
           deleteActionPrompt();
           mutate(["allServices", token]);
-        } else throw new Error("Something Bad Happen");
+        } else {
+          throw new Error("Something Bad Happen");
+        }
       }
     } catch (err: unknown) {
       apiGeneralErrorHandle(err);
@@ -76,6 +78,9 @@ const ServicesRoot = () => {
         "By clicking confirm, you will save the changes made to this service. Are you sure you want to proceed?",
         "Confirm Update"
       );
+
+      // close edit View When user click cancel
+      confirmMessage.isDismissed && setClickedEdit(false);
 
       if (confirmMessage.isConfirmed) {
         const res = await fetch(`${API_URL}/tableRoute/services/${serviceId}`, {
