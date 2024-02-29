@@ -22,8 +22,9 @@ const Step2: React.FC<Step2Props> = ({
   return (
     <div>
       <MultiFormWraper>
+        <label>choose stylist</label>
         <select
-          value={employee_id}
+          value={employee_id ?? ""}
           onChange={(e) => updateFileds({ employee_id: +e.target.value })}
         >
           {findEmployee.length ? (

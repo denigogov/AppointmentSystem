@@ -1,0 +1,82 @@
+@use "./mixin";
+@use "./colors";
+@use "./general";
+
+.appointment__container {
+  // main container
+  border-top: 1px solid #e0e0e0;
+  height: 100%;
+  @include mixin.overflowScroll;
+
+  select,
+  input {
+    padding: 7px !important;
+  }
+}
+
+.appointment--title {
+  padding: 30px;
+  h2 {
+    font-weight: 600;
+    color: colors.$font-Primary;
+  }
+
+  :last-child {
+    padding: 15px;
+    text-align: center;
+    margin: 0 auto;
+    width: 60%;
+    font-size: 14px;
+    color: colors.$font-Secound;
+  }
+
+  @media (max-width: general.$md) {
+    text-align: center;
+    :last-child {
+      width: 100%;
+      text-wrap: balance;
+    }
+  }
+}
+
+.appointmenet_wrap-form {
+  // hole form with ProgressBar
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media (max-width: general.$sm) {
+    div {
+      text-align: center;
+      justify-content: center;
+    }
+  }
+  //   justify-content: center;
+}
+
+// Only inputs with button
+.form__container--appointments {
+  border: 1px solid #ffc7c7;
+  background: colors.$dashboard-Employees-Box;
+  padding: 4rem;
+  margin: 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+
+  input[type="text"],
+  select {
+    @include mixin.input;
+  }
+
+  label {
+    color: colors.$font-Primary;
+  }
+}
+
+@media (max-width: general.$sm) {
+  .flexColumn {
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -10,6 +10,7 @@ import {
 import { convertISOtoLocalZone } from "../../helpers/Dates";
 import { addDays, setHours, setMinutes, subDays } from "date-fns";
 import moment from "moment-timezone";
+import MultiFormWraper from "../ManagementComponent/Employees/MultiFormWraper";
 
 interface Step3Props {
   allAppointments: AllAppointmentsTypes[];
@@ -91,9 +92,10 @@ const Step3: React.FC<Step3Props> = ({
     : "2024-01-01T23:59:59.000Z";
 
   return (
-    <div>
+    <MultiFormWraper>
+      <label>choose Date</label>
       <DatePicker
-        showIcon
+        // showIcon
         minDate={subDays(new Date(), 1)}
         // maxDate={addDays(new Date(), )}
         selected={startDate}
@@ -121,7 +123,7 @@ const Step3: React.FC<Step3Props> = ({
         portalId="root-portal"
         //  holidays={filteredHolliday} not recomendet to use because its not sync. with users, I will add this fundtion but i will mention also!
       />
-    </div>
+    </MultiFormWraper>
   );
 };
 

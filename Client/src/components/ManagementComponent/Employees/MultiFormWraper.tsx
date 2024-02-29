@@ -13,7 +13,7 @@ const MultiFormWraper: React.FC<MultiFormWraperProps> = ({
   return (
     <>
       {title && <h3 className="multiFormWraper__title">{title}</h3>}
-      <div className="multiForm-wrap__children">{children}</div>
+      <div className="multiForm-wrap__children ">{children}</div>
     </>
   );
 };

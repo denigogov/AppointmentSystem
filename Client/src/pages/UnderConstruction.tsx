@@ -301,12 +301,12 @@ const UnderConstruction = ({ titleText }: { titleText: string }) => {
         </p>
         <p>It's okay, we're excited too!</p>
 
-        <ruby>
+        {/* <ruby>
           Dejan <rt>First Name</rt>
         </ruby>
         <ruby>
           Gogov <rt>Last Name</rt>
-        </ruby>
+        </ruby> */}
       </div>
     </div>
   );

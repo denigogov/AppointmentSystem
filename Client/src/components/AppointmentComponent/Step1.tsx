@@ -1,17 +1,22 @@
 import { InitialDataProps } from "../../pages/App/Appointment/Appointment";
 import { ServiceEmloyeesTypes } from "../../types/tableApiTypes";
 import MultiFormWraper from "../ManagementComponent/Employees/MultiFormWraper";
+import LoadingRing from "../loadingRing";
 
 interface Step1Props {
-  service_id: string | number;
+  service_id: number | string;
   updateFileds: (fileds: Partial<InitialDataProps>) => void;
   servicesEmpolyees: ServiceEmloyeesTypes[];
+  servicesEmpolyeesLoading: boolean;
+  servicesEmpolyeesError: Error;
 }
 
 const Step1: React.FC<Step1Props> = ({
   service_id,
   updateFileds,
   servicesEmpolyees,
+  servicesEmpolyeesLoading,
+  servicesEmpolyeesError,
 }) => {
   const uniqueServicesNames = servicesEmpolyees.filter(
     (service, i, arr) =>
@@ -20,20 +25,30 @@ const Step1: React.FC<Step1Props> = ({
 
   return (
     <MultiFormWraper>
-      <select
-        value={service_id}
-        onChange={(e) => updateFileds({ service_id: +e.target.value })}
-      >
-        {uniqueServicesNames?.map((services) => (
-          <option key={services?.services_id} value={services?.services_id}>
-            {services?.servicesName ?? "Not Found"}
-          </option>
-        ))}
-        {/* <option value={1}>Choose Service</option>
+      {servicesEmpolyeesError && <p>{servicesEmpolyeesError.message}</p>}
+      {servicesEmpolyeesLoading ? (
+        <LoadingRing />
+      ) : (
+        <>
+          <label>Select Service</label>
+          <select
+            required
+            value={service_id}
+            onChange={(e) => updateFileds({ service_id: +e.target.value })}
+          >
+            <option value={0}>Choose Service</option>
+            {uniqueServicesNames?.map((services) => (
+              <option key={services?.services_id} value={services?.services_id}>
+                {services?.servicesName ?? "Not Found"}
+              </option>
+            ))}
+            {/* <option value={1}>Choose Service</option>
         <option value={1}>haircut</option>
         <option value={2}>painting</option>
         <option value={3}>blabla</option> */}
-      </select>
+          </select>{" "}
+        </>
+      )}
     </MultiFormWraper>
   );
 };
