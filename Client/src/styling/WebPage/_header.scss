@@ -1,0 +1,105 @@
+@use "../colors";
+@use "../general";
+@use "../mixin";
+
+.hero__container {
+  height: calc(100vh - 6rem);
+  display: flex;
+}
+
+// Main container split into half
+.hero__text--wrap,
+.hero__image--wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+}
+
+.hero__text--wrap {
+  margin: 0 0 0 4rem;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+
+  // title
+  .hero-title {
+    font-weight: 400;
+    letter-spacing: 2px;
+    line-height: 1.1;
+    font-size: 5.5rem;
+
+    // star Icon
+    img {
+      background-color: #000000;
+      border-radius: 50%;
+      width: 2rem;
+      padding: 0.5rem;
+      display: inline;
+    }
+  }
+
+  //   Selected Word
+  .markedWord {
+    font-weight: 500;
+    background-size: 100% 15%;
+    background-repeat: repeat-x;
+    background-position: left 0% bottom 10%;
+    background-image: linear-gradient(
+      179deg,
+      colors.$actionBtn__background--1 0%,
+      colors.$actionBtn__background--2 40%,
+      transparent 54%,
+      transparent 100%
+    );
+  }
+
+  // Subtitle
+  .hero-subTitle {
+    line-height: 1.8;
+    letter-spacing: 0.5px;
+    color: colors.$font-Secound;
+    font-size: 0.9rem;
+    text-align: start;
+    margin: 0 3rem 0 0;
+  }
+}
+@media (max-width: general.$md) {
+  .hero__image-container {
+    display: none;
+  }
+}
+
+@media (max-width: general.$sm) {
+  .hero__container {
+    flex-direction: column;
+  }
+
+  .hero__text--wrap {
+    margin-top: 2.5rem;
+    // Title
+    .hero-title {
+      font-size: 3rem;
+    }
+
+    .hero-subTitle {
+      margin: 0;
+    }
+  }
+  .hero__image--wrap {
+    // Hide the animation from mobile screen
+    .hero__image-container {
+      display: none;
+    }
+  }
+}
+
+// Hide the animation
+@media (max-width: general.$lg) {
+  .hero__text--wrap {
+    margin-left: 0rem;
+  }
+}

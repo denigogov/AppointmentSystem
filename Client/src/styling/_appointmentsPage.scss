@@ -57,6 +57,8 @@
 .form__container--appointments {
   border: 1px solid #ffc7c7;
   background: colors.$dashboard-Employees-Box;
+  // box-shadow: colors.$dashboard-Owner-Box--Shadow;
+  box-shadow: 0px 30px 40px -20px hsl(229, 6%, 66%);
   padding: 4rem;
   margin: 1rem;
   border-radius: 0.5rem;

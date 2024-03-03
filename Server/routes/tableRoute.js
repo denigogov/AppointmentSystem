@@ -20,7 +20,6 @@ const {
 } = require("../Validations/tableQueryValidation");
 
 router
-  // Route for services
   .get("/services/:id?", verifyToken, database.getAllServices)
   .put(
     "/services/:id",
@@ -36,15 +35,10 @@ router
   )
   .delete("/services/:id", verifyToken, database.deleteServices)
 
-  // Route for serviceEmployer which employer have which service
-
-  // :id - employer id is
   .get("/serviceemloyees/:id?", verifyToken, database.getServiceEmployeesJoin)
-  .put("/serviceemloyees/:id", verifyToken, database.updateServiceEmployees)
   .post("/serviceemloyees", verifyToken, database.addNewEmployeesService)
   .delete("/serviceemloyees/:id", verifyToken, database.deleteServiceEmployees)
 
-  // Route related to customers
   .post(
     "/customers",
     validateCustomer,
@@ -54,22 +48,12 @@ router
   .delete("/customers/:id", verifyToken, customerQuery.deleteCustomer)
   .get("/customers/:id?/:type?", verifyToken, customerQuery.customerAllData)
   .get("/userTypes", verifyToken, employeeQuery.userTypesTable)
-
-  // pagination api
   .get("/customers-limit", verifyToken, customerQuery.allCustomersPagination)
-
-  // chart route
   .get("/customersTop5", verifyToken, customerQuery.top5Customers)
-
-  // customer email confirm
   .get("/confirm", customerEmailConfirm.customerConfirm) // not need to add verify token !
-
-  // route for appointments
   .get("/appointment", verifyToken, appointmenQuery.getAllAppointments)
   .post("/appointment", verifyToken, appointmenQuery.postAppointment)
   .delete("/appointment/:id", verifyToken, appointmenQuery.deleteAppointment)
-
-  // Route for Employers
   .get("/accounts/:id/:type", verifyToken, accountsQuery.editUserAllData)
   .put(
     "/accounts/:id/:type",

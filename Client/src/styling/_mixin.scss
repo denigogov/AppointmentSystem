@@ -16,6 +16,50 @@
   }
 }
 
+@mixin gradientBackground--btn-action(
+  $background1: colors.$actionBtn__background--1,
+  $background2: colors.$actionBtn__background--2,
+  $background-hover-1: colors.$actionBtn__background--hover-1,
+  $background-hover-2: colors.$actionBtn__background--hover-2
+) {
+  color: colors.$background-secondary;
+  @include button;
+
+  background-image: repeating-linear-gradient(
+      135deg,
+      rgba(68, 68, 68, 0.07) 0px,
+      rgba(68, 68, 68, 0.07) 2px,
+      transparent 2px,
+      transparent 4px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      rgba(68, 68, 68, 0.07) 0px,
+      rgba(68, 68, 68, 0.07) 2px,
+      transparent 2px,
+      transparent 4px
+    ),
+    linear-gradient(90deg, #{$background1}, #{$background2});
+
+  &:hover {
+    background-image: repeating-linear-gradient(
+        135deg,
+        rgba(68, 68, 68, 0.07) 0px,
+        rgba(68, 68, 68, 0.07) 2px,
+        transparent 2px,
+        transparent 4px
+      ),
+      repeating-linear-gradient(
+        45deg,
+        rgba(68, 68, 68, 0.07) 0px,
+        rgba(68, 68, 68, 0.07) 2px,
+        transparent 2px,
+        transparent 4px
+      ),
+      linear-gradient(90deg, #{$background-hover-1}, #{$background-hover-2});
+  }
+}
+
 @mixin inputLogin {
   border: 1px solid colors.$border-Primary;
   border-radius: 10px;

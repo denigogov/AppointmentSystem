@@ -75,3 +75,7 @@ a.active {
 .table {
   @include mixin.table;
 }
+
+.action__button-global {
+  @include mixin.gradientBackground--btn-action;
+}

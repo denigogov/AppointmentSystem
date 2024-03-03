@@ -1,3 +1,5 @@
+import "../styling/_underConstruction.scss";
+
 const UnderConstruction = ({ titleText }: { titleText: string }) => {
   return (
     <div className="underConstructiont--container">

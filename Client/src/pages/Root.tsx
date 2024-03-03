@@ -52,12 +52,15 @@ const Root = () => {
                 <img src={homeIcon} alt="homeIcon" />
               </li>
             </NavLink>
-            <NavLink to="/app">
-              <li>
-                App
-                <img src={AppDashboardIcon} alt="homeIcon" />
-              </li>
-            </NavLink>
+
+            {auth.token && (
+              <NavLink to="/app">
+                <li>
+                  Dashboard
+                  <img src={AppDashboardIcon} alt="homeIcon" />
+                </li>
+              </NavLink>
+            )}
             {!auth.token && (
               <NavLink to="signup">
                 <li>

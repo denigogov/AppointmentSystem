@@ -1,10 +1,9 @@
-import "../../styling/_underConstruction.scss";
-import UnderConstruction from "../UnderConstruction";
+import Hero from "../../components/WebPageComponents/Hero";
 
 const WebPage = () => {
   return (
     <div>
-      <UnderConstruction titleText="Site" />
+      <Hero />
     </div>
   );
 };
