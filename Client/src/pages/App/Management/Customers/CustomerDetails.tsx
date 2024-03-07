@@ -10,7 +10,8 @@ interface CustomerDetails {}
 const CustomerDetails: React.FC<CustomerDetails> = ({}) => {
   const selectedCustomerId = useParams();
   const auth = useAuth();
-  const token = auth.token;
+
+  const token = auth.token ?? "";
   const type = 1;
   const id = selectedCustomerId?.id;
 

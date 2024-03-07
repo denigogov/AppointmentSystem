@@ -192,7 +192,6 @@ const DashboardOwner: React.FC<DashboardOwnerProps> = ({ setPopupOpen }) => {
         {/* Top of the Dashbaord */}
         <div className="dashboardTop--wrap">
           <div className="dashboardleft__owner--WelcomeText">
-            {/* */}
             {/* Username Title */}
             <h3>Welcome {userInfo?.username ?? "username"}</h3>
             <p>Lorem, ipsum dolor. lorem</p>

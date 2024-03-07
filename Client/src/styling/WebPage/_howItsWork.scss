@@ -1,0 +1,345 @@
+@use "../mixin";
+@use "../general";
+@use "../colors";
+
+.getStarted {
+  margin: 4rem 0;
+  display: flex;
+  gap: 30px;
+
+  @media (max-width: general.$md) {
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+  }
+  .getStarted__textContainer,
+  .getStarted__steps {
+    flex: 1;
+  }
+}
+
+.getStarted__textContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: right;
+  text-wrap: balance;
+  gap: 1.4rem;
+
+  @media (max-width: general.$md) {
+    text-align: center;
+    text-wrap: none;
+  }
+
+  .getStarted__textContainer-text2 {
+    text-align: left;
+    padding: 2rem;
+
+    @media (max-width: general.$md) {
+      display: none;
+      text-align: center;
+      padding: 0;
+    }
+  }
+}
+
+// CSS Ronny Siikaluoma  https://codepen.io/siiron
+.steps {
+  @mixin breakpoint($point) {
+    @if $point == big {
+      @media screen and (min-width: 601px) {
+        @content;
+      }
+    } @else if $point == small {
+      @media screen and (max-width: 600px) {
+        @content;
+      }
+    }
+  }
+
+  $connectorHeight: 42px;
+  $connectorBorderWidth: 1px;
+  $connectorBorderColor: #d8d8d8;
+
+  $circleSizeSmall: 36px;
+  $circlePaddingSmall: 9px;
+
+  $circleSizeLarge: 174px;
+  $circlePaddingLarge: 48px;
+
+  .container {
+    box-sizing: content-box;
+    padding: 0 12px;
+    max-width: 640px;
+    margin: 48px auto;
+  }
+
+  .step-list__item {
+    counter-increment: step-counter;
+    position: relative;
+
+    &:before {
+      content: counter(step-counter);
+      font-weight: 300;
+      color: $connectorBorderColor;
+    }
+
+    h2 {
+      font-size: 24px;
+      line-height: 30px;
+      font-weight: 300;
+    }
+
+    .icon {
+      border-radius: 50%;
+      display: block;
+      flex: 0 0 auto;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .body {
+      font-size: 12px;
+      line-height: 18px;
+      font-weight: 300;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: row;
+      padding-bottom: 18px;
+    }
+
+    &:first-child {
+      .icon {
+        background: #f4f6d5;
+      }
+    }
+    &:nth-child(2) {
+      .icon {
+        background: #e8f4f3;
+      }
+    }
+    &:nth-child(3) {
+      .icon {
+        background: #ededed;
+      }
+    }
+    // &:nth-child(4) {
+    //   .icon {
+    //     background: #edf6ef;
+    //   }
+    // }
+    // &:nth-child(5) {
+    //   .icon {
+    //     background: #fef3f3;
+    //   }
+    // }
+
+    &:nth-child(odd) {
+      .content {
+        justify-content: flex-start;
+      }
+    }
+
+    &:nth-child(even) {
+      .content {
+        justify-content: flex-end;
+      }
+    }
+
+    &:first-child {
+      > .step-list__item__inner {
+        &:before {
+          content: none;
+        }
+      }
+    }
+
+    &:last-child {
+      > .step-list__item__inner {
+        &:after {
+          content: none;
+        }
+      }
+    }
+
+    + li {
+      margin-top: $connectorHeight * 2;
+
+      > div {
+        margin-top: -$connectorBorderWidth;
+      }
+    }
+
+    @include breakpoint(small) {
+      display: flex;
+
+      &:before {
+        content: counter(step-counter);
+        position: relative;
+        font-size: 36px;
+        line-height: 42px;
+        font-weight: 300;
+        color: #000000;
+        margin-right: 12px;
+      }
+
+      .icon {
+        order: 0;
+        width: $circleSizeSmall;
+        height: $circleSizeSmall;
+        padding: $circlePaddingSmall;
+        position: absolute;
+        left: -9px;
+        top: 42px;
+      }
+
+      .body {
+        order: 1;
+        margin-top: 8px;
+        margin-left: 12px;
+      }
+
+      .content {
+        align-items: flex-start;
+
+        &:before {
+          content: "";
+          position: absolute;
+          border-left: $connectorBorderColor;
+          height: 100%;
+          left: 9px;
+          bottom: 0;
+          display: block;
+          width: 1px;
+          background: $connectorBorderColor;
+          top: 84px;
+        }
+      }
+
+      &:last-child {
+        .content {
+          &:before {
+            content: none;
+          }
+        }
+      }
+    }
+
+    @include breakpoint(big) {
+      &:before {
+        content: counter(step-counter);
+        position: absolute;
+        font-size: 90px;
+        line-height: 1;
+        font-weight: 300;
+        color: #d8d8d8;
+      }
+
+      .icon {
+        width: $circleSizeLarge;
+        height: $circleSizeLarge;
+        padding: $circlePaddingLarge;
+      }
+
+      .body {
+        flex: 0 1 33.3333%;
+        margin-top: $connectorHeight * 2;
+      }
+
+      .content {
+        align-items: flex-end;
+      }
+
+      > .step-list__item__inner {
+        position: relative;
+
+        &:before,
+        &:after {
+          border-width: 0px;
+          border-style: solid;
+          border-color: $connectorBorderColor;
+          display: block;
+          content: "";
+          position: absolute;
+          height: $connectorHeight;
+          width: calc(33.3333% - #{$connectorHeight});
+        }
+      }
+
+      &:nth-child(odd) {
+        > .step-list__item__inner {
+          text-align: right;
+
+          &:before,
+          &:after {
+            border-left-width: $connectorBorderWidth;
+            left: calc(33.3333% - $connectorHeight / 2);
+          }
+
+          &:before {
+            border-top-width: $connectorBorderWidth;
+            border-top-left-radius: $connectorHeight;
+            margin-top: -$connectorHeight;
+          }
+
+          &:after {
+            border-bottom-width: $connectorBorderWidth;
+            border-bottom-left-radius: $connectorHeight;
+            margin-bottom: -$connectorHeight;
+          }
+        }
+
+        &:before {
+          left: 0;
+          margin-left: 33.3333%;
+          transform: translateX(-100%);
+        }
+
+        .icon {
+          margin-left: 72px;
+        }
+      }
+
+      &:nth-child(even) {
+        > .step-list__item__inner {
+          &:before,
+          &:after {
+            border-right-width: $connectorBorderWidth;
+            right: calc(33.3333% - $connectorHeight / 2);
+          }
+
+          &:before {
+            border-top-width: $connectorBorderWidth;
+            border-top-right-radius: $connectorHeight;
+            margin-top: -$connectorHeight;
+          }
+
+          &:after {
+            border-bottom-width: $connectorBorderWidth;
+            border-bottom-right-radius: $connectorHeight;
+            margin-bottom: -$connectorHeight;
+          }
+        }
+
+        &:before {
+          right: 0;
+          margin-right: 33.3333%;
+          transform: translateX(100%);
+        }
+
+        .icon {
+          margin-right: 72px;
+        }
+
+        .body {
+          order: 1;
+        }
+      }
+    }
+  }
+}

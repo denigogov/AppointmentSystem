@@ -1,8 +1,5 @@
-import useSWR, { mutate, useSWRConfig } from "swr";
-import {
-  fetchAllEmployees,
-  fetchSingleEmployees,
-} from "../../../../api/tableApi";
+import useSWR, { mutate } from "swr";
+import { fetchSingleEmployees } from "../../../../api/tableApi";
 import EditInputs from "../../../../components/ManagementComponent/Employees/edit/EditInputs";
 import EditTitle from "../../../../components/ManagementComponent/Employees/edit/EditTitle";
 import { useAuth } from "../../../../helpers/Auth";

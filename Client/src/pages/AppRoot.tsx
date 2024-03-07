@@ -79,7 +79,7 @@ const AppRoot = () => {
       </nav>
       <div className="appNavMenu--icon" onClick={handleMobileMenu}>
         <img src={UserNavMenu} alt="app nav menu" />
-        <p className="navLinkInfo">{auth.userInfo?.username ?? "Dejan"}</p>
+        <p className="navLinkInfo">{auth.userInfo?.username ?? ""}</p>
       </div>
       <main className="appRoot-outlet test">
         <Outlet />

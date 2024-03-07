@@ -79,3 +79,32 @@ a.active {
 .action__button-global {
   @include mixin.gradientBackground--btn-action;
 }
+
+.articleText {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+
+  &__title {
+    letter-spacing: 1.2px;
+    color: colors.$font-Primary;
+  }
+
+  &__subTitle {
+    letter-spacing: 1.2px;
+    color: colors.$font-Primary;
+    font-size: 1.7rem;
+  }
+
+  &__info {
+    color: colors.$font-Primary;
+  }
+
+  &__btn {
+    padding-top: 1rem;
+  }
+
+  @media (max-width: general.$md) {
+    align-items: center;
+  }
+}

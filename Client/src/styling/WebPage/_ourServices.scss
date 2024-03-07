@@ -1,0 +1,90 @@
+@use "../colors";
+@use "../general";
+@use "../mixin";
+
+.ourServices {
+  background-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      transparent 27%,
+      rgba(196, 196, 196, 0.05) 27%,
+      rgba(196, 196, 196, 0.05) 42%,
+      transparent 42%,
+      transparent 100%
+    ),
+    linear-gradient(
+      135deg,
+      transparent 0%,
+      transparent 38%,
+      rgba(196, 196, 196, 0.05) 38%,
+      rgba(196, 196, 196, 0.05) 41%,
+      transparent 41%,
+      transparent 100%
+    ),
+    linear-gradient(
+      45deg,
+      transparent 0%,
+      transparent 19%,
+      rgba(196, 196, 196, 0.05) 19%,
+      rgba(196, 196, 196, 0.05) 40%,
+      transparent 40%,
+      transparent 100%
+    ),
+    linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255));
+
+  &__container {
+    padding: 4rem;
+    text-align: center;
+
+    // Title of the section
+    &-title {
+      padding: 20px;
+      font-size: 2.1rem;
+      color: colors.$font-Primary;
+      font-weight: 500;
+      letter-spacing: 2px;
+    }
+
+    &-subTitle {
+      letter-spacing: 0.6px;
+      font-weight: 300;
+      color: colors.$font-Secound;
+    }
+
+    // Footer
+    &-footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.3rem;
+      letter-spacing: 0.6px;
+      font-weight: 300;
+      color: colors.$font-Secound;
+
+      &-subTitle {
+        color: colors.$font-Primary;
+        font-weight: 400;
+      }
+
+      &-btn {
+        @include mixin.gradientBackground--btn-action(
+          rgba(198, 205, 119, 0),
+          rgba(86, 85, 85, 0.182),
+          rgba(196, 196, 196, 0.312),
+          rgba(86, 85, 85, 0.601)
+        );
+
+        font-weight: 500;
+        color: colors.$font-Secound;
+
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  &__cards {
+    margin: 2rem 0;
+  }
+}

@@ -1,16 +1,17 @@
 import "../../styling/WebPage/_header.scss";
 import startIcon from "../../assets/stars-svgrepo-com.svg";
 import { useAuth } from "../../helpers/Auth";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import Loading from "../../pages/Loading";
 
-interface HeroProps {}
-
-const Hero: React.FC<HeroProps> = ({}) => {
+const Hero: React.FC = ({}) => {
   const { token } = useAuth();
 
+  // @ts-ignore  //currenly
+  const { ref } = useOutletContext();
+
   return (
-    <div className="hero__container">
+    <header className="hero__container" ref={ref}>
       <div className="hero__text--wrap">
         <h1 className="hero-title">
           Empower <br />
@@ -40,7 +41,7 @@ const Hero: React.FC<HeroProps> = ({}) => {
           <Loading />
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 

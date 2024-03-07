@@ -12,9 +12,12 @@ import linkedInIcon from "../assets/linkedInLogo.svg";
 import AppDashboardIcon from "../assets/appDashboardIcon.svg";
 import SignupIcon from "../assets/signupIcon.svg";
 import SigninIcon from "../assets/signinIcon.svg";
+import { useInView } from "react-intersection-observer";
 
 const Root = () => {
   const [openNav, setOpenNav] = useState<boolean>(false);
+
+  const { ref, inView } = useInView();
 
   const auth = useAuth();
   const navigate = useNavigate();
@@ -40,7 +43,7 @@ const Root = () => {
           <p className="navLinkInfo">Scheduler Suite System</p>
         </div>
         <div className="navLinkInfo mobile">
-          <p>{auth.userInfo?.username ?? "username"}</p>
+          <p>{auth.userInfo?.username ?? ""}</p>
         </div>
 
         {/* Navigation Menu */}
@@ -119,7 +122,12 @@ const Root = () => {
       </div>
 
       <main>
-        <Outlet />
+        <Outlet context={{ ref }} />
+        {!inView && (
+          <a href="#" className="arrow-scroll">
+            arrow example
+          </a>
+        )}
       </main>
     </div>
   );
