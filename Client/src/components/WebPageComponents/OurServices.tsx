@@ -46,7 +46,7 @@ const OurServices = () => {
   return (
     <section className="ourServices">
       <div className="ourServices__container">
-        <p className="ourServices__container-title">Features</p>
+        <h2 className="ourServices__container-title">Features</h2>
         <p className="ourServices__container-subTitle">
           SalonPro Scheduler Suite System comes with a range of powerful
           features:
@@ -62,6 +62,7 @@ const OurServices = () => {
             features firsthand!
           </p>
           <button
+            style={{ color: "#fff" }}
             className="ourServices__container-footer-btn"
             onClick={() => navigate("/app/dashboard")}
           >

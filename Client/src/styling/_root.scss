@@ -167,8 +167,14 @@
 }
 
 .arrow-scroll {
+  width: 40px;
   position: sticky;
-  bottom: 10%;
-  display: block;
-  text-align: right;
+  left: 100%;
+  bottom: 5%;
+  padding: 0;
+  cursor: pointer;
+
+  &:active {
+    transform: scale(0.9);
+  }
 }

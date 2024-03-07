@@ -101,7 +101,7 @@ a.active {
   }
 
   &__btn {
-    padding-top: 1rem;
+    padding: 1rem 0;
   }
 
   @media (max-width: general.$md) {

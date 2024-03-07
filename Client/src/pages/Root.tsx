@@ -13,14 +13,17 @@ import AppDashboardIcon from "../assets/appDashboardIcon.svg";
 import SignupIcon from "../assets/signupIcon.svg";
 import SigninIcon from "../assets/signinIcon.svg";
 import { useInView } from "react-intersection-observer";
+import arrowScrollTop from "../assets/arrowScrollTop.svg";
 
 const Root = () => {
   const [openNav, setOpenNav] = useState<boolean>(false);
-
-  const { ref, inView } = useInView();
-
   const auth = useAuth();
   const navigate = useNavigate();
+  const { ref, inView } = useInView();
+
+  const scrollOnTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   // const location = useLocation();
   // const matchLocation =
@@ -124,9 +127,12 @@ const Root = () => {
       <main>
         <Outlet context={{ ref }} />
         {!inView && (
-          <a href="#" className="arrow-scroll">
-            arrow example
-          </a>
+          <img
+            onClick={scrollOnTop}
+            src={arrowScrollTop}
+            alt="arrowSCrollTop"
+            className="arrow-scroll"
+          />
         )}
       </main>
     </div>

@@ -11,6 +11,8 @@ export type StepsDataType = {
 };
 
 const GetStarted: React.FC<HowitsWorkProps> = ({}) => {
+  const isPhone = window.innerWidth <= 768;
+
   const stepsData: StepsDataType[] = [
     {
       title: "Create Your Account",
@@ -42,6 +44,8 @@ const GetStarted: React.FC<HowitsWorkProps> = ({}) => {
           text="Discover the seamless process of SalonPro Scheduler Suite System.
             Sign up, verify your email, and start booking appointments
             effortlessly"
+          buttonText={isPhone ? "Sign Up Now" : ""}
+          buttonNavigation={isPhone ? "signup" : ""}
         />
 
         <ArticleText
