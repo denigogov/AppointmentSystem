@@ -85,3 +85,8 @@
     margin: 2rem 0;
   }
 }
+
+.title-observer {
+  opacity: 0;
+  animation: cardsShow 1.8s 0.4s 1 ease forwards;
+}

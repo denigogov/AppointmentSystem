@@ -9,7 +9,7 @@ const InfoCard: React.FC<InfoCardProps> = ({ cardsData }) => {
   return (
     <div className="infoCard">
       {cardsData.map((card, i) => (
-        <span className={`card ${card.className}`} key={i}>
+        <span className={`card ${card.className}  `} key={i} ref={card.cardRef}>
           <div className="overlay"></div>
           <div className="circle">
             <img src={card.svg} alt={card.title} />

@@ -4,10 +4,17 @@ import carpetCare1 from "../../assets/carpetCare1.png";
 import carpetCare2 from "../../assets/carpetCare2.png";
 import carpetCare4 from "../../assets/carpetCare5.png";
 import LazyLoadingImage from "../../helpers/LazyLoadingImage";
+import { useInView } from "react-intersection-observer";
 const PortfolioSection: React.FC = ({}) => {
+  const { ref, inView } = useInView({ triggerOnce: true });
+
   return (
     <section className="portfolioSection">
-      <div className="portfolioSection__text">
+      <div
+        className={`portfolioSection__text ${
+          inView && "portfolio-observerAnimation"
+        }`}
+      >
         <ArticleText
           title="Some Other Portfolio Projects"
           subTitle="Introducing"
@@ -18,6 +25,7 @@ const PortfolioSection: React.FC = ({}) => {
           buttonText="Check it Out"
           buttonNavigation="https://carpetcaremanager.onrender.com/"
           additionalBtnStyle="portfolioSection__text-button"
+          observerIntersepcting={ref}
         />
       </div>
       <div className="portfolioSection__image">

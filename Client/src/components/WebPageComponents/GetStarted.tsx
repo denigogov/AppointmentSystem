@@ -1,7 +1,7 @@
 import "../../styling/WebPage/_howItsWork.scss";
+import { useInView } from "react-intersection-observer";
 import ArticleText from "./ArticleText";
 import Steps from "./Steps";
-interface HowitsWorkProps {}
 
 export type StepsDataType = {
   title: string;
@@ -10,8 +10,15 @@ export type StepsDataType = {
   alt: string;
 };
 
-const GetStarted: React.FC<HowitsWorkProps> = ({}) => {
+const GetStarted: React.FC = () => {
   const isPhone = window.innerWidth <= 768;
+
+  const { ref: firstRef, inView: firstView } = useInView({
+    triggerOnce: true,
+  });
+  const { ref: secoundRef, inView: secoundView } = useInView({
+    triggerOnce: true,
+  });
 
   const stepsData: StepsDataType[] = [
     {
@@ -36,9 +43,15 @@ const GetStarted: React.FC<HowitsWorkProps> = ({}) => {
   ];
 
   return (
-    <section className="getStarted">
-      <div className="getStarted__textContainer">
+    <section className="getStarted  getStarted-observerAnimation">
+      <div
+        className={`getStarted__textContainer  ${
+          firstView ? "articleText-observerAnimation1" : ""
+        }  ${secoundView ? "articleText-observerAnimation2" : ""} 
+        `}
+      >
         <ArticleText
+          observerIntersepcting={firstRef}
           title="Get Started in Three Simple Steps"
           subTitle="A Quick Guide to Using SalonPro Scheduler Suite System Like a Pro"
           text="Discover the seamless process of SalonPro Scheduler Suite System.
@@ -49,6 +62,7 @@ const GetStarted: React.FC<HowitsWorkProps> = ({}) => {
         />
 
         <ArticleText
+          observerIntersepcting={secoundRef}
           title="Maximize Efficiency with SalonPro Scheduler"
           subTitle="Streamline your scheduling process and elevate your salon's performance."
           text="Experience the power of SalonPro Scheduler Suite System in optimizing your salon's workflow, reducing overhead, and enhancing customer satisfaction."
@@ -57,7 +71,11 @@ const GetStarted: React.FC<HowitsWorkProps> = ({}) => {
           buttonNavigation="signup"
         />
       </div>
-      <div className="getStarted__steps">
+      <div
+        className={`getStarted__steps  ${
+          firstView && "steps-observerAnimation"
+        }`}
+      >
         <Steps stepsData={stepsData} />
       </div>
     </section>

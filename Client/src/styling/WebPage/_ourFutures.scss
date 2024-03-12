@@ -24,6 +24,9 @@
     justify-content: center;
     gap: 15px;
 
+    // I add this opacity 0 because of the observer to start from 0 and after that it will stay on at 1 when its 100% with forward property on animation
+    opacity: 0;
+
     @media (max-width: general.$md) {
       order: 0;
     }
@@ -109,4 +112,9 @@
       --_x: calc(-1 * var(--g));
     }
   }
+}
+
+// Interseptiing observer animation - setup in _infoCard.scss
+.ourFuture-observerAnimation {
+  animation: cardsShow 1.2s 1 ease-in-out forwards;
 }

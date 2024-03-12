@@ -66,6 +66,8 @@
   }
 
   &__text {
+    // Observer Opcity start with 0 and if intersepting 1
+    opacity: 0;
     order: 1;
 
     @media (max-width: general.$lg) {
@@ -184,4 +186,8 @@
       }
     }
   }
+}
+
+.portfolio-observerAnimation {
+  animation: cardsShow 1s 1 ease-in-out forwards;
 }

@@ -12,18 +12,11 @@ import linkedInIcon from "../assets/linkedInLogo.svg";
 import AppDashboardIcon from "../assets/appDashboardIcon.svg";
 import SignupIcon from "../assets/signupIcon.svg";
 import SigninIcon from "../assets/signinIcon.svg";
-import { useInView } from "react-intersection-observer";
-import arrowScrollTop from "../assets/arrowScrollTop.svg";
 
 const Root = () => {
   const [openNav, setOpenNav] = useState<boolean>(false);
   const auth = useAuth();
   const navigate = useNavigate();
-  const { ref, inView } = useInView();
-
-  const scrollOnTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   // const location = useLocation();
   // const matchLocation =
@@ -45,6 +38,7 @@ const Root = () => {
           <img src={logoImg} alt="company logo" onClick={() => navigate("/")} />
           <p className="navLinkInfo">Scheduler Suite System</p>
         </div>
+
         <div className="navLinkInfo mobile">
           <p>{auth.userInfo?.username ?? ""}</p>
         </div>
@@ -112,7 +106,6 @@ const Root = () => {
           <p className="navLinkInfo">Dejan Gogov</p>
         </div>
       </div>
-
       {/* Navigation Hamburger Menu only Avaible on phone */}
       <div className={openNav ? "overlay" : ""} onClick={handleNavBar}>
         {!openNav && (
@@ -123,17 +116,8 @@ const Root = () => {
           </div>
         )}
       </div>
-
       <main>
-        <Outlet context={{ ref }} />
-        {!inView && (
-          <img
-            onClick={scrollOnTop}
-            src={arrowScrollTop}
-            alt="arrowSCrollTop"
-            className="arrow-scroll"
-          />
-        )}
+        <Outlet />
       </main>
     </div>
   );

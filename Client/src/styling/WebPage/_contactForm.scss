@@ -1,0 +1,128 @@
+@use "../mixin";
+@use "../colors";
+@use "../general";
+
+.contactForm {
+  background-image: linear-gradient(
+      112.5deg,
+      rgb(214, 214, 214) 0%,
+      rgb(214, 214, 214) 10%,
+      rgb(195, 195, 195) 10%,
+      rgb(195, 195, 195) 53%,
+      rgb(176, 176, 176) 53%,
+      rgb(176, 176, 176) 55%,
+      rgb(157, 157, 157) 55%,
+      rgb(157, 157, 157) 60%,
+      rgb(137, 137, 137) 60%,
+      rgb(137, 137, 137) 88%,
+      rgb(118, 118, 118) 88%,
+      rgb(118, 118, 118) 91%,
+      rgb(99, 99, 99) 91%,
+      rgb(99, 99, 99) 100%
+    ),
+    linear-gradient(
+      157.5deg,
+      rgb(214, 214, 214) 0%,
+      rgb(214, 214, 214) 10%,
+      rgb(195, 195, 195) 10%,
+      rgb(195, 195, 195) 53%,
+      rgb(176, 176, 176) 53%,
+      rgb(176, 176, 176) 55%,
+      rgb(157, 157, 157) 55%,
+      rgb(157, 157, 157) 60%,
+      rgb(137, 137, 137) 60%,
+      rgb(137, 137, 137) 88%,
+      rgb(118, 118, 118) 88%,
+      rgb(118, 118, 118) 91%,
+      rgb(99, 99, 99) 91%,
+      rgb(99, 99, 99) 100%
+    ),
+    linear-gradient(
+      135deg,
+      rgb(214, 214, 214) 0%,
+      rgb(214, 214, 214) 10%,
+      rgb(195, 195, 195) 10%,
+      rgb(195, 195, 195) 53%,
+      rgb(176, 176, 176) 53%,
+      rgb(176, 176, 176) 55%,
+      rgb(157, 157, 157) 55%,
+      rgb(157, 157, 157) 60%,
+      rgb(137, 137, 137) 60%,
+      rgb(137, 137, 137) 88%,
+      rgb(118, 118, 118) 88%,
+      rgb(118, 118, 118) 91%,
+      rgb(99, 99, 99) 91%,
+      rgb(99, 99, 99) 100%
+    ),
+    linear-gradient(90deg, rgb(195, 195, 195), rgb(228, 228, 228));
+  background-blend-mode: overlay, overlay, overlay, normal;
+
+  padding: 2rem 0;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  @media (max-width: general.$md) {
+    flex-direction: column;
+  }
+
+  &__form,
+  &__info {
+    flex: 1;
+  }
+
+  &__form {
+    border-radius: 30px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    input,
+    textarea {
+      font-family: general.$primary-font;
+      height: 3rem;
+      width: 25rem;
+      background-color: transparent;
+      border: none;
+      border-bottom: 1px solid colors.$border-Primary-Dark;
+      color: colors.$font-Primary;
+      letter-spacing: 1px;
+      margin: 0em 0 1.875em 0;
+      width: 70%;
+      transition: all 0.3s;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  &__info {
+    // start with o and after with animation end with 1
+    opacity: 0;
+
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    &-footer {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: general.$md) {
+      order: -1;
+      text-align: center;
+
+      &-footer {
+        justify-content: center;
+      }
+    }
+  }
+}
+
+.articleText-observerAnimation {
+  animation: cardsShow 1s 1 ease-in-out forwards;
+}

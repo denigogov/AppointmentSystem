@@ -4,10 +4,15 @@ import employerDashboardImage from "../../assets/employerOwner.png";
 import customerDashboard from "../../assets/customerdashboard.png";
 import LazyLoadingImage from "../../helpers/LazyLoadingImage";
 import ArticleText from "./ArticleText";
+import { useInView } from "react-intersection-observer";
 
 interface OurFuturesProps {}
 
 const OurFutures: React.FC<OurFuturesProps> = ({}) => {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+  });
+
   const images = [
     {
       id: 1,
@@ -27,8 +32,12 @@ const OurFutures: React.FC<OurFuturesProps> = ({}) => {
   ];
 
   return (
-    <div className="ourFutures">
-      <div className="ourFutures__text">
+    <div className="ourFutures" ref={ref}>
+      <div
+        className={`ourFutures__text ${
+          inView ? "ourFuture-observerAnimation" : ""
+        }`}
+      >
         <ArticleText
           title="Explore SalonPro Scheduler"
           subTitle="Discover the Versatility of Our Dashboard Solutions"

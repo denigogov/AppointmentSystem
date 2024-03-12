@@ -28,6 +28,7 @@ export const errorMessageBtn = (
   });
 };
 
+// for created !
 export const succesMessageNoBtn = (title: string) => {
   return Swal.fire({
     position: "center",
@@ -64,6 +65,13 @@ export const deleteActionPrompt = (title?: string) =>
     timer: 1500,
   });
 
+/**
+ *
+ * @param title string
+ * @param htmlText string | also can be added HTML tags example: `${<strong>text</strong>}`
+ * @param confirmBtnText string | btn name
+ * @returns
+ */
 export const confirmUpdatePrompt = (
   title: string,
   htmlText: string,
@@ -79,6 +87,11 @@ export const confirmUpdatePrompt = (
     confirmButtonText: confirmBtnText,
   });
 
+/**
+ *
+ * @param title string
+ * @param htmlText string | also can be added HTML tags example: `${<strong>text</strong>}`
+ */
 export const updateActionPrompt = (title: string, htmlText: string) => {
   Swal.fire({
     position: "center",

@@ -16,6 +16,8 @@ const findUserLogin = async (req, res, next) => {
       email
     );
 
+    console.log("customer", findCustomer);
+    console.log("employer", findUsername);
     // ABLE NOW CUSTOMER AND EMPLOYEE TO LOGIN FROM THE SAME FORM !!
     if (
       findUsername?.length ||

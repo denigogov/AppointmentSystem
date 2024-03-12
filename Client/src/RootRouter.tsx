@@ -34,8 +34,9 @@ import Approvals from "./pages/App/Management/Approvals/Approvals";
 import SignUp from "./pages/SignUp/SignUp";
 import Root from "./pages/Root";
 import WebPage from "./pages/Home/WebPage";
-import Home from "./pages/Home/Home";
+import Confirm from "./pages/Home/Confirm";
 import Login from "./pages/Login";
+import { ProtectEmailConfirm } from "./helpers/ProtectEmailConfirm";
 
 const RootRouter: React.FC = ({}) => {
   const auth = useAuth();
@@ -45,11 +46,11 @@ const RootRouter: React.FC = ({}) => {
       <Route path="/" element={<Root />}>
         <Route index element={<WebPage />} />
         <Route
-          path="home/:token"
+          path="confirm/:token"
           element={
-            // <RequireAuth>
-            <Home />
-            // </RequireAuth>
+            <ProtectEmailConfirm>
+              <Confirm />
+            </ProtectEmailConfirm>
           }
         />
 

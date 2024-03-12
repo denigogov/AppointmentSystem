@@ -1,0 +1,41 @@
+@use "./colors";
+@use "./mixin";
+
+.confirmComponent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 2rem;
+
+  p {
+    &:nth-child(1) {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: colors.$font-Primary;
+      letter-spacing: 0.6px;
+    }
+
+    &:nth-child(2) {
+      width: 60%;
+      text-wrap: balance;
+      color: colors.$font-Secound;
+      letter-spacing: 0.4px;
+    }
+  }
+
+  h4 {
+    color: colors.$font-Primary;
+  }
+
+  &-btn {
+    @include mixin.gradientBackground--btn-action(
+      rgba(198, 205, 119, 0),
+      rgba(86, 85, 85, 0.182),
+      rgba(196, 196, 196, 0.312),
+      rgba(86, 85, 85, 0.601)
+    );
+    color: white;
+  }
+}

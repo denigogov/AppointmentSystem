@@ -108,3 +108,16 @@ a.active {
     align-items: center;
   }
 }
+
+.arrow-scroll {
+  width: 40px;
+  position: sticky;
+  top: 90%;
+  left: 100%;
+  padding: 0;
+  cursor: pointer;
+
+  &:active {
+    transform: scale(0.9);
+  }
+}

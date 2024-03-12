@@ -1,22 +1,29 @@
 import "../../styling/WebPage/_header.scss";
 import startIcon from "../../assets/stars-svgrepo-com.svg";
 import { useAuth } from "../../helpers/Auth";
-import { Link, useOutletContext } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Loading from "../../pages/Loading";
 
-const Hero: React.FC = ({}) => {
+interface HeroProps {
+  observer: (node?: Element | null) => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ observer }) => {
   const { token } = useAuth();
 
-  // @ts-ignore  //currenly
-  const { ref } = useOutletContext();
-
   return (
-    <header className="hero__container" ref={ref}>
+    // observer for the arrow top
+    <header className="hero__container " ref={observer}>
+      {/* observer for the text */}
       <div className="hero__text--wrap">
         <h1 className="hero-title">
           Empower <br />
           your <span className="markedWord">salon</span> workflow.
-          <img src={startIcon} alt="startIcon" />
+          <img
+            src={startIcon}
+            alt="startIcon"
+            className="icon-animationObserver"
+          />
         </h1>
         <p className="hero-subTitle">
           Efficiently streamline scheduling processes. Elevate customer

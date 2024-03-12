@@ -45,12 +45,13 @@ router
     hashedPassword,
     customerEmailConfirm.createCustomer
   )
+  // .get("/confirm", customerEmailConfirm.customerConfirm) // not need to add verify token !
+  .post("/confirm", customerEmailConfirm.confirmAccount)
   .delete("/customers/:id", verifyToken, customerQuery.deleteCustomer)
   .get("/customers/:id?/:type?", verifyToken, customerQuery.customerAllData)
   .get("/userTypes", verifyToken, employeeQuery.userTypesTable)
   .get("/customers-limit", verifyToken, customerQuery.allCustomersPagination)
   .get("/customersTop5", verifyToken, customerQuery.top5Customers)
-  .get("/confirm", customerEmailConfirm.customerConfirm) // not need to add verify token !
   .get("/appointment", verifyToken, appointmenQuery.getAllAppointments)
   .post("/appointment", verifyToken, appointmenQuery.postAppointment)
   .delete("/appointment/:id", verifyToken, appointmenQuery.deleteAppointment)
@@ -67,6 +68,7 @@ router
     verifyToken,
     validateCreateEmployerWorkTime,
     employeeQuery.createEmployerWorkTime
-  );
+  )
+  .post("/formMessage", customerEmailConfirm.formMessage);
 
 module.exports = router;

@@ -12,7 +12,7 @@ const Steps: React.FC<StepsProps> = ({ stepsData }) => {
       <div className="container">
         <ul className="step-list">
           {stepsData.map((text, i) => (
-            <li className="step-list__item" key={i}>
+            <li className="step-list__item " key={i}>
               <div className="step-list__item__inner">
                 <div className="content">
                   <div className="body">

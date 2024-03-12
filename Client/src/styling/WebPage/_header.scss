@@ -3,7 +3,7 @@
 @use "../mixin";
 
 .hero__container {
-  height: calc(100vh - 6rem);
+  // height: calc(100vh - 6rem);
   display: flex;
 }
 
@@ -36,7 +36,7 @@
     img {
       background-color: #000000;
       border-radius: 50%;
-      width: 2rem;
+      width: 2.3rem;
       padding: 0.5rem;
       display: inline;
     }
@@ -97,9 +97,23 @@
   }
 }
 
-// Hide the animation
+// Hide the animation border spiner text
 @media (max-width: general.$lg) {
   .hero__text--wrap {
     margin-left: 0rem;
+  }
+}
+
+.icon-animationObserver {
+  animation: iconSpin 0.6s 0.7s 1 ease-in-out;
+}
+
+@keyframes iconSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
   }
 }
