@@ -17,7 +17,8 @@ const Vacation = () => {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(null);
 
-  const [timeManagement, setPopupOpen] = useTimeManagementData();
+  //   const [timeManagement, setPopupOpen] = useTimeManagementData();
+  const [_, setPopupOpen] = useTimeManagementData();
   const auth = useAuth();
   const navigate = useNavigate();
 

@@ -10,7 +10,7 @@ import { Outlet, useNavigate, useOutletContext } from "react-router-dom";
 import { useState } from "react";
 import { mutate } from "swr";
 import AppointmentIntervalView from "../../../components/Settings/TimeManagement/AppointmentIntervalView";
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
 import { apiGeneralErrorHandle } from "../../../helpers/api";
 import { updateActionPrompt } from "../../../components/ErrorSuccesMessage";
 const API_URL = import.meta.env.VITE_API_URL as string;

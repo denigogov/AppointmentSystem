@@ -3,9 +3,13 @@ import { useLocation } from "react-router-dom";
 import { ReactNode } from "react";
 import { useAuth } from "./Auth";
 
-export const ProtectEmailConfirm: React.FC<{ children: ReactNode }> = ({
+interface ProtectEmailConfirmProps {
+  children: ReactNode;
+}
+
+export const ProtectEmailConfirm: React.FC<ProtectEmailConfirmProps> = ({
   children,
-}) => {
+}): JSX.Element => {
   const auth = useAuth();
   const location = useLocation();
   const tokens = location.search.substring(7);
@@ -17,5 +21,5 @@ export const ProtectEmailConfirm: React.FC<{ children: ReactNode }> = ({
     return <Navigate to="/" state={{ path: location.pathname }} />;
   }
 
-  return children;
+  return <>{children}</>;
 };

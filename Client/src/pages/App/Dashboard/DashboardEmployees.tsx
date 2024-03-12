@@ -54,7 +54,7 @@ const DashboardEmployees = ({ setPopupOpen }: DashboardEmployeeProps) => {
 
   const {
     data: servicesEmpolyees,
-    error: servicesEmpolyeesError,
+    // error: servicesEmpolyeesError,
     isLoading: servicesEmpolyeesLoading,
   } = useSWR<ServiceEmloyeesTypes[]>(["employeesCurrentServices", token], () =>
     fetchAllServiceEmployees(token, id)
@@ -71,7 +71,7 @@ const DashboardEmployees = ({ setPopupOpen }: DashboardEmployeeProps) => {
 
   const {
     data: appointmentsByDataRange,
-    error: appointmentsByDataRangeError,
+    // error: appointmentsByDataRangeError,
     isLoading: appointmentsByDataRangeLoading,
   } = useSWR<allAppointmentsByDataRangeAndEmployTypes[]>(
     ["appointmentsRange", token, startDateSelected, endDateSelected],
@@ -86,7 +86,7 @@ const DashboardEmployees = ({ setPopupOpen }: DashboardEmployeeProps) => {
 
   const {
     data: serviceProcentCalc,
-    error: serviceProcentCalcError,
+    // error: serviceProcentCalcError,
     isLoading: serviceProcentCalcLoading,
   } = useSWR<fetchServiceProcentCurrentMonthTypes[]>(
     ["serviceProcentCalc", token],
@@ -102,7 +102,7 @@ const DashboardEmployees = ({ setPopupOpen }: DashboardEmployeeProps) => {
 
   const {
     data: appointmentsByHourRange,
-    error: appointmentsByHourRangeError,
+    // error: appointmentsByHourRangeError,
     isLoading: appointmentsByHourRangeLoading,
   } = useSWR<FetchAppointmentsByHourRangeTypes[]>(
     ["appointmentByHourRange", token, endDateAndHour],
@@ -125,7 +125,7 @@ const DashboardEmployees = ({ setPopupOpen }: DashboardEmployeeProps) => {
 
   const {
     data: allAppointmentsByDay,
-    error: allAppointmentsByDayError,
+    // error: allAppointmentsByDayError,
     isLoading: allAppointmentsByDayLoading,
   } = useSWR<FetchAppointmentsByDayAndTotalTypes[]>(
     ["allAppointmentsByDay", token],
@@ -134,7 +134,7 @@ const DashboardEmployees = ({ setPopupOpen }: DashboardEmployeeProps) => {
 
   const {
     data: totalAppointments,
-    error: totalAppointmentsError,
+    // error: totalAppointmentsError,
     isLoading: totalAppointmentsLoading,
   } = useSWR<FetchAppointmentsTotalTypes[]>(["totalAppointments", token], () =>
     fetchAppointmentsTotal({ token, id })

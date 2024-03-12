@@ -25,7 +25,6 @@ const Step3: React.FC<Step3Props> = ({
   timeManagment,
   allAppointments,
   employee_id,
-  scheduled_at,
 }) => {
   const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const [startDate, setStartDate] = useState(

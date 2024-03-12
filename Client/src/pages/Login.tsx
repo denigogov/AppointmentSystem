@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 import loginLogo from "../assets/loginLogo.svg";
 import LoadingRing from "../components/loadingRing";
-
+const API_URL = import.meta.env.VITE_API_URL as string;
 const Login = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passRef = useRef<HTMLInputElement>(null);
@@ -23,7 +23,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:4000/login`, {
+      const response = await fetch(`${API_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

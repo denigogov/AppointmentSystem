@@ -3,9 +3,13 @@ import { useAuth } from "./Auth";
 import { useLocation } from "react-router-dom";
 import { ReactNode } from "react";
 
-export const OnlyEmployeesAccess: React.FC<{ children: ReactNode }> = ({
+interface OnlyEmployeesAccessProps {
+  children: ReactNode;
+}
+
+export const OnlyEmployeesAccess: React.FC<OnlyEmployeesAccessProps> = ({
   children,
-}) => {
+}): JSX.Element => {
   const auth = useAuth();
   const location = useLocation();
 
@@ -13,5 +17,5 @@ export const OnlyEmployeesAccess: React.FC<{ children: ReactNode }> = ({
     return <Navigate to="/app" state={{ path: location.pathname }} />;
   }
 
-  return children;
+  return <>{children}</>;
 };

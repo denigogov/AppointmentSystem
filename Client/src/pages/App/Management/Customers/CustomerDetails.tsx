@@ -16,7 +16,7 @@ const CustomerDetails: React.FC<CustomerDetails> = ({}) => {
   const id = selectedCustomerId?.id;
 
   const {
-    data: customerData,
+    // data: customerData,
     error: customerDataError,
     isLoading: customerDataLoading,
   } = useSWR<CustomersDataTypes[]>(["customerData", id, token], () =>

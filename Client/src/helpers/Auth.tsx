@@ -1,11 +1,13 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 import { TokenType, UserInfoType, AuthContextType } from "../types/AuthTypes";
 
+interface AuthProviderProps {
+  children: ReactNode;
+}
+
 const AuthContext = createContext<AuthContextType | null>(null);
 
-export const AuthProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [token, setToken] = useState<TokenType>(
     localStorage.getItem("accessKey") ?? null
   );
