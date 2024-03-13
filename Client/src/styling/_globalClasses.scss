@@ -116,6 +116,7 @@ a.active {
   left: 100%;
   padding: 0;
   cursor: pointer;
+  z-index: 10000;
 
   &:active {
     transform: scale(0.9);
