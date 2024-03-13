@@ -5,7 +5,7 @@ const findUserLogin = async (req, res, next) => {
     const { email } = req.body;
 
     const [findUsername] = await database.query(
-      `SELECT employees.id, username, email, password, employeesUserType_id as employeesType_id, userType_id FROM haircut.employees 
+      `SELECT employees.id, username, email, password, employeesUserType_id as employeesType_id, userType_id FROM employees 
       join employeestype on employees.employeesUserType_id = employeestype.id
       join usertypes on employeestype.userType_id = usertypes.id where email = ?`,
       [email]
@@ -16,8 +16,8 @@ const findUserLogin = async (req, res, next) => {
       email
     );
 
-    console.log("customer", findCustomer);
-    console.log("employer", findUsername);
+    // console.log("customer", findCustomer);
+    // console.log("employer", findUsername);
     // ABLE NOW CUSTOMER AND EMPLOYEE TO LOGIN FROM THE SAME FORM !!
     if (
       findUsername?.length ||
@@ -55,7 +55,7 @@ const getUserIdNext = async (req, res, next) => {
       };
     } else {
       const [findEmployee] = await database.query(
-        `SELECT employees.id, employees.firstName, usertypes.id as employeesType_id  FROM haircut.employees
+        `SELECT employees.id, employees.firstName, usertypes.id as employeesType_id  FROM employees
         inner join usertypes on employeesUserType_id = usertypes.id
          where  employees.id = ?`,
         [sub]

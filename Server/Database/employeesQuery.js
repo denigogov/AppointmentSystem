@@ -118,9 +118,7 @@ const employeesTimeManagment = async (req, res) => {
   try {
     const { id } = req.params;
     const [timeManagment] = await database.query(
-      `SELECT * FROM haircut.timemanagment ${
-        id ? "where employee_id = ?" : ""
-      }`,
+      `SELECT * FROM timemanagment ${id ? "where employee_id = ?" : ""}`,
       [id]
     );
 

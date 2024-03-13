@@ -48,7 +48,7 @@ const getServiceEmployeesJoin = async (req, res) => {
     const { id } = req.params;
 
     const [servicesEmployees] = await database.query(
-      `SELECT serviceemployee.id,  services_id, employees_id, firstName, lastName,  serviceemployee.approved,servicesName,servicePrice FROM haircut.serviceemployee 
+      `SELECT serviceemployee.id,  services_id, employees_id, firstName, lastName,  serviceemployee.approved,servicesName,servicePrice FROM serviceemployee 
       left join employees on serviceemployee.employees_id = employees.id
       left join services on serviceemployee.services_id = services.id
       ${id ? "where employees_id = ?" : ""}
@@ -229,7 +229,7 @@ const getAllAppointmentByDataRange = async (req, res) => {
 
     const [appointmentRange] = await database.query(
       `
-    SELECT appointments.id as appointmentId, appointments.employee_id,customers.firstName, customers.lastName, customers.id as customerID, services.servicesName, services.id as serviceID,  appointments.scheduled_at  FROM haircut.appointments 
+    SELECT appointments.id as appointmentId, appointments.employee_id,customers.firstName, customers.lastName, customers.id as customerID, services.servicesName, services.id as serviceID,  appointments.scheduled_at  FROM appointments 
     left join services on appointments.service_id = services.id
     left join customers on appointments.customer_id = customers.id
     WHERE  DATE(scheduled_at)  between  ?  and  ? AND employee_id = ?
@@ -382,7 +382,7 @@ const countTotalAppointments = async (req, res) => {
     COUNT(id) AS totalAppointments,
     COUNT(CASE WHEN MONTH(scheduled_at) = MONTH(CURRENT_DATE()) THEN id END) AS monthlyAppointments,
     COUNT(CASE WHEN YEAR(scheduled_at) = YEAR(CURRENT_DATE()) THEN id END) AS yearlyAppointments
-    FROM haircut.appointments
+    FROM appointments
     ${id ? "WHERE employee_id = ?" : ""}
       `,
       [id]
