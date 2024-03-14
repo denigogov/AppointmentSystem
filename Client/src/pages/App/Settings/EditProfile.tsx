@@ -20,9 +20,6 @@ const EditProfile = () => {
     isLoading: userInfoDataLoading,
   } = useSWR(["userInfoData", token], () => fetchUserData({ id, type, token }));
 
-  if (userInfoDataError) return <h6>{userInfoDataError.message}</h6>;
-  if (userInfoDataLoading) return <p>loading...</p>;
-
   const handlePutRequest = async (queryData: AllUserTypes) => {
     try {
       const confirmUpdateMessage = await confirmUpdatePrompt(
@@ -74,6 +71,8 @@ const EditProfile = () => {
       {/* <h5>{userInfoData![0]?.firstName}</h5> */}
       <h2>Edit Profile</h2>
       <EditProfileInputs
+        userInfoDataError={userInfoDataError}
+        userInfoDataLoading={userInfoDataLoading}
         userInfoData={userInfoData}
         handlePutRequest={handlePutRequest}
       />

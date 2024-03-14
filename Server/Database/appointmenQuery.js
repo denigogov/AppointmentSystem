@@ -160,8 +160,25 @@ const postAppointment = async (req, res) => {
       [customer_id]
     );
 
+    const [findEmployer] = await database.query(
+      `select username, phoneNumber from employees where id = ?`,
+      [employee_id]
+    );
+
     const customerEmail = findCustomerEmail[0]?.email ?? "";
     const customerName = findCustomerEmail[0]?.firstName ?? "";
+    const username = findEmployer[0].username ?? "";
+    const phoneNumber = findEmployer[0].phoneNumber ?? "";
+
+    const d = new Date(scheduled_at);
+
+    const formatedHour = `${
+      d.getHours() < 10 ? "0" + d.getHours() : d.getHours()
+    }:${d.getMinutes() < 10 ? "0" + d.getMinutes() : d.getMinutes()}`;
+    const formatedDate = new Date(scheduled_at).toUTCString().slice(0, 17);
+
+    console.log("hour", formatedHour);
+    console.log("dater", formatedDate);
 
     const message = {
       from: {
@@ -177,11 +194,11 @@ const postAppointment = async (req, res) => {
           ],
           subject: `Appointment Confirmation`,
           dynamic_template_data: {
-            hour: `${scheduled_at}`,
-            date: `${scheduled_at}`,
-            employerName: `${customerName}`,
-            customerName: `${customerName}`,
-            employeePhone: `${employee_id}`,
+            hour: `${formatedHour ?? "not found"}`,
+            date: `${formatedDate ?? "not found"}`,
+            employerName: `${username ?? "Employer"}`,
+            customerName: `${customerName ?? "Customer"}`,
+            employeePhone: `${phoneNumber ?? "+49 123 4567 012"}`,
           },
         },
       ],

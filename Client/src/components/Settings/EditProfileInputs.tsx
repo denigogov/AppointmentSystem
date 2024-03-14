@@ -2,15 +2,21 @@ import { useRef } from "react";
 import "../../styling/Components/SettingsComponents/_editProfileInputs.scss";
 
 import { AllUserTypes } from "../../types/tableApiTypes";
+import LoadingRing from "../loadingRing";
+import ErrorPage1 from "../../pages/ErrorPage";
 
 interface EditProfileProps {
   userInfoData: AllUserTypes[] | null | undefined;
+  userInfoDataLoading: boolean;
+  userInfoDataError: Error;
   handlePutRequest: (queryData: AllUserTypes) => void;
 }
 
 const EditProfileInputs = ({
   userInfoData,
   handlePutRequest,
+  userInfoDataLoading,
+  userInfoDataError,
 }: EditProfileProps) => {
   const firstNameRef = useRef<HTMLInputElement>(null);
   const lastNameRef = useRef<HTMLInputElement>(null);
@@ -37,6 +43,15 @@ const EditProfileInputs = ({
 
     handlePutRequest(userReadyData as AllUserTypes);
   };
+
+  if (userInfoDataLoading) return <LoadingRing />;
+  if (userInfoDataError)
+    return (
+      <ErrorPage1
+        errorMessage={userInfoDataError?.message}
+        navigateTo1={"/app"}
+      />
+    );
 
   return (
     <div className="editProfileInputs__container">
