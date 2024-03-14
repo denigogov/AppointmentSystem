@@ -10,6 +10,8 @@ app.use(cors());
 app.use(compression());
 app.use(helmet());
 
+app.disable("x-powered-by");
+
 const port = process.env.SERVER_PORT || 4001;
 
 // ........................ express routes setup

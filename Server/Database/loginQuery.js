@@ -33,7 +33,7 @@ const findUserLogin = async (req, res, next) => {
     }
   } catch (err) {
     console.log(err);
-    req.status(500).send(`username not valid , ${err.message}`);
+    res.status(500).send(`username not valid , ${err.message}`);
   }
 };
 
