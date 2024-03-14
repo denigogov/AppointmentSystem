@@ -3,7 +3,6 @@ import startIcon from "../../assets/stars-svgrepo-com.svg";
 import { useAuth } from "../../helpers/Auth";
 import { Link } from "react-router-dom";
 import Loading from "../../pages/Loading";
-import LazyLoadingImage from "../../helpers/LazyLoadingImage";
 
 interface HeroProps {
   observer: (node?: Element | null) => void;
@@ -20,9 +19,11 @@ const Hero: React.FC<HeroProps> = ({ observer }) => {
         <h1 className="hero-title">
           Empower <br />
           your <span className="markedWord">salon</span> workflow.
-          <span className="icon-animationObserver">
-            <LazyLoadingImage id="1" alt="startIcon" source={startIcon} />
-          </span>
+          <img
+            src={startIcon}
+            alt="startIcon"
+            className="icon-animationObserver"
+          />
         </h1>
         <p className="hero-subTitle">
           Efficiently streamline scheduling processes. Elevate customer
