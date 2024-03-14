@@ -1,5 +1,4 @@
 const database = require("./database");
-const { hashedPassword } = require("../auth");
 
 const getAllEmployees = async (req, res) => {
   try {

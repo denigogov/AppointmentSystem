@@ -18,7 +18,8 @@ export const ProtectEmailConfirm: React.FC<ProtectEmailConfirmProps> = ({
   const checkLength = tokens.length < 180 && tokens.length > 150 ? false : true;
 
   if (checkLength || auth.token) {
-    return <Navigate to="/" state={{ path: location.pathname }} />;
+    return <Navigate to="/" />;
+    // return <Navigate to="/" state={{ path: location.pathname }} />;
   }
 
   return <>{children}</>;

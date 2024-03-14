@@ -1,6 +1,5 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "./Auth";
-import { useLocation } from "react-router-dom";
 import { ReactNode } from "react";
 
 interface RequireAuthProps {
@@ -11,10 +10,9 @@ export const RequireAuth: React.FC<RequireAuthProps> = ({
   children,
 }): JSX.Element => {
   const auth = useAuth();
-  const location = useLocation();
 
   if (!auth.token) {
-    return <Navigate to="/login" state={{ path: location.pathname }} />;
+    return <Navigate to="/login" />;
   }
 
   return <>{children}</>;

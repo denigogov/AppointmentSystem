@@ -90,10 +90,16 @@ const Login = () => {
           required
           type="text"
           name="email"
-          defaultValue="owner@gmail.com"
-          placeholder="email"
+          // defaultValue="owner@gmail.com"
+          placeholder="Select an email from list"
           ref={emailRef}
+          list="accounts"
         />
+        <datalist id="accounts">
+          <option value="ownerview@salonpro.com">Owner Account</option>
+          <option value="employeeview@salonpro.com">Employees Account</option>
+          <option value="denigogov@hotmail.com">Customers Account</option>
+        </datalist>
         <input
           required
           type="password"

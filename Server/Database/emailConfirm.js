@@ -17,7 +17,7 @@ const createCustomer = async (req, res) => {
     const token = jwt.sign(payload, accessCode, {
       expiresIn: "3540s", // 59 minutes!
     });
-    const confirmationLink = `http://localhost:3000/confirm/confirm?token=${token}`;
+    const confirmationLink = `https://salonpro.onrender.com/confirm/confirm?token=${token}`;
 
     const [employeesEmail] = await database.query(
       "SELECT email FROM employees WHERE email = ? UNION SELECT email FROM customers WHERE email = ?",
