@@ -5,52 +5,18 @@
 .dashboardCustomerRight--container {
   display: flex;
   justify-content: space-between;
-  text-align: center;
   gap: 30px;
+  padding: 1rem 0;
 
-  .dashboardCustomer__totalRandom,
-  .dashboardCustomer__totalAmount,
-  .dashboardCustomer__totalAppointments {
-    height: 25vh; // 25% of the viewport height
-    flex: 1 1 0;
-    // width: 0;
-    div {
-      background: colors.$dashboardBoxes;
-      height: 100%;
-      border-radius: 15%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-
-      p:first-child {
-        font-size: 1.1em;
-        letter-spacing: 0.9px;
-      }
-
-      p:last-child {
-        font-size: 1.3em;
-        font-weight: 400;
-        font-style: italic;
-        font-family: "Merriweather", serif;
-      }
+  p {
+    &:nth-child(2) {
+      font-family: "Merriweather", serif;
     }
   }
 }
 
-// NEED TO FIX MOBILE RESPONSIVE !
 @media (max-width: general.$md) {
   .dashboardCustomerRight--container {
     flex-direction: column;
-    align-items: center;
-    height: 100vh;
-  }
-
-  .dashboardCustomer__totalRandom,
-  .dashboardCustomer__totalAmount,
-  .dashboardCustomer__totalAppointments {
-    // border: 1px solid red;
-    width: 50vw;
   }
 }

@@ -5,17 +5,18 @@
   display: flex;
 
   height: calc(
-    100vh - 90px
+    100dvh - 90px
   ); // -90px from viewport because of the navbar which is 90px height (to fit the page in screen no scroll)
 }
 
 .appRoot-navigation {
-  border-right: 1px solid colors.$border-Primary;
+  // border-right: 1px solid colors.$border-Primary;
   display: flex;
   flex: 0 0 15%; // 15% of the screen -- shorthand (grow, shrink, flex-basis)
   flex-direction: column;
   justify-content: space-between;
   background: colors.$background-AppNavBar;
+
   ul {
     display: flex;
     flex-direction: column;

@@ -102,17 +102,12 @@ const Appointment = () => {
         updateFileds={updateFileds}
         timeManagment={timeManagment ?? []}
         allAppointments={allAppointments}
+        timeManagmentError={timeManagmentError}
+        timeManagmentLoading={timeManagmentLoading}
+        allAppointmentsError={allAppointmentsError}
+        allAppointmentsLoading={allAppointmentsLoading}
       />,
     ]);
-
-  if (timeManagmentError || allAppointmentsError)
-    return <h6>{"error happen"}</h6>;
-  if (
-    // servicesEmpolyeesLoading ||
-    timeManagmentLoading ||
-    allAppointmentsLoading
-  )
-    return <p>loading...</p>; // If I add some text there will be flicking because of data loading but anyway I need to add personal Loading message !!
 
   const postData = { ...appointmentData, customer_id: customerId };
 

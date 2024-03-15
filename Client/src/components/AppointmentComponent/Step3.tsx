@@ -11,6 +11,7 @@ import { convertISOtoLocalZone } from "../../helpers/Dates";
 import { addDays, setHours, setMinutes, subDays } from "date-fns";
 import moment from "moment-timezone";
 import MultiFormWraper from "../ManagementComponent/Employees/MultiFormWraper";
+import LoadingRing from "../loadingRing";
 
 interface Step3Props {
   allAppointments: AllAppointmentsTypes[];
@@ -18,6 +19,10 @@ interface Step3Props {
   updateFileds: (fileds: Partial<InitialDataProps>) => void;
   employee_id: string | number;
   scheduled_at: Date | string;
+  timeManagmentError: Error;
+  allAppointmentsError: Error;
+  timeManagmentLoading: boolean;
+  allAppointmentsLoading: boolean;
 }
 
 const Step3: React.FC<Step3Props> = ({
@@ -25,12 +30,18 @@ const Step3: React.FC<Step3Props> = ({
   timeManagment,
   allAppointments,
   employee_id,
+  timeManagmentError,
+  allAppointmentsError,
+  timeManagmentLoading,
+  allAppointmentsLoading,
 }) => {
   const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const [startDate, setStartDate] = useState(
     new Date(new Date().toLocaleString("en", { timeZone: userTimeZone }))
   );
 
+  console.log("timeM", timeManagmentLoading);
+  console.log("all", allAppointmentsLoading);
   const filteTimeManagment = timeManagment?.filter(
     (arr: TimeManagmentTypes) => arr.employee_id === +employee_id
   );
@@ -58,7 +69,7 @@ const Step3: React.FC<Step3Props> = ({
     const endHour = filteTimeManagment?.[0]?.endHour ?? 17;
     const endMinute = filteTimeManagment?.[0]?.endMinute ?? 0;
 
-    const isFutureTime = currentDate.getTime() < selectedDate.getTime();
+    const isFutureTime = currentDate?.getTime() < selectedDate.getTime();
     const selectedMinutes =
       selectedDate.getHours() * 60 + selectedDate.getMinutes();
     const startTime = startHour * 60 + startMinute;
@@ -74,7 +85,7 @@ const Step3: React.FC<Step3Props> = ({
     }
 
     const selectedTimeISO = convertISOtoLocalZone(selectedDate);
-    const isBooked = filterAppointments.some(
+    const isBooked = filterAppointments?.some(
       (app) =>
         app.employee_id === +employee_id && app.scheduled_at === selectedTimeISO
     );
@@ -93,35 +104,45 @@ const Step3: React.FC<Step3Props> = ({
   return (
     <MultiFormWraper>
       <label>choose Date</label>
-      <DatePicker
-        // showIcon
-        minDate={subDays(new Date(), 1)}
-        // maxDate={addDays(new Date(), )}
-        selected={startDate}
-        onChange={handleDateChange}
-        showTimeSelect
-        filterTime={filterPassedTime}
-        timeIntervals={filteTimeManagment[0]?.timeInterval ?? 30}
-        excludeDateIntervals={[
-          {
-            start: subDays(new Date(startDateDefault), 1),
-            end: addDays(new Date(endDateDefault), 0),
-          },
-        ]}
-        excludeTimes={[
-          // when user want to take off time ! or vacation he wont be avaible for this period
-          setHours(
-            setMinutes(new Date(), filteTimeManagment[0]?.startMinute ?? 0),
-            filteTimeManagment[0]?.startHour ?? 0
-          ),
-        ]}
-        excludeDates={[addDays(new Date(), -1)]} // EXCLUDET DATE YESTERDAY !!
-        dateFormat="MMMM d, yyyy hh:mm"
-        timeFormat="HH:mm"
-        withPortal
-        portalId="root-portal"
-        //  holidays={filteredHolliday} not recomendet to use because its not sync. with users, I will add this fundtion but i will mention also!
-      />
+      {(timeManagmentError || allAppointmentsError) && (
+        <label>{timeManagmentError.message}</label>
+      )}
+
+      {!timeManagmentLoading &&
+      !allAppointmentsLoading &&
+      timeManagment.length ? (
+        <DatePicker
+          // showIcon
+          minDate={subDays(new Date(), 1)}
+          // maxDate={addDays(new Date(), )}
+          selected={startDate}
+          onChange={handleDateChange}
+          showTimeSelect
+          filterTime={filterPassedTime}
+          timeIntervals={filteTimeManagment[0]?.timeInterval ?? 30}
+          excludeDateIntervals={[
+            {
+              start: subDays(new Date(startDateDefault), 1),
+              end: addDays(new Date(endDateDefault), 0),
+            },
+          ]}
+          excludeTimes={[
+            // when user want to take off time ! or vacation he wont be avaible for this period
+            setHours(
+              setMinutes(new Date(), filteTimeManagment[0]?.startMinute ?? 0),
+              filteTimeManagment[0]?.startHour ?? 0
+            ),
+          ]}
+          excludeDates={[addDays(new Date(), -1)]} // EXCLUDET DATE YESTERDAY !!
+          dateFormat="MMMM d, yyyy hh:mm"
+          timeFormat="HH:mm"
+          withPortal
+          portalId="root-portal"
+          //  holidays={filteredHolliday} not recomendet to use because its not sync. with users, I will add this fundtion but i will mention also!
+        />
+      ) : (
+        <LoadingRing />
+      )}
     </MultiFormWraper>
   );
 };

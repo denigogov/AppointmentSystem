@@ -8,6 +8,7 @@ import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 import loginLogo from "../assets/loginLogo.svg";
 import LoadingRing from "../components/loadingRing";
+import { succesMessageBtn } from "../components/ErrorSuccesMessage";
 const API_URL = import.meta.env.VITE_API_URL as string;
 const Login = () => {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -35,6 +36,7 @@ const Login = () => {
       if (!response.ok) {
         throw new Error(data.message);
       }
+
       return data.token as TokenType;
     } catch (err) {
       const requestError = (err as Error).stack;
@@ -51,7 +53,12 @@ const Login = () => {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    succesMessageBtn(
+      "Login Delay",
+      "Please wait while we securely log you in. Server standby may cause a brief delay. Thank you for your patience",
+      "",
+      "info"
+    );
     // const redirectPath = location.state?.path || "/";
 
     // leaving as reference

@@ -1,9 +1,8 @@
+import "../../../styling/Components/dashboard components/_dashboardCustomerInfo.scss";
 // import customerInfoIcon from "../../../assets/customerInfo.svg";
 import malePersonalIcon from "../../../assets/customerInfo1.svg";
 import femaleIcon from "../../../assets/femaleIcon.svg";
 import otherIcon from "../../../assets/genderOtherIcon.svg";
-
-import "../../../styling/Components/dashboard components/_dashboardCustomerInfo.scss";
 import { CustomerPersonalInfo } from "../../../types/tableApiTypes";
 
 interface DashboardCustomerInfoProps {

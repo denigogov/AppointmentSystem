@@ -19,19 +19,7 @@
   padding: 20px;
   overflow-y: auto;
 
-  th {
-    background-color: colors.$background-secondary;
-  }
-
-  &::-webkit-scrollbar {
-    width: 3px;
-    background-color: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: colors.$font-style;
-  }
-
+  @include mixin.overflowScroll;
   @include mixin.table;
 }
 @media (max-width: general.$md) {

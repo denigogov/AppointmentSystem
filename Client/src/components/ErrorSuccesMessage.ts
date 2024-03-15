@@ -1,16 +1,26 @@
 import Swal from "sweetalert2";
 
+/**
+ *
+ * @param state  title of the message
+ * @param message main message
+ * @param footer footer
+ * @returns alert with button
+ */
 export const succesMessageBtn = (
   state: string,
   message: string,
-  footer: string
+  footer?: string,
+  iconType: any = "success"
 ) => {
   return Swal.fire({
     title: state,
-    text: message,
+    html: message,
     footer: footer,
-    icon: "success",
-    confirmButtonColor: "#fe9393",
+    position: "center",
+    icon: iconType,
+    iconColor: "#ffda79",
+    confirmButtonColor: "#ffda79",
   });
 };
 

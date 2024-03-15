@@ -125,7 +125,9 @@ const DashboardCustomerTableView = ({
           ) : (
             <tbody>
               <tr>
-                <td colSpan={parseInt("11")}>No Appointments found</td>
+                <td data-cell="Status" colSpan={parseInt("11")}>
+                  No Appointments found
+                </td>
               </tr>
             </tbody>
           )}

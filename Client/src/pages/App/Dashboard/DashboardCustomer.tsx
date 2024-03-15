@@ -1,8 +1,8 @@
+import "../../../styling/Dashboard/_dashboardCustomer.scss";
 import DashboardCustomerInfo from "../../../components/DashboardComponents/DashboardCustomer/DashboardCustomerInfo";
 import DashboardCustomerDataBox from "../../../components/DashboardComponents/DashboardCustomer/DashboardCustomerDataBox";
 import DashboardUpcomingEvent from "../../../components/DashboardComponents/DashboardCustomer/DashboardUpcomingEvent";
 import DashboardCustomerTableView from "../../../components/DashboardComponents/DashboardCustomer/DashboardCustomerTableView";
-import "../../../styling/Dashboard/_dashboardCustomer.scss";
 import { useAuth } from "../../../helpers/Auth";
 import useSWR from "swr";
 import {
@@ -13,6 +13,7 @@ import {
 } from "../../../types/tableApiTypes";
 import { fetchCustomerData } from "../../../api/tableApi";
 import { calculateDaysLeft } from "../../../helpers/Dates";
+import LoadingRing from "../../../components/loadingRing";
 
 const DashboardCustomer = () => {
   const auth = useAuth();
@@ -96,21 +97,38 @@ const DashboardCustomer = () => {
       {/* Left Side */}
       <div className="customerInfo__dashboard--container">
         <div className="dashboardCustomer__info--wrap">
-          <DashboardCustomerInfo customerInfoData={customerInfoData} />
+          {customerInfoData ? (
+            <DashboardCustomerInfo customerInfoData={customerInfoData} />
+          ) : (
+            <LoadingRing />
+          )}
           {/* <DashboardCustomerInfo /> when I want to test without real data !  */}
         </div>
         <div className="dashboardCustomer__event--wrap">
-          <DashboardUpcomingEvent upcomingEventsData={upcomingEventsData} />
+          {upcomingEventsData ? (
+            <DashboardUpcomingEvent upcomingEventsData={upcomingEventsData} />
+          ) : (
+            <LoadingRing />
+          )}
         </div>
       </div>
 
       {/* Right Side */}
       <div className="customerRightInfo--dashboard">
-        <DashboardCustomerDataBox customerDataBox={customerDataBox} />
-        <DashboardCustomerTableView
-          customerDataError={customerDataError}
-          cusomerTableDashboardData={cusomerTableDashboardData}
-        />
+        {customerDataBox ? (
+          <DashboardCustomerDataBox customerDataBox={customerDataBox} />
+        ) : (
+          <LoadingRing />
+        )}
+
+        {cusomerTableDashboardData ? (
+          <DashboardCustomerTableView
+            customerDataError={customerDataError}
+            cusomerTableDashboardData={cusomerTableDashboardData}
+          />
+        ) : (
+          <LoadingRing />
+        )}
       </div>
     </div>
   );

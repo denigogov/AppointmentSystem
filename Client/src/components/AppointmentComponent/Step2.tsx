@@ -1,6 +1,7 @@
 import { InitialDataProps } from "../../pages/App/Appointment/Appointment";
 import { ServiceEmloyeesTypes } from "../../types/tableApiTypes";
 import MultiFormWraper from "../ManagementComponent/Employees/MultiFormWraper";
+import LoadingRing from "../loadingRing";
 
 interface Step2Props {
   employee_id: number | string;
@@ -21,28 +22,32 @@ const Step2: React.FC<Step2Props> = ({
   );
   return (
     <div>
-      <MultiFormWraper>
-        <label>choose stylist</label>
-        <select
-          value={employee_id ?? ""}
-          onChange={(e) => updateFileds({ employee_id: +e.target.value })}
-        >
-          {findEmployee.length ? (
-            <>
-              <option>choose Stylist</option>
-              {findEmployee?.map((employer) => (
-                <option key={employer?.id} value={employer?.employees_id}>
-                  {employer?.firstName ?? "Not Found"} {employer?.lastName}
-                </option>
-              ))}
-            </>
-          ) : (
-            <>
-              <option>Not Found</option>
-            </>
-          )}
-        </select>
-      </MultiFormWraper>
+      {servicesEmpolyees ? (
+        <MultiFormWraper>
+          <label>choose stylist</label>
+          <select
+            value={employee_id ?? ""}
+            onChange={(e) => updateFileds({ employee_id: +e.target.value })}
+          >
+            {findEmployee.length ? (
+              <>
+                <option>choose Stylist</option>
+                {findEmployee?.map((employer) => (
+                  <option key={employer?.id} value={employer?.employees_id}>
+                    {employer?.firstName ?? "Not Found"} {employer?.lastName}
+                  </option>
+                ))}
+              </>
+            ) : (
+              <>
+                <option>Not Found</option>
+              </>
+            )}
+          </select>
+        </MultiFormWraper>
+      ) : (
+        <LoadingRing />
+      )}
     </div>
   );
 };

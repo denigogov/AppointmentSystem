@@ -18,14 +18,16 @@ const Step1: React.FC<Step1Props> = ({
   servicesEmpolyeesLoading,
   servicesEmpolyeesError,
 }) => {
-  const uniqueServicesNames = servicesEmpolyees.filter(
+  const uniqueServicesNames = servicesEmpolyees?.filter(
     (service, i, arr) =>
       i === arr.findIndex((v) => v.servicesName === service.servicesName)
   );
 
   return (
     <MultiFormWraper>
-      {servicesEmpolyeesError && <p>{servicesEmpolyeesError.message}</p>}
+      {servicesEmpolyeesError && (
+        <label>{servicesEmpolyeesError?.message ?? "Error"}</label>
+      )}
       {servicesEmpolyeesLoading ? (
         <LoadingRing />
       ) : (
@@ -42,10 +44,6 @@ const Step1: React.FC<Step1Props> = ({
                 {services?.servicesName ?? "Not Found"}
               </option>
             ))}
-            {/* <option value={1}>Choose Service</option>
-        <option value={1}>haircut</option>
-        <option value={2}>painting</option>
-        <option value={3}>blabla</option> */}
           </select>{" "}
         </>
       )}

@@ -13,6 +13,10 @@
   height: 100%;
   width: 65%;
 
+  @media (max-width: general.$sm) {
+    width: 95%;
+  }
+
   .customerIconName {
     display: flex;
     align-items: center;

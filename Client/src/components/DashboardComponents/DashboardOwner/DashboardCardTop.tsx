@@ -1,6 +1,6 @@
 import "../../../styling/Components/dashboard components/DashboardOwner/_dashboardCardTop.scss";
 
-interface DashboardCardTopProps {
+export interface DashboardCardTopProps {
   title?: string;
   value?: string | number;
   footer?: string;

@@ -29,12 +29,17 @@
     text-align: center;
   }
 
+  @media (max-width: general.$sm) {
+    width: 95%;
+  }
+
   .dashboardUpcomingEvent--wrap {
-    border-radius: 25px;
+    border-radius: 1.7rem;
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 10px;
+    gap: 0.625rem;
+    padding: 0.625rem;
+    transition: general.$transition;
 
     &:hover {
       background: colors.$background;
@@ -53,7 +58,6 @@
     .dashboardCustomer__icon {
       img {
         width: 50px;
-        transition: general.$transition;
 
         &:hover {
           filter: brightness(0) saturate(100%) invert(87%) sepia(38%)
