@@ -35,3 +35,4 @@ app.listen(port, (err) => {
     ? "Something bad happen"
     : "Server is listening on http://localhost:${port}/";
 });
+module.exports = { app };

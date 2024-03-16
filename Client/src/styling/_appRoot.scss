@@ -106,6 +106,7 @@
     right: 20px;
     text-align: center;
     cursor: pointer;
+    z-index: 100;
 
     &:active {
       transform: scale(0.98);

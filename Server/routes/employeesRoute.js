@@ -11,6 +11,7 @@ const appointmenQuery = require("../Database/appointmenQuery");
 const chartQuery = require("../Database/chartQuery");
 
 router
+  // .get("/", database.getAllEmployees)
   .get("/", verifyToken, database.getAllEmployees)
   .post(
     "/",
