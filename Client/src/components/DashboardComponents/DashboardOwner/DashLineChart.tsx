@@ -10,6 +10,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { FetchAppointmentsByDayAndTotalTypes } from "../../../types/tableApiTypes";
+import LoadingRing from "../../loadingRing";
 
 // styling for this component can be found in _dashboardOwner.scss
 
@@ -25,9 +26,16 @@ ChartJS.register(
 
 interface DashLineChartProps {
   allAppointmentsByDay?: FetchAppointmentsByDayAndTotalTypes[];
+  allAppointmentsByDayLoading: boolean;
+  allAppointmentsByDayError: Error;
 }
 
-const DashLineChart = ({ allAppointmentsByDay }: DashLineChartProps) => {
+const DashLineChart: React.FC<DashLineChartProps> = ({
+  allAppointmentsByDay,
+  allAppointmentsByDayLoading,
+  allAppointmentsByDayError,
+}) => {
+  // Temporary Need to fix the type
   const options: any = {
     maintainAspectRatio: false,
     responsive: true,
@@ -81,7 +89,14 @@ const DashLineChart = ({ allAppointmentsByDay }: DashLineChartProps) => {
 
   return (
     <div className="dashLine__chart">
-      <Line options={options} data={data} />
+      {allAppointmentsByDayError && (
+        <p className="globalTextError">{allAppointmentsByDayError?.message}</p>
+      )}
+      {allAppointmentsByDayLoading ? (
+        <LoadingRing />
+      ) : (
+        <Line options={options} data={data} />
+      )}
     </div>
   );
 };

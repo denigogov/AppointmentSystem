@@ -2,7 +2,14 @@
 
 const LoadingRing = () => {
   return (
-    <div style={{ textAlign: "center" }}>
+    <div
+      style={{
+        textAlign: "center",
+        alignContent: "center",
+        justifyContent: "center",
+        margin: "0 auto",
+      }}
+    >
       <svg
         width="38"
         height="38"

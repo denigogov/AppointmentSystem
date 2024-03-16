@@ -118,42 +118,10 @@ const DashboardOwner: React.FC<DashboardOwnerProps> = ({ setPopupOpen }) => {
   const {
     data: allServices,
     error: allServicesError,
-    isLoading: allServiceshLoading,
+    isLoading: allServicesLoading,
   } = useSWR<AllServicesTypes[]>(["allServices", token], () =>
     fetchAllServices(token ?? "")
   );
-
-  if (
-    top5CustomersError ||
-    allEmployeesError ||
-    allAppointmentsByDayError ||
-    allServicesError ||
-    totalMoneyAppServiceError ||
-    dataByServiceError ||
-    serviceByMonthError ||
-    allAppointmentsByDayError
-  )
-    return (
-      <h6>
-        {top5CustomersError?.message ||
-          allServicesError.message ||
-          allEmployeesError?.message ||
-          totalMoneyAppServiceError ||
-          dataByServiceError.message ||
-          serviceByMonthError.message ||
-          allAppointmentsByDayError?.message}
-      </h6>
-    );
-  if (
-    top5CustomersLoading ||
-    allEmployeesLoading ||
-    totalMoneyAppServiceLoading ||
-    dataByServiceLoading ||
-    serviceByMonthLoading ||
-    allServiceshLoading ||
-    allAppointmentsByDayLoading
-  )
-    return <p>loading...</p>;
 
   const handleDataRange = (dates: [Date | null, Date | null] | null) => {
     if (dates) {
@@ -194,7 +162,7 @@ const DashboardOwner: React.FC<DashboardOwnerProps> = ({ setPopupOpen }) => {
           <div className="dashboardleft__owner--WelcomeText">
             {/* Username Title */}
             <h3>Welcome {userInfo?.username ?? "username"}</h3>
-            <p>Lorem, ipsum dolor. lorem</p>
+            <p>Your Studio's Command Center</p>
           </div>
           <div className="ownerDashobar--datepicker">
             <ReactDatePicker
@@ -213,23 +181,35 @@ const DashboardOwner: React.FC<DashboardOwnerProps> = ({ setPopupOpen }) => {
 
         {/* CardsTop */}
         <div className="dashboardLeft__cards--top">
-          <DashboardCardWrapTop totalMoneyAppService={totalMoneyAppService} />
+          <DashboardCardWrapTop
+            totalMoneyAppService={totalMoneyAppService}
+            totalMoneyAppServiceError={totalMoneyAppServiceError}
+            totalMoneyAppServiceLoading={totalMoneyAppServiceLoading}
+          />
         </div>
 
         {/* Middle Section of the Dashboard */}
         <div className="dashboardOwner__chart-card--container">
           <div className="dashOwner__lineChart">
-            <DashLineChart allAppointmentsByDay={allAppointmentsByDay} />
+            <DashLineChart
+              allAppointmentsByDay={allAppointmentsByDay}
+              allAppointmentsByDayError={allAppointmentsByDayError}
+              allAppointmentsByDayLoading={allAppointmentsByDayLoading}
+            />
           </div>
           <div className="dashOwner__infoCard">
             <DashboardSelectOption
               dataByService={dataByService}
               setSelectedService={setSelectedService}
+              dataByServiceError={dataByServiceError}
+              dataByServiceLoading={dataByServiceLoading}
             />
             <DashboardCardWrapMiddle
               filteredDataByService={filteredDataByService}
               calcTotalMoneyAndApp={calcTotalMoneyAndApp}
               selectedService={selectedService}
+              dataByServiceError={dataByServiceError}
+              dataByServiceLoading={dataByServiceLoading}
             />
           </div>
         </div>
@@ -240,9 +220,17 @@ const DashboardOwner: React.FC<DashboardOwnerProps> = ({ setPopupOpen }) => {
             setSelectedYear={setSelectedYear}
             setSelectedServiceChart={setSelectedServiceChart}
             allServices={allServices}
+            allServicesError={allServicesError}
+            allServicesLoading={allServicesLoading}
             serviceByMonth={serviceByMonth}
+            serviceByMonthError={serviceByMonthError}
+            serviceByMonthLoading={serviceByMonthLoading}
           />
-          <DashChartMonth filterDataByYear={filterDataByYear} />
+          <DashChartMonth
+            filterDataByYear={filterDataByYear}
+            serviceByMonthError={serviceByMonthError}
+            serviceByMonthLoading={serviceByMonthLoading}
+          />
         </div>
 
         {/*  */}
@@ -251,10 +239,14 @@ const DashboardOwner: React.FC<DashboardOwnerProps> = ({ setPopupOpen }) => {
         <TopCustTableView
           setPopupOpen={setPopupOpen}
           top5Customers={top5Customers}
+          top5CustomersError={top5CustomersError}
+          top5CustomersLoading={top5CustomersLoading}
         />
         <AllEmployeesTableView
           setPopupOpen={setPopupOpen}
           allEmployees={allEmployees}
+          allEmployeesError={allEmployeesError}
+          allEmployeesLoading={allEmployeesLoading}
         />
       </div>
     </div>

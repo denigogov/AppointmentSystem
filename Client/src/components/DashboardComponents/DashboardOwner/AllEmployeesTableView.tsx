@@ -2,15 +2,20 @@ import "../../../styling/Components/dashboard components/DashboardOwner/_dashboa
 import TableViewDashboard from "./TableViewDashboard";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FetchAllEmployeesTypes } from "../../../types/tableApiTypes";
+import LoadingRing from "../../loadingRing";
 
 interface AllEmployeesTableViewProps {
   setPopupOpen: React.Dispatch<React.SetStateAction<boolean>>;
   allEmployees?: FetchAllEmployeesTypes[];
+  allEmployeesLoading: Boolean;
+  allEmployeesError: Error;
 }
 
 const AllEmployeesTableView: React.FC<AllEmployeesTableViewProps> = ({
   setPopupOpen,
   allEmployees,
+  allEmployeesLoading,
+  allEmployeesError,
 }) => {
   const navigator = useNavigate();
   const { pathname } = useLocation();
@@ -25,10 +30,17 @@ const AllEmployeesTableView: React.FC<AllEmployeesTableViewProps> = ({
   return (
     <div className="allEmployeesTableView__container">
       <p className="dashboard--TableTitle--owner">Employee Overview</p>
-      <TableViewDashboard
-        handleDetails={handleDetailsEmployees}
-        apiData={allEmployees}
-      />
+      {allEmployeesError && (
+        <p className="globalTextError">{allEmployeesError?.message}</p>
+      )}
+      {allEmployeesLoading ? (
+        <LoadingRing />
+      ) : (
+        <TableViewDashboard
+          handleDetails={handleDetailsEmployees}
+          apiData={allEmployees}
+        />
+      )}
     </div>
   );
 };

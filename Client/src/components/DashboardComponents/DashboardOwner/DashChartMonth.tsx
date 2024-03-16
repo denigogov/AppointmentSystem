@@ -10,6 +10,7 @@ import {
   BarElement,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import LoadingRing from "../../loadingRing";
 
 // styling for this component can be found in _dashboardOwner.scss
 
@@ -25,13 +26,17 @@ ChartJS.register(
 
 interface DashChartMonthProps {
   filterDataByYear?: FetchServiceByMonthProps[];
+  serviceByMonthError: Error;
+  serviceByMonthLoading: Boolean;
 }
 
 const DashChartMonth: React.FC<DashChartMonthProps> = ({
   filterDataByYear,
+  serviceByMonthError,
+  serviceByMonthLoading,
 }) => {
   const screenSize: number = window.innerWidth;
-
+  // need to add  the type temporary problem !
   const options: any = {
     maintainAspectRatio: false,
     indexAxis: `${screenSize <= 640 ? "y" : "x"}`,
@@ -75,7 +80,14 @@ const DashChartMonth: React.FC<DashChartMonthProps> = ({
 
   return (
     <div className="dashLine__chart">
-      <Line options={options} data={data} />
+      {serviceByMonthError && (
+        <p className="globalTextError">{serviceByMonthError?.message}</p>
+      )}
+      {serviceByMonthLoading ? (
+        <LoadingRing />
+      ) : (
+        <Line options={options} data={data} />
+      )}
     </div>
   );
 };

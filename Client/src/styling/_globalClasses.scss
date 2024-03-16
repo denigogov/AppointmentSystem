@@ -122,3 +122,12 @@ a.active {
     transform: scale(0.9);
   }
 }
+
+.globalTextError {
+  margin: 0 auto;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: colors.$NavLinkActive;
+}

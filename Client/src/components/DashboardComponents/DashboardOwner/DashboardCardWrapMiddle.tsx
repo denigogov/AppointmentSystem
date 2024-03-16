@@ -3,6 +3,7 @@ import bestEmployee from "../../../assets/bestEmployee.svg";
 import daylyCountAppIcon from "../../../assets/daylyCountAppIcon.svg";
 import DashboardCardTop from "./DashboardCardTop";
 import { FetchDataByServiceProps } from "../../../types/tableApiTypes";
+import LoadingRing from "../../loadingRing";
 
 // type CalcTotalMoneyAndApp = {
 //   totalAppointments?: number;
@@ -16,52 +17,64 @@ interface DashboardCardWrapMiddleProps {
     "totalAppointments" | "totalMoney"
   >;
   selectedService: string;
+  dataByServiceLoading: Boolean;
+  dataByServiceError: Error;
 }
 
 const DashboardCardWrapMiddle: React.FC<DashboardCardWrapMiddleProps> = ({
   filteredDataByService,
   calcTotalMoneyAndApp,
   selectedService,
+  dataByServiceLoading,
+  dataByServiceError,
 }) => {
   return (
     <div className="dashboardCardWrapMiddle--Wrap">
-      <DashboardCardTop
-        title="Total Revenue"
-        value={`€ ${
-          selectedService !== "All"
-            ? filteredDataByService![0]?.totalMoney
-            : calcTotalMoneyAndApp?.totalMoney ?? "/"
-        }`}
-        footer="Full-Year Insights"
-        hexColor="#80b3ff"
-        cardFlexSize="0.3 20%"
-        svgIcon={topServiceRocketIcon}
-      />
-      <DashboardCardTop
-        title="Total Appointments"
-        value={
-          selectedService !== "All"
-            ? filteredDataByService![0]?.totalAppointments
-            : calcTotalMoneyAndApp?.totalAppointments ?? "/"
-        }
-        footer={`All Appointments`}
-        hexColor="#f1c40f"
-        cardFlexSize="0.3 20%"
-        svgIcon={daylyCountAppIcon}
-      />
-      <DashboardCardTop
-        title="Top Performer"
-        value={
-          selectedService !== "All"
-            ? filteredDataByService![0]?.bestEmployer
-            : "Not Found"
-        }
-        footer="Top Achievers"
-        hexColor="#e74c3c"
-        cardFlexSize="0.3 20%"
-        svgIcon={bestEmployee}
-      />{" "}
-      {/* <DashboardCardTop
+      {dataByServiceError && (
+        <p className="globalTextError">{dataByServiceError?.message}</p>
+      )}
+
+      {dataByServiceLoading ? (
+        <LoadingRing />
+      ) : (
+        <>
+          <DashboardCardTop
+            title="Total Revenue"
+            value={`€ ${
+              selectedService !== "All"
+                ? filteredDataByService![0]?.totalMoney
+                : calcTotalMoneyAndApp?.totalMoney ?? "/"
+            }`}
+            footer="Full-Year Insights"
+            hexColor="#80b3ff"
+            cardFlexSize="0.3 20%"
+            svgIcon={topServiceRocketIcon}
+          />
+          <DashboardCardTop
+            title="Total Appointments"
+            value={
+              selectedService !== "All"
+                ? filteredDataByService![0]?.totalAppointments
+                : calcTotalMoneyAndApp?.totalAppointments ?? "/"
+            }
+            footer={`All Appointments`}
+            hexColor="#f1c40f"
+            cardFlexSize="0.3 20%"
+            svgIcon={daylyCountAppIcon}
+          />
+          <DashboardCardTop
+            title="Top Performer"
+            value={
+              selectedService !== "All"
+                ? filteredDataByService![0]?.bestEmployer
+                : "Not Found"
+            }
+            footer="Top Achievers"
+            hexColor="#e74c3c"
+            cardFlexSize="0.3 20%"
+            svgIcon={bestEmployee}
+          />{" "}
+          {/* <DashboardCardTop
         title="Daily Appointments"
         value={30}
         footer="Today's Schedule"
@@ -69,6 +82,8 @@ const DashboardCardWrapMiddle: React.FC<DashboardCardWrapMiddleProps> = ({
         cardFlexSize="0.3 20%"
         svgIcon={totalAppDashIcon1}
       /> */}
+        </>
+      )}
     </div>
   );
 };

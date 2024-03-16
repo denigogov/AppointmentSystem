@@ -2,15 +2,20 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "../../../styling/Components/dashboard components/DashboardOwner/_dashboardTableView.scss";
 import TableViewDashboard from "./TableViewDashboard";
 import { FetchTop5CustomersTypes } from "../../../types/tableApiTypes";
+import LoadingRing from "../../loadingRing";
 
 interface TopCustTableViewProps {
   setPopupOpen: React.Dispatch<React.SetStateAction<boolean>>;
   top5Customers?: FetchTop5CustomersTypes[];
+  top5CustomersLoading: Boolean;
+  top5CustomersError: Error;
 }
 
 const TopCustTableView: React.FC<TopCustTableViewProps> = ({
   setPopupOpen,
   top5Customers,
+  top5CustomersLoading,
+  top5CustomersError,
 }) => {
   const navigator = useNavigate();
   let { pathname } = useLocation();
@@ -26,10 +31,18 @@ const TopCustTableView: React.FC<TopCustTableViewProps> = ({
   return (
     <div className="topCustTableView__container">
       <p className="dashboard--TableTitle--owner">Top 5 Customers</p>
-      <TableViewDashboard
-        handleDetails={handleDetailsCustomer}
-        apiData={top5Customers}
-      />
+      {top5CustomersError && (
+        <p className="globalTextError">{top5CustomersError?.message}</p>
+      )}
+
+      {top5CustomersLoading ? (
+        <LoadingRing />
+      ) : (
+        <TableViewDashboard
+          handleDetails={handleDetailsCustomer}
+          apiData={top5Customers}
+        />
+      )}
     </div>
   );
 };
