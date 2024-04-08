@@ -1,9 +1,26 @@
 import { app } from "server";
-import supertest from "supertest";
-import { test, beforeAll, describe, expect, afterAll } from "vitest";
 
 export const serverTest = supertest(app);
+import { test, beforeAll, describe, expect, afterAll, it, vi } from "vitest";
+import supertest from "supertest";
+
+import * as employeesDB from "../Database/employeesQuery";
+
 export let token = "";
+
+// vi.mock("../Database/employeesQuery", () => ({
+//   getEmployees: vi.fn().mockResolvedValue([...mockedEmployeesData]),
+// }));
+
+vi.mock("../Database/employeesQuery", async () => {
+  const actual = await vi.importActual("../Database/employeesQuery");
+
+  return {
+    ...actual,
+    default: vi.fn(),
+  };
+});
+const fetch = vi.mocked(employeesDB.default);
 
 // THIS IS TEST VERSION FOR LOCAL DATABASE !
 
