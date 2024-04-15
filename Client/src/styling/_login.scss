@@ -1,59 +1,192 @@
 @use "./colors";
 @use "./mixin";
+@use "./general";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
-.login-page {
+.loginPage {
   background: colors.$background;
+  height: calc(100vh - 6rem);
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 30px;
-  text-align: center;
-  // height: calc(100vh - 6rem);
-  height: 100vh;
+  justify-content: center;
+  position: relative;
+  font-family: "Montserrat", sans-serif;
 
-  form {
+  &__signup {
+    background-color: rgba(#222222, 0.85);
+    color: white;
+
+    width: 70%;
+    height: 50%;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.25);
+
+    @media (max-width: general.$lg) {
+      width: 90%;
+      height: 50%;
+    }
+
+    &-text {
+      padding: 1.3rem;
+      width: 50%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: start;
+
+      h4 {
+        font-weight: 300;
+        font-size: 1.66rem;
+        line-height: 1em;
+        padding: 10px;
+        span {
+          color: gold;
+        }
+      }
+
+      p {
+        padding: 10px;
+        font-weight: 300;
+      }
+
+      button {
+        @include mixin.gradientBackground--btn-action();
+        color: white;
+        padding: 12px 60px;
+      }
+    }
+  }
+
+  &__login {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 2px 0 15px rgba(#000, 0.25);
+    position: absolute;
+    height: 65%;
+    width: 30%;
+    top: 17%;
+    left: 50%;
+
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    text-align: center;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0.6rem;
 
-    // button do not  be the same length as input filed
-    // align-items: center;
+    @media (max-width: general.$lg) {
+      height: 60%;
+      width: 40%;
 
-    input[type="text"] {
-      background: url(../assets/loginInputIcon.svg) no-repeat;
-      background-color: white;
-      @include mixin.inputLogin();
+      top: 20%;
+      left: 50%;
     }
 
-    input[type="password"] {
-      background: url(../assets/passwordInputIcon.svg) no-repeat;
-      background-color: white;
-      @include mixin.inputLogin();
+    &-title {
+      color: colors.$font-Primary;
+      font-weight: 300;
+      letter-spacing: 3px;
+      font-size: 1.66rem;
+      text-align: center;
     }
 
-    button {
-      // @include mixin.button();
-      @include mixin.gradientBackground--btn-action(
-        rgba(198, 205, 119, 0),
-        rgba(86, 85, 85, 0.182),
-        rgba(196, 196, 196, 0.312),
-        rgba(86, 85, 85, 0.601)
-      );
-      color: white;
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      text-align: center;
+      max-width: 100%;
+
+      input[type="email"] {
+        background: url(../assets/loginInputIcon.svg) no-repeat;
+        background-color: white;
+        @include mixin.inputLogin();
+        background-size: 1.3rem;
+        padding: 10px 30px;
+      }
+
+      input[type="text"] {
+        background: url(../assets/passwordInputIcon.svg) no-repeat;
+        background-color: white;
+        @include mixin.inputLogin();
+        background-size: 1.3rem;
+        padding: 10px 30px;
+      }
+      input[type="password"] {
+        background: url(../assets/passwordInputIcon.svg) no-repeat;
+        background-color: white;
+        @include mixin.inputLogin();
+        background-size: 1.3rem;
+        padding: 10px 30px;
+      }
+
+      // width: 100%;
+      // border-bottom: 1px solid gray;
+      padding: 6px 20px 6px 6px;
+
+      font-size: 1rem;
+      font-weight: 300;
+      color: darken(gray, 30%);
+      letter-spacing: 0.1rem;
+
+      .passwordShow {
+        position: relative;
+
+        p {
+          background: none;
+          border: none;
+          position: absolute; // Adjust positioning as needed
+          top: 0.6rem;
+          right: 5px;
+          transform: translate(50% -50%); // Adjust positioning as needed
+          opacity: 0;
+          cursor: pointer;
+        }
+      }
+
+      button {
+        // @include mixin.button();
+        @include mixin.gradientBackground--btn-action(
+          rgba(198, 205, 119, 0),
+          rgba(86, 85, 85, 0.182),
+          rgba(196, 196, 196, 0.312),
+          rgba(86, 85, 85, 0.601)
+        );
+        color: white;
+      }
     }
   }
 }
 
-.login-appInfo {
-  font-size: 32px;
-  font-weight: 200;
-}
+@media (max-width: general.$sm) {
+  .loginPage {
+    flex-direction: column;
+    height: calc(100vh);
 
-.login-logo {
-  padding: 10px;
-  img {
-    width: 4.3rem;
+    &__signup {
+      width: 100%;
+      height: 50%;
+
+      &-text {
+        padding: 10px;
+        width: 100%;
+
+        h4 {
+          font-size: 1.3rem;
+        }
+        p {
+          font-size: 0.8rem;
+        }
+
+        button {
+          margin-left: 7px;
+          padding: 8px 30px;
+        }
+      }
+    }
+
+    &__login {
+      height: 100%;
+      width: 100%;
+      position: static;
+    }
   }
 }

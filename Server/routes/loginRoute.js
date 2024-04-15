@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const rateLimit = require("express-rate-limit");
 const cron = require("node-cron");
+const fetch = require("node-fetch"); // Import fetch
 
 const { verifyPassword, verifyToken, sendUserInfo } = require("../auth");
 const database = require("../Database/loginQuery");
@@ -22,10 +23,9 @@ router
 
 // Simulate a login request because backend server goes to sleep after 15 minutes of inactivity and takes some time to wake up -- I'm using free version of render ! just for showcase(portfolio project)
 //every 12 minutes!
-
-cron.schedule("*/13 * * * *", async () => {
+cron.schedule("*/12 * * * *", async () => {
   try {
-    await fetch("https://salonpro.onrender.com/login", {
+    await fetch("https://appointmentsystem-gcyv.onrender.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
