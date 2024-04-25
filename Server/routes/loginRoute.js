@@ -3,6 +3,7 @@ const router = express.Router();
 const rateLimit = require("express-rate-limit");
 const cron = require("node-cron");
 const fetch = require("node-fetch"); // Import fetch
+require("dotenv").config();
 
 const { verifyPassword, verifyToken, sendUserInfo } = require("../auth");
 const database = require("../Database/loginQuery");
@@ -25,7 +26,7 @@ router
 //every 12 minutes!
 cron.schedule("*/12 * * * *", async () => {
   try {
-    await fetch("https://appointmentsystem-gcyv.onrender.com/login", {
+    await fetch(process.env.BACKENDURLFORDCRONJOB, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
