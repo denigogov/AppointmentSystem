@@ -1,4 +1,5 @@
 @use "./colors";
+@use "./general";
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700);
 
 .underConstructiont--container {
@@ -17,16 +18,22 @@
   }
 
   .warning-content {
-    text-align: center;
+    height: calc(100vh - 30vh);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    justify-content: center;
+    text-align: center;
   }
 
   svg {
     width: 240px;
     height: 240px;
+
+    @media (max-width: general.$sm) {
+      width: 170px;
+      height: 170px;
+    }
   }
 
   /* SMOKE */
