@@ -80,5 +80,12 @@
   .flexColumn {
     display: flex;
     flex-direction: column;
+
+    button {
+      // size of the button on phone view
+      height: 30px !important;
+      width: 120px !important;
+      margin: 0 auto;
+    }
   }
 }

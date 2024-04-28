@@ -37,6 +37,7 @@ import WebPage from "./pages/Home/WebPage";
 import Confirm from "./pages/Home/Confirm";
 import Login from "./pages/Login";
 import { ProtectEmailConfirm } from "./helpers/ProtectEmailConfirm";
+import Help from "./pages/App/Help/Help";
 
 const RootRouter: React.FC = ({}) => {
   const auth = useAuth();
@@ -155,6 +156,8 @@ const RootRouter: React.FC = ({}) => {
               <Route path="approvals" element={<Approvals />} />
             </Route>
           )}
+
+          <Route path="help" element={<Help />} />
         </Route>
 
         {/* IF USER IS ALREADY SIGN IN , Don't show the router (show as error) */}

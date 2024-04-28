@@ -9,10 +9,11 @@ const App = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const validateToken = async () => {
+    const validateToken = async (retryCount: number = 0) => {
       try {
-        if (typeof auth.token === "string" && auth.token.length) {
+        if (typeof auth.token === "string" && auth.token?.length) {
           const userData = await fetchTokenValidation(auth.token as TokenType);
+
           if (userData) {
             auth.info(userData.payload as UserInfoType);
           } else {
@@ -21,16 +22,22 @@ const App = () => {
         } else {
           auth.logout();
         }
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
+        if (retryCount < 3) {
+          setTimeout(() => {
+            validateToken(retryCount + 1);
+          }, 1000);
+        } else {
+          setLoading(false);
+        }
       }
     };
     validateToken();
   }, [auth.token]);
 
-  return <div>{loading ? <p>loading...</p> : <RootRouter />}</div>;
+  return <div>{loading ? <p></p> : <RootRouter />}</div>;
 };
 
 export default App;

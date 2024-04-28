@@ -15,6 +15,7 @@ import SigninIcon from "../assets/signinIcon.svg";
 
 const Root = () => {
   const [openNav, setOpenNav] = useState<boolean>(false);
+  const [_, setClickNewRoute] = useState<boolean>(false);
   const auth = useAuth();
   const navigate = useNavigate();
 
@@ -24,10 +25,16 @@ const Root = () => {
 
   const handleNavBar = () => {
     setOpenNav((e) => !e);
+    setClickNewRoute(false);
   };
 
   const handleLogOut = () => {
     auth.logout();
+  };
+
+  const handleClickedNavItem = () => {
+    setClickNewRoute((e) => !e);
+    setOpenNav(false);
   };
 
   return (
@@ -43,8 +50,8 @@ const Root = () => {
           <p>{auth.userInfo?.username ?? ""}</p>
         </div>
 
-        {/* Navigation Menu */}
-        <nav>
+        {/* Navigation Menu, -- onclick on some route the nav will close*/}
+        <nav onClick={handleClickedNavItem}>
           <ul>
             <NavLink to="/">
               <li>
@@ -96,10 +103,7 @@ const Root = () => {
               <img src={githubIcon} alt="github Logo" />
             </a>
 
-            <a
-              target="_blank"
-              href="https://www.linkedin.com/in/dejan-gogov-571871270/"
-            >
+            <a target="_blank" href="https://www.linkedin.com/in/dejangogov/">
               <img src={linkedInIcon} alt="linkedIn Logo" />
             </a>
           </div>

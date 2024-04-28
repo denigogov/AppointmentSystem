@@ -16,6 +16,7 @@ import { useAuth } from "../helpers/Auth";
 
 const AppRoot = () => {
   const [openNavUser, setOpenNavUser] = useState<boolean>(false);
+  const [_, setClickedNavItem] = useState<boolean>(false);
   const auth = useAuth();
 
   const handleMobileMenu = () => {
@@ -23,9 +24,15 @@ const AppRoot = () => {
     window.scrollTo(0, 0);
   };
 
+  const handleClickedNavItem = () => {
+    setClickedNavItem((e) => !e);
+    setOpenNavUser(false);
+  };
+
   return (
     <div className="appRoot-container">
       <nav
+        onClick={handleClickedNavItem}
         className={
           openNavUser
             ? "appRoot-navigation"
