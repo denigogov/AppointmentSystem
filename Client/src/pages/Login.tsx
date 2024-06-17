@@ -8,6 +8,10 @@ import { Link } from "react-router-dom";
 import LoadingRing from "../components/loadingRing";
 import { succesMessageBtn } from "../components/ErrorSuccesMessage";
 const API_URL = import.meta.env.VITE_API_URL as string;
+const ALERT_TITLE = import.meta.env.VITE_ALERT_TITLE as string;
+const ALERT_TEXT = import.meta.env.VITE_ALERT_MESSAGE as string;
+const ALERT_ICON = import.meta.env.VITE_ALERT_ICON as string;
+
 const Login = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passRef = useRef<HTMLInputElement>(null);
@@ -53,12 +57,18 @@ const Login = () => {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    succesMessageBtn(
-      "Login Delay",
-      "Please wait while we securely log you in. Server standby may cause a brief delay. Thank you for your patience",
-      "",
-      "info"
-    );
+
+    {
+      ALERT_ICON === "" ||
+        succesMessageBtn(
+          // "Login Delay",
+          ALERT_TITLE,
+          ALERT_TEXT,
+          // "Please wait while we securely log you in. Server standby may cause a brief delay. Thank you for your patience",
+          "",
+          ALERT_ICON
+        );
+    }
     // const redirectPath = location.state?.path || "/";
 
     // leaving as reference
