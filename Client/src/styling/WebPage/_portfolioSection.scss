@@ -2,7 +2,8 @@
 @use "../general";
 @use "../colors";
 
-.portfolioSection {
+.tete {
+  padding: 0 2rem;
   background-image: linear-gradient(
       22.5deg,
       rgba(66, 66, 66, 0.02) 0%,
@@ -49,11 +50,14 @@
       rgba(94, 94, 94, 0.02) 100%
     ),
     linear-gradient(90deg, #ffffff, #ffffff);
+}
 
+.portfolioSection {
   display: flex;
   gap: 1rem;
   align-items: center;
   padding: 4rem 0;
+  opacity: 0;
 
   @media (max-width: general.$lg) {
     flex-direction: column;
@@ -67,7 +71,7 @@
 
   &__text {
     // Observer Opcity start with 0 and if intersepting 1
-    opacity: 0;
+
     order: 1;
 
     @media (max-width: general.$lg) {
