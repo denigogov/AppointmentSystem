@@ -12,7 +12,7 @@ const API_URL = import.meta.env.VITE_API_URL as string;
 const EditProfile = () => {
   const auth = useAuth();
   const { id, type } = auth.userInfo ?? {};
-  const token = auth?.token;
+  const token = auth?.token ?? "";
 
   const {
     data: userInfoData,
