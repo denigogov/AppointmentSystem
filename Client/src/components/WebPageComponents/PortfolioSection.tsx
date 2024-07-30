@@ -4,8 +4,8 @@ import carpetCare1 from "../../assets/carpetCare1.png";
 import carpetCare2 from "../../assets/carpetCare2.png";
 import carpetCare4 from "../../assets/carpetCare5.png";
 import nexigo1 from "../../assets/nexiGo1.png";
-import nexigo2 from "../../assets/nexiGo2.png";
-import nexigo3 from "../../assets/nexiGo3.png";
+import nexigo2 from "../../assets/nexigoTable.png";
+import nexigo3 from "../../assets/nexigoInvoiceDetails.png";
 import LazyLoadingImage from "../../helpers/LazyLoadingImage";
 import { useInView } from "react-intersection-observer";
 const PortfolioSection: React.FC = () => {
