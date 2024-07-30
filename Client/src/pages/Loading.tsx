@@ -3,7 +3,7 @@ import TextAnimation from "./TextAnimation";
 
 interface LoadingProps {}
 
-const Loading: React.FC<LoadingProps> = ({}) => {
+const Loading: React.FC<LoadingProps> = () => {
   return (
     <div className="loading__container">
       <div className="loading">

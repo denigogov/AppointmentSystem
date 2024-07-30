@@ -4,7 +4,7 @@ import LoadingRing from "../../loadingRing";
 interface DashboardSelectOptionProps {
   dataByService?: FetchDataByServiceProps[];
   setSelectedService: React.Dispatch<React.SetStateAction<string>>;
-  dataByServiceLoading: Boolean;
+  dataByServiceLoading: boolean;
   dataByServiceError: Error;
 }
 

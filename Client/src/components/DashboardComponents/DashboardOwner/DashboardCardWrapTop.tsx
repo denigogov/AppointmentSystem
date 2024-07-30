@@ -8,7 +8,7 @@ import LoadingRing from "../../loadingRing";
 interface DashboardCardWrapTop {
   totalMoneyAppService?: FetchTotalMoneyAppServiceProps[];
   totalMoneyAppServiceError: Error;
-  totalMoneyAppServiceLoading: Boolean;
+  totalMoneyAppServiceLoading: boolean;
 }
 
 const DashboardCardWrapTop: React.FC<DashboardCardWrapTop> = ({

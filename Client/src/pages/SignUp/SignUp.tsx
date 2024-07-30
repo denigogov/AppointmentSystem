@@ -16,8 +16,11 @@ const API_URL = import.meta.env.VITE_API_URL as string;
 
 const SignUp = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
-  //@ts-ignore
+
   const [succes, setSucces] = useState<string>("");
+
+  console.log(succes);
+
   const [gender, setGender] = useState<string>("");
   const [values, setValues] = useState<CustomerInputsTypes>({
     firstName: "",
@@ -32,6 +35,9 @@ const SignUp = () => {
   const auth = useAuth();
 
   const handlePostRequest = async () => {
+    //
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { confirmPassword, ...allValues } = values;
     const restValues = { gender, ...allValues };
 

@@ -6,7 +6,7 @@ interface FloatingActionBtnProps {
   //  propsTypes
 }
 
-const FloatingActionBtn: React.FC<FloatingActionBtnProps> = ({}) => {
+const FloatingActionBtn: React.FC<FloatingActionBtnProps> = () => {
   return (
     <div className="float-container--dashboard">
       <div className="wrapper">

@@ -46,6 +46,8 @@ const TimeManagement = () => {
 
   // RESET DEFAULT BUTTON !
   // I didn't find the type for e.target.previousSibling.href;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleResetDefaultValues = async (e: any) => {
     const findClickedTarget = e.target.previousSibling.href;
 

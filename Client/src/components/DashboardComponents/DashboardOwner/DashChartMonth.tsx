@@ -27,7 +27,7 @@ ChartJS.register(
 interface DashChartMonthProps {
   filterDataByYear?: FetchServiceByMonthProps[];
   serviceByMonthError: Error;
-  serviceByMonthLoading: Boolean;
+  serviceByMonthLoading: boolean;
 }
 
 const DashChartMonth: React.FC<DashChartMonthProps> = ({
@@ -37,6 +37,8 @@ const DashChartMonth: React.FC<DashChartMonthProps> = ({
 }) => {
   const screenSize: number = window.innerWidth;
   // need to add  the type temporary problem !
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const options: any = {
     maintainAspectRatio: false,
     indexAxis: `${screenSize <= 640 ? "y" : "x"}`,
@@ -52,7 +54,9 @@ const DashChartMonth: React.FC<DashChartMonthProps> = ({
     plugins: {
       tooltip: {
         callbacks: {
-          // no idea what type is context !
+          //
+
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           label: function (context: any) {
             let label = context?.dataset.label || "";
             label ? (label += ` Total : ${context?.parsed?.y} €`) : "";

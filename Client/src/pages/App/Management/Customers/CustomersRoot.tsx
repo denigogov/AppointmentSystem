@@ -14,11 +14,9 @@ import { apiGeneralErrorHandle } from "../../../../helpers/api";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-interface CustomersRootProps {}
-
 const apiUrl = import.meta.env.VITE_API_URL as string;
 
-const CustomersRoot: React.FC<CustomersRootProps> = ({}) => {
+const CustomersRoot: React.FC = () => {
   const [popupOpen, setPopupOpen] = useState<boolean>(false);
   const navigator = useNavigate();
   const { token } = useAuth();

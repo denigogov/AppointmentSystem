@@ -24,6 +24,8 @@ const DashboardCustomer = () => {
     data: customerData,
     error: customerDataError,
     isLoading: customerDataLoading,
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } = useSWR<CustomersDataTypes[] | any>(["customerData", auth?.token], () =>
     fetchCustomerData({ id, type, token })
   );

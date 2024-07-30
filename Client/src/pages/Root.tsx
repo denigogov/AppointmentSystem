@@ -15,7 +15,9 @@ import SigninIcon from "../assets/signinIcon.svg";
 
 const Root = () => {
   const [openNav, setOpenNav] = useState<boolean>(false);
-  const [_, setClickNewRoute] = useState<boolean>(false);
+
+  const [, setClickNewRoute] = useState<boolean>(false);
+
   const auth = useAuth();
   const navigate = useNavigate();
 

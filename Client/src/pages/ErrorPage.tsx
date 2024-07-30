@@ -3,7 +3,11 @@ import { Link, useLocation } from "react-router-dom";
 
 interface ErrorProps {
   errorMessage?: string;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigateTo1?: any;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigateTo2?: any;
 }
 const apiUrl = import.meta.env.VITE_API_URL as string;

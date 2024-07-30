@@ -1,8 +1,6 @@
 import "../styling/_textAnimation.scss";
 
-interface TextAnimationProps {}
-
-const TextAnimation: React.FC<TextAnimationProps> = ({}) => {
+const TextAnimation: React.FC = () => {
   return (
     <div className="textAnimation__container">
       <p className="content__container__text">Continuous Improvement</p>

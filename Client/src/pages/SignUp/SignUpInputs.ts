@@ -39,6 +39,8 @@ export const generateInputs = (
     placeholder: "Email",
     label: "Email",
     errorMessage: "It should be valid email or this email already existd",
+
+    // eslint-disable-next-line no-useless-escape
     pattern: `^[^\s@]+@[^\s@]+\.[^\s@]+$`,
     required: true,
   },

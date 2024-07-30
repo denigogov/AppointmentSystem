@@ -14,7 +14,7 @@ const DashEmployeesTable = ({
   setPopupOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const navigator = useNavigate();
-  let { pathname } = useLocation();
+  const { pathname } = useLocation();
 
   const handleDetails = (
     customerData: allAppointmentsByDataRangeAndEmployTypes

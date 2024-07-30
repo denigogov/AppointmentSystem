@@ -39,7 +39,7 @@ import Login from "./pages/Login";
 import { ProtectEmailConfirm } from "./helpers/ProtectEmailConfirm";
 import Help from "./pages/App/Help/Help";
 
-const RootRouter: React.FC = ({}) => {
+const RootRouter: React.FC = () => {
   const auth = useAuth();
 
   const router = createBrowserRouter(

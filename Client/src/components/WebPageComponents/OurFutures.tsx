@@ -6,9 +6,7 @@ import LazyLoadingImage from "../../helpers/LazyLoadingImage";
 import ArticleText from "./ArticleText";
 import { useInView } from "react-intersection-observer";
 
-interface OurFuturesProps {}
-
-const OurFutures: React.FC<OurFuturesProps> = ({}) => {
+const OurFutures: React.FC = () => {
   const { ref, inView } = useInView({
     triggerOnce: true,
   });

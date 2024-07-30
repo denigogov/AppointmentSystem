@@ -16,7 +16,7 @@ import { useAuth } from "../helpers/Auth";
 
 const AppRoot = () => {
   const [openNavUser, setOpenNavUser] = useState<boolean>(false);
-  const [_, setClickedNavItem] = useState<boolean>(false);
+  const [, setClickedNavItem] = useState<boolean>(false);
   const auth = useAuth();
 
   const handleMobileMenu = () => {

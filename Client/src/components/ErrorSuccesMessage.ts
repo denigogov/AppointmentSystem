@@ -11,7 +11,8 @@ export const succesMessageBtn = (
   state: string,
   message: string,
   footer?: string,
-  iconType: any = "success"
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  iconType: string | any = "success"
 ) => {
   return Swal.fire({
     title: state,

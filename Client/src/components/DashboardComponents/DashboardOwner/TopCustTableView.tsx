@@ -7,7 +7,7 @@ import LoadingRing from "../../loadingRing";
 interface TopCustTableViewProps {
   setPopupOpen: React.Dispatch<React.SetStateAction<boolean>>;
   top5Customers?: FetchTop5CustomersTypes[];
-  top5CustomersLoading: Boolean;
+  top5CustomersLoading: boolean;
   top5CustomersError: Error;
 }
 
@@ -18,7 +18,7 @@ const TopCustTableView: React.FC<TopCustTableViewProps> = ({
   top5CustomersError,
 }) => {
   const navigator = useNavigate();
-  let { pathname } = useLocation();
+  const { pathname } = useLocation();
 
   const handleDetailsCustomer = (user: FetchTop5CustomersTypes) => {
     setPopupOpen((x) => !x);

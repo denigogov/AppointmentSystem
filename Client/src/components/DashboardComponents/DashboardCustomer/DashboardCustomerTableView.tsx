@@ -28,9 +28,9 @@ const DashboardCustomerTableView = ({
   cusomerTableDashboardData,
   customerDataError,
 }: props) => {
-  if (customerDataError) return <h6>{customerDataError.message}</h6>;
-
   const { token } = useAuth();
+
+  if (customerDataError) return <h6>{customerDataError.message}</h6>;
 
   const sortedData = cusomerTableDashboardData
     .slice()

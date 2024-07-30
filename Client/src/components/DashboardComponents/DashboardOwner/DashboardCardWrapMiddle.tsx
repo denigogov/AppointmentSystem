@@ -17,7 +17,7 @@ interface DashboardCardWrapMiddleProps {
     "totalAppointments" | "totalMoney"
   >;
   selectedService: string;
-  dataByServiceLoading: Boolean;
+  dataByServiceLoading: boolean;
   dataByServiceError: Error;
 }
 

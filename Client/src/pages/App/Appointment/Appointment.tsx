@@ -62,6 +62,8 @@ const Appointment = () => {
     data: servicesEmpolyees,
     error: servicesEmpolyeesError,
     isLoading: servicesEmpolyeesLoading,
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } = useSWR<ServiceEmloyeesTypes[] | any>(["servicesemployees", token], () =>
     fetchAllServiceEmployees(token)
   );
@@ -79,6 +81,8 @@ const Appointment = () => {
     data: allAppointments,
     error: allAppointmentsError,
     isLoading: allAppointmentsLoading,
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } = useSWR<AllAppointmentsTypes[] | any>(["allAppointments", token], () =>
     fetchAllAppointmentsFromTodayOn(token)
   );

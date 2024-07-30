@@ -13,7 +13,7 @@ import {
 
 const apiUrl = import.meta.env.VITE_API_URL as string;
 
-const EmployeesRoot = ({}) => {
+const EmployeesRoot = () => {
   const { token } = useAuth();
   const [popUpOpen, setPopupOpen] = useState<boolean>(false);
   const navigator = useNavigate();
@@ -74,7 +74,9 @@ const EmployeesRoot = ({}) => {
           deleteActionPrompt();
         } else throw new Error(`${res.statusText}`);
       }
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

@@ -138,11 +138,11 @@ export const fetchUserData = async ({
 }: {
   id?: number;
   type?: number;
-  token?: any;
+  token?: string;
 }) => {
   return apiFetcher<AllUserTypes[] | null>(
     `tableRoute/accounts/${id}/${type}`,
-    token
+    token ?? ""
   );
 };
 
@@ -296,8 +296,8 @@ export const fetchTotalMoneyAppService = async ({
   formatEndDate,
 }: {
   token?: string;
-  formatStartDate?: Date | String | null;
-  formatEndDate?: Date | String | null;
+  formatStartDate?: Date | string | null;
+  formatEndDate?: Date | string | null;
 }) => {
   return apiFetcher<FetchTotalMoneyAppServiceProps[]>(
     `employees/totalMoneyAppService/${

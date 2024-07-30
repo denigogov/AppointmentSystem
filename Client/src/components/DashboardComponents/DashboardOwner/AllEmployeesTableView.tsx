@@ -7,7 +7,7 @@ import LoadingRing from "../../loadingRing";
 interface AllEmployeesTableViewProps {
   setPopupOpen: React.Dispatch<React.SetStateAction<boolean>>;
   allEmployees?: FetchAllEmployeesTypes[];
-  allEmployeesLoading: Boolean;
+  allEmployeesLoading: boolean;
   allEmployeesError: Error;
 }
 

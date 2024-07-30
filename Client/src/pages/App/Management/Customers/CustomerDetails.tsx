@@ -5,9 +5,7 @@ import { CustomersDataTypes } from "../../../../types/tableApiTypes";
 import { fetchCustomerData } from "../../../../api/tableApi";
 import UnderConstruction from "../../../UnderConstruction";
 
-interface CustomerDetails {}
-
-const CustomerDetails: React.FC<CustomerDetails> = ({}) => {
+const CustomerDetails: React.FC = () => {
   const selectedCustomerId = useParams();
   const auth = useAuth();
 

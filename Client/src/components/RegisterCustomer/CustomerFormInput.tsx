@@ -28,7 +28,8 @@ const CustomerFormInput = (props: CustomerFormInputProps) => {
         onFocus={() =>
           inputProps.name === "confirmPassword" && setFocused(true)
         }
-        //@ts-ignore
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         focused={focused.toString()}
       />
       <span>{errorMessage}</span>

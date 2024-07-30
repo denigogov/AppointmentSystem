@@ -6,6 +6,7 @@ import {
 } from "../../../types/tableApiTypes";
 
 interface TableViewDashboardProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   handleDetails: (user: any) => void;
   apiData?: (FetchTop5CustomersTypes | FetchAllEmployeesTypes)[];
 }

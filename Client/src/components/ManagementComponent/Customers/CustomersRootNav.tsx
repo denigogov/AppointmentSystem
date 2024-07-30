@@ -1,14 +1,6 @@
 import "../../../styling/Components/management components/_customerRootNavBar.scss";
 
-interface CustomersRootNavProps {
-  /* props types */
-}
-
-const CustomersRootNav: React.FC<CustomersRootNavProps> = (
-  {
-    /* props */
-  }
-) => {
+const CustomersRootNav: React.FC = () => {
   return (
     <div className="customerRoot--navBar">
       <nav>

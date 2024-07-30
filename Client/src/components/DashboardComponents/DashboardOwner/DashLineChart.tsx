@@ -35,7 +35,7 @@ const DashLineChart: React.FC<DashLineChartProps> = ({
   allAppointmentsByDayLoading,
   allAppointmentsByDayError,
 }) => {
-  // Temporary Need to fix the type
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const options: any = {
     maintainAspectRatio: false,
     responsive: true,
@@ -50,7 +50,7 @@ const DashLineChart: React.FC<DashLineChartProps> = ({
     plugins: {
       tooltip: {
         callbacks: {
-          // no idea what type is context !
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           label: function (context: any) {
             let label = context?.dataset.label || "";
             label ? (label += ` Total: ${context?.parsed?.y}`) : "";

@@ -1,6 +1,4 @@
-interface EditTitleProps {}
-
-const EditTitle: React.FC<EditTitleProps> = ({}) => {
+const EditTitle: React.FC = () => {
   return (
     // Styling inside of editEmployer.scss
     <div className="editEmployer__title--container">

@@ -10,7 +10,7 @@ interface ApprovalsProps {
   // propType
 }
 
-const Approvals: React.FC<ApprovalsProps> = ({}) => {
+const Approvals: React.FC<ApprovalsProps> = () => {
   const { token } = useAuth();
 
   const {

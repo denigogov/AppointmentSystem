@@ -10,7 +10,7 @@ interface DashChartOptionProps {
   allServices?: AllServicesTypes[];
   serviceByMonth?: FetchServiceByMonthProps[];
   allServicesLoading: boolean;
-  serviceByMonthLoading: Boolean;
+  serviceByMonthLoading: boolean;
   serviceByMonthError: Error;
   allServicesError: Error;
 }

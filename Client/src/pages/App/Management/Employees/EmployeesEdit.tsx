@@ -19,7 +19,7 @@ interface EmployeesEditProps {
 }
 const API_URL = import.meta.env.VITE_API_URL as string;
 
-const EmployeesEdit: React.FC<EmployeesEditProps> = ({}) => {
+const EmployeesEdit: React.FC<EmployeesEditProps> = () => {
   const { token } = useAuth();
   const { id: employerId } = useParams();
   const navigate = useNavigate();
@@ -103,6 +103,7 @@ const EmployeesEdit: React.FC<EmployeesEditProps> = ({}) => {
       const currentValue = inputValues[refName].current?.value ?? "";
       const initialValue = singleEmployer?.[0]?.[fieldName];
       if (currentValue !== initialValue) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         queryData[fieldName] = currentValue;
       }
